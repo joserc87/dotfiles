@@ -1,0 +1,16 @@
+#!/bin/bash
+mkdir /etc/httpd/conf/ssl
+cd /etc/httpd/conf/ssl
+
+echo -e "Enter your virtual host FQDN: \nThis will generate the default name for Nginx  SSL certificate!"
+read cert
+
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out $cert.key
+chmod 600 $cert.key
+openssl req -new -key $cert.key -out $cert.csr
+openssl x509 -req -days 365 -in $cert.csr -signkey $cert.key -out $cert.crt
+
+echo -e " The certificate "$cert" has been generated!\nPlease link it to Apache SSL available website!"
+
+ls -all /etc/httpd/conf/ssl
+exit 0
