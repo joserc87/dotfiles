@@ -12,7 +12,7 @@
 #fi
 
 # Load .Xresources
-xrdb ~./.Xresources
+xrdb ~/.Xresources
 # Set the background of i3
 fe --bg-scale ~/Pictures/Wallpapers/ArchLinux1.png
 
