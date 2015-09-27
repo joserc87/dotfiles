@@ -5,14 +5,19 @@
 # vi style incremental search
 # look at www.drbunsen.org/the-text-triumvirate/
 export EDITOR="vim"
+export SHELL="/bin/zsh"
 bindkey -v
 
 # Add this so we don't have to type cd
 setopt AUTO_CD
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/jose/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 export DEFAULT_USER=jose
+
+# To solve the weird characters on ssh
+export LC_ALL=en_US.utf-8
+export LANG="$LC_ALL"
 
 
 ##############################
@@ -74,9 +79,9 @@ plugins=(git)
 
 # User configuration
 
-export PATH="/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.6.7/bin:~/.composer/vendor/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.6.7/bin:~/.composer/vendor/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin/:/usr/local/bin/"
+#export PATH="/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.6.7/bin:~/.composer/vendor/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.6.7/bin:~/.composer/vendor/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin/:/usr/local/bin/"
 # export MANPATH="/usr/local/man:$MANPATH"
-export PATH=~/Scripts/:$PATH
+#export PATH=~/Scripts/:$PATH
 
 source $ZSH/oh-my-zsh.sh
 

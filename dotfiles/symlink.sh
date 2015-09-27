@@ -15,6 +15,5 @@ symlink_home vim/ .vim
 symlink_home vim/ .vimrc
 symlink_home "" .bash_profile
 symlink_home "" .zshrc
-symlink_home "" .oh-my-zsh
 symlink_home "" .tmux.conf
 
