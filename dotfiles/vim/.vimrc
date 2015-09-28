@@ -95,7 +95,15 @@ colorscheme solarized
 
 " NERDTree:
 nmap <leader>ne :NERDTree<cr>
+
+" jj goes to normal mode
 inoremap jj <ESC>
+
+" Map ; to : so we don't have to press shift
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 
 " WINDOW NAVIGATION:
 nnoremap <C-J> <C-W><C-J>
