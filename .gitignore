@@ -1,2 +1,4 @@
 
 dotfiles/vim/.vim/bundle/
+3rd/
+.netrwhist
