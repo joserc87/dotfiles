@@ -15,7 +15,8 @@ set guioptions-=l
 set guioptions-=L
 
 " Enable per-project .vimrc's
-set exrc
+" UNSAFE
+" set exrc
 
 
 set nocompatible              " be iMproved, required
@@ -92,18 +93,17 @@ colorscheme solarized
 " --------
 " Set the leader to -
 :let mapleader = ","
+nmap <space> <leader>
+nmap <space><space> <leader><leader>
+
+" TAGBAR:
+nmap <F8> ;TagbarToggle<CR>
 
 " NERDTree:
-nmap <leader>ne :NERDTree<cr>
+nmap <leader>ne ;NERDTree<CR>
 
 " jj goes to normal mode
 inoremap jj <ESC>
-
-" Map ; to : so we don't have to press shift
-nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
 
 " WINDOW NAVIGATION:
 nnoremap <C-J> <C-W><C-J>
@@ -112,32 +112,32 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 let g:ctrlp_map = '<c-p>'
-nmap <silent> <A-Up> :wincmd k<CR>
-nmap <silent> <A-Down> :wincmd j<CR>
-nmap <silent> <A-Left> :wincmd h<CR>
-nmap <silent> <A-Right> :wincmd l<CR>
+nmap <silent> <A-Up> ;wincmd k<CR>
+nmap <silent> <A-Down> ;wincmd j<CR>
+nmap <silent> <A-Left> ;wincmd h<CR>
+nmap <silent> <A-Right> ;wincmd l<CR>
 
 " This allows buffers to be hidden if you've modified a buffer.
 " This is almost a must if you wish to use buffers in this way.
 set hidden
 
 " To open a new empty buffer
-" This replaces :tabnew which I used to bind to this mapping
+" This replaces ;tabnew which I used to bind to this mapping
 " This would be incompatible with testing
-"nmap <leader>T :enew<cr>
+"nmap <leader>T ;enew<cr>
 
 " Move to the next buffer
-nmap <leader>bl :bnext<CR>
+nmap <leader>bl ;bnext<CR>
 
 " Move to the previous buffer
-nmap <leader>bh :bprevious<CR>
+nmap <leader>bh ;bprevious<CR>
 
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
-nmap <leader>bq :bp <BAR> bd #<CR>
+nmap <leader>bq ;bp <BAR> bd #<CR>
 
 " Show all open buffers and their status
-"nmap <leader>bl :ls<CR>
+"nmap <leader>bl ;ls<CR>
 
 " Tab movement
 nnoremap th  :tabfirst<CR>
@@ -175,7 +175,13 @@ map <Leader>h <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
+" Map ; to : so we don't have to press shift
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
+
 " Because we enable external .vimrc's, we prevent :autocmd, shell and write
 " commands being run inside project-specific .vimrc unless they are owned by
 " me
-set secure
+" set secure
