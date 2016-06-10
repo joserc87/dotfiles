@@ -62,6 +62,11 @@ filetype plugin indent on    " required
 
 " NORMAL SETTINGS:
 " ---------------
+" Set any *.md file to Markdown by default
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" To enable fenced code block syntax highlighting
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+
 " Smarter tab line for airline:
 let g:airline#extensions#tabline#enabled = 1
 
@@ -77,7 +82,11 @@ set noswapfile
 set splitbelow
 set splitright
 
+"  Relative line numbers
+set rnu
+
 syntax on
+
 " COLOR SCHEMES:
 " -------------
 
@@ -100,7 +109,7 @@ nmap <space><space> <leader><leader>
 nmap <F8> ;TagbarToggle<CR>
 
 " NERDTree:
-nmap <leader>ne ;NERDTree<CR>
+nmap <leader>ne ;NERDTreeFocus<CR>
 
 " jj goes to normal mode
 inoremap jj <ESC>
@@ -174,6 +183,13 @@ map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+
+" EASY ALIGN:
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " Map ; to : so we don't have to press shift
 nnoremap ; :

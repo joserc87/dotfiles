@@ -81,9 +81,13 @@ plugins=(git)
 
 #export PATH="/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.6.7/bin:~/.composer/vendor/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.6.7/bin:~/.composer/vendor/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin/:/usr/local/bin/"
 # export MANPATH="/usr/local/man:$MANPATH"
-export PATH=~/Scripts/:$PATH
+export PATH=~/Scripts/:/usr/local/Cellar/python/2.7.10_2/bin/:$PATH
+export PYTHONPATH=~/dev/whatsapp/cortado/yowsup/:.:$PYTHONPATH
 
 source $ZSH/oh-my-zsh.sh
+
+# Virtualenv/VirtualenvWrapper
+source /usr/local/bin/virtualenvwrapper.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
