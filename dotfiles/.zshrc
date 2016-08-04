@@ -19,6 +19,11 @@ export DEFAULT_USER=jose
 export LC_ALL=en_US.utf-8
 export LANG="$LC_ALL"
 
+# Tokens for fb bots and wit.ai
+export FACEBOOK_PAGE_ACCESS_TOKEN=__FACEBOOK_PAGE_ACCESS_TOKEN_HERE__
+export FACEBOOK_VERIFY_TOKEN=__FACEBOOK_VERIFY_TOKEN_HERE__
+export WIT_TOKEN=__WIT_TOKEN_HERE__
+export PORT=3000
 
 ##############################
 # DEFAULT OH-MY-ZSH CONFIG   #
@@ -82,7 +87,10 @@ plugins=(git)
 #export PATH="/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.6.7/bin:~/.composer/vendor/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.6.7/bin:~/.composer/vendor/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin/:/usr/local/bin/"
 # export MANPATH="/usr/local/man:$MANPATH"
 export PATH=~/Scripts/:/usr/local/Cellar/python/2.7.10_2/bin/:$PATH
+# Python
 export PYTHONPATH=~/dev/whatsapp/cortado/yowsup/:.:$PYTHONPATH
+# Android tools:
+export PATH=~/Library/Android/sdk/platform-tools/:/Applications/MacPorts/MacVim.app/Contents/MacOS/:$PATH
 
 source $ZSH/oh-my-zsh.sh
 
@@ -113,3 +121,5 @@ source /usr/local/bin/virtualenvwrapper.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

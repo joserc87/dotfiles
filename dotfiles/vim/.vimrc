@@ -18,7 +18,6 @@ set guioptions-=L
 " UNSAFE
 " set exrc
 
-
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -62,6 +61,8 @@ filetype plugin indent on    " required
 
 " NORMAL SETTINGS:
 " ---------------
+" Reload files automatically:
+set autoread
 " Set any *.md file to Markdown by default
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " To enable fenced code block syntax highlighting
@@ -201,3 +202,15 @@ vnoremap : ;
 " commands being run inside project-specific .vimrc unless they are owned by
 " me
 " set secure
+
+" This enables customizing the vimrc on the fly
+" Idea taken from: http://vimcasts.org/episodes/updating-your-vimrc-file-on-the-fly/
+" Source the vimrc file after saving it
+if has ("autocmd")
+	autocmd bufwritepost .vimrc source $MYVIMRC
+endif
+
+" nmap <leader>v :tabedit $MYVIMRC<CR>
+" Actually it would be better in vertical split
+ nmap <leader>v ;vsplit $MYVIMRC<CR>
+
