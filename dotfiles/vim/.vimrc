@@ -123,7 +123,13 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Map ctrlp
 let g:ctrlp_map = '<c-p>'
+" Make ctrlp find dotfiles too
+let g:ctrlp_show_hidden = 1
+" List the buffers with CtrlP
+nmap <leader>bb ;CtrlPMRU<CR>
+
 nmap <silent> <A-Up> ;wincmd k<CR>
 nmap <silent> <A-Down> ;wincmd j<CR>
 nmap <silent> <A-Left> ;wincmd h<CR>
@@ -142,8 +148,6 @@ set hidden
 nmap <leader>bl ;bnext<CR>
 nmap <leader>bh ;bprevious<CR>
 nmap <leader>bq ;bp <BAR> bd #<CR>
-" List the buffers with CtrlP
-nmap <leader>bb ;CtrlPMRU
 
 " Show all open buffers and their status
 "nmap <leader>bl ;ls<CR>
