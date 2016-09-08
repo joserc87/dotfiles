@@ -36,7 +36,9 @@ Plugin 'VundleVim/Vundle.vim'
 " set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 " In a codebase that uses a single tab character that appears 4-spaces wide
 " for each indent:
-set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
+
+" 4 spaces instead of a tab
+set tabstop=4 shiftwidth=4 expandtab
 
 " PLUGINS:
 " --------
@@ -136,15 +138,12 @@ set hidden
 " This would be incompatible with testing
 "nmap <leader>T ;enew<cr>
 
-" Move to the next buffer
+" Buffer operations:
 nmap <leader>bl ;bnext<CR>
-
-" Move to the previous buffer
 nmap <leader>bh ;bprevious<CR>
-
-" Close the current buffer and move to the previous one
-" This replicates the idea of closing a tab
 nmap <leader>bq ;bp <BAR> bd #<CR>
+" List the buffers with CtrlP
+nmap <leader>bb ;CtrlPMRU
 
 " Show all open buffers and their status
 "nmap <leader>bl ;ls<CR>
@@ -214,3 +213,8 @@ endif
 " Actually it would be better in vertical split
  nmap <leader>v ;vsplit $MYVIMRC<CR>
 
+" Useful fugitive configurations:
+if has ("autocmd")
+	" Autodelete fugitive buffers
+	autocmd BufReadPost fugitive://* set bufhidden=delete
+endif
