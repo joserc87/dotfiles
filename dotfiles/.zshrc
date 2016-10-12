@@ -2,9 +2,26 @@
 # CUSTOM OPTIONS ADDED BY ME:
 #############################
 
+# in neovim, <C-H> won't work:
+# Solution found at https://github.com/neovim/neovim/wiki/FAQ#my-ctrl-h-mapping-doesnt-work
+# if .terminfo does not exist, apply
+# infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
+#tic $TERM.ti"
+export TERMINFO="$HOME/.terminfo"
+
+# for neovim
+export XDG_CONFIG_HOME="~/.config/"
 # vi style incremental search
 # look at www.drbunsen.org/the-text-triumvirate/
-export EDITOR="vim"
+
+# If neovim exists, use nvim, otherwise use vim
+if ! hash nvim 2>/dev/null; then
+    export EDITOR="vim"
+else
+    export EDITOR="nvim"
+    # This is just because I am used to type $ vim instead of $ nvim
+    alias vim=nvim
+fi
 export SHELL="/bin/zsh"
 bindkey -v
 
