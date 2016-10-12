@@ -26,6 +26,7 @@ symlink() {
 
 symlink_home vim/ .vim
 symlink_home vim/ .vimrc
+symlink vim/ .vimrc ~/.config/nvim/ init.vim
 
 symlink_home git/ .gitconfig
 symlink_home git/ .gitignore_global
