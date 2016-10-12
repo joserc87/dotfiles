@@ -89,13 +89,42 @@ syntax on
 " COLOR SCHEMES:
 " -------------
 
+set background=dark    " Setting dark mode
+syntax on
+
 " colorscheme candystripe
 " colorscheme kolor
 " colorscheme predawn
 
-set background=dark    " Setting dark mode
 "colorscheme gruvbox
-colorscheme solarized
+"colorscheme solarized
+"colorscheme monokai
+
+" WIN
+if has("win32")
+  if has("gui_running")
+    colorscheme solarized
+  else
+    " colors in windows console do not work very well
+    colorscheme kolor
+  endif
+" MAC
+else
+  colorscheme solarized
+endif
+
+" FONT:
+" -----
+if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=Inconsolata\ 12
+  elseif has("gui_macvim")
+    set guifont=Menlo\ Regular:h14
+  elseif has("gui_win32")
+    " set guifont=Consolas:h11:cANSI
+    set guifont=Ubuntu\ Mono:h11:cANSI
+  endif
+endif
 
 " MAPPINGS:
 " --------
