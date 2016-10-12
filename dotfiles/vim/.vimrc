@@ -51,7 +51,7 @@ filetype plugin indent on    " required
 " filetype plugin on
 
 " Solarized colors
- 
+
 " Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
@@ -65,10 +65,6 @@ filetype plugin indent on    " required
 " ---------------
 " Reload files automatically:
 set autoread
-" Set any *.md file to Markdown by default
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-" To enable fenced code block syntax highlighting
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 " Smarter tab line for airline:
 let g:airline#extensions#tabline#enabled = 1
@@ -222,3 +218,16 @@ if has ("autocmd")
 	" Autodelete fugitive buffers
 	autocmd BufReadPost fugitive://* set bufhidden=delete
 endif
+
+" MARKDOWN:
+" Set any *.md file to Markdown by default
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" To enable fenced code block syntax highlighting
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+" ysiwi will make word italic (*italic*):
+" ysiwb will make word bold (**word**):
+autocmd FileType markdown,octopress let b:surround_{char2nr('i')} = "*\r*"
+autocmd FileType markdown,octopress let b:surround_{char2nr('b')} = "**\r**"
+
+" EmbeddedJavaScript:
+autocmd BufNewFile,BufRead *.ejs set filetype=html
