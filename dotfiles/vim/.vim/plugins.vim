@@ -31,9 +31,29 @@ Plugin 'joonty/vdebug'
 Plugin 'elzr/vim-json'
 " Arduino IDE
 Plugin '4Evergreen4/vim-hardy'
+"CSS colors
+Plugin 'chrisbra/Colorizer'
 
+
+" CODE:
+" Indentation
+Plugin 'nathanaelkane/vim-indent-guides'
+" Automatically add some closing quotes
+Plugin 'Raimondi/delimitMate'
+" By pressing C-c after {, it will put the pointer in the line between { and }
+imap <C-c> <CR><Esc>O
+" Autocompletion
+Plugin 'Valloric/YouCompleteMe'
+" let g:ycm_add_preview_to_completeopt=0
+" let g:ycm_confirm_extra_conf=0
+" set completeopt-=preview
+Plugin 'marijnh/tern_for_vim'
+
+" JAVASCRIPT:
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
 
 " RAILS:
-Plugin 'tpope/vim-rails'
-Plugin 'jgdavey/vim-turbux'
+" Plugin 'tpope/vim-rails'
+" Plugin 'jgdavey/vim-turbux'
 
