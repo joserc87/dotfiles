@@ -9,9 +9,9 @@ warn() {
 
 brew_update() {
     if ! hash brew 2>/dev/null; then
-        echo "brew - Installing..."
+        info "brew" ": Installing..."
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" >/dev/null;
-        echo "brew - Installed."
+        echo "Done."
     fi
 
     info "brew" ": Updating..."
@@ -23,19 +23,31 @@ brew_update() {
 # The second argument is one of the programs in the package, to check
 brew_install() {
     # Install brew if not installed yet
-    if ! hash $2 2>/dev/null; then
-        info $1 ": Installing..."
-		brew install $1
+    if ! hash $1 2>/dev/null; then
+        info $2 ": Installing..."
+		brew install $2
         echo "Done."
     else
-        info $1 ": Already installed.\n"
+        info $2 ": Already installed.\n"
     fi
 }
 
 warn "Installing software:\n"
-# Brew:
+# Homebrew:
 brew_update
-brew_install neovim nvim
+brew_install zsh zsh-completions
+brew_install zsh zsh
+brew_install nvim neovim
 brew_install node node
-brew_install grunt-cli grunt
+brew_install grunt grunt-cli
+
+# Oh my zsh
+if [ -z ${ZSH} ]; then
+    info "oh-my-zsh" ": Installing..."
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" >/dev/null;
+    echo "Done."
+else
+    info "oh-my-zsh" ": Already installed.\n"
+fi
+
 warn "Done\n"
