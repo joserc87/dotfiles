@@ -53,6 +53,12 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
 
+" TYPESCRIPT:
+Plugin 'Shougo/vimproc.vim', {'do' : 'make'}
+Plugin 'Quramy/tsuquyomi'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'Quramy/vim-js-pretty-template'
+
 " RAILS:
 " Plugin 'tpope/vim-rails'
 " Plugin 'jgdavey/vim-turbux'
