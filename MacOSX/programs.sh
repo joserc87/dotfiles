@@ -40,6 +40,7 @@ brew_install zsh zsh
 brew_install nvim neovim
 brew_install node node
 brew_install grunt grunt-cli
+brew_install convert imagemagick
 
 # Oh my zsh
 if [ -z ${ZSH} ]; then
