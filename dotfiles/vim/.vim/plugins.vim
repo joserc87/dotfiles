@@ -54,8 +54,9 @@ Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
 
 " TYPESCRIPT:
-Plugin 'Shougo/vimproc.vim', {'do' : 'make'}
-Plugin 'Quramy/tsuquyomi'
+" tsuquyomi disabled because it lags when the file is saved
+" Plugin 'Shougo/vimproc.vim', {'do' : 'make'}
+" Plugin 'Quramy/tsuquyomi'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'Quramy/vim-js-pretty-template'
 
