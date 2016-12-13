@@ -35,3 +35,5 @@ symlink_home "" .bash_profile
 symlink_home "" .zshrc
 symlink_home "" .tmux.conf
 
+symlink_home "" .tmuxinator
+
