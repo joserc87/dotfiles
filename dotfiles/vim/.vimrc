@@ -260,3 +260,6 @@ autocmd FileType markdown,octopress let b:surround_{char2nr('b')} = "**\r**"
 
 " EmbeddedJavaScript:
 autocmd BufNewFile,BufRead *.ejs set filetype=html
+
+" SPELL:
+au BufRead,BufNewFile *.spl set syntax=spell
