@@ -1,26 +1,24 @@
+#!/bin/sh
+# Import symlink functions
+. ./util.sh
+
 dotfiles=""
 
-symlink_home () {
-	if [ ! -e ~/$2 ]; then
-		dir=`pwd`/
-		cd ~
-		echo "Creating symbolic link for ~/"$2
-		# echo ln -s $dir$1$2 $2
-		ln -s $dir$1$2 $2
-		cd $dir
-	fi
-}
-
-symlink() {
-	if [ ! -e $3$4 ]; then
-		dir=`pwd`/
-		cd $3
-		echo "Creating symbolic link for "$3$4
-		# echo ln -s $dir$1$2 $4
-		ln -s $dir$1$2 $4
-		cd $dir
-	fi
-}
-
+# Link script files
+warn "Linking scripts\n";
 symlink_home "" scripts
+
+# Link dot files
+warn "Linking configuration files\n";
+cd dotfiles
+./symlink.sh
+cd ..
+
+# Link MacOS specific files (scripts)
+case $OSTYPE in darwin*)
+    warn "Linking mac scripts\n";
+    cd MacOSX
+    ./symlink.sh
+    cd ..
+esac
 

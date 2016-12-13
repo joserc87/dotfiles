@@ -1,11 +1,6 @@
-#!/bin/zsh
+#!/bin/sh
 
-info() {
-    echo -en "\e[34m$1\\e[39m$2"
-}
-warn() {
-    echo -en "\e[33m$1\\e[39m$2"
-}
+. ../util.sh
 
 brew_update() {
     if ! hash brew 2>/dev/null; then
@@ -51,4 +46,4 @@ else
     info "oh-my-zsh" ": Already installed.\n"
 fi
 
-warn "Done\n"
+warn "Done installing software\n"
