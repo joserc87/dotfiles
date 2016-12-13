@@ -1,0 +1,33 @@
+#!/usr/bin/python
+
+import sys
+import base64
+
+def printUsage():
+    print('Usage:')
+    print('\n\t' + sys.argv[0] + ' [inputString]')
+    print('\nWith no arguments, take the input string from STDIN')
+
+def hasOption(option):
+    for arg in sys.argv:
+        if (type(option) is str and arg == option) or \
+            (type(option) is list and arg in option):
+            return True
+    return False
+
+def main():
+    if hasOption("--help"):
+        printUsage();
+    else:
+        # The program can take the input string as an argument
+        # Or should the argument point to the file?
+        if len(sys.argv) >= 2:
+            s = sys.argv[1]
+        else:
+            s = sys.stdin.read()
+        e = base64.b64encode(s)
+
+        # TODO: write to file if len(sys.argv) >= 3:
+        print(e)
+
+main()
