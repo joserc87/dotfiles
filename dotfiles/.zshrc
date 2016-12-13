@@ -108,6 +108,10 @@ export PATH=~/Scripts/:/usr/local/Cellar/python/2.7.10_2/bin/:$PATH
 export PYTHONPATH=~/dev/whatsapp/cortado/yowsup/:.:$PYTHONPATH
 # Android tools:
 export PATH=~/Library/Android/sdk/platform-tools/:/Applications/MacPorts/MacVim.app/Contents/MacOS/:$PATH
+# Antlr
+export CLASSPATH=.:/usr/local/lib/antlr-4.5.3-complete.jar:$CLASSPATH
+alias antlr4='java -jar /usr/local/lib/antlr-4.5.3-complete.jar'
+alias grun='java org.antlr.v4.gui.TestRig'
 
 source $ZSH/oh-my-zsh.sh
 
