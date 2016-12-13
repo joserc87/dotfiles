@@ -103,7 +103,7 @@ plugins=(git)
 
 #export PATH="/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.6.7/bin:~/.composer/vendor/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.6.7/bin:~/.composer/vendor/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin/:/usr/local/bin/"
 # export MANPATH="/usr/local/man:$MANPATH"
-export PATH=~/scripts/:/usr/local/Cellar/python/2.7.10_2/bin/:$PATH
+export PATH=~/scripts/:~/macscripts/:/usr/local/Cellar/python/2.7.10_2/bin/:$PATH
 # Python
 export PYTHONPATH=~/dev/whatsapp/cortado/yowsup/:.:$PYTHONPATH
 # Android tools:
