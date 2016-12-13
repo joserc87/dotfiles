@@ -60,7 +60,12 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'Quramy/vim-js-pretty-template'
 
+" CSS:
+Plugin 'ap/vim-css-color'
+
 " RAILS:
 " Plugin 'tpope/vim-rails'
 " Plugin 'jgdavey/vim-turbux'
 
+" DASH INTEGRATION:
+Plugin 'rizzatti/dash.vim'
