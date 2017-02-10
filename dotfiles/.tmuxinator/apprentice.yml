@@ -1,7 +1,7 @@
 # ~/.tmuxinator/apprentice.yml
 
 name: apprentice
-root: ~/dev/apprentice
+root: ~/Dev/apprentice
 
 # Optional tmux socket
 # socket_name: foo

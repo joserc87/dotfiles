@@ -1,7 +1,7 @@
 # ~/.tmuxinator/whatsapp.yml
 
 name: cortado
-root: ~/dev/cortado-messenger/
+root: ~/Dev/cortado-messenger/
 
 # Optional tmux socket
 # socket_name: foo

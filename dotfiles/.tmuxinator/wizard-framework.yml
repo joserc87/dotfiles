@@ -1,7 +1,7 @@
 # ~/.tmuxinator/wizard-framework.yml
 
 name: wizard-framework
-root: ~/dev/wizard-framework/
+root: ~/Dev/wizard-framework/
 
 # Optional tmux socket
 # socket_name: foo

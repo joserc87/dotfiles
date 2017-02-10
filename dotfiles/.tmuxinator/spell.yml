@@ -1,7 +1,7 @@
 # ~/.tmuxinator/spell.yml
 
 name: spell
-root: ~/dev/spell/
+root: ~/Dev/spell/
 
 # Optional tmux socket
 # socket_name: foo
