@@ -2,7 +2,7 @@
 " PLUGINS:
 Plugin 'morhetz/gruvbox'
 Plugin 'scrooloose/nerdtree'
-"Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
@@ -16,7 +16,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 " A class outliner for vim
 Plugin 'majutsushi/tagbar'
-"Plugin 'klen/python-mode'
+Plugin 'klen/python-mode'
 " Per-project vimrc
 Plugin 'embear/vim-localvimrc'
 " Useful for XML/HTML
