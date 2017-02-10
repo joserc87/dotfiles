@@ -104,6 +104,13 @@ plugins=(git)
 #export PATH="/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.6.7/bin:~/.composer/vendor/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.6.7/bin:~/.composer/vendor/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin/:/usr/local/bin/"
 # export MANPATH="/usr/local/man:$MANPATH"
 
+# -- JOSE --
+# Path to the Gems:
+if [[ -e ~/.gem/ruby/2.4.0/bin ]];
+then
+    export PATH=~/.gem/ruby/2.4.0/bin/:$PATH
+fi
+
 # User defined scripts:
 # Scripts folder is present for Linux and Mac OS
 export PATH=~/Scripts/:$PATH
