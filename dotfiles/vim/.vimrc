@@ -107,8 +107,11 @@ if has("win32")
     colorscheme kolor
   endif
 " MAC
-else
+elseif has ("mac")
   colorscheme solarized
+" LINUX
+elseif has ("unix")
+  colorscheme torte
 endif
 
 " FONT:
