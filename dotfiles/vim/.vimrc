@@ -229,6 +229,15 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" Test different files:
+if has ("autocmd")
+    autocmd FileType python nmap <Leader>t ;call VimuxRunCommand("nosetests -a '!slow'")<CR>
+    autocmd FileType java nmap <Leader>t ;call VimuxRunCommand("gradle test")<CR>
+    autocmd FileType java nmap <Leader>tp ;call VimuxRunCommand("gradle build && ./run.sh")<CR>
+    autocmd FileType groovy nmap <Leader>t ;call VimuxRunCommand("gradle test")<CR>
+    autocmd FileType groovy nmap <Leader>tp ;call VimuxRunCommand("gradle build && ./run.sh")<CR>
+endif
+
 " Map ; to : so we don't have to press shift
 nnoremap ; :
 nnoremap : ;
