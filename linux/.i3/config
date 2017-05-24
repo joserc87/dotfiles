@@ -27,9 +27,12 @@ set_from_resource $cyan        color14 #000000
 set_from_resource $darkwhite   color7  #000000
 set_from_resource $white       color15 #000000
 # Use custom colors for black
+set $white       #FFFFFF
+set $darkwhite   #555555
 set $black       #282828
 set $darkblack   #1d2021
-set $transparent #00000000
+#set $transparent #00000000
+set $translucent #00000088
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -118,13 +121,14 @@ bindsym $mod+a focus parent
 set $workspace1 "1: "
 set $workspace2 "2: "
 set $workspace3 "3: "
-set $workspace4 "4"
-set $workspace5 "5"
-set $workspace6 "6"
-set $workspace7 "7"
+set $workspace4 "4: "
+set $workspace5 "5: "
+set $workspace6 "6: "
+set $workspace7 "7:  "
 set $workspace8 "8: "
 set $workspace9 "9: "
 set $workspace10 "10: "
+
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -193,11 +197,14 @@ bindsym $mod+r mode "resize"
 
 bindsym $mod+shift+x exec i3lock
 
+# AUTOSTART
+exec_always "feh --bg-scale /home/jose/Pictures/wallpaper.jpg"
+exec --no-startup-id compton -b
+
 exec "xrandr --output eDP1 --mode 2560x1440 --pos 0x0"
 exec "setxkbmap -option ctrl:nocaps"
 #xmodmap -e "clear lock" #disable caps lock switch
 #xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
-exec_always "feh --bg-scale /home/jose/Pictures/wallpaper.jpg"
 exec "nylas"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -208,32 +215,35 @@ exec "nylas"
 
 bar {
 #    verbose yes
-    status_command i3blocks
-    i3bar_command i3bar -t
-    position top
-    font pango:Hack, FontAwesome 11
-    strip_workspace_numbers yes
-    separator_symbol "■"
-    bindsym button4 nop
-    bindsym button5 nop
-    tray_output eDP1
-    tray_output LVDS-0
-    tray_padding 0
-    height 34 # $height
-    colors {
+     status_command i3blocks
+     #i3bar_command i3bar -t
+     position top
+     font pango:Hack, FontAwesome 11
+     strip_workspace_numbers no
+     separator_symbol "■"
+     bindsym button4 nop
+     bindsym button5 nop
+     tray_output eDP1
+     tray_output LVDS-0
+     tray_padding 0
+     height 34 # $height
+     colors {
         statusline         $white
-        background         $transparent
+        background         $translucent
         separator          $transparent
 
 #                          BORDER       BACKGROUND   TEXT
-        focused_workspace  $transparent $transparent $darkwhite
-        inactive_workspace $transparent $transparent $white
+        focused_workspace  $transparent $transparent $white
+        inactive_workspace $transparent $transparent $darkwhite
         active_workspace   $transparent $transparent $white
         urgent_workspace   $darkred     $darkred     $transparent
         binding_mode       $darkred     $darkred     $transparent
-    }
+     }
 }
 
+# No title bars
+new_window pixel 3
 # i3-gaps
 gaps inner 10
 gaps outer 10
+
