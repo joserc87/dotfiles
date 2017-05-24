@@ -41,6 +41,15 @@ export DEFAULT_USER=jose
 export LC_ALL=en_US.utf-8
 export LANG="$LC_ALL"
 
+
+############
+# PROJECTS #
+############
+
+# TRIVIHASH
+export TRIVIHASH_DATABASE_PASSWORD=trivihash
+
+# CORTADO
 # Tokens for fb bots and wit.ai
 export MESSENGER_PAGE_ACCESS_TOKEN=__FACEBOOK_PAGE_ACCESS_TOKEN_HERE__
 export MESSENGER_VALIDATION_TOKEN=__FACEBOOK_VERIFY_TOKEN_HERE__
@@ -116,6 +125,7 @@ then
     export PATH=~/.gem/ruby/2.4.0/bin/:$PATH
 fi
 export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+export PATH="$HOME/Dev/spell/build/install/spell/bin:$PATH"
 
 # User defined scripts:
 # Scripts folder is present for Linux and Mac OS
