@@ -115,6 +115,7 @@ if [[ -e ~/.gem/ruby/2.4.0/bin ]];
 then
     export PATH=~/.gem/ruby/2.4.0/bin/:$PATH
 fi
+export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 
 # User defined scripts:
 # Scripts folder is present for Linux and Mac OS
@@ -144,9 +145,14 @@ alias grun='java org.antlr.v4.gui.TestRig'
 source $ZSH/oh-my-zsh.sh
 
 # Virtualenv/VirtualenvWrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Dev
 if [[ -f /usr/local/bin/virtualenvwrapper.sh ]];
 then
     source /usr/local/bin/virtualenvwrapper.sh
+elif [[ -f /usr/bin/virtualenvwrapper.sh ]];
+then
+    source /usr/bin/virtualenvwrapper.sh
 fi
 
 # You may need to manually set your language environment
