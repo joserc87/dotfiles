@@ -25,6 +25,11 @@ fi
 export SHELL="/bin/zsh"
 bindkey -v
 
+# TMUXINATOR
+if hash tmuxinator 2>/dev/null; then
+    alias mux=tmuxinator
+fi
+
 # Add this so we don't have to type cd
 setopt AUTO_CD
 
