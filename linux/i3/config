@@ -122,9 +122,9 @@ set $workspace1 "1: "
 set $workspace2 "2: "
 set $workspace3 "3: "
 set $workspace4 "4: "
-set $workspace5 "5: "
-set $workspace6 "6: "
-set $workspace7 "7:  "
+set $workspace5 "5: "
+set $workspace6 "6: "
+set $workspace7 "7: "
 set $workspace8 "8: "
 set $workspace9 "9: "
 set $workspace10 "10: "
@@ -169,6 +169,32 @@ bindsym $mod+F2 focus output right
 bindsym $mod+Shift+F1 move workspace to output left
 bindsym $mod+Shift+F2 move workspace to output right
 
+##############
+# MULTIMEDIA #
+##############
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% && pkill -RTMIN+1 i3blocks #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle  && pkill -RTMIN+1 i3blocks
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 && pkill -RTMIN+2 i3blocks
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 && pkill -RTMIN+2 i3blocks
+
+# Touchpad controls
+# bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+# bindsym XF86Search exec /some/path/toggletouchpad.sh # toggle touchpad
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Screen control
+# bindsym XF86Display exec xbacklight -inc 10 # toggle touchpad
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -177,10 +203,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -195,7 +221,8 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-bindsym $mod+shift+x exec i3lock
+bindsym $mod+shift+x exec ~/.config/i3lock/i3lock.sh
+bindsym $mod+ctrl+4 exec gnome-screenshot -a
 
 # AUTOSTART
 exec_always "feh --bg-scale /home/jose/Pictures/wallpaper.jpg"
