@@ -12,13 +12,15 @@ while read line; do
 
         if [[ ! -z "$activated" ]]; then
             [[ -z "${BLOCK_BUTTON}" ]] || {
-                xrandr --output "${output}" --off
+                # xrandr --output "${output}" --off
+                ~/.screenlayout/xrandr-standalone.sh
                 pkill -RTMIN+4 i3blocks
             }
         else
             [[ -z "${BLOCK_BUTTON}" ]] || {
-                xrandr --auto
-                xrandr --output "${output}" --right-of eDP1
+                # xrandr --auto
+                # xrandr --output "${output}" --right-of eDP1
+                ~/.screenlayout/xrandr-office.sh
                 pkill -RTMIN+4 i3blocks
             }
 

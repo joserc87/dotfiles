@@ -23,19 +23,19 @@ separator_block_width=5
 #border_bottom=4
 
 [output]
-command=$HOME/scripts/i3blocks/monitor.sh
+command=$HOME/Scripts/i3blocks/monitor.sh
 interval=60
 signal=4
 
 [updates]
-command=$HOME/scripts/i3blocks/updates.sh
+command=$HOME/Scripts/i3blocks/updates.sh
 interval=60
 signal=3
 urgent=true
 
 [volume]
 label=    
-command=[[ -z "${BLOCK_BUTTON}" ]] || ( [[ "${BLOCK_BUTTON}" == "1" ]] && ((/usr/bin/pavucontrol -t 3 --name "pavucontrol-bar" || true) && $HOME/scripts/i3blocks/volume_control.py signal) || $HOME/scripts/i3blocks/volume_control.py toggle ); $HOME/scripts/i3blocks/volume_control.py i3blocks
+command=[[ -z "${BLOCK_BUTTON}" ]] || ( [[ "${BLOCK_BUTTON}" == "1" ]] && ((/usr/bin/pavucontrol -t 3 --name "pavucontrol-bar" || true) && $HOME/Scripts/i3blocks/volume_control.py signal) || $HOME/Scripts/i3blocks/volume_control.py toggle ); $HOME/Scripts/i3blocks/volume_control.py i3blocks
 interval=5
 signal=1
 markup=pango
@@ -50,8 +50,8 @@ signal=2
 
 [temperature]
 label=   
-command=echo "$($HOME/scripts/i3blocks/temperature.sh 'Core 0')"
-#command=echo "$($HOME/scripts/i3blocks/temperature.sh 'Core 0') $($HOME/scripts/i3blocks/temperature.sh 'Core 1') $($HOME/scripts/i3blocks/temperature.sh 'Core 2') $($HOME/scripts/i3blocks/temperature.sh 'Core 3') "
+command=echo "$($HOME/Scripts/i3blocks/temperature.sh 'Core 0')"
+#command=echo "$($HOME/Scripts/i3blocks/temperature.sh 'Core 0') $($HOME/Scripts/i3blocks/temperature.sh 'Core 1') $($HOME/Scripts/i3blocks/temperature.sh 'Core 2') $($HOME/Scripts/i3blocks/temperature.sh 'Core 3') "
 interval=5
 #border=#b16286
 
@@ -64,7 +64,7 @@ interval=2
 #border=#98971a
 
 [battery]
-command=$HOME/scripts/i3blocks/battery.sh
+command=$HOME/Scripts/i3blocks/battery.sh
 interval=persist
 #border=#458588
 
