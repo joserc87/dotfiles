@@ -231,11 +231,11 @@ bindsym $mod+shift+x exec ~/.config/i3lock/i3lock.sh
 bindsym $mod+ctrl+4 exec gnome-screenshot -a
 
 # AUTOSTART
-exec_always "feh --bg-scale /home/jose/Pictures/wallpaper.jpg"
-exec --no-startup-id compton -b
+exec_always --no-startup-id "feh --bg-scale /home/jose/Pictures/wallpaper.png"
+#exec --no-startup-id compton -b
 
-exec "xrandr --output eDP1 --mode 2560x1440 --pos 0x0"
-exec "setxkbmap -option ctrl:nocaps"
+exec --no-startup-id "xrandr --output eDP1 --mode 2560x1440 --pos 0x0"
+exec --no-startup-id "setxkbmap -option ctrl:nocaps"
 #xmodmap -e "clear lock" #disable caps lock switch
 #xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
 exec "nylas"
