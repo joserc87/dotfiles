@@ -31,7 +31,7 @@ set $white       #FFFFFF
 set $darkwhite   #555555
 set $black       #282828
 set $darkblack   #1d2021
-#set $transparent #00000000
+set $transparent #00000000
 set $translucent #00000088
 
 # Font for window titles. Will also be used by the bar unless a different font
