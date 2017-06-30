@@ -32,3 +32,7 @@
     #tree = "!f() { git log $@ --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit ; }; f"
     tree = "!f() { git log $@ --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %<(50,trunc)%s %Cgreen(%cr) %C(reset)' --abbrev-commit ; }; f"
 	stash-unapply = !git stash show -p | git apply -R
+    # Just because I get tired of writing the same commands over and over and over and over again
+    s = !"git status"
+    d = !"git diff"
+    ds = !"git diff --staged"
