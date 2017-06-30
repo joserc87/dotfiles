@@ -35,8 +35,8 @@ windows:
   - vm:
       layout: even-horizontal
       panes:
-        - vagrant up
-        - ls
+        - ngrok http 3000
+        - vagrant up && vagrant ssh
   - git: 
       layout: even-horizontal
       panes:
