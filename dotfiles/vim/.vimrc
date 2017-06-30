@@ -231,6 +231,10 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" LOCALVIRC:
+let g:localvimrc_sandbox = 0
+let g:localvimrc_persistent = 1
+
 " Test different files:
 if has ("autocmd")
     autocmd FileType python nmap <Leader>t ;call VimuxRunCommand("nosetests -a '!slow'")<CR>
