@@ -194,4 +194,14 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# alias checktws="find -type f -exec egrep -l \" +$\" {} \;"
+function checktws() {
+    if [ "$1" != "" ]
+    then
+        find "$1" -type f -exec egrep -l " +$" {} \;
+    else
+        find . -type f -exec egrep -l " +$" {} \;
+    fi
+}
+
 eval $(thefuck --alias)
