@@ -12,12 +12,12 @@ URxvt.iso14755_52: false
 URxvt*font: xft:Source\ Code\ Pro\ Medium:size=12:antialias=true:hinting=true,xft:Liberation Mono:antialias=true:hinting=true,xft:FontAwesome\ Regular
 
 ! terminal padding
-URxvt.internalBorder: 25
-!URxvt.internalBorder: 05
+URxvt.internalBorder:   25
+!URxvt.internalBorder:  05
 
 ! uncomment for transparent terminal if you are ready to be made fun of in #rice
-URxvt.transparent:	true
-URxvt.shading:		20
+! URxvt.transparent:    true
+! URxvt.shading:        20
 
 ! make otf / ttf fonts look pretty.  does not matter if you are using a bitmap font.
 Xft.autohint: 0

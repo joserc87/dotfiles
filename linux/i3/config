@@ -12,6 +12,7 @@
 set $mod Mod4
 
 # Copied from Airblander dotfiles
+set_from_resource $darkgray    color0  #000000
 set_from_resource $darkred     color1  #000000
 set_from_resource $red         color9  #000000
 set_from_resource $darkgreen   color2  #000000
@@ -26,13 +27,20 @@ set_from_resource $darkcyan    color6  #000000
 set_from_resource $cyan        color14 #000000
 set_from_resource $darkwhite   color7  #000000
 set_from_resource $white       color15 #000000
+
 # Use custom colors for black
-set $white       #FFFFFF
+#set $white       #FFFFFF
 set $darkwhite   #555555
 set $black       #282828
 set $darkblack   #1d2021
 set $transparent #00000000
 set $translucent #00000088
+
+# set some nice colors      border        background        text    indicator   child_border
+client.focused              $green        $green            $white  $green      $green
+client.unfocused            $transparent  $darkgray         $white  $darkgray   $darkgray
+client.focused_inactive     $transparent  $darkgray         $white  $darkgray   $darkgray
+client.urgent               $transparent  $darkgray         $white  $darkgray   $darkgray
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -281,5 +289,5 @@ bar {
 new_window pixel 3
 # i3-gaps
 gaps inner 10
-gaps outer 10
+gaps outer 40
 
