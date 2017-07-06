@@ -132,8 +132,8 @@ bindsym $mod+a focus parent
 set $workspace1 "1: "
 set $workspace2 "2: "
 set $workspace3 "3: "
-set $workspace4 "4: "
-set $workspace5 "5: "
+set $workspace4 "4: "
+set $workspace5 "5: "
 set $workspace6 "6: "
 set $workspace7 "7: "
 set $workspace8 "8: "
@@ -171,6 +171,8 @@ assign [class="Vmware"] $workspace8
 assign [class="Nylas Mail"] $workspace9
 assign [class="Spotify"] $workspace10
 for_window [class="Spotify"] move to workspace $workspace10
+assign [class="Nautilus"] $workspace4
+assign [class="libreoffice-writer"] $workspace5
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -217,10 +219,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 50 px or 50 ppt
+        bindsym j resize grow height 50 px or 50 ppt
+        bindsym k resize shrink height 50 px or 50 ppt
+        bindsym l resize grow width 50 px or 50 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -245,8 +247,10 @@ bindsym $mod+ctrl+shift+space exec setxkbmap -layout us
 exec_always --no-startup-id "feh --bg-scale /home/jose/Pictures/wallpaper.png"
 #exec --no-startup-id compton -b
 
-#exec --no-startup-id "xrandr --output eDP1 --mode 2560x1440 --pos 0x0"
+# Caps lock is control
 exec --no-startup-id "setxkbmap -option ctrl:nocaps"
+# Right menu key is control
+exec --no-startup-id "setxkbmap -option ctrl:menu_rctrl"
 #xmodmap -e "clear lock" #disable caps lock switch
 #xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
 exec "nylas"
