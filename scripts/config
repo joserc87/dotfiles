@@ -10,6 +10,7 @@ if [ "$#" -ne 1 ]; then
     echo " -> nvim"
     echo " -> vim-plugins"
     echo " -> zsh"
+    echo " -> xresources"
     echo " -> config"
     exit
 fi
@@ -28,6 +29,9 @@ case $1 in
     zsh)
         $EDITOR ~/.zshrc
     ;;
+    xresources)
+        $EDITOR ~/.Xresources && xrdb ~/.Xresources
+    ;;
     config)
         $EDITOR ~/Scripts/config
     ;;
@@ -35,7 +39,7 @@ case $1 in
         cd ~/Code/config-files
     ;;
     shortlist)
-        echo i3 nvim vim-plugins zsh stuff config
+        echo i3 nvim vim-plugins zsh xresources stuff config
     ;;
     *)
         echo "I don't know how to config $1"
