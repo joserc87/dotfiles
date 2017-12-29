@@ -1,7 +1,7 @@
-# ~/.tmuxinator/word-solver.yml
+# ~/.tmuxinator/bigdata.yml
 
-name: word-solver
-root: ~/Code/word-solver
+name: big
+root: ~/git/bigdata
 
 # Optional tmux socket
 # socket_name: foo
@@ -25,14 +25,19 @@ root: ~/Code/word-solver
 # attach: false
 
 # Runs after everything. Use it to attach to tmux with custom options etc.
-# post: tmux -CC attach -t angry-solver
+# post: tmux -CC attach -t bigdata
 
 windows:
-  - editor:
-      layout: main-horizontal
+  - editor: vim
+  - server:
+      layout: main-vertical
       panes:
-        - vim
-        - workon word-solver
-  - debug: python -S ~/Scripts/pydb/pydbp "-d" "localhost:9000" ./script.py
-  - python2: python
-  - python3: python3
+        - static:
+          - workon big
+          - python bigdata.py
+        - gulp:
+          - gulp dev
+        - rts:
+          - workon big
+          - python realtime.py
+  - git: git lg

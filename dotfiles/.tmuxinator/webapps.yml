@@ -1,7 +1,7 @@
-# ~/.tmuxinator/whatsapp.yml
+# ~/.tmuxinator/webapps.yml
 
-name: cortado
-root: ~/Dev/cortado-messenger/
+name: webapps
+root: ~/git/webapps
 
 # Optional tmux socket
 # socket_name: foo
@@ -25,16 +25,17 @@ root: ~/Dev/cortado-messenger/
 # attach: false
 
 # Runs after everything. Use it to attach to tmux with custom options etc.
-# post: tmux -CC attach -t whatsapp
+# post: tmux -CC attach -t webapps
 
 windows:
-  - editor:
-      layout: main-vertical
+  - editor: vim
+  - servers:
+      layout: even-horizontal
       panes:
-        - vim
-  - server:
-      layout: main-horizontal
-      panes:
-        - node index.js
-        - ngrok http $PORT
-  - logs: heroku logs
+        - static:
+          - workon webapps
+          - python server/runstatic.py
+        - rts:
+          - workon webapps
+          - python server/runrts.py
+  - logs: echo logs...
