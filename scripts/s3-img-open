@@ -1,0 +1,13 @@
+#!/bin/sh
+
+VIEWER=feh
+bucket=com.bigdata.raw.dev.v3
+file=/tmp/$1
+
+if [ ! -f "$file" ]
+then
+    aws s3 cp "s3://$bucket/$1" $file
+fi
+
+$VIEWER $file
+
