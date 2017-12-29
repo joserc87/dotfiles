@@ -50,7 +50,7 @@ Plugin 'Valloric/YouCompleteMe'
 " let g:ycm_add_preview_to_completeopt=0
 " let g:ycm_confirm_extra_conf=0
 " set completeopt-=preview
-Plugin 'marijnh/tern_for_vim'
+" Plugin 'marijnh/tern_for_vim'
 
 " JAVASCRIPT:
 Plugin 'jelera/vim-javascript-syntax'
@@ -60,8 +60,8 @@ Plugin 'pangloss/vim-javascript'
 " tsuquyomi disabled because it lags when the file is saved
 " Plugin 'Shougo/vimproc.vim', {'do' : 'make'}
 " Plugin 'Quramy/tsuquyomi'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'Quramy/vim-js-pretty-template'
+" Plugin 'leafgarland/typescript-vim'
+" Plugin 'Quramy/vim-js-pretty-template'
 
 " CSS:
 Plugin 'ap/vim-css-color'

@@ -2,7 +2,7 @@
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
 	pager = less -F -X
-	editor = nvim
+	editor = vim
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -10,8 +10,8 @@
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [user]
-	name = Jose Ramon Cano Yribarren
-	email = jose.cano@theconsultancyfirm.com
+	name = Jose Ramon Cano
+	email = jcano@ravenpack.com
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
@@ -36,3 +36,5 @@
     s = !"git status"
     d = !"git diff"
     ds = !"git diff --staged"
+[push]
+	default = simple

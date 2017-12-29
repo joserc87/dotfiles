@@ -17,6 +17,7 @@ export XDG_CONFIG_HOME="~/.config/"
 # If neovim exists, use nvim, otherwise use vim
 if ! hash nvim 2>/dev/null; then
     export EDITOR="vim"
+    alias nvim=vim
 else
     export EDITOR="nvim"
     # This is just because I am used to type $ vim instead of $ nvim
@@ -28,6 +29,11 @@ bindkey -v
 # TMUXINATOR
 if hash tmuxinator 2>/dev/null; then
     alias mux=tmuxinator
+fi
+
+# i3lock + suspend
+if hash i3lock 2>/dev/null; then
+    alias suspend="i3lock -c 000000 && systemctl suspend"
 fi
 
 # Add this so we don't have to type cd
@@ -158,7 +164,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Virtualenv/VirtualenvWrapper
 export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Dev
+export PROJECT_HOME=$HOME/git
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 if [[ -f /usr/local/bin/virtualenvwrapper.sh ]];
 then
     source /usr/local/bin/virtualenvwrapper.sh
@@ -225,4 +233,15 @@ alias rcd=ranger-cd
 # Ranger + Tmux
 alias rmux="ranger-cd && tmux new -s `echo '${PWD##*/}'`"
 
-eval $(thefuck --alias)
+# eval $(thefuck --alias)
+
+##########
+# ORACLE #
+##########
+
+export ORACLE_HOME=/usr/lib/oracle/12.2/client64/lib/
+export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib/
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

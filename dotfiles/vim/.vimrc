@@ -14,6 +14,9 @@ set guioptions-=R
 set guioptions-=l
 set guioptions-=L
 
+set ttymouse=xterm2
+set mouse=a
+
 " Enable per-project .vimrc's
 " UNSAFE
 " set exrc
@@ -113,6 +116,8 @@ elseif has ("mac")
   colorscheme solarized
 " LINUX
 elseif has ("unix")
+  colorscheme torte
+else
   colorscheme torte
 endif
 " Uncomment for transparent vim background if you are ready to be made fun of
@@ -294,3 +299,7 @@ au BufRead,BufNewFile *.g4 set syntax=antlr
 
 " SPELL:
 au BufRead,BufNewFile *.spl set syntax=spell
+
+" HTML:
+autocmd FileType html setlocal softtabstop=4 shiftwidth=4 tabstop=4 noexpandtab
+autocmd FileType javascript setlocal softtabstop=2 shiftwidth=2 tabstop=2 expandtab

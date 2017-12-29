@@ -1,0 +1,84 @@
+" VIM CONFIGURATION
+"
+" José Ramón Cano Yribarren
+" joserc87@gmail.com
+"
+" This configuration file is released under the GPL terms
+" This vim configuration file was written based on my
+" own preferences, but hoping that you can find useful
+" stuff to create your own. ;)
+
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" TABS:
+" -----
+" In a codebase that uses 4 space characters for each indent:
+" set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+" In a codebase that uses a single tab character that appears 4-spaces wide
+" for each indent:
+
+" 4 spaces instead of a tab
+" set tabstop=4 shiftwidth=4 expandtab
+
+" NORMAL SETTINGS:
+" ---------------
+
+" Open new split panes to right and bottom, which feels more natural than
+" Vim's default
+set splitbelow
+set splitright
+
+"  Relative line numbers
+set rnu
+
+syntax on
+
+" MAPPINGS:
+" --------
+" Set the leader to -
+:let mapleader = ","
+nmap <space> <leader>
+nmap <space><space> <leader><leader>
+
+" jj goes to normal mode
+inoremap jj <ESC>
+
+" WINDOW NAVIGATION:
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Map ctrlp
+let g:ctrlp_map = '<c-p>'
+
+nmap <silent> <A-Up> ;wincmd k<CR>
+nmap <silent> <A-Down> ;wincmd j<CR>
+nmap <silent> <A-Left> ;wincmd h<CR>
+nmap <silent> <A-Right> ;wincmd l<CR>
+
+" Buffer operations:
+nmap <leader>bl ;bnext<CR>
+nmap <leader>bh ;bprevious<CR>
+nmap <leader>bq ;bp <BAR> bd #<CR>
+
+" Tab movement
+nnoremap th  :tabfirst<CR>
+nnoremap tj  :tabnext<CR>
+nnoremap tk  :tabprev<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap tn  :tabnext<Space>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
+" Alternatively use
+"nnoremap th :tabnext<CR>
+"nnoremap tl :tabprev<CR>
+"nnoremap tn :tabnew<CR>
+
+" Map ; to : so we don't have to press shift
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
