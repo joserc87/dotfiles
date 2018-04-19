@@ -193,6 +193,13 @@ nmap <leader>bl ;bnext<CR>
 nmap <leader>bh ;bprevious<CR>
 nmap <leader>bq ;bp <BAR> bd #<CR>
 
+" quickfix operations:
+nmap <leader>cc ;copen<CR>
+nmap <leader>cl ;cn<CR>
+nmap <leader>ch ;cp<CR>
+nmap <leader>cq ;cclose<CR>
+
+
 " Show all open buffers and their status
 "nmap <leader>bl ;ls<CR>
 
@@ -245,7 +252,7 @@ let g:localvimrc_persistent = 1
 
 " Test different files:
 if has ("autocmd")
-    autocmd FileType python nmap <Leader>t ;call VimuxRunCommand("nosetests -a '!slow'")<CR>
+    autocmd FileType python nmap <Leader>t ;call VimuxRunCommand("pytest")<CR>
     autocmd FileType java nmap <Leader>t ;call VimuxRunCommand("gradle test")<CR>
     autocmd FileType java nmap <Leader>tp ;call VimuxRunCommand("gradle build && ./run.sh")<CR>
     autocmd FileType groovy nmap <Leader>t ;call VimuxRunCommand("gradle test")<CR>
