@@ -272,6 +272,10 @@ exec_always --no-startup-id "feh --bg-scale /home/jose/Pictures/wallpaper.png"
 exec --no-startup-id "setxkbmap -option ctrl:nocaps"
 # Right menu key is control
 exec --no-startup-id "setxkbmap -option ctrl:menu_rctrl"
+
+# Log the unlock
+exec "logunlock"
+
 #xmodmap -e "clear lock" #disable caps lock switch
 #xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
 exec "charm"

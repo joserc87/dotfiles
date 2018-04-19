@@ -2,8 +2,13 @@
 set -eu
 
 [[ -z "$(pgrep i3lock)" ]] || exit
+
 #i3lock -n -u -t -i ${HOME}/.config/i3lock/lock.png
 #i3lock -n -u -c000000
+
+timestamp() {
+  date +"%Y-%m-%d_%H-%M-%S"
+}
 
 B='#00000000'  # blank
 C='#ffffff22'  # clear ish
@@ -13,6 +18,13 @@ T='#ee00eeee'  # text
 T='#FFFFFF33'  # text
 W='#880000bb'  # wrong
 V='#bb00bbbb'  # verifying
+
+# Pause the music
+playerctl pause
+
+# loglock
+# Log the lock
+echo "L $(timestamp)" >> ~/lock.log
 
 #./x86_64-pc-linux-gnu/i3lock \
 i3lock \
@@ -41,7 +53,7 @@ i3lock \
 --timestr="%H:%M:%S"  \
 --datestr="%A, %m %Y" \
 --keylayout 2         \
-
+-n
 # --veriftext="Drinking verification can..."
 # --wrongtext="Nope!"
 # --textsize=20
@@ -49,3 +61,7 @@ i3lock \
 # --timefont=comic-sans
 # --datefont=monofur
 # etc
+
+# logunlock
+# Log the lock
+echo "U $(timestamp)" >> ~/lock.log
