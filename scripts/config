@@ -12,6 +12,7 @@ if [ "$#" -ne 1 ]; then
     echo " -> zsh"
     echo " -> xresources"
     echo " -> config"
+    echo " -> tmux"
     exit
 fi
 
@@ -35,11 +36,14 @@ case $1 in
     config)
         $EDITOR ~/Scripts/config
     ;;
+    tmux)
+        $EDITOR ~/.tmux.conf
+    ;;
     stuff)
         cd ~/Code/config-files
     ;;
     shortlist)
-        echo i3 nvim vim-plugins zsh xresources stuff config
+        echo i3 nvim vim-plugins zsh xresources tmux stuff config
     ;;
     *)
         echo "I don't know how to config $1"

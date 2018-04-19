@@ -1,6 +1,6 @@
 #!/bin/sh
 
-bucket=com.bigdata.rpxml.dev.v3
+bucket=com.bigdata.annotated.dev.v3
 file=/tmp/$1
 
 if [ ! -f "$file" ]
@@ -17,4 +17,3 @@ then
 
     $EDITOR $file.pretty.xml
 fi
-

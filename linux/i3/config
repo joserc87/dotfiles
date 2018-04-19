@@ -266,7 +266,7 @@ bindsym $mod+ctrl+shift+space exec setxkbmap -layout us
 
 # AUTOSTART
 exec_always --no-startup-id "feh --bg-scale /home/jose/Pictures/wallpaper.png"
-#exec --no-startup-id compton -b
+exec --no-startup-id compton --config ~/.config/compton.conf -b
 
 # Caps lock is control
 exec --no-startup-id "setxkbmap -option ctrl:nocaps"
