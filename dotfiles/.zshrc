@@ -233,7 +233,9 @@ alias rcd=ranger-cd
 # Ranger + Tmux
 alias rmux="ranger-cd && tmux new -s `echo '${PWD##*/}'`"
 
-# eval $(thefuck --alias)
+if command -v thefuck 1>/dev/null 2>&1; then
+    eval $(thefuck --alias)
+fi
 
 ##########
 # ORACLE #
