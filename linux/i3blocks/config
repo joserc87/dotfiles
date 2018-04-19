@@ -22,31 +22,32 @@ separator_block_width=5
 #border_right=0
 #border_bottom=4
 
-[output]
-command=$HOME/Scripts/i3blocks/monitor.sh
-interval=60
-signal=4
+# [output]
+# command=$HOME/Scripts/i3blocks/monitor.sh
+# interval=60
+# signal=4
 
-[updates]
-command=$HOME/Scripts/i3blocks/updates.sh
-interval=60
-signal=3
-urgent=true
+# [updates]
+# command=$HOME/Scripts/i3blocks/updates.sh
+# interval=60
+# signal=3
+# urgent=true
+
+[mediaplayer]
+label= 
+command=$HOME/Scripts/i3blocks/mediaplayer
+instance=spotify
+interval=5
+signal=10
 
 [volume]
 label=    
+# command=[[ -z "${BLOCK_BUTTON}" ]] || ( [[ "${BLOCK_BUTTON}" == "1" ]] && ((/usr/bin/pavucontrol -t 3 --name "pavucontrol-bar" || true) && $HOME/Scripts/i3blocks/volume_control.py signal) || $HOME/Scripts/i3blocks/volume_control.py toggle ); $HOME/Scripts/i3blocks/volume_control.py i3blocks
 command=[[ -z "${BLOCK_BUTTON}" ]] || ( [[ "${BLOCK_BUTTON}" == "1" ]] && ((/usr/bin/pavucontrol -t 3 --name "pavucontrol-bar" || true) && $HOME/Scripts/i3blocks/volume_control.py signal) || $HOME/Scripts/i3blocks/volume_control.py toggle ); $HOME/Scripts/i3blocks/volume_control.py i3blocks
-interval=5
+interval=once
 signal=1
 markup=pango
 #border=#cc241d
-
-[brightness]
-label=    
-command=printf "%.0f " $(xbacklight -get)
-interval=10
-signal=2
-#border=#d79921
 
 [temperature]
 label=   
@@ -55,18 +56,33 @@ command=echo "$($HOME/Scripts/i3blocks/temperature.sh 'Core 0')"
 interval=5
 #border=#b16286
 
-[wireless]
-label=    
+##########
+# LAPTOP #
+##########
 
-#command=[[ -z "$(iwgetid -r)" ]] || echo "$(iwgetid -r) "
-command=[[ -z "${BLOCK_BUTTON}" ]] || ( [[ "${BLOCK_BUTTON}" == "1" ]] && (/usr/bin/gnome-control-center network || true)); [[ -z "$(iwgetid -r)" ]] || echo "$(iwgetid -r) "
-interval=2
-#border=#98971a
+#    [brightness]
+#    label=    
+#    command=printf "%.0f " $(xbacklight -get)
+#    interval=10
+#    signal=2
+#    #border=#d79921
 
-[battery]
-command=$HOME/Scripts/i3blocks/battery.sh
-interval=persist
-#border=#458588
+#    [wireless]
+#    label=    
+#    #command=[[ -z "$(iwgetid -r)" ]] || echo "$(iwgetid -r) "
+#    command=[[ -z "${BLOCK_BUTTON}" ]] || ( [[ "${BLOCK_BUTTON}" == "1" ]] && (/usr/bin/gnome-control-center network || true)); [[ -z "$(iwgetid -r)" ]] || echo "$(iwgetid -r) "
+#    interval=2
+#    #border=#98971a
+
+#    [battery]
+#    command=$HOME/Scripts/i3blocks/battery.sh
+#    interval=persist
+#    #border=#458588
+
+[uptime]
+label= 
+command=$HOME/Scripts/devtime --short
+interval=30
 
 [time]
 label=    
