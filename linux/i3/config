@@ -135,6 +135,12 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
 #workspace
 #FILE:
 #
@@ -187,6 +193,7 @@ assign [class="Nautilus"] $workspace4
 assign [class="libreoffice-writer"] $workspace5
 assign [class="Slack"] $workspace6
 assign [class="jetbrains-pycharm"] $workspace2
+assign [class="Rambox"] $workspace9
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -204,9 +211,9 @@ bindsym $mod+Shift+F2 move workspace to output right
 ##############
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% && pkill -RTMIN+1 i3blocks #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle  && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% # && pkill -RTMIN+1 i3blocks #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% # && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle  && pkill -RTMIN+1 i3blocks
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 && pkill -RTMIN+2 i3blocks
@@ -217,8 +224,8 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10 && pkill -RTMIN+2 i3blocks
 # bindsym XF86Search exec /some/path/toggletouchpad.sh # toggle touchpad
 
 # Media player controls
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioPlay exec playerctl play-pause
+#bindsym XF86AudioPause exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
@@ -267,8 +274,11 @@ exec --no-startup-id "setxkbmap -option ctrl:nocaps"
 exec --no-startup-id "setxkbmap -option ctrl:menu_rctrl"
 #xmodmap -e "clear lock" #disable caps lock switch
 #xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
+exec "charm"
+exec "firefox"
+exec "chromium-browser"
 exec "slack"
-exec "nylas"
+exec "rambox"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -306,7 +316,47 @@ bar {
 
 # No title bars
 new_window pixel 3
-# i3-gaps
-gaps inner 10
+
+###########
+# i3-gaps #
+###########
+
+gaps inner 2
 gaps outer 0
 
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+ 
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+ 
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+ 
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+ 
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+ 
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+ 
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
