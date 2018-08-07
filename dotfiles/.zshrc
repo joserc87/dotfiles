@@ -52,7 +52,9 @@ export PORT=3000
 # time that oh-my-zsh is loaded.
 # The following would be the default theme
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="agnoster"
+# ZSH_THEME="agnoster"
+# ZSH_THEME="lambda-gister"
+ZSH_THEME="node"
 
 
 # Uncomment the following line to use case-sensitive completion.
@@ -105,11 +107,16 @@ plugins=(git)
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # -- JOSE --
-# Path to the Gems:
-if [[ -e ~/.gem/ruby/2.4.0/bin ]];
+# rbenv
+if which rbenv > /dev/null;
 then
-    export PATH=~/.gem/ruby/2.4.0/bin/:$PATH
+    eval "$(rbenv init -)";
 fi
+# Path to the Gems:
+#if [[ -e ~/.gem/ruby/2.4.0/bin ]];
+#then
+#    export PATH=~/.gem/ruby/2.4.0/bin/:$PATH
+#fi
 
 # User defined scripts:
 # Scripts folder is present for Linux and Mac OS
@@ -136,6 +143,9 @@ export CLASSPATH=.:/usr/local/lib/antlr-4.5.3-complete.jar:$CLASSPATH
 alias antlr4='java -jar /usr/local/lib/antlr-4.5.3-complete.jar'
 alias grun='java org.antlr.v4.gui.TestRig'
 
+# Disable warning when .oh-my-zsh is shared between users
+# https://github.com/robbyrussell/oh-my-zsh/issues/6835#issuecomment-390216875
+ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
 
 # Virtualenv/VirtualenvWrapper
