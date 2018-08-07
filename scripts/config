@@ -1,0 +1,52 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+    echo "Wrong number of arguments. Usage:"
+    echo ""
+    echo "  config SOMETHING"
+    echo ""
+    echo "Where SOMETHING can be:"
+    echo " -> i3"
+    echo " -> nvim"
+    echo " -> vim-plugins"
+    echo " -> zsh"
+    echo " -> xresources"
+    echo " -> config"
+    echo " -> tmux"
+    exit
+fi
+
+
+case $1 in
+    i3)
+        $EDITOR ~/.config/i3/config
+    ;;
+    nvim)
+        $EDITOR ~/.config/nvim/init.vim
+    ;;
+    vim-plugins)
+        $EDITOR ~/.vim/plugins.vim
+    ;;
+    zsh)
+        $EDITOR ~/.zshrc
+    ;;
+    xresources)
+        $EDITOR ~/.Xresources && xrdb ~/.Xresources
+    ;;
+    config)
+        $EDITOR ~/Scripts/config
+    ;;
+    tmux)
+        $EDITOR ~/.tmux.conf
+    ;;
+    stuff)
+        cd ~/Code/config-files
+    ;;
+    shortlist)
+        echo i3 nvim vim-plugins zsh xresources tmux stuff config
+    ;;
+    *)
+        echo "I don't know how to config $1"
+    ;;
+
+esac

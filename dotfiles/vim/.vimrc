@@ -14,6 +14,10 @@ set guioptions-=R
 set guioptions-=l
 set guioptions-=L
 
+if !has('nvim')
+  set ttymouse=xterm2
+endif
+
 " Enable per-project .vimrc's
 " UNSAFE
 " set exrc
@@ -71,6 +75,8 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
+" automatically populate the g:airline_symbols
+let g:airline_powerline_fonts = 1
 "
 " Dont write backup files
 set nobackup
@@ -116,7 +122,12 @@ elseif has ("mac")
 " LINUX
 elseif has ("unix")
   colorscheme torte
+else
+  colorscheme torte
 endif
+" Uncomment for transparent vim background if you are ready to be made fun of
+" in #rice.
+hi Normal guibg=NONE ctermbg=NONE
 
 " FONT:
 " -----
@@ -187,6 +198,13 @@ nmap <leader>bl ;bnext<CR>
 nmap <leader>bh ;bprevious<CR>
 nmap <leader>bq ;bp <BAR> bd #<CR>
 
+" quickfix operations:
+nmap <leader>cc ;copen<CR>
+nmap <leader>cl ;cn<CR>
+nmap <leader>ch ;cp<CR>
+nmap <leader>cq ;cclose<CR>
+
+
 " Show all open buffers and their status
 "nmap <leader>bl ;ls<CR>
 
@@ -233,9 +251,13 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" LOCALVIRC:
+let g:localvimrc_sandbox = 0
+let g:localvimrc_persistent = 1
+
 " Test different files:
 if has ("autocmd")
-    autocmd FileType python nmap <Leader>t ;call VimuxRunCommand("nosetests -a '!slow'")<CR>
+    autocmd FileType python nmap <Leader>t ;call VimuxRunCommand("pytest")<CR>
     autocmd FileType java nmap <Leader>t ;call VimuxRunCommand("gradle test")<CR>
     autocmd FileType java nmap <Leader>tp ;call VimuxRunCommand("gradle build && ./run.sh")<CR>
     autocmd FileType groovy nmap <Leader>t ;call VimuxRunCommand("gradle test")<CR>
@@ -289,3 +311,7 @@ au BufRead,BufNewFile *.g4 set syntax=antlr
 
 " SPELL:
 au BufRead,BufNewFile *.spl set syntax=spell
+
+" HTML:
+autocmd FileType html setlocal softtabstop=4 shiftwidth=4 tabstop=4 noexpandtab
+autocmd FileType javascript setlocal softtabstop=2 shiftwidth=2 tabstop=2 expandtab

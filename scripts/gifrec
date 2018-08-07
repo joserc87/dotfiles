@@ -1,0 +1,37 @@
+#!/bin/bash
+
+#ARGUMENTS=$(slop --format="--x=%x --y=%y --width=%w --height=%h") || exit -1
+#rect=`slop --format="--x=%x --y=%y --width=%w --height=%h"` 
+#byzanz-record --duration=10 $rect ~/Pictures/byzanz.gif
+
+# Delay before starting
+DELAY=0
+
+# Sound notification to let one know when recording is about to start (and ends)
+beep() {
+    paplay /usr/share/sounds/KDE-Im-Irc-Event.ogg &
+}
+
+# Duration and output file
+if [ $# -gt 0 ]; then
+    D="--duration=$@"
+else
+    echo Default recording duration 10s to /tmp/recorded.gif
+    #echo Default recording duration 10s to /Pictures/gifshot-/$(date +%F_%R).gif
+    D="--duration=15 /tmp/recorded.gif"
+    #D="--duration=10 \"$HOME/Pictures/gifshot-$(date +%F_%R).gif\""
+fi
+
+# xrectsel from https://github.com/lolilolicon/xrectsel
+#ARGUMENTS=$(xrectsel "--x=%x --y=%y --width=%w --height=%h") || exit -1
+ARGUMENTS=$(slop --format="--x=%x --y=%y --width=%w --height=%h") || exit -1
+
+echo Delaying $DELAY seconds. After that, byzanz will start
+for (( i=$DELAY; i>0; --i )) ; do
+    echo $i
+    sleep 1
+done
+#beep
+#echo byzanz-record --verbose --delay=0 ${ARGUMENTS} $D
+byzanz-record ${ARGUMENTS} $D
+#beep

@@ -31,6 +31,6 @@ windows:
   - editor:
       layout: main-vertical
       panes:
-        - dia.sh
+        - vim
   - other: ./mdlive.sh
 

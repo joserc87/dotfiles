@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+cd ~/git/teamstats
+export PYTHONPATH=$(pwd)
+export DEBUG=True
+export SLACK_API_KEY=xxxx-your-bot-slack-key
+export GITLAB_PRIVATE_TOKEN=rzm9B1zNHsE6u3DtK4By
+
+# the virtualenv should have the requirements in requirements.txt installed
+# ~/.virtualenvs/teamstats/bin/python stats.py --config pythonistas
+~/.virtualenvs/teamstats/bin/python stats.py
+
