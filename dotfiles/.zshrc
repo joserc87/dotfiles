@@ -73,8 +73,8 @@ export PORT=3000
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # The following would be the default theme
-# ZSH_THEME="robbyrussell"
-ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell"
+# ZSH_THEME="agnoster"
 
 
 # Uncomment the following line to use case-sensitive completion.
