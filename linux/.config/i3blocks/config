@@ -80,9 +80,15 @@ interval=5
 #    #border=#458588
 
 [uptime]
-label= 
+label= 
 command=$HOME/Scripts/devtime --short
 interval=30
+
+[layout]
+label= 
+command=setxkbmap -print | grep xkb_symbols | cut -d'+' -f 2
+interval=30
+signal=10
 
 [time]
 label=    

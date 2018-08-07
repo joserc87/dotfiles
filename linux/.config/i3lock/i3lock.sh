@@ -20,11 +20,13 @@ W='#880000bb'  # wrong
 V='#bb00bbbb'  # verifying
 
 # Pause the music
-playerctl pause
+playerctl pause || true
 
-# loglock
 # Log the lock
 echo "L $(timestamp)" >> ~/lock.log
+
+# Disable notifications
+# https://faq.i3wm.org/question/5654/how-can-i-disable-notifications-when-the-screen-locks-and-enable-them-again-when-unlocking/index.html
 
 #./x86_64-pc-linux-gnu/i3lock \
 i3lock \
