@@ -11,7 +11,7 @@
 	trustExitCode = true
 [user]
 	name = Jose Ramon Cano Yribarren
-	email = jose.cano@theconsultancyfirm.com
+	email = joserc87@gmail.com
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
