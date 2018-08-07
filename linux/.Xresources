@@ -15,7 +15,7 @@ URxvt.iso14755_52: false
 !URxvt*font: xft:Ubuntu\ Mono\ for\ Powerline:size=12:antialias=true:hinting=true,xft:Liberation Mono:antialias=true:hinting=true,xft:FontAwesome\ Regular
 
 ! Rxvt.allow_bold:           true
-URxvt*font: xft:Ubuntu Mono for Powerline:pixelsize=14
+URxvt*font: xft:Ubuntu Mono for Powerline:pixelsize=13
 ! URxvt*imFont: xft:ubuntu mono for powerline:regular:pixelsize=18
 ! URxvt*boldFont: xft:ubuntu mono for powerline:bold:pixelsize=18
 ! URxvt*italicFont: xft:ubuntu mono for powerline:italic:pixelsize=18
