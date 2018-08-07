@@ -7,6 +7,7 @@ if [ "$#" -ne 1 ]; then
     echo ""
     echo "Where SOMETHING can be:"
     echo " -> i3"
+    echo " -> bar"
     echo " -> nvim"
     echo " -> vim-plugins"
     echo " -> zsh"
@@ -20,6 +21,9 @@ fi
 case $1 in
     i3)
         $EDITOR ~/.config/i3/config
+    ;;
+    bar)
+        $EDITOR ~/.config/i3blocks/config
     ;;
     nvim)
         $EDITOR ~/.config/nvim/init.vim

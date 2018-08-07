@@ -2,6 +2,7 @@
 
 import webbrowser
 import sys
+import subprocess
 
 
 def main():
@@ -11,6 +12,8 @@ def main():
         url = '{}/browse/{}'.format(base, issue)
     else:
         url = base
+    # Swiitch to the 7th workspace
+    subprocess.call(['i3-msg', 'workspace', '7: '])
     webbrowser.open(url)
 
 if __name__ == '__main__':
