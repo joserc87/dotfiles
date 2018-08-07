@@ -1,6 +1,5 @@
 
 " PLUGINS:
-Plugin 'morhetz/gruvbox'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'scrooloose/syntastic'
@@ -69,3 +68,7 @@ Plugin 'ap/vim-css-color'
 
 " DASH INTEGRATION:
 Plugin 'rizzatti/dash.vim'
+
+" THEMES
+Plugin 'morhetz/gruvbox'
+Plugin 'sonph/onehalf', {'rtp': 'vim/'}

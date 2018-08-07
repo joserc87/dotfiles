@@ -108,7 +108,11 @@ if has("win32")
   endif
 " MAC
 elseif has ("mac")
-  colorscheme solarized
+  " colorscheme solarized
+  " colorscheme gruvbox
+  " let g:airline_theme='gruvbox'
+  colorscheme onehalfdark
+  let g:airline_theme='onehalfdark'
 " LINUX
 elseif has ("unix")
   colorscheme torte
