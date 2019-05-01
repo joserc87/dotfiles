@@ -63,6 +63,8 @@ export TELEGRAM_BOT_TOKEN=__TELEGRAM_TOKEN_HERE__
 export WIT_TOKEN=__WIT_TOKEN_HERE__
 export PORT=3000
 
+source ~/.tokens
+
 
 ##############################
 # DEFAULT OH-MY-ZSH CONFIG   #
@@ -232,6 +234,9 @@ function ranger-cd {
 alias rcd=ranger-cd
 # Ranger + Tmux
 alias rmux="ranger-cd && tmux new -s `echo '${PWD##*/}'`"
+alias t=task
+alias th="task priority:H"
+alias tl="task priority:H or priority:"
 
 if command -v thefuck 1>/dev/null 2>&1; then
     eval $(thefuck --alias)
@@ -259,4 +264,3 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 alias inp="pyenv activate big"
-export RP_API_KEY="MY_API_KEY"

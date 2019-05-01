@@ -19,14 +19,22 @@ T='#FFFFFF33'  # text
 W='#880000bb'  # wrong
 V='#bb00bbbb'  # verifying
 
+lockfile=~/.lock.log
+
 # Pause the music
 playerctl pause || true
 
+
+# Mute slack
+source ~/.tokens
+slack-cli snooze start 180 || echo "Failed to snooze slack"
+
 # Log the lock
-echo "L $(timestamp)" >> ~/lock.log
+echo "L $(timestamp)" >> $lockfile
 
 # Disable notifications
 # https://faq.i3wm.org/question/5654/how-can-i-disable-notifications-when-the-screen-locks-and-enable-them-again-when-unlocking/index.html
+notify-send "DUNST_COMMAND_PAUSE"
 
 #./x86_64-pc-linux-gnu/i3lock \
 i3lock \
@@ -66,4 +74,9 @@ i3lock \
 
 # logunlock
 # Log the lock
-echo "U $(timestamp)" >> ~/lock.log
+echo "U $(timestamp)" >> $lockfile
+
+# Enable notifications
+notify-send "DUNST_COMMAND_RESUME"
+# Unmute slack
+slack-cli snooze end

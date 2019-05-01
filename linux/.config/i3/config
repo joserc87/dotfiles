@@ -118,6 +118,7 @@ bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
+popup_during_fullscreen leave_fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -220,6 +221,9 @@ bindsym $mod+$mod2+Shift+8 move container to workspace $workspace8ext
 bindsym $mod+$mod2+Shift+9 move container to workspace $workspace9ext
 bindsym $mod+$mod2+Shift+0 move container to workspace $workspace10ext
 
+# Automatic back-and-forth when switching to current workspace
+workspace_auto_back_and_forth yes
+
 assign [class="Firefox"] $workspace3
 # assign [class="Remmina"] $workspace7
 # assign [class="Vmware"] $workspace8
@@ -248,9 +252,9 @@ bindsym $mod+Shift+F2 move workspace to output right
 ##############
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse set Master 5%+   # && pkill -RTMIN+1 i3blocks #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse set Master 5%-   # && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioMute        exec --no-startup-id amixer -D pulse set Master toggle # && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioRaiseVolume exec --no-startup-id volume up   # && pkill -RTMIN+1 i3blocks #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id volume down   # && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute        exec --no-startup-id volume mute  # && pkill -RTMIN+1 i3blocks
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 && pkill -RTMIN+2 i3blocks
@@ -299,9 +303,18 @@ bindsym $mod+shift+x exec ~/.config/i3lock/i3lock.sh
 bindsym $mod+ctrl+4 exec gnome-screenshot -a
 
 bindsym $mod+ctrl+space exec switchkblayout && pkill -RTMIN+10 i3blocks
+bindsym F12 exec ~/Scripts/bigGUI
+#bindsym F11 exec urxvt -name vimedit -e ~/Scripts/vimedit
+bindsym F11 exec ~/Scripts/vimediti3
+bindsym F10 exec ~/Scripts/jira-select
+bindsym F9 exec ~/Scripts/script-select
+for_window [class="URxvt" title="vimedit"] floating enable
+for_window [class="URxvt" title="editi3"] floating enable
 
 # AUTOSTART
-exec_always --no-startup-id "feh --bg-scale /home/jose/Pictures/background.png"
+#exec_always --no-startup-id "feh --bg-scale /home/jose/Pictures/background.png"
+# Panoramic background
+exec_always --no-startup-id "feh --bg-scale --no-xinerama /home/jose/Pictures/wallpapers/panorama.jpg"
 exec --no-startup-id compton --config ~/.config/compton.conf -b
 
 # Caps lock is control
@@ -331,7 +344,8 @@ bar {
      status_command i3blocks
      #i3bar_command i3bar -t
      position top
-     font pango:Hack, FontAwesome 11
+     font pango:Hack, Noto Emoji:Regular, FontAwesome 10
+     #font pango:Noto Emoji 10
      strip_workspace_numbers no
      separator_symbol "■"
      bindsym button4 nop
@@ -339,7 +353,7 @@ bar {
      tray_output eDP1
      tray_output LVDS-0
      tray_padding 0
-     height 34
+     height 24
      colors {
         statusline         $white
         background         $translucent
@@ -361,8 +375,11 @@ new_window pixel 3
 # i3-gaps #
 ###########
 
-gaps inner 2
+gaps inner 50
 gaps outer 0
+
+smart_gaps on
+smart_borders on
 
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
@@ -380,14 +397,33 @@ mode "$mode_gaps_inner" {
         bindsym plus  gaps inner current plus 5
         bindsym minus gaps inner current minus 5
         bindsym 0     gaps inner current set 0
+        bindsym 1     gaps inner current set 10
+        bindsym 2     gaps inner current set 20
+        bindsym 3     gaps inner current set 30
+        bindsym 4     gaps inner current set 40
+        bindsym 5     gaps inner current set 50
+        bindsym 6     gaps inner current set 60
+        bindsym 7     gaps inner current set 70
+        bindsym 8     gaps inner current set 80
+        bindsym 9     gaps inner current set 90
  
         bindsym Shift+plus  gaps inner all plus 5
         bindsym Shift+minus gaps inner all minus 5
         bindsym Shift+0     gaps inner all set 0
+        bindsym Shift+1     gaps inner all set 10
+        bindsym Shift+2     gaps inner all set 20
+        bindsym Shift+3     gaps inner all set 30
+        bindsym Shift+4     gaps inner all set 40
+        bindsym Shift+5     gaps inner all set 50
+        bindsym Shift+6     gaps inner all set 60
+        bindsym Shift+7     gaps inner all set 70
+        bindsym Shift+8     gaps inner all set 80
+        bindsym Shift+9     gaps inner all set 90
  
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
 mode "$mode_gaps_outer" {
         bindsym plus  gaps outer current plus 5
         bindsym minus gaps outer current minus 5
