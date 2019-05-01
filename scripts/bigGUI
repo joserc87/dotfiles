@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+~/.pyenv/shims/python ~/Scripts/big --gui

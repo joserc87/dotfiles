@@ -3,7 +3,7 @@
 import sys
 from datetime import datetime, timedelta
 
-LOCK_LOG_FILE='/home/jose/lock.log'
+LOCK_LOG_FILE='/home/jose/.lock.log'
 
 dateformat = "%Y-%m-%d"
 datetimeformat = "%Y-%m-%d_%H-%M-%S"

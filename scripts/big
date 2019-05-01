@@ -1,0 +1,204 @@
+#!/usr/bin/env python3
+
+import webbrowser
+import sys
+import subprocess
+import base64
+import json
+import lxml.etree as etree
+import awsso
+
+tmp_file = '/tmp/big-gui.tmp'
+open_output_file = False
+GUI = False
+
+def notify(msg):
+    subprocess.call(['notify-send', '-a', 'Script', msg])
+
+
+def paste(arg):
+    if arg is None:
+        try:
+            import pyperclip
+            return pyperclip.paste()
+        except ModuleNotFoundError:
+            pass
+    return arg
+
+
+def is_jira_code(txt):
+    for code in ['BIG', 'RSP', 'MNT', 'DEX']:
+        if txt[:len(code)+1] == code + '-':
+            return True
+    return False
+
+
+def open_jira(arg=None):
+    arg = paste(arg)
+
+    if arg != 'jira' and not is_jira_code(arg):
+        try:
+            arg = int(arg)
+            arg = 'BIG-{}'.format(arg)
+        except (ValueError, TypeError):
+            return False
+
+    base = 'https://jira.ravenpack.com'
+    if arg == 'jira':
+        url = base
+        # Swiitch to the 7th workspace
+        subprocess.call(['i3-msg', 'workspace', '7: '])
+        webbrowser.open(url)
+    else:
+        subprocess.call(['jira-open', arg])
+        url = '{}/browse/{}'.format(base, arg)
+
+    return True
+
+
+def xml_prettify(infile, outfile):
+    # x = xml.dom.minidom.parse(rpxml_path)
+    # pretty_xml_as_string = x.toprettyxml()
+    # with open(f'/tmp/{arg}.pretty.xml', 'w') as f:
+    #     f.write(pretty_xml_as_string)
+    x = etree.parse(infile)
+    pretty_xml_as_string = etree.tostring(x, pretty_print=True)
+    with open(outfile, 'wb') as f:
+        f.write(pretty_xml_as_string)
+
+
+def s3_download(arg=None):
+    # ADF8B815809DD78E58785D48EEBE9B71
+    arg = paste(arg)
+    if not arg or len(arg) != 32 or not arg.isalnum():
+        return False
+
+    try:
+        import boto3
+        s3 = boto3.resource('s3')
+    except ModuleNotFoundError:
+        return True
+
+    rpxml_path = f'/tmp/{arg}'
+    annotated_path = f'/tmp/{arg}.xml'
+
+    # Download RPXML
+    rpxml_bucket = s3.Bucket('com.bigdata.rpxml.dev')
+    annotated_bucket = s3.Bucket('com.bigdata.annotated.dev')
+
+    files = []
+    try:
+        rpxml_bucket.download_file(f'{arg}', rpxml_path)
+        out = f'/tmp/{arg}.pretty.xml'
+        xml_prettify(rpxml_path, out)
+        files += [out]
+    except:
+        raise
+        print(f'skipping rpxml for {arg}')
+
+    try:
+        annotated_bucket.download_file(f'{arg}.xml', annotated_path)
+        out = f'/tmp/{arg}.xml.pretty.xml'
+        xml_prettify(annotated_path, out)
+        files += [out]
+    except:
+        print(f'skipping annotated for {arg}')
+
+    open_files_in_editor(*files)
+
+    return True
+
+
+def b64decode(string):
+    """Decode base64, padding being optional.
+
+    :param string: Base64 string to decode
+    :returns: The decoded string.
+    """
+    missing_padding = len(string) % 4
+    if missing_padding != 0:
+        string += '=' * (4 - missing_padding)
+    return base64.b64decode(string)
+
+
+def parse_search_query(arg):
+    arg = paste(arg)
+    if not arg or len(arg) < 8:
+        return False
+
+    try:
+        text = b64decode(arg)
+    except base64.binascii.Error:
+        return False
+
+    try:
+        parsed = json.loads(text)
+        text = json.dumps(parsed, indent=4)
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        pass
+
+    global open_output_file
+    open_output_file = True
+    print(text)
+
+    return True
+
+
+def update_aws_credentials(arg):
+    profile_name = awsso.update_credentials()
+    if profile_name:
+        notify(f'Updated AWS credentials to profile {profile_name}')
+        return True
+    else:
+        return False
+
+
+def do_stuff(argv):
+    arg = argv[0] if len(argv) == 1 else None
+    return open_jira(arg) or \
+        s3_download(arg) or \
+        update_aws_credentials(arg) or \
+        parse_search_query(arg) or \
+        False
+
+
+def get_editor() :
+    return 'gvim' if GUI else 'vim'
+
+
+def open_files_in_editor(*args):
+    subprocess.call([get_editor()] + list(args))
+
+
+def main():
+    argv = sys.argv[1:]
+    if len(argv) > 0 and argv[0] == '--gui':
+        global GUI
+        GUI = True
+        argv = argv[1:]
+
+    if GUI:
+        stdout = sys.stdout
+        stderr = sys.stdout
+        with open(tmp_file, 'w') as f:
+            sys.stdout = f
+            sys.stderr = f
+            print('# Output from big --gui')
+            done = do_stuff(argv)
+            open_files_in_editor
+        sys.stdout = stdout
+        if open_output_file:
+            open_files_in_editor(tmp_file)
+    else:
+        done = do_stuff(argv)
+
+    if not done:
+        print("I don't know what to do!")
+        return False
+    return True
+
+
+if __name__ == '__main__':
+    if not main():
+        sys.exit(1)
+
