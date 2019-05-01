@@ -11,12 +11,11 @@ notify() {
 }
 
 case $OPTION in
-
     "Select AWS profile")
         aws-select
     ;;
     "Deploy")
-        deploy ls | dmenu | xargs -I {} deploy "{}" | xargs -I {} notify "{}"
+        deploy ls | dmenu | xargs -I {} deploy "{}" | xargs -I {} notify-send -a Script "{}"
     ;;
     "Config")
         EDITOR=editi3 config $(config ls | dmenu -i -l 10)
