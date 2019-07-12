@@ -5,5 +5,5 @@ timestamp() {
 }
 
 # Log the lock
-echo "L $(timestamp)" >> ~/lock.log
+echo "L $(timestamp)" >> ~/.lock.log
 

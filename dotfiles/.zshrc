@@ -68,6 +68,8 @@ export TELEGRAM_BOT_TOKEN=__TELEGRAM_TOKEN_HERE__
 export WIT_TOKEN=__WIT_TOKEN_HERE__
 export PORT=3000
 
+source ~/.tokens
+
 
 ##############################
 # DEFAULT OH-MY-ZSH CONFIG   #
@@ -166,7 +168,6 @@ export PATH=~/Library/Android/sdk/platform-tools/:/Applications/MacPorts/MacVim.
 export CLASSPATH=.:/usr/local/lib/antlr-4.5.3-complete.jar:$CLASSPATH
 alias antlr4='java -jar /usr/local/lib/antlr-4.5.3-complete.jar'
 alias grun='java org.antlr.v4.gui.TestRig'
->>>>>>> 5b43eb0c595991ab97b61257ac384774cc7373cf
 
 # -- JOSE --
 # rbenv
@@ -280,6 +281,9 @@ function ranger-cd {
 alias rcd=ranger-cd
 # Ranger + Tmux
 alias rmux="ranger-cd && tmux new -s `echo '${PWD##*/}'`"
+alias t=task
+alias th="task priority:H"
+alias tl="task priority:H or priority:"
 
 if command -v thefuck 1>/dev/null 2>&1; then
     eval $(thefuck --alias)
@@ -305,4 +309,5 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
->>>>>>> 5b43eb0c595991ab97b61257ac384774cc7373cf
+
+alias inp="pyenv activate big"

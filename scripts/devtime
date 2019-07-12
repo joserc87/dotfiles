@@ -3,14 +3,17 @@
 import sys
 from datetime import datetime, timedelta
 
-LOCK_LOG_FILE='/home/jose/lock.log'
+LOCK_LOG_FILE='/home/jose/.lock.log'
 
 dateformat = "%Y-%m-%d"
 datetimeformat = "%Y-%m-%d_%H-%M-%S"
 
 
+def day_str(day):
+    return day.strftime(dateformat)
+
 def today_str():
-    return datetime.today().strftime(dateformat)
+    return day_str(datetime.today())
 
 
 def read_log():
@@ -26,41 +29,59 @@ def read_log():
     return data
 
 
-def calculate_devtime(today, is_today=True):
+def is_lunch_break(time_lock, time_unlock):
+    """
+    It is lunch break around 2:30, and if the time out is bigger than 5 minutes
+    """
+    two_30_pm = time_lock.replace(hour=14, minute=30, second=0)
+    return time_lock < two_30_pm and time_unlock > two_30_pm and \
+        time_unlock - time_lock > timedelta(0, 5*60)
+
+
+def is_futbolin_break(time_lock, time_unlock):
+    """
+    It is futbolin break after 6, if the away time is bigger than 5 minutes
+    """
+    six_pm = time_lock.replace(hour=18, minute=00, second=0)
+    return time_lock > six_pm and time_unlock - time_lock > timedelta(0, 5*60)
+
+
+def calculate_devtime(day, is_today=True):
     now = datetime.now()
 
     start_of_the_day = None
-    last_unlock = None
+    last_lock = None
 
 
     total_time_wasted = timedelta()
     time_lock = None
-    for lock, time in today:
+    for lock, time in day:
         if lock == 'U':
             time_unlock = time
             if start_of_the_day is None:
-                start_of_the_day = time_unlock
+                last_lock = start_of_the_day = time_unlock
             # Calculate wasted time
             two_pm, three_pm, six_pm = (time.replace(hour=hour, minute=0, second=0)
                                           for hour in (14, 15, 18))
-            if time_lock and (\
-                (time_lock < three_pm and time_unlock > two_pm) or # Lunch
-                time_lock > six_pm): # Futbolin
+            if time_lock and (
+                is_lunch_break(time_lock, time_unlock) or
+                is_futbolin_break(time_lock, time_unlock)):
                 total_time_wasted += time_unlock - time_lock
                 # Prevent the wasted time being counted twice after two unlocks
                 # This can happen if we logout or restart the computer
                 time_lock = None
+
         else:
-            time_lock = time
+            last_lock = time_lock = time
 
     # Day ongoing -> until now
-    end_of_the_day = last_unlock if not is_today else now
+    end_of_the_day = last_lock if not is_today else now
     return (end_of_the_day - start_of_the_day) - total_time_wasted, total_time_wasted
 
 
 def format_delta(delta, short=False):
     # s = '{} hours {} minutes {} seconds'
-    s = '{}:{}' if short else '{} hours {} minutes'
+    s = '{}:{:02}' if short else '{} hours {} minutes'
     return s.format(delta.days*24 + delta.seconds//3600, (delta.seconds//60)%60, delta.seconds%60)
 
 def output(delta, wasted):
@@ -70,14 +91,44 @@ def output(delta, wasted):
     else:
         return '{} ({} wasted)'.format(format_delta(delta), format_delta(wasted))
 
+def format_timedelta(td):
+    if td < timedelta(0):
+        return '-' + format_timedelta(-td)
+    else:
+        # Change this to format positive timedeltas the way you want
+        return str(td)
+
+
 def main():
     log = read_log()
-    today = today_str()
-    if today not in log:
-        print('?')
+    today = datetime.today()
+    stoday = day_str(today)
+    if len(sys.argv) > 1 and sys.argv[1] == '--week':
+        weekday = today.weekday()
+        days_in_week = [day_str(today - timedelta(days=i)) for i in range(weekday + 1)]
+        total_delta, total_wasted = None, None
+        cnt = 0
+        for i, sday in enumerate(days_in_week):
+            if sday in log:
+                delta, wasted = calculate_devtime(log[sday], is_today=(i == 0))
+                if total_delta is None:
+                    total_delta = delta
+                    total_wasted = wasted
+                else:
+                    total_delta += delta
+                    total_wasted += wasted
+                cnt += 1
+            else:
+                print('{} FREE!'.format(sday))
+        print(output(total_delta, total_wasted))
+        difference = total_delta - timedelta(hours=8*cnt)
+        print(format_timedelta(difference))
     else:
-        delta, wasted = calculate_devtime(log[today], is_today=True)
-        print(output(delta, wasted))
+        if stoday not in log:
+            print('?')
+        else:
+            delta, wasted = calculate_devtime(log[stoday], is_today=True)
+            print(output(delta, wasted))
 
 if __name__ == '__main__':
     main()

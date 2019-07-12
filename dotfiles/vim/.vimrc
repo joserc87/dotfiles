@@ -126,13 +126,18 @@ elseif has ("mac")
   let g:airline_theme='onehalfdark'
 " LINUX
 elseif has ("unix")
-  colorscheme torte
+  if has("gui_running")
+    " colorscheme srcery
+    colorscheme monokai
+  else
+    colorscheme torte
+  endif
 else
   colorscheme torte
 endif
 " Uncomment for transparent vim background if you are ready to be made fun of
 " in #rice.
-hi Normal guibg=NONE ctermbg=NONE
+" hi Normal guibg=NONE ctermbg=NONE
 
 " FONT:
 " -----

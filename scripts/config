@@ -1,25 +1,38 @@
 #!/bin/bash
 
+list() {
+    echo "${1}i3"
+    echo "${1}bar"
+    echo "${1}nvim"
+    echo "${1}vim-plugins"
+    echo "${1}zsh"
+    echo "${1}xresources"
+    echo "${1}config"
+    echo "${1}tmux"
+    echo "${1}task"
+    echo "${1}aws"
+}
+
 if [ "$#" -ne 1 ]; then
     echo "Wrong number of arguments. Usage:"
     echo ""
     echo "  config SOMETHING"
     echo ""
     echo "Where SOMETHING can be:"
-    echo " -> i3"
-    echo " -> nvim"
-    echo " -> vim-plugins"
-    echo " -> zsh"
-    echo " -> xresources"
-    echo " -> config"
-    echo " -> tmux"
+    list " -> "
     exit
 fi
 
 
 case $1 in
+    ls)
+        list
+    ;;
     i3)
         $EDITOR ~/.config/i3/config
+    ;;
+    bar)
+        $EDITOR ~/.config/i3blocks/config
     ;;
     nvim)
         $EDITOR ~/.config/nvim/init.vim
@@ -38,6 +51,12 @@ case $1 in
     ;;
     tmux)
         $EDITOR ~/.tmux.conf
+    ;;
+    task)
+        $EDITOR ~/.taskrc
+    ;;
+    aws)
+        $EDITOR ~/.aws/credentials
     ;;
     stuff)
         cd ~/Code/config-files

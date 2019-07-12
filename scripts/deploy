@@ -1,0 +1,72 @@
+#!/bin/bash
+
+ENVIRONMENT=${1:-dev}
+JENKINS_URL='http://aws-jenkins:8080'
+JENKINS_ISSUER_URL=$JENKINS_URL'/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'
+URL=$ENVIRONMENT
+PROJECT="Bigdata%20-%20Frontend"
+JOB="bidata-frontend"
+
+case "$ENVIRONMENT" in
+    dev)
+        echo Deploying to DEV
+        URL=development
+        ;;
+    stg)
+        echo Deploying to STG
+        URL=staging
+        ;;
+    demo)
+        ENVIRONMENT="demo01"
+        echo Deploying to DEMO
+        URL=demo
+        ;;
+    gpbullhound)
+        echo Deploying to GP-BULLHOUND
+        URL=gpbullhound
+        ;;
+    ravenpack)
+        echo Deploying to RAVENPACK
+        URL=ravenpack
+        ;;
+    covalis)
+        echo Deploying to COVALIS
+        URL=covalis
+        ;;
+    dv)
+        echo Deploying to Data Valuation
+        URL=dev.data-valuation
+        ENVIRONMENT=dev
+        PROJECT="Data%20Marketplace"
+        JOB="data-valuation-frontend"
+        ;;
+    dex)
+        echo Deploying to Data EXchange
+        URL=development.market
+        ENVIRONMENT=dev
+        PROJECT="Data%20Marketplace"
+        JOB="frontend"
+        ;;
+    ls)
+        echo 'dev
+stg
+demo
+gpbullhoud
+ravenpack
+covalis
+dv
+dex'
+        exit 0
+        ;;
+    *)
+        echo Wrong environment "$ENVIRONMENT". It should be one of [dev, stg,  demo, gpbullhoud, ravenpack, covalis] Quitting.
+        exit -1
+        ;;
+esac
+echo https://$URL.bigdata.com/
+
+# CSRF
+CRUMB=$(curl -u $JENKINS_USER:$JENKINS_API_TOKEN -s $JENKINS_ISSUER_URL)
+
+# Request a build
+curl -u "$JENKINS_USER:$JENKINS_API_TOKEN" -X POST -H "$CRUMB" "$JENKINS_URL/view/$PROJECT/job/${JOB}-$ENVIRONMENT/build"

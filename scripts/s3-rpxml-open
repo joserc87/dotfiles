@@ -1,6 +1,6 @@
 #!/bin/sh
 
-bucket=com.bigdata.rpxml.dev.v3
+bucket=com.bigdata.rpxml.dev
 file=/tmp/$1
 
 if [ ! -f "$file" ]

@@ -41,7 +41,8 @@ interval=5
 signal=10
 
 [volume]
-label=    
+#label=    
+label=🔈
 # command=[[ -z "${BLOCK_BUTTON}" ]] || ( [[ "${BLOCK_BUTTON}" == "1" ]] && ((/usr/bin/pavucontrol -t 3 --name "pavucontrol-bar" || true) && $HOME/Scripts/i3blocks/volume_control.py signal) || $HOME/Scripts/i3blocks/volume_control.py toggle ); $HOME/Scripts/i3blocks/volume_control.py i3blocks
 command=[[ -z "${BLOCK_BUTTON}" ]] || ( [[ "${BLOCK_BUTTON}" == "1" ]] && ((/usr/bin/pavucontrol -t 3 --name "pavucontrol-bar" || true) && $HOME/Scripts/i3blocks/volume_control.py signal) || $HOME/Scripts/i3blocks/volume_control.py toggle ); $HOME/Scripts/i3blocks/volume_control.py i3blocks
 interval=once
@@ -49,12 +50,20 @@ signal=1
 markup=pango
 #border=#cc241d
 
-[temperature]
+[memory]
+#command=$SCRIPT_DIR/memory
+command=$HOME/Scripts/i3blocks/memory
+# label=
 label=   
-command=echo "$($HOME/Scripts/i3blocks/temperature.sh 'Core 0')"
-#command=echo "$($HOME/Scripts/i3blocks/temperature.sh 'Core 0') $($HOME/Scripts/i3blocks/temperature.sh 'Core 1') $($HOME/Scripts/i3blocks/temperature.sh 'Core 2') $($HOME/Scripts/i3blocks/temperature.sh 'Core 3') "
-interval=5
-#border=#b16286
+interval=30
+
+
+# [temperature]
+# label=   
+# command=echo "$($HOME/Scripts/i3blocks/temperature.sh 'Core 0')"
+# #command=echo "$($HOME/Scripts/i3blocks/temperature.sh 'Core 0') $($HOME/Scripts/i3blocks/temperature.sh 'Core 1') $($HOME/Scripts/i3blocks/temperature.sh 'Core 2') $($HOME/Scripts/i3blocks/temperature.sh 'Core 3') "
+# interval=5
+# #border=#b16286
 
 ##########
 # LAPTOP #
@@ -80,9 +89,15 @@ interval=5
 #    #border=#458588
 
 [uptime]
-label= 
+label= 
 command=$HOME/Scripts/devtime --short
 interval=30
+
+[layout]
+label= 
+command=setxkbmap -print | grep xkb_symbols | cut -d'+' -f 2
+interval=30
+signal=10
 
 [time]
 label=    

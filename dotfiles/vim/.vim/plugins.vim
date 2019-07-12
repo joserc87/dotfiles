@@ -36,6 +36,10 @@ Plugin '4Evergreen4/vim-hardy'
 "CSS colors
 Plugin 'chrisbra/Colorizer'
 
+" COLOR SCHEMES:
+Plugin 'srcery-colors/srcery-vim'
+Plugin 'crusoexia/vim-monokai'
+
 
 " CODE:
 " Indentation

@@ -5,5 +5,5 @@ timestamp() {
 }
 
 # Log the unlock
-echo "U $(timestamp)" >> ~/lock.log
+echo "U $(timestamp)" >> ~/.lock.log
 

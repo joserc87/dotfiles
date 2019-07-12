@@ -1,6 +1,6 @@
 #!/bin/sh
 
-bucket=com.bigdata.annotated.dev.v3
+bucket=com.bigdata.annotated.dev
 file=/tmp/$1
 
 if [ ! -f "$file" ]

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+PROFILE=$(aws-tool ls | dmenu -l 10)
+
+aws-tool cp $PROFILE default && \
+    notify-send -a Script "Set AWS profile '$PROFILE' as default" -u normal

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+OPTION=$(echo 'Select AWS profile
+Deploy
+Config
+Gif rec
+Edit script' | dmenu -i)
+
+notify() {
+    notify-send -a Script $1 -u normal
+}
+
+case $OPTION in
+    "Select AWS profile")
+        aws-select
+    ;;
+    "Deploy")
+        deploy ls | dmenu | xargs -I {} deploy "{}" | xargs -I {} notify-send -a Script "{}"
+    ;;
+    "Config")
+        EDITOR=editi3 config $(config ls | dmenu -i -l 10)
+    ;;
+    "GIF rec")
+        gifrec
+    ;;
+    "Edit script")
+        FILE=$(ls ~/Scripts | dmenu -i -l 20)
+        editi3 ~/Scripts/$FILE
+    ;;
+esac

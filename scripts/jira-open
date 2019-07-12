@@ -1,0 +1,43 @@
+#!/usr/bin/zsh
+
+# Open a Jira by code.
+
+open_command () {
+	emulate -L zsh
+	setopt shwordsplit
+	local open_cmd
+	case "$OSTYPE" in
+		(darwin*) open_cmd='open'  ;;
+		(cygwin*) open_cmd='cygstart'  ;;
+		(linux*) open_cmd='xdg-open'  ;;
+		(msys*) open_cmd='start ""'  ;;
+		(*) echo "Platform $OSTYPE not supported"
+			return 1 ;;
+	esac
+	if [[ "$OSTYPE" = darwin* ]]
+	then
+		$open_cmd "$@" &> /dev/null
+	else
+		nohup $open_cmd "$@" &> /dev/null
+	fi
+}
+if [ $# -eq 0 ]
+then
+    echo "Usage:"
+    echo "    jira CODE"
+    exit -1
+fi
+
+RECENT_JIRAS=~/jiras.txt
+
+JIRA=$1
+NAMED_JIRA=$(jira-get code,summary $JIRA " ")
+# Save jira
+echo "$NAMED_JIRA\n$( cat $RECENT_JIRAS )" | awk '!x[$0]++' > $RECENT_JIRAS
+
+# Go to destkop 7
+i3-msg workspace '7: '
+
+# open 
+open_command "https://jira.ravenpack.com/browse/$JIRA"
+

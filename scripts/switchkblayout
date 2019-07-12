@@ -1,0 +1,9 @@
+layout=`setxkbmap -print | grep xkb_symbols | cut -d'+' -f 2`
+
+if [ "$layout" = "us" ]; then
+    other_layout="es"
+else
+    other_layout="us"
+fi
+
+setxkbmap -layout "$other_layout"
