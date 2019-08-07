@@ -82,3 +82,6 @@ nnoremap ; :
 nnoremap : ;
 vnoremap ; :
 vnoremap : ;
+
+" AceJump
+nnoremap <Space>s :action AceAction<CR>
