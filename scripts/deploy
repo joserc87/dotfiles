@@ -4,8 +4,8 @@ ENVIRONMENT=${1:-dev}
 JENKINS_URL='http://aws-jenkins:8080'
 JENKINS_ISSUER_URL=$JENKINS_URL'/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'
 URL=$ENVIRONMENT
-PROJECT="Bigdata%20-%20Frontend"
-JOB="bidata-frontend"
+PROJECT="RPE%20-%20Frontend"
+JOB="bigdata-frontend"
 
 case "$ENVIRONMENT" in
     dev)
@@ -37,14 +37,21 @@ case "$ENVIRONMENT" in
         echo Deploying to Data Valuation
         URL=dev.data-valuation
         ENVIRONMENT=dev
-        PROJECT="Data%20Marketplace"
+        PROJECT="Bigdata%20Marketplace"
         JOB="data-valuation-frontend"
         ;;
     dex)
         echo Deploying to Data EXchange
         URL=development.market
         ENVIRONMENT=dev
-        PROJECT="Data%20Marketplace"
+        PROJECT="Bigdata%20Marketplace"
+        JOB="frontend"
+        ;;
+    dex-stg)
+        echo Deploying to Data EXchange STG
+        URL=staging.market
+        ENVIRONMENT=stg
+        PROJECT="Bigdata%20Marketplace"
         JOB="frontend"
         ;;
     ls)
@@ -55,7 +62,8 @@ gpbullhoud
 ravenpack
 covalis
 dv
-dex'
+dex
+dex-stg'
         exit 0
         ;;
     *)

@@ -1,0 +1,204 @@
+#!/usr/bin/env bash
+
+ENVIRONMENT=${1:-dev}
+JENKINS_URL='http://aws-jenkins:8080'
+JENKINS_ISSUER_URL=$JENKINS_URL'/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'
+PRODUCT_URL=https://$ENVIRONMENT.bigdata.com
+JOB="data-valuation-frontend"
+
+ALIASES='dev
+         stg
+         demo
+         gpbullhound
+         ravenpack
+         covalis
+         dv
+         dex'
+
+select_from_alias() {
+    # Default to bigdata
+    PROJECT="Bigdata%20-%20Frontend"
+    JOB="bigdata-frontend"
+    ENVIRONMENT=$1
+    case "$1" in
+        dev)
+            URL=https://development.ravenpack.com
+            ;;
+        stg)
+            URL=https://staging.ravenpack.com
+            ;;
+        demo)
+            ENVIRONMENT="demo01"
+            URL=https://demo.ravenpack.com
+            ;;
+        gpbullhound)
+            URL=https://gpbullhound.ravenpack.com
+            ;;
+        ravenpack)
+            URL=https://ravenpack.ravenpack.com
+            ;;
+        covalis)
+            URL=https://covalis.ravenpack.com
+            ;;
+        dv)
+            URL=https://dev.data-valuation.bigdata.com
+            ENVIRONMENT=dev
+            PROJECT="Bigdata%20Marketplace"
+            JOB="data-valuation-frontend"
+            ;;
+        dex)
+            URL=https://development.market.bigdata.com
+            ENVIRONMENT=dev
+            PROJECT="Bigdata%20Marketplace"
+            JOB="frontend"
+            ;;
+        ls)
+            echo $ALIASES
+            exit 0
+            ;;
+        *)
+            echo Wrong environment "$1".
+            echo It should be one of [$ALIASES]
+            echo Quitting.
+            exit -1
+            ;;
+    esac
+}
+
+deploy() {
+    # ARGS: PROJECT JOB ENVIRONMENT
+    # CSRF
+    CRUMB=$(curl -u $JENKINS_USER:$JENKINS_API_TOKEN -s $JENKINS_ISSUER_URL)
+
+    # Request a build
+    echo curl -u "$JENKINS_USER:$JENKINS_API_TOKEN" -X POST -H "$CRUMB" "$JENKINS_URL/view/$1/job/$2-$3/build"
+}
+
+check_job_status() {
+    #vars=$(cat ~/sample.json |\
+    # We don't need -u "$JENKINS_USER:$JENKINS_API_TOKEN"
+    vars=$(curl --silent "$JENKINS_URL/job/${1}-$2/lastBuild/api/json" | \
+        jq '
+            if .building then
+                "BUILDING"
+            else
+                .result
+            end,
+
+            if .building then
+                (100 * (1000 * now - .timestamp)/.estimatedDuration | floor | tostring) + "%"
+            else
+                (100 * .duration / .estimatedDuration | floor | tostring) + "%"
+            end,
+
+            .url' | awk '{print "var"NR"="$1}')
+
+    eval $vars
+
+    STATUS=$var1
+    PROGRESS=$var2
+    BUILD_URL=$var3
+
+    echo "$STATUS
+$PROGRESS
+$BUILD_URL"
+}
+
+print_usage() {
+    echo "Usage:"
+    echo ""
+    echo "  jenkins [deploy|status] [-c] <env>"
+    echo ""
+    echo "List of environments:"
+    echo $ALIASES
+}
+
+print_job_status() {
+    eval $(cat $HOME/jenkins_builds/$1 | awk '{print "var"NR"="$1}')
+    STATUS=$var1
+    PROGRESS=$var2
+    URL=$var3
+
+    case "$STATUS" in
+        SUCCESS)
+            if [ "$PANGO" ] ; then
+                echo -n '<span color="#00FF00">✓</span>'
+            else
+                echo -n "v"
+            fi
+        ;;
+        BUILDING)
+            echo -n
+            if [ "$PANGO" ] ; then
+                echo -n "<span color=\"#88CCFF\">[$1 ($PROGRESS)]</span>"
+            else
+                echo -n "v"
+            fi
+        ;;
+        *)
+            if [ "$PANGO" ] ; then
+                echo -n "<span color=\"#FF5588\">[$1 ($STATUS)]</span>"
+            else
+                echo -n "v"
+            fi
+        ;;
+    esac
+}
+
+UPDATE_STATUS=true
+PANGO=""
+
+
+for arg in "$@"
+do
+    if [[ $arg == -* ]]; then
+        case $arg in
+            "-c")
+                UPDATE_STATUS=false
+            ;;
+            "--cache")
+                UPDATE_STATUS=false
+            ;;
+            "--pango")
+                PANGO=true
+            ;;
+        esac
+    elif [[ ! $ACTION ]]; then
+        ACTION=$arg
+    elif [[ ! $ALIAS ]]; then
+        ALIAS=$arg
+    fi
+done
+
+if [[ ! "$ACTION" ]] || [[ "$ACTION" != 'status' && ! "$ALIAS" ]]; then
+    echo "Wrong number of arguments."
+    print_usage
+    exit
+fi
+
+
+main() {
+    select_from_alias $2
+    case $1 in
+        deploy)
+            echo deploy $PROJECT $JOB $ENVIRONMENT
+        ;;
+        status)
+            if $UPDATE_STATUS ; then
+                check_job_status $JOB $ENVIRONMENT > $HOME/jenkins_builds/$2
+            fi
+            print_job_status $2
+        ;;
+        *)
+            echo "Invalid action $1"
+        ;;
+    esac
+}
+
+if [[ $ALIAS ]]; then
+    main $ACTION $ALIAS
+else
+    while read -r ALIAS; do
+        main $ACTION $ALIAS
+    done <<< "$ALIASES"
+fi
