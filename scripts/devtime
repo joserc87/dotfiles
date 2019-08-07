@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 
-LOCK_LOG_FILE='/home/jose/.lock.log'
+LOCK_LOG_FILE = '/home/jose/.lock.log'
 
 dateformat = "%Y-%m-%d"
 datetimeformat = "%Y-%m-%d_%H-%M-%S"
@@ -11,6 +11,7 @@ datetimeformat = "%Y-%m-%d_%H-%M-%S"
 
 def day_str(day):
     return day.strftime(dateformat)
+
 
 def today_str():
     return day_str(datetime.today())
@@ -52,7 +53,6 @@ def calculate_devtime(day, is_today=True):
     start_of_the_day = None
     last_lock = None
 
-
     total_time_wasted = timedelta()
     time_lock = None
     for lock, time in day:
@@ -61,8 +61,10 @@ def calculate_devtime(day, is_today=True):
             if start_of_the_day is None:
                 last_lock = start_of_the_day = time_unlock
             # Calculate wasted time
-            two_pm, three_pm, six_pm = (time.replace(hour=hour, minute=0, second=0)
-                                          for hour in (14, 15, 18))
+            two_pm, three_pm, six_pm = (
+                time.replace(hour=hour, minute=0, second=0)
+                for hour in (14, 15, 18)
+            )
             if time_lock and (
                 is_lunch_break(time_lock, time_unlock) or
                 is_futbolin_break(time_lock, time_unlock)):
@@ -76,20 +78,26 @@ def calculate_devtime(day, is_today=True):
 
     # Day ongoing -> until now
     end_of_the_day = last_lock if not is_today else now
-    return (end_of_the_day - start_of_the_day) - total_time_wasted, total_time_wasted
+    return (end_of_the_day - start_of_the_day) - total_time_wasted, \
+        total_time_wasted
 
 
 def format_delta(delta, short=False):
     # s = '{} hours {} minutes {} seconds'
     s = '{}:{:02}' if short else '{} hours {} minutes'
-    return s.format(delta.days*24 + delta.seconds//3600, (delta.seconds//60)%60, delta.seconds%60)
+    return s.format(delta.days * 24 + delta.seconds // 3600,
+                    (delta.seconds // 60) % 60, delta.seconds % 60)
 
-def output(delta, wasted):
-    short = len(sys.argv) > 1 and sys.argv[1] == '--short'
+
+def output(delta, wasted, short=False):
     if short:
         return format_delta(delta, short=True)
     else:
-        return '{} ({} wasted)'.format(format_delta(delta), format_delta(wasted))
+        return '{} ({} wasted)'.format(
+            format_delta(delta),
+            format_delta(wasted)
+        )
+
 
 def format_timedelta(td):
     if td < timedelta(0):
@@ -99,12 +107,29 @@ def format_timedelta(td):
         return str(td)
 
 
+def read_options():
+    options = {}
+    for i, arg in enumerate(sys.argv):
+        if arg.startswith('--'):
+            option = arg[2:]
+            value = True
+            if i + 1 < len(sys.argv) and \
+                    not sys.argv[i + 1].startswith('--'):
+                value = sys.argv[i + 1]
+            options[option] = value
+
+    return options
+
 def main():
     log = read_log()
+    now = datetime.now()
     today = datetime.today()
     stoday = day_str(today)
-    if len(sys.argv) > 1 and sys.argv[1] == '--week':
-        weekday = today.weekday()
+    options = read_options()
+    weekday = today.weekday()
+    hours_per_day = 7.5 if options.get('summer') else 8
+    friday_hours_per_day = 6 # Only in summer
+    if options.get('week'):
         days_in_week = [day_str(today - timedelta(days=i)) for i in range(weekday + 1)]
         total_delta, total_wasted = None, None
         cnt = 0
@@ -120,15 +145,26 @@ def main():
                 cnt += 1
             else:
                 print('{} FREE!'.format(sday))
-        print(output(total_delta, total_wasted))
-        difference = total_delta - timedelta(hours=8*cnt)
+        # Print X hours Y minutes (X hours Y minutes wasted)
+        print(output(total_delta, total_wasted, options.get('short')))
+        hours_in_the_week = hours_per_day*cnt \
+            if not options.get('summer') or cnt < 5 \
+            else hours_per_day*(cnt - 1) + friday_hours_per_day
+        difference = total_delta - timedelta(hours=hours_in_the_week)
+        # Print how much time until going home
         print(format_timedelta(difference))
+        # Print at what time you will go home
+
+        d = -difference + timedelta(minutes=30) \
+            if now.time() < time(14) \
+            else -difference
+        print('You go out at: ', (now + d).time())
     else:
         if stoday not in log:
             print('?')
         else:
             delta, wasted = calculate_devtime(log[stoday], is_today=True)
-            print(output(delta, wasted))
+            print(output(delta, wasted, options.get('short')))
 
 if __name__ == '__main__':
     main()
