@@ -1,14 +1,22 @@
 #!/usr/bin/env bash
 
-RECENT_JIRAS=~/jiras.txt
+DEFAULT_PROJECT=BIG
+USER=jcano
+
+RECENT=$(cat ~/jiras.txt)
+IN_PROGRESS=$(jira-get "code,summary" assignee=$USER status="In Progress" separator=" " | sed 's/^/[*]/')
+echo $IN_PROGRESS
+
+JIRAS=$(echo -e "$IN_PROGRESS\n$RECENT")
+
 
 # Get a jira code from the saved ones or a new one
-selected_jira=$(cat $RECENT_JIRAS | dmenu -i -l 10)
+selected_jira=$(echo "$JIRAS" | dmenu -i -l 10 | sed 's/\[\*\]//')
 
 # If the user enters a number, assume BIG project
 re='^[0-9]+$'
 if [[ $selected_jira =~ $re ]] ; then
-    selected_jira=BIG-$selected_jira
+    selected_jira=${DEFAULT_PROJECT}-$selected_jira
 fi
 echo Opening $selected_jira
 

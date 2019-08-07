@@ -31,7 +31,7 @@ fi
 RECENT_JIRAS=~/jiras.txt
 
 JIRA=$1
-NAMED_JIRA=$(jira-get code,summary $JIRA " ")
+NAMED_JIRA=$(jira-get code,summary code=$JIRA separator=" ")
 # Save jira
 echo "$NAMED_JIRA\n$( cat $RECENT_JIRAS )" | awk '!x[$0]++' > $RECENT_JIRAS
 
