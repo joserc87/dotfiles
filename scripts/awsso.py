@@ -8,10 +8,11 @@ CREDENTIALS_PATH = path.join(
 
 profile_mapping = {
     '958466354486': 'data_valuation-dev',
-    '562161736591': 'data_market_place-dev',
+    '562161736591': 'data-marketplace-dev',
     '319536452804': 'bigdata-demo',
     '221539845528': 'bigdata-gpbullhound',
     '163889103523': 'bigdata-covalis',
+    '159931895472': 'data-marketplace-stg',
 }
 
 
