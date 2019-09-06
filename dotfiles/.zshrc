@@ -139,7 +139,7 @@ export PATH="$HOME/Dev/spell/build/install/spell/bin:$PATH"
 
 # User defined scripts:
 # Scripts folder is present for Linux and Mac OS
-export PATH=~/Scripts/:$PATH
+export PATH=$HOME/bin/:$HOME/Scripts/:$PATH
 
 # Scripts for Mac
 if [[ -e ~/macscripts/ ]];
