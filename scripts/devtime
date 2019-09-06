@@ -4,9 +4,12 @@ import sys
 from datetime import datetime, timedelta, time
 
 LOCK_LOG_FILE = '/home/jose/.lock.log'
+YEAR_LOG_FILE = '/home/jose/logs/lock/19/lock.2019.log'
 
 dateformat = "%Y-%m-%d"
 datetimeformat = "%Y-%m-%d_%H-%M-%S"
+
+SATURDAY, SUNDAY = 5, 6
 
 
 def day_str(day):
@@ -17,9 +20,9 @@ def today_str():
     return day_str(datetime.today())
 
 
-def read_log():
+def read_log(path=LOCK_LOG_FILE):
     data = {}
-    with open(LOCK_LOG_FILE) as f:
+    with open(path) as f:
         for line in f:
             l, date_str = line.split()
             dt = datetime.strptime(date_str, datetimeformat)
@@ -84,9 +87,15 @@ def calculate_devtime(day, is_today=True):
 
 def format_delta(delta, short=False):
     # s = '{} hours {} minutes {} seconds'
-    s = '{}:{:02}' if short else '{} hours {} minutes'
-    return s.format(delta.days * 24 + delta.seconds // 3600,
-                    (delta.seconds // 60) % 60, delta.seconds % 60)
+    if delta.days:
+        s = '{}:{}:{:02}' if short else '{} days {} hours {} minutes'
+        # Days*3 gives working days, since 24 = 8 * 3
+        return s.format(delta.days * 3, delta.seconds // 3600,
+                        (delta.seconds // 60) % 60, delta.seconds % 60)
+    else:
+        s = '{}:{:02}' if short else '{} hours {} minutes'
+        return s.format(delta.seconds // 3600,
+                        (delta.seconds // 60) % 60, delta.seconds % 60)
 
 
 def output(delta, wasted, short=False):
@@ -104,7 +113,8 @@ def format_timedelta(td):
         return '-' + format_timedelta(-td)
     else:
         # Change this to format positive timedeltas the way you want
-        return str(td)
+        #return str(td)
+        return format_delta(td)
 
 
 def read_options():
@@ -119,6 +129,10 @@ def read_options():
             options[option] = value
 
     return options
+
+def daterange(start_date, end_date):
+    for n in range(int((end_date - start_date).days)):
+        yield start_date + timedelta(n)
 
 def main():
     log = read_log()
@@ -159,6 +173,42 @@ def main():
             if now.time() < time(14) \
             else -difference
         print('You go out at: ', (now + d).time())
+    elif options.get('year'):
+        log = read_log(YEAR_LOG_FILE)
+        jan_1 = datetime(today.year, 1, 1)
+        days_in_year = [
+            day_str(day)
+            for day in daterange(jan_1, today)
+            if (day.weekday() not in (SATURDAY, SUNDAY))
+        ]
+        days_in_year.reverse()
+        total_delta, total_wasted = None, None
+        cnt = 0
+        for i, sday in enumerate(days_in_year):
+            if sday in log:
+                delta, wasted = calculate_devtime(log[sday], is_today=(i == 0))
+                if total_delta is None:
+                    total_delta = delta
+                    total_wasted = wasted
+                else:
+                    total_delta += delta
+                    total_wasted += wasted
+                cnt += 1
+            else:
+                print('{} FREE!'.format(sday))
+        total_delta, total_wasted = total_delta or timedelta(), total_wasted or timedelta()
+        # Print how many days you have worked
+        print('You have worked {} days'.format(cnt))
+        # Print X hours Y minutes (X hours Y minutes wasted)
+        print(output(total_delta, total_wasted, options.get('short')))
+        hours_in_the_week = hours_per_day*cnt
+        difference = total_delta - timedelta(hours=hours_in_the_week)
+        # Print how much time until going home
+        print(format_timedelta(difference))
+
+        d = -difference + timedelta(minutes=30) \
+            if now.time() < time(14) \
+            else -difference
     else:
         if stoday not in log:
             print('?')
