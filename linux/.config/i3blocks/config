@@ -33,8 +33,15 @@ separator_block_width=5
 # signal=3
 # urgent=true
 
+[jenkins]
+label=
+command=$HOME/Scripts/jenkins status -c --pango
+interval=10
+markup=pango
+signal=10
+
 [mediaplayer]
-label= 
+#label= 
 command=$HOME/Scripts/i3blocks/mediaplayer
 instance=spotify
 interval=5
