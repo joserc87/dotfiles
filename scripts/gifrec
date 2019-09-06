@@ -18,7 +18,8 @@ if [ $# -gt 0 ]; then
 else
     echo Default recording duration 10s to /tmp/recorded.gif
     #echo Default recording duration 10s to /Pictures/gifshot-/$(date +%F_%R).gif
-    D="--duration=15 /tmp/recorded.gif"
+    #D="--duration=15 /tmp/recorded.gif"
+    D="--exec=urxvt /tmp/recorded.gif"
     #D="--duration=10 \"$HOME/Pictures/gifshot-$(date +%F_%R).gif\""
 fi
 
