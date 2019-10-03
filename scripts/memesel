@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+DIR=~/Pictures/memes/
+find $DIR* -printf "%f\n" \
+    | dmenu -l 5 \
+    | awk "{print \"$DIR\"\$1}" \
+    | xargs dragon
+    #| xclip -i -selection clipboard -t text/uri-list
+

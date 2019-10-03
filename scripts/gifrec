@@ -6,6 +6,7 @@
 
 # Delay before starting
 DELAY=0
+FILE=/tmp/recorded.gif
 
 # Sound notification to let one know when recording is about to start (and ends)
 beep() {
@@ -16,10 +17,10 @@ beep() {
 if [ $# -gt 0 ]; then
     D="--duration=$@"
 else
-    echo Default recording duration 10s to /tmp/recorded.gif
+    echo Default recording duration 10s to $FILE
     #echo Default recording duration 10s to /Pictures/gifshot-/$(date +%F_%R).gif
     #D="--duration=15 /tmp/recorded.gif"
-    D="--exec=urxvt /tmp/recorded.gif"
+    D="--exec=xclock $FILE"
     #D="--duration=10 \"$HOME/Pictures/gifshot-$(date +%F_%R).gif\""
 fi
 
@@ -35,4 +36,7 @@ done
 #beep
 #echo byzanz-record --verbose --delay=0 ${ARGUMENTS} $D
 byzanz-record ${ARGUMENTS} $D
+sxiv -a $FILE
+dragon $FILE
+
 #beep
