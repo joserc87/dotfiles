@@ -251,6 +251,18 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" VIMWIKI:
+let wiki_1 = {}
+let wiki_1.path = '~/vimwiki/'
+let wiki_1.syntax = 'markdown'
+let wiki_1.ext = '.md'
+
+let g:vimwiki_list = [wiki_1]
+let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+nmap <A-PageUp> <Plug>(VimwikiDiaryPrevDay)
+nmap <A-PageDown> <Plug>(VimwikiDiaryNextDay)
+
+
 " LOCALVIRC:
 let g:localvimrc_sandbox = 0
 let g:localvimrc_persistent = 1
@@ -315,3 +327,12 @@ au BufRead,BufNewFile *.spl set syntax=spell
 " HTML:
 autocmd FileType html setlocal softtabstop=4 shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType javascript setlocal softtabstop=2 shiftwidth=2 tabstop=2 expandtab
+
+" Run macro on lines:
+
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+    execute ":'<,'>normal @".nr2char(getchar())
+    endfunction)

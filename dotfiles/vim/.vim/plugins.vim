@@ -19,7 +19,7 @@ Plugin 'tommcdo/vim-fubitive'
 Plugin 'airblade/vim-gitgutter'
 " A class outliner for vim
 Plugin 'majutsushi/tagbar'
-Plugin 'klen/python-mode'
+" Plugin 'klen/python-mode'
 " Per-project vimrc
 Plugin 'embear/vim-localvimrc'
 " Useful for XML/HTML

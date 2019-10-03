@@ -300,7 +300,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 bindsym $mod+shift+x exec ~/.config/i3lock/i3lock.sh
-bindsym $mod+ctrl+4 exec gnome-screenshot -a
+bindsym $mod+ctrl+3 exec gnome-screenshot
+bindsym $mod+ctrl+4 exec gnome-screenshot -a && find ~/Pictures/Screenshot\ from* | tail -1 | xargs -I@ dragon @
 
 bindsym $mod+ctrl+space exec switchkblayout && pkill -RTMIN+10 i3blocks
 bindsym F12 exec ~/Scripts/bigGUI
@@ -310,11 +311,15 @@ bindsym F10 exec ~/Scripts/jira-select
 bindsym F9 exec ~/Scripts/script-select
 for_window [class="URxvt" title="vimedit"] floating enable
 for_window [class="URxvt" title="editi3"] floating enable
+for_window [class="XClock"] floating enable
+for_window [class="XClock"] move position mouse
+for_window [class="Sxiv" title="sxiv - /tmp/recorded.gif"] floating enable
 
 # AUTOSTART
 #exec_always --no-startup-id "feh --bg-scale /home/jose/Pictures/background.png"
 # Panoramic background
-exec_always --no-startup-id "feh --bg-scale --no-xinerama /home/jose/Pictures/wallpapers/panorama.jpg"
+#exec_always --no-startup-id "feh --bg-scale --no-xinerama /home/jose/Pictures/wallpapers/panorama.jpg"
+exec_always --no-startup-id "feh --bg-fill /home/jose/Pictures/wallpapers/panorama.jpg"
 exec --no-startup-id compton --config ~/.config/compton.conf -b
 
 # Caps lock is control
