@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
 from datetime import datetime, timedelta, time
@@ -88,7 +88,7 @@ def calculate_devtime(day, is_today=True):
 def format_delta(delta, short=False):
     # s = '{} hours {} minutes {} seconds'
     if delta.days:
-        s = '{}:{}:{:02}' if short else '{} days {} hours {} minutes'
+        s = '{}d {}:{:02}' if short else '{} days {} hours {} minutes'
         # Days*3 gives working days, since 24 = 8 * 3
         return s.format(delta.days * 3, delta.seconds // 3600,
                         (delta.seconds // 60) % 60, delta.seconds % 60)

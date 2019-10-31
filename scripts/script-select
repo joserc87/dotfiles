@@ -1,37 +1,41 @@
 #!/bin/bash
 
-OPTION=$(echo 'Select AWS profile
-Deploy
-Config
-Gif rec
-Meme selector
-ASCII ART
-Edit script' | dmenu -i -l 10)
+OPTION=$(echo '1. Select AWS profile
+2. My Jiras
+3. Deploy
+4. Config
+5. Gif rec
+6. Meme selector
+7. ASCII ART
+8. Edit script' | dmenu -i -l 10)
 
 notify() {
     notify-send -a Script $1 -u normal
 }
 
 case $OPTION in
-    "Select AWS profile")
+    "1. Select AWS profile")
         aws-select
     ;;
-    "Deploy")
+    "2. My Jiras")
+        jira-select-mine
+    ;;
+    "3. Deploy")
         deploy ls | dmenu | xargs -I {} deploy "{}" | xargs -I {} notify-send -a Script "{}"
     ;;
-    "Config")
+    "4. Config")
         EDITOR=editi3 config $(config ls | dmenu -i -l 10)
     ;;
-    "Gif rec")
+    "5. Gif rec")
         gifrec
     ;;
-    "Meme selector")
+    "6. Meme selector")
         memesel
     ;;
-    "ASCII ART")
+    "7. ASCII ART")
         cat ~/Documents/ascii-art.txt | dmenu -l 10 | xsel --clipboard --input
     ;;
-    "Edit script")
+    "8. Edit script")
         FILE=$(ls ~/Scripts | dmenu -i -l 20)
         editi3 ~/Scripts/$FILE
     ;;

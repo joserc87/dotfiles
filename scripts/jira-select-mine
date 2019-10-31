@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+DEFAULT_PROJECT=BIG
+USER=jcano
+
+IN_PROGRESS=$(jira-get "code,summary" assignee=$USER status="Open" separator=" " | sort -r)
+
+JIRAS=$(echo -e "$IN_PROGRESS")
+
+
+# Get a jira code from the saved ones or a new one
+selected_jira=$(echo "$JIRAS" | dmenu -i -l 30 | sed 's/\[\*\]//')
+
+# If the user enters a number, assume BIG project
+re='^[0-9]+$'
+if [[ $selected_jira =~ $re ]] ; then
+    selected_jira=${DEFAULT_PROJECT}-$selected_jira
+fi
+echo Opening $selected_jira
+
+# Open the jira code
+echo $selected_jira | awk '{print $1}' | xargs jira-open

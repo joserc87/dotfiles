@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
 grep --exclude-dir={.bzr,CVS,.git,.hg,.svn} "\- \[ \]" -R ~/vimwiki/diary | \
-    sort -s -t':' -k1,1 | \
-    grep --color=auto "\- \[ \]" 
-
+    sort | \
+    sed "s/:- \[.*$//g" | \
+    xargs $EDITOR

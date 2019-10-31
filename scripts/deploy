@@ -6,11 +6,13 @@ JENKINS_ISSUER_URL=$JENKINS_URL'/crumbIssuer/api/xml?xpath=concat(//crumbRequest
 URL=$ENVIRONMENT
 PROJECT="RPE%20-%20Frontend"
 JOB="bigdata-frontend"
+FORM=""
 
 case "$ENVIRONMENT" in
     dev)
         echo Deploying to DEV
         URL=development
+        FORM='{"parameter": [{"name: "BRANCH", "value": "master"}]}'
         ;;
     stg)
         echo Deploying to STG
@@ -77,4 +79,4 @@ echo https://$URL.bigdata.com/
 CRUMB=$(curl -u $JENKINS_USER:$JENKINS_API_TOKEN -s $JENKINS_ISSUER_URL)
 
 # Request a build
-curl -u "$JENKINS_USER:$JENKINS_API_TOKEN" -X POST -H "$CRUMB" "$JENKINS_URL/view/$PROJECT/job/${JOB}-$ENVIRONMENT/build"
+curl -u "$JENKINS_USER:$JENKINS_API_TOKEN" -X POST -H "$CRUMB" "$JENKINS_URL/view/$PROJECT/job/${JOB}-$ENVIRONMENT/build" --data-urlencode json="$FORM"

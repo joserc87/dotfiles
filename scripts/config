@@ -11,6 +11,7 @@ list() {
     echo "${1}tmux"
     echo "${1}task"
     echo "${1}aws"
+    echo "${1}notif"
 }
 
 if [ "$#" -ne 1 ]; then
@@ -60,6 +61,9 @@ case $1 in
     ;;
     stuff)
         cd ~/Code/config-files
+    ;;
+    notif)
+        $EDITOR ~/.config/dunst/dunstrc
     ;;
     shortlist)
         echo i3 nvim vim-plugins zsh xresources tmux stuff config

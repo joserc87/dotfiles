@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# To reload: killall dunst
+FONT_SIZE=8
+BOX=□
+MY_TODO=$(todo | \
+   sed "s/^.*- \[ \]//g" | \
+   sed "s/^/<span font=\"Iosevka Term $FONT_SIZE\">$BOX /g" | \
+   sed "s/$/<\/span>/g")
+notify-send -a Todo "TODO:" "$MY_TODO"
+

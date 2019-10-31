@@ -122,7 +122,21 @@ print_job_status() {
     case "$STATUS" in
         SUCCESS)
             if [ "$PANGO" ] ; then
-                echo -n '<span color="#00FF00">✓</span>'
+                echo -n '<span color="#00FF00"></span>'
+            else
+                echo -n "v"
+            fi
+        ;;
+        ABORTED)
+            if [ "$PANGO" ] ; then
+                echo -n '<span color="#FF8800"><sup>$1</sup></span>'
+            else
+                echo -n "v"
+            fi
+        ;;
+        FAILURE)
+            if [ "$PANGO" ] ; then
+                echo -n "<span color=\"#FF0000\"><sup>$1</sup></span>"
             else
                 echo -n "v"
             fi
@@ -130,16 +144,16 @@ print_job_status() {
         BUILDING)
             echo -n
             if [ "$PANGO" ] ; then
-                echo -n "<span color=\"#88CCFF\">[$1 ($PROGRESS)]</span>"
+                echo -n "<span color=\"#88CCFF\"><sup>$1</sup>$PROGRESS</span>"
             else
-                echo -n "v"
+                echo -n "?"
             fi
         ;;
         *)
             if [ "$PANGO" ] ; then
-                echo -n "<span color=\"#FF5588\">[$1 ($STATUS)]</span>"
+                echo -n "<span color=\"#FF5588\"><sup>$1</sup>$STATUS]</span>"
             else
-                echo -n "v"
+                echo -n "x"
             fi
         ;;
     esac
@@ -147,6 +161,7 @@ print_job_status() {
 
 UPDATE_STATUS=true
 PANGO=""
+DAEMON=false
 
 
 for arg in "$@"
@@ -161,6 +176,9 @@ do
             ;;
             "--pango")
                 PANGO=true
+            ;;
+            "--daemon")
+                DAEMON=true
             ;;
         esac
     elif [[ ! $ACTION ]]; then
@@ -195,7 +213,17 @@ main() {
     esac
 }
 
-if [[ $ALIAS ]]; then
+run_daemon() {
+    # For each environment ENVIRONMENT with state building
+    #   check_job_status $JOB $ENVIRONMENT. That sets STATUS, PROGRESS and BUILD_URL
+    # PROBLEM updating only one of the environments. Easier in python
+    echo "Not implemented"
+}
+
+if  $DAEMON ; then
+    echo because Daemon is $DAEMON
+    run_daemon
+elif [ "$ALIAS" ]; then
     main $ACTION $ALIAS
 else
     while read -r ALIAS; do

@@ -5,7 +5,7 @@
 #byzanz-record --duration=10 $rect ~/Pictures/byzanz.gif
 
 # Delay before starting
-DELAY=0
+DELAY=2
 FILE=/tmp/recorded.gif
 
 # Sound notification to let one know when recording is about to start (and ends)
