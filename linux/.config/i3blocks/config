@@ -33,12 +33,21 @@ separator_block_width=5
 # signal=3
 # urgent=true
 
+[todo]
+label=
+command=$HOME/Scripts/i3blocks/todo.sh
+interval=60
+markup=pango
+signal=10
+color=#88CCFF
+
 [jenkins]
 label=
-command=$HOME/Scripts/jenkins status -c --pango
+command=$HOME/Scripts/i3blocks/jenkins.sh
 interval=10
 markup=pango
 signal=10
+color=#555555
 
 [mediaplayer]
 #label= 
@@ -46,16 +55,19 @@ command=$HOME/Scripts/i3blocks/mediaplayer
 instance=spotify
 interval=5
 signal=10
+color=#E26EFF
 
 [volume]
 #label=    
 label=🔈
 # command=[[ -z "${BLOCK_BUTTON}" ]] || ( [[ "${BLOCK_BUTTON}" == "1" ]] && ((/usr/bin/pavucontrol -t 3 --name "pavucontrol-bar" || true) && $HOME/Scripts/i3blocks/volume_control.py signal) || $HOME/Scripts/i3blocks/volume_control.py toggle ); $HOME/Scripts/i3blocks/volume_control.py i3blocks
-command=[[ -z "${BLOCK_BUTTON}" ]] || ( [[ "${BLOCK_BUTTON}" == "1" ]] && ((/usr/bin/pavucontrol -t 3 --name "pavucontrol-bar" || true) && $HOME/Scripts/i3blocks/volume_control.py signal) || $HOME/Scripts/i3blocks/volume_control.py toggle ); $HOME/Scripts/i3blocks/volume_control.py i3blocks
+#command=[[ -z "${BLOCK_BUTTON}" ]] || ( [[ "${BLOCK_BUTTON}" == "1" ]] && ((/usr/bin/pavucontrol -t 3 --name "pavucontrol-bar" || true) && $HOME/Scripts/i3blocks/volume_control.py signal) || $HOME/Scripts/i3blocks/volume_control.py toggle ); $HOME/Scripts/i3blocks/volume_control.py i3blocks
+command=$HOME/Scripts/i3blocks/volume.sh
 interval=once
 signal=1
 markup=pango
 #border=#cc241d
+color=#70FDFF
 
 [memory]
 #command=$SCRIPT_DIR/memory
@@ -63,6 +75,7 @@ command=$HOME/Scripts/i3blocks/memory
 # label=
 label=   
 interval=30
+color=#C3FF00
 
 
 # [temperature]
@@ -97,18 +110,20 @@ interval=30
 
 [uptime]
 label= 
-command=$HOME/Scripts/devtime --short
+command=$HOME/Scripts/i3blocks/devtime.sh
 interval=30
+color=#FFAD7A
 
 [layout]
 label= 
-command=setxkbmap -print | grep xkb_symbols | cut -d'+' -f 2
+command=$HOME/Scripts/i3blocks/kblayout.sh
 interval=30
 signal=10
+color=#AAAAFF
 
 [time]
 label=    
-command=echo "`date +'%a %d %b'` <b>`date +'%T'`</b> "; [[ -z "${BLOCK_BUTTON}" ]] || gsimplecal &
+command=$HOME/Scripts/i3blocks/date.sh
 interval=1
 markup=pango
 #border=#928374
