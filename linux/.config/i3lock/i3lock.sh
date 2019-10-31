@@ -27,7 +27,7 @@ playerctl pause || true
 
 # Mute slack
 source ~/.tokens
-slack-cli snooze start 180 || echo "Failed to snooze slack"
+# slack-cli snooze start 180 || echo "Failed to snooze slack"
 
 # Log the lock
 echo "L $(timestamp)" >> $lockfile
@@ -37,6 +37,11 @@ echo "L $(timestamp)" >> $lockfile
 notify-send "DUNST_COMMAND_PAUSE"
 
 #./x86_64-pc-linux-gnu/i3lock \
+
+# Troll mode 1
+# i3lock -u -p default -i ~/Pictures/wallpapers/AuthDevLock.png -n
+
+# Regular blur:
 i3lock \
 --insidevercolor=$C   \
 --ringvercolor=$V     \
@@ -79,4 +84,4 @@ echo "U $(timestamp)" >> $lockfile
 # Enable notifications
 notify-send "DUNST_COMMAND_RESUME"
 # Unmute slack
-slack-cli snooze end
+# slack-cli snooze end

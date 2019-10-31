@@ -264,3 +264,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 alias inp="pyenv activate big"
+export JIRA_USER=jcano
+alias my-jiras="jira-get 'code,summary' assignee=$JIRA_USER status='Open' separator=' '"
+
+HISTSIZE=999999999

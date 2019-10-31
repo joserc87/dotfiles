@@ -318,8 +318,8 @@ for_window [class="Sxiv" title="sxiv - /tmp/recorded.gif"] floating enable
 # AUTOSTART
 #exec_always --no-startup-id "feh --bg-scale /home/jose/Pictures/background.png"
 # Panoramic background
-#exec_always --no-startup-id "feh --bg-scale --no-xinerama /home/jose/Pictures/wallpapers/panorama.jpg"
-exec_always --no-startup-id "feh --bg-fill /home/jose/Pictures/wallpapers/panorama.jpg"
+exec_always --no-startup-id "feh --bg-fill --no-xinerama /home/jose/Pictures/wallpapers/panorama.jpg"
+#exec_always --no-startup-id "feh --bg-fill /home/jose/Pictures/wallpapers/panorama.jpg"
 exec --no-startup-id compton --config ~/.config/compton.conf -b
 
 # Caps lock is control
@@ -391,14 +391,14 @@ set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
 set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
 bindsym $mod+Shift+g mode "$mode_gaps"
- 
+
 mode "$mode_gaps" {
         bindsym o      mode "$mode_gaps_outer"
         bindsym i      mode "$mode_gaps_inner"
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
- 
+
 mode "$mode_gaps_inner" {
         bindsym plus  gaps inner current plus 5
         bindsym minus gaps inner current minus 5
@@ -412,7 +412,7 @@ mode "$mode_gaps_inner" {
         bindsym 7     gaps inner current set 70
         bindsym 8     gaps inner current set 80
         bindsym 9     gaps inner current set 90
- 
+
         bindsym Shift+plus  gaps inner all plus 5
         bindsym Shift+minus gaps inner all minus 5
         bindsym Shift+0     gaps inner all set 0
@@ -425,7 +425,7 @@ mode "$mode_gaps_inner" {
         bindsym Shift+7     gaps inner all set 70
         bindsym Shift+8     gaps inner all set 80
         bindsym Shift+9     gaps inner all set 90
- 
+
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
@@ -434,11 +434,11 @@ mode "$mode_gaps_outer" {
         bindsym plus  gaps outer current plus 5
         bindsym minus gaps outer current minus 5
         bindsym 0     gaps outer current set 0
- 
+
         bindsym Shift+plus  gaps outer all plus 5
         bindsym Shift+minus gaps outer all minus 5
         bindsym Shift+0     gaps outer all set 0
- 
+
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
