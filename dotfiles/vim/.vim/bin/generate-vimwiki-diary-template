@@ -1,0 +1,66 @@
+#!/usr/bin/python3
+
+import os
+import sys
+import datetime
+import re
+
+
+def today():
+    date = datetime.date.today()
+    return date.strftime('%d - %A')
+
+
+def render_template():
+    d = get_vimwiki_dir()
+    yesterday = get_yesterday_filename()
+
+    template = """
+# {date}
+
+## Todo
+
+{migrated_tasks}
+- [ ]
+
+## Notes
+
+"""
+
+    content = template.format(
+        date=today(),
+        migrated_tasks=get_migrated_tasks(os.path.join(d, yesterday))[:-1],
+    )
+    return content
+
+
+def get_vimwiki_dir():
+    if len(sys.argv) >= 2:
+        filename = sys.argv[1]
+        folder = filename.rsplit('/', 1)[0]
+    else:
+        folder = '/home/jose/vimwiki/diary'
+    return folder
+
+
+def get_yesterday_filename():
+    d = get_vimwiki_dir()
+    for f in sorted(os.listdir(d), reverse=True):
+        full_path = os.path.join(d, f)
+        if os.path.isfile(full_path) and re.match(r'\d\d\d\d-\d\d-\d\d\.md', f):
+            return f
+    return None
+
+
+def get_migrated_tasks(filename):
+    content = ''
+    in_migration = False
+    with open(filename) as f:
+        for line in f:
+            if line.startswith('- [>]') or (line.startswith(' ') and in_migration):
+                content += line.replace('[>]', '[ ]')
+                in_migration = True
+            in_migration = False
+    return content
+
+print(render_template())

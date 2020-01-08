@@ -261,6 +261,7 @@ let g:vimwiki_list = [wiki_1]
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 nmap <A-PageUp> <Plug>(VimwikiDiaryPrevDay)
 nmap <A-PageDown> <Plug>(VimwikiDiaryNextDay)
+au BufNewFile ~/vimwiki/diary/*.md :silent 0r !~/.vim/bin/generate-vimwiki-diary-template '%'
 
 
 " LOCALVIRC:
