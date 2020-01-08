@@ -13,6 +13,14 @@ beep() {
     paplay /usr/share/sounds/KDE-Im-Irc-Event.ogg &
 }
 
+# xrectsel from https://github.com/lolilolicon/xrectsel
+#ARGUMENTS=$(xrectsel "--x=%x --y=%y --width=%w --height=%h") || exit -1
+slop=$(slop -n -f "%x %y %w %h %g %i") || exit -1
+read -r X Y W H G ID < <(echo $slop)
+BYZANZ_ARGUMENTS="--x=$X --y=$Y --width=$W --height=$H"
+SCREENKEY_ARGUMENTS="-g $G"
+
+
 # Duration and output file
 if [ $# -gt 0 ]; then
     D="--duration=$@"
@@ -24,18 +32,16 @@ else
     #D="--duration=10 \"$HOME/Pictures/gifshot-$(date +%F_%R).gif\""
 fi
 
-# xrectsel from https://github.com/lolilolicon/xrectsel
-#ARGUMENTS=$(xrectsel "--x=%x --y=%y --width=%w --height=%h") || exit -1
-ARGUMENTS=$(slop --format="--x=%x --y=%y --width=%w --height=%h") || exit -1
-
 echo Delaying $DELAY seconds. After that, byzanz will start
 for (( i=$DELAY; i>0; --i )) ; do
     echo $i
     sleep 1
 done
 #beep
-#echo byzanz-record --verbose --delay=0 ${ARGUMENTS} $D
-byzanz-record ${ARGUMENTS} $D
+#echo byzanz-record --verbose --delay=0 ${BYZANZ_ARGUMENTS} $D
+screenkey -g "$G" &
+byzanz-record ${BYZANZ_ARGUMENTS} $D
+killall screenkey
 sxiv -a $FILE
 dragon $FILE
 

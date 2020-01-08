@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+content=$(cat)
+echo -n "$content" | xsel --clipboard --input
+notify-send -a Script "Clipboard" "Copied: $content"
+
+

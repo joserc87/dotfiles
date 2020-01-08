@@ -141,7 +141,8 @@ def main():
     stoday = day_str(today)
     options = read_options()
     weekday = today.weekday()
-    hours_per_day = 7.5 if options.get('summer') else 8
+    summer = bool(options.get('summer'))
+    hours_per_day = 7.5 if summer else 8
     friday_hours_per_day = 6 # Only in summer
     if options.get('week'):
         days_in_week = [day_str(today - timedelta(days=i)) for i in range(weekday + 1)]
@@ -162,14 +163,16 @@ def main():
         # Print X hours Y minutes (X hours Y minutes wasted)
         print(output(total_delta, total_wasted, options.get('short')))
         hours_in_the_week = hours_per_day*cnt \
-            if not options.get('summer') or cnt < 5 \
+            if not summer or cnt < 5 \
             else hours_per_day*(cnt - 1) + friday_hours_per_day
         difference = total_delta - timedelta(hours=hours_in_the_week)
         # Print how much time until going home
         print(format_timedelta(difference))
         # Print at what time you will go home
 
-        d = -difference + timedelta(minutes=30) \
+        lunch_duration = 30 if summer else 60
+
+        d = -difference + timedelta(minutes=lunch_duration) \
             if now.time() < time(14) \
             else -difference
         print('You go out at: ', (now + d).time())

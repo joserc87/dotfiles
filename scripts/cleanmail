@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+PROJ_DIR=/home/jose/code/gmail
+PREV_DIR=$(pwd)
+
+cd $PROJ_DIR
+pyenv activate gmail
+python clean_mail.py
+cd $PREV_DIR

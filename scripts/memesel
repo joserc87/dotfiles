@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
+DMENU="${DMENU:-dmenu}"
 DIR=~/Pictures/memes/
+
 find $DIR* -printf "%f\n" \
-    | dmenu -l 5 \
+    | $DMENU -l 5 \
     | awk "{print \"$DIR\"\$1}" \
     | xargs dragon
     #| xclip -i -selection clipboard -t text/uri-list

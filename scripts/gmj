@@ -1,0 +1,1 @@
+gitmoji refactor -s | tail -1 | awk '{print }' | clipcopy
