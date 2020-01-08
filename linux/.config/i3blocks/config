@@ -38,7 +38,7 @@ label=
 command=$HOME/Scripts/i3blocks/todo.sh
 interval=60
 markup=pango
-signal=10
+signal=11
 color=#88CCFF
 
 [jenkins]
@@ -46,7 +46,7 @@ label=
 command=$HOME/Scripts/i3blocks/jenkins.sh
 interval=10
 markup=pango
-signal=10
+signal=12
 color=#555555
 
 [mediaplayer]
@@ -54,7 +54,7 @@ color=#555555
 command=$HOME/Scripts/i3blocks/mediaplayer
 instance=spotify
 interval=5
-signal=10
+signal=13
 color=#E26EFF
 
 [volume]
@@ -107,6 +107,13 @@ color=#C3FF00
 #    command=$HOME/Scripts/i3blocks/battery.sh
 #    interval=persist
 #    #border=#458588
+
+[rain]
+label=
+command=$HOME/Scripts/i3blocks/rain.sh
+interval=30
+markup=pango
+signal=14
 
 [uptime]
 label= 
