@@ -83,7 +83,8 @@ source ~/.tokens
 # ZSH_THEME="robbyrussell"
 # ZSH_THEME="agnoster"
 # ZSH_THEME="lambda-gister"
-ZSH_THEME="node"
+# ZSH_THEME="node"
+ZSH_THEME="spaceship"
 
 
 # Uncomment the following line to use case-sensitive completion.
