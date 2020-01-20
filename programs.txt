@@ -3,3 +3,4 @@ tmux
 neovim
 ranger
 python3
+alacritty
