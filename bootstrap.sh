@@ -64,7 +64,7 @@ install_generic_software() {
     # OhMyZsh
     if [ ! -e $USER_HOME/.oh-my-zsh/ ]; then
         # A new .zshrc will be generated as part of the process, so let's back it up
-        mv $USER_HOME/.zshrc $USER_HOME/.zshrc.bak
+        $do mv $USER_HOME/.zshrc $USER_HOME/.zshrc.bak
         wget_url=https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
         if type curl > /dev/null; then
             $do sh -c "$(curl -fsSL $wget_url)" "" --unattended
@@ -76,10 +76,35 @@ install_generic_software() {
             echo 'Curl or wget needed'
             exit
         fi
-        rm $USER_HOME/.zshrc
-        mv $USER_HOME/.zshrc.bak $USER_HOME/.zshrc
+        $do rm $USER_HOME/.zshrc
+        $do mv $USER_HOME/.zshrc.bak $USER_HOME/.zshrc
+
     fi
-    $do chsh -s $(which zsh)
+
+    # Oh-My-Zsh spaceship theme
+    if [ ! -e $USER_HOME/.oh-my-zsh/themes/spaceship-prompt/ ]; then
+        $do git clone \
+            https://github.com/denysdovhan/spaceship-prompt.git \
+            "$USER_HOME/.oh-my-zsh/themes/spaceship-prompt"
+        $do ln -s \
+            "$USER_HOME/.oh-my-zsh/themes/spaceship-prompt/spaceship.zsh-theme" \
+            "$USER_HOME/.oh-my-zsh/themes/spaceship.zsh-theme"
+    fi
+    if ! grep /zsh /etc/passwd > /dev/null ; then
+        $do chsh -s $(which zsh)
+    fi
+
+    # Alacritty theme
+    if [ ! -e $USER_HOME/.config/alacritty/alacritty.yml ]; then
+        $do mkdir -p $USER_HOME/.config/alacritty/
+        $do wget -O $USER_HOME/.config/alacritty/alacritty.yml \
+            https://raw.githubusercontent.com/eendroroy/alacritty-theme/master/themes/iterm.yaml
+    fi
+
+    # Missing files
+    if [ ! -e $USER_HOME/.tokens ]; then
+        $do touch $USER_HOME/.tokens
+    fi
 }
 
 bootstrap() {
