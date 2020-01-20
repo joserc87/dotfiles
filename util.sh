@@ -27,10 +27,13 @@ symlink() {
         if [[ $REPLY =~ ^[Yy]$ ]]
         then
             if [[ -d "$3/$4" ]]; then
-                # If it's a directory, move all the content and rmdir
-                warn "Moving $3/$4/* to $1/$2/\n"
-                mv "$3/$4/"* "$1/$2/"
-                rmdir "$3/$4" 
+                # If we could remove it, it was empty
+                if ! rmdir "$3/$4" ; then
+                    # If it's a directory, move all the content and rmdir
+                    warn "Moving $3/$4/* to $1/$2/\n"
+                    mv "$3/$4/"* "$3/$4/".* "$1/$2/"
+                    rmdir "$3/$4"
+                fi
             else
                 # if it's just a file, then just move it
                 warn "Moving $3/$4 to $1/$2\n"
