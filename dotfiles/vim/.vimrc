@@ -130,7 +130,10 @@ elseif has ("unix")
     " colorscheme srcery
     colorscheme monokai
   else
-    colorscheme torte
+    " colorscheme torte
+    colorscheme gruvbox
+    " colorscheme onehalfdark
+    " let g:airline_theme='onehalfdark'
   endif
 else
   colorscheme torte

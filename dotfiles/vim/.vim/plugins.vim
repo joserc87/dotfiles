@@ -79,3 +79,4 @@ Plugin 'rizzatti/dash.vim'
 " THEMES:
 Plugin 'morhetz/gruvbox'
 Plugin 'sonph/onehalf', {'rtp': 'vim/'}
+Plugin 'joshdick/onedark'

@@ -6,6 +6,7 @@ dotfiles=""
 
 # Link script files
 warn "Linking linux config files\n";
+symlink .config/ alacritty ~/.config alacritty 
 symlink .config/ clipit ~/.config clipit 
 symlink .config/ i3 ~/.config i3 
 symlink .config/ i3blocks ~/.config i3blocks 
