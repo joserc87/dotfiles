@@ -2,9 +2,25 @@
 DMENU="${DMENU:-dmenu}"
 DIR=~/Pictures/memes/
 
-find $DIR* -printf "%f\n" \
-    | $DMENU -l 5 \
-    | awk "{print \"$DIR\"\$1}" \
-    | xargs dragon
-    #| xclip -i -selection clipboard -t text/uri-list
+img=$(ls $DIR \
+    | $DMENU -l 10
+)
 
+if [ ! -z "$img" ]; then
+
+    TMPFILE=/tmp/$img
+    text=$(echo | $DMENU)
+    if [ ! -z "$text" ]; then
+        python -m dankcli $DIR/$img "$text" -f $TMPFILE 
+        dragon $TMPFILE*
+    else
+        dragon $DIR/$img
+    fi
+fi
+
+# find $DIR* -printf "%f\n" \
+#     | $DMENU -l 5 \
+#     | awk "{print \"$DIR\"\$1}" \
+#     | xargs dragon
+#     #| xclip -i -selection clipboard -t text/uri-list
+# 

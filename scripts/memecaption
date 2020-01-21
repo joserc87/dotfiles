@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+DMENU="${DMENU:-dmenu}"
+DIR=~/Pictures/memes/
+TMPFILE=/tmp/memecaption
+
+img=$(ls $DIR \
+    | $DMENU -l 10
+)
+echo | $DMENU | xargs -I % python -m dankcli $DIR/$img "%" -f $TMPFILE 
+dragon $TMPFILE*
