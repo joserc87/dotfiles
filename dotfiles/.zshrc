@@ -142,8 +142,9 @@ if [[ -e ~/.gem/ruby/2.4.0/bin ]];
 then
     export PATH=~/.gem/ruby/2.4.0/bin/:$PATH
 fi
-export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-export PATH="$HOME/Dev/spell/build/install/spell/bin:$PATH"
+# Deprecated:
+# export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+# export PATH="$HOME/Dev/spell/build/install/spell/bin:$PATH"
 
 # User defined scripts:
 # Scripts folder is present for Linux and Mac OS
