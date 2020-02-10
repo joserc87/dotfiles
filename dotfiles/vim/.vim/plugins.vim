@@ -49,11 +49,12 @@ Plugin 'Raimondi/delimitMate'
 " By pressing C-c after {, it will put the pointer in the line between { and }
 imap <C-c> <CR><Esc>O
 " Autocompletion
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 " let g:ycm_add_preview_to_completeopt=0
 " let g:ycm_confirm_extra_conf=0
 " set completeopt-=preview
 " Plugin 'marijnh/tern_for_vim'
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 " JAVASCRIPT:
 Plugin 'jelera/vim-javascript-syntax'
@@ -72,6 +73,9 @@ Plugin 'ap/vim-css-color'
 " RAILS:
 " Plugin 'tpope/vim-rails'
 " Plugin 'jgdavey/vim-turbux'
+
+" DART:
+Plugin 'dart-lang/dart-vim-plugin'
 
 " DASH INTEGRATION:
 Plugin 'rizzatti/dash.vim'

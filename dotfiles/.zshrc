@@ -80,11 +80,11 @@ source ~/.tokens
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # The following would be the default theme
-# ZSH_THEME="robbyrussell"
+ZSH_THEME="robbyrussell"
 # ZSH_THEME="agnoster"
 # ZSH_THEME="lambda-gister"
 # ZSH_THEME="node"
-ZSH_THEME="spaceship"
+# ZSH_THEME="spaceship"
 
 
 # Uncomment the following line to use case-sensitive completion.
@@ -148,7 +148,7 @@ fi
 
 # User defined scripts:
 # Scripts folder is present for Linux and Mac OS
-export PATH=~/Scripts/:$PATH
+export PATH=~/scripts/:$PATH
 
 # Scripts for Mac
 if [[ -e ~/macscripts/ ]];

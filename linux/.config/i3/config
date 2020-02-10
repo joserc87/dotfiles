@@ -69,6 +69,7 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 # Start Applications
+
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 # bindsym $mod+F2 exec palemoon
 bindsym $mod+F3 exec pcmanfm
@@ -265,6 +266,7 @@ bindsym $mod+Shift+F2 move workspace to output right
 
 # Open applications on specific workspaces
 assign [class="Firefox"] $ws3
+assign [class="Station"] $ws9
 #assign [class="Remmina"] $ws7
 #assign [class="Vmware"] $ws8
 assign [class="Nylas Mail"] $ws9
@@ -397,6 +399,8 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
+exec --no-startup-id station
+exec --no-startup-id station
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 exec --no-startup-id start_conky_maia
@@ -571,8 +575,8 @@ client.urgent               $transparent  $darkgray         $white  $darkgray
 #############################
 
 # Set inner/outer gaps
-gaps inner 14
-gaps outer -2
+gaps inner 20
+gaps outer 5
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
