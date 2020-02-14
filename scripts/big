@@ -116,6 +116,7 @@ def b64decode(string):
     :returns: The decoded string.
     """
     missing_padding = len(string) % 4
+    string = string.replace('-', '+').replace('_', '/')
     if missing_padding != 0:
         string += '=' * (4 - missing_padding)
     return base64.b64decode(string)
