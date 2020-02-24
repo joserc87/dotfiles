@@ -1,0 +1,7 @@
+zsh
+tmux
+neovim
+ranger
+python3
+alacritty
+figlet

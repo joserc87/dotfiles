@@ -3,9 +3,9 @@
 " Maintainer: José Ramón Cano Yribarren
 " Latest Revision: 07 Dec 2016
 
-if exists("b:current_syntax")
-  finish
-endif
+"if exists("b:current_syntax")
+"  finish
+"endif
 
 " KEYWORDS:
 

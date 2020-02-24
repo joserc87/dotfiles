@@ -47,6 +47,11 @@ export DEFAULT_USER=jose
 export LC_ALL=en_US.UTF-8
 export LANG="$LC_ALL"
 
+# Tokens for fb bots and wit.ai
+export MESSENGER_PAGE_ACCESS_TOKEN=__FACEBOOK_PAGE_ACCESS_TOKEN_HERE__
+export MESSENGER_VALIDATION_TOKEN=__FACEBOOK_VERIFY_TOKEN_HERE__
+export WIT_TOKEN=__WIT_TOKEN_HERE__
+export PORT=3000
 
 ############
 # PROJECTS #
@@ -77,6 +82,9 @@ source ~/.tokens
 # The following would be the default theme
 ZSH_THEME="robbyrussell"
 # ZSH_THEME="agnoster"
+# ZSH_THEME="lambda-gister"
+# ZSH_THEME="node"
+# ZSH_THEME="spaceship"
 
 
 # Uncomment the following line to use case-sensitive completion.
@@ -134,8 +142,46 @@ if [[ -e ~/.gem/ruby/2.4.0/bin ]];
 then
     export PATH=~/.gem/ruby/2.4.0/bin/:$PATH
 fi
-export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-export PATH="$HOME/Dev/spell/build/install/spell/bin:$PATH"
+# Deprecated:
+# export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+# export PATH="$HOME/Dev/spell/build/install/spell/bin:$PATH"
+
+# User defined scripts:
+# Scripts folder is present for Linux and Mac OS
+export PATH=~/scripts/:$PATH
+
+# Scripts for Mac
+if [[ -e ~/macscripts/ ]];
+then
+    export PATH=~/macscripts/:$PATH
+fi
+
+# Python for Mac
+if [[ -e /usr/local/Cellar/python/2.7.10_2/bin/ ]];
+then
+    export PATH=~/Scripts/:/usr/local/Cellar/python/2.7.10_2/bin/:$PATH
+fi
+
+# Python
+export PYTHONPATH=~/dev/whatsapp/cortado/yowsup/:.:$PYTHONPATH
+# Android tools:
+export PATH=~/Library/Android/sdk/platform-tools/:/Applications/MacPorts/MacVim.app/Contents/MacOS/:$PATH
+# Antlr
+export CLASSPATH=.:/usr/local/lib/antlr-4.5.3-complete.jar:$CLASSPATH
+alias antlr4='java -jar /usr/local/lib/antlr-4.5.3-complete.jar'
+alias grun='java org.antlr.v4.gui.TestRig'
+
+# -- JOSE --
+# rbenv
+if which rbenv > /dev/null;
+then
+    eval "$(rbenv init -)";
+fi
+# Path to the Gems:
+#if [[ -e ~/.gem/ruby/2.4.0/bin ]];
+#then
+#    export PATH=~/.gem/ruby/2.4.0/bin/:$PATH
+#fi
 
 # User defined scripts:
 # Scripts folder is present for Linux and Mac OS
@@ -162,6 +208,9 @@ export CLASSPATH=.:/usr/local/lib/antlr-4.5.3-complete.jar:$CLASSPATH
 alias antlr4='java -jar /usr/local/lib/antlr-4.5.3-complete.jar'
 alias grun='java org.antlr.v4.gui.TestRig'
 
+# Disable warning when .oh-my-zsh is shared between users
+# https://github.com/robbyrussell/oh-my-zsh/issues/6835#issuecomment-390216875
+ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
 
 # Virtualenv/VirtualenvWrapper
