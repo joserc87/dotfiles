@@ -210,29 +210,29 @@ bindsym $mod+$mod2+9 workspace $ws9ext
 bindsym $mod+$mod2+0 workspace $ws10ext
 
 # Move focused container to workspace
-bindsym $mod+Ctrl+grave move container to workspace $ws0
-bindsym $mod+Ctrl+1 move container to workspace $ws1
-bindsym $mod+Ctrl+2 move container to workspace $ws2
-bindsym $mod+Ctrl+3 move container to workspace $ws3
-bindsym $mod+Ctrl+4 move container to workspace $ws4
-bindsym $mod+Ctrl+5 move container to workspace $ws5
-bindsym $mod+Ctrl+6 move container to workspace $ws6
-bindsym $mod+Ctrl+7 move container to workspace $ws7
-bindsym $mod+Ctrl+8 move container to workspace $ws8
-bindsym $mod+Ctrl+9 move container to workspace $ws9
-bindsym $mod+Ctrl+0 move container to workspace $ws10
+# bindsym $mod+Ctrl+grave move container to workspace $ws0
+# bindsym $mod+Ctrl+1 move container to workspace $ws1
+# bindsym $mod+Ctrl+2 move container to workspace $ws2
+# bindsym $mod+Ctrl+3 move container to workspace $ws3
+# bindsym $mod+Ctrl+4 move container to workspace $ws4
+# bindsym $mod+Ctrl+5 move container to workspace $ws5
+# bindsym $mod+Ctrl+6 move container to workspace $ws6
+# bindsym $mod+Ctrl+7 move container to workspace $ws7
+# bindsym $mod+Ctrl+8 move container to workspace $ws8
+# bindsym $mod+Ctrl+9 move container to workspace $ws9
+# bindsym $mod+Ctrl+0 move container to workspace $ws10
 # Move focused container to extra workspace
-bindsym $mod+$mod2+Ctrl+grave move container to workspace $ws0
-bindsym $mod+$mod2+Ctrl+1 move container to workspace $ws1
-bindsym $mod+$mod2+Ctrl+2 move container to workspace $ws2
-bindsym $mod+$mod2+Ctrl+3 move container to workspace $ws3
-bindsym $mod+$mod2+Ctrl+4 move container to workspace $ws4
-bindsym $mod+$mod2+Ctrl+5 move container to workspace $ws5
-bindsym $mod+$mod2+Ctrl+6 move container to workspace $ws6
-bindsym $mod+$mod2+Ctrl+7 move container to workspace $ws7
-bindsym $mod+$mod2+Ctrl+8 move container to workspace $ws8
-bindsym $mod+$mod2+Ctrl+9 move container to workspace $ws9
-bindsym $mod+$mod2+Ctrl+0 move container to workspace $ws10
+# bindsym $mod+$mod2+Ctrl+grave move container to workspace $ws0
+# bindsym $mod+$mod2+Ctrl+1 move container to workspace $ws1
+# bindsym $mod+$mod2+Ctrl+2 move container to workspace $ws2
+# bindsym $mod+$mod2+Ctrl+3 move container to workspace $ws3
+# bindsym $mod+$mod2+Ctrl+4 move container to workspace $ws4
+# bindsym $mod+$mod2+Ctrl+5 move container to workspace $ws5
+# bindsym $mod+$mod2+Ctrl+6 move container to workspace $ws6
+# bindsym $mod+$mod2+Ctrl+7 move container to workspace $ws7
+# bindsym $mod+$mod2+Ctrl+8 move container to workspace $ws8
+# bindsym $mod+$mod2+Ctrl+9 move container to workspace $ws9
+# bindsym $mod+$mod2+Ctrl+0 move container to workspace $ws10
 
 # Move to workspace with focused container
 bindsym $mod+Shift+grave move container to workspace $workspace0; workspace $ws0
@@ -423,7 +423,8 @@ exec --no-startup-id start_conky_maia
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-exec_always --no-startup-id "feh --bg-scale /home/jose/Pictures/wallpaper.png"
+#exec_always --no-startup-id "feh --bg-scale /home/jose/Pictures/wallpaper.png"
+exec_always --no-startup-id "feh --bg-scale /home/jcano/Pictures/wallpaper.jpg"
 #exec_always --no-startup-id "feh --bg-scale /home/jose/Pictures/background.png"
 # Panoramic background
 #exec_always --no-startup-id "feh --bg-fill --no-xinerama /home/jose/Pictures/wallpapers/panorama.jpg"
