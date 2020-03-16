@@ -1,0 +1,11 @@
+#!/bin/bash
+NETWORKS="192.168.1.0/24 10.1.1.0/16 10.1.0.0/16 10.200.0.0/16"
+ENDPOINT="ssh.ravenpack.com"
+
+echo "Please before execute this script. Check that you have sshuttle installed on your OS (https://github.com/sshuttle)"
+
+# First let me check it your resolv.conf it's correct.
+sudo ./setup-dns-fqdn.sh
+
+echo "Connecting to RavenPack network..."
+sshuttle --no-latency-control --dns -r ${ENDPOINT} ${NETWORKS} -vv
