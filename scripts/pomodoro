@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+if [[ $1 == on ]]; then 
+    slack-cli status edit "In the zone. Ping if needed." ":tomato:"
+    slack-cli snooze start 15
+    sleep 900
+    slack-cli status edit " " ":python:"
+elif [[ $1 == off ]]; then 
+    echo enable pomodoro
+    slack-cli snooze end
+    slack-cli status edit " " ":python:"
+else
+    echo Error. Wrong arguments
+fi
+
+# slack-cli status edit "In the zone. Ping if needed." ":tomato:"
+# slack-cli snooze start 15
+# slack-cli status edit " " ":python:"

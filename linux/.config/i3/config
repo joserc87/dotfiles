@@ -404,6 +404,8 @@ for_window [class="URxvt" title="editi3"] floating enable
 for_window [class="XClock"] floating enable
 for_window [class="XClock"] move position mouse
 for_window [class="Sxiv" title="sxiv - /tmp/recorded.gif"] floating enable
+for_window [class="Gsimplecal"] floating enable
+for_window [class="Gsimplecal"] sticky enable
 
 
 # Autostart applications
@@ -431,9 +433,16 @@ exec_always --no-startup-id "feh --bg-scale /home/jcano/Pictures/wallpaper.jpg"
 #exec_always --no-startup-id "feh --bg-fill /home/jose/Pictures/wallpapers/panorama.jpg"
 exec --no-startup-id compton --config ~/.config/compton.conf -b
 # Caps lock is control
-exec --no-startup-id "setxkbmap -option ctrl:nocaps"
+#exec --no-startup-id "setxkbmap -option ctrl:nocaps"
+exec --no-startup-id "setxkbmap -option caps:ctrl_modifier"
+exec --no-startup-id "xcape -e 'Caps_Lock=Escape;Control_L=Escape;Control_R=Escape"
 # Right menu key is control
 exec --no-startup-id "setxkbmap -option ctrl:menu_rctrl"
+#exec --no-startup-id "setxkbmap -option ctrl:menu_rctrl"
+# Right menu key is mouse click:
+#xdotool click 1
+bindcode 135 exec "xdotool click 1"
+
 # Log the unlock
 exec "logunlock"
 

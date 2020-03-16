@@ -28,13 +28,12 @@ Plugin 'godlygeek/tabular'
 " Tabularize is much better
 " Plugin 'junegunn/vim-easy-align'
 " Debugger
-Plugin 'joonty/vdebug' 
+"Plugin 'joonty/vdebug' 
 " Syntax highlighting for json
 Plugin 'elzr/vim-json'
 " Arduino IDE
-Plugin '4Evergreen4/vim-hardy'
-"CSS colors
-Plugin 'chrisbra/Colorizer'
+" Plugin '4Evergreen4/vim-hardy'
+Plugin 'tpope/vim-repeat'
 
 " COLOR SCHEMES:
 Plugin 'srcery-colors/srcery-vim'
@@ -69,6 +68,7 @@ Plugin 'pangloss/vim-javascript'
 
 " CSS:
 Plugin 'ap/vim-css-color'
+Plugin 'chrisbra/Colorizer'
 
 " RAILS:
 " Plugin 'tpope/vim-rails'
@@ -78,7 +78,7 @@ Plugin 'ap/vim-css-color'
 Plugin 'dart-lang/dart-vim-plugin'
 
 " DASH INTEGRATION:
-Plugin 'rizzatti/dash.vim'
+" Plugin 'rizzatti/dash.vim'
 
 " THEMES:
 Plugin 'morhetz/gruvbox'

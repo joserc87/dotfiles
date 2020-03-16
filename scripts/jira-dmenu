@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+DEFAULT_PROJECT=BIG
+USER=jcano
+
+RECENT=$(cat ~/jiras.txt)
+IN_PROGRESS=$(jira-get "code,summary" assignee=$USER status="In Progress" separator=" " | sed 's/^/[*]/')
+
+JIRAS=$(echo -e "$IN_PROGRESS\n$RECENT")
+
+
+# Get a jira code from the saved ones or a new one
+selected_jira=$(echo "$JIRAS" | dmenu -i -l 10 | sed 's/\[\*\]//')
+
+# If the user enters a number, assume BIG project
+re='^[0-9]+$'
+if [[ $selected_jira =~ $re ]] ; then
+    selected_jira=${DEFAULT_PROJECT}-$selected_jira
+fi
+
+selected_jira_code=$(echo $selected_jira | awk '{print $1}')
+if [ $selected_jira_code ]; then
+    if [[ $1 = '--snake' ]]; then
+        jira-get "code,summary" code="$selected_jira_code" separator=" " | sed 's/\s\+/_/g'
+    elif [[ $1 = '--dash' ]]; then
+        jira-get "code,summary" code="$selected_jira_code" separator=" " | sed 's/\s\+/-/g'
+    else
+        jira-get "code,summary" code="$selected_jira_code" separator=" "
+    fi
+else
+    exit 0
+fi

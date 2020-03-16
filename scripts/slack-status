@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+DMENU="${DMENU:-dmenu}"
+
+OPTION=$(echo '1. None
+2. QQ
+3. Lunch
+4. Coffee
+5. Standup
+6. Meeting
+7. Pymeeting
+8. Pomodoro
+' \
+    | $DMENU -i -l 10)
+
+notify() {
+    notify-send -a Script $1 -u normal
+}
+
+emoji=:python: 
+stat=" "
+
+case $OPTION in
+    "1. None")
+        emoji=:python: 
+        stat=" "
+    ;;
+    "2. QQ")
+        emoji=:donutparrot: 
+        stat="QQing"
+    ;;
+    "3. Lunch")
+        emoji=:chompy: 
+        stat="Lunching"
+    ;;
+    "4. Coffee")
+        emoji=:teatime: 
+        stat="Coffeeing"
+    ;;
+    "5. Standup")
+        emoji=:calendar: 
+        stat="In morning standup"
+    ;;
+    "6. Meeting")
+        emoji=:calendar: 
+        stat="In A Meeting"
+    ;;
+    "7. Pymeeting")
+        emoji=:calendar: 
+        stat="In PyMeeting"
+    ;;
+    "8. Pomodoro")
+        emoji=:tomato: 
+        stat="In the zone. Ping if important."
+    ;;
+esac
+
+echo "I'm $stat... $emoji"
+slack-cli status edit "$stat" "$emoji"
