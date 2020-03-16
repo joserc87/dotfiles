@@ -15,7 +15,7 @@ export XDG_CONFIG_HOME="~/.config/"
 # look at www.drbunsen.org/the-text-triumvirate/
 
 # If neovim exists, use nvim, otherwise use vim
-if ! hash nvim 2>/dev/null; then
+if ! type nvim >/dev/null; then
     export EDITOR="vim"
     alias nvim=vim
 else
@@ -139,7 +139,11 @@ export PATH="$HOME/Dev/spell/build/install/spell/bin:$PATH"
 
 # User defined scripts:
 # Scripts folder is present for Linux and Mac OS
-export PATH=$HOME/bin/:$HOME/.local/bin:$HOME/Scripts/:$PATH
+export PATH=$HOME/bin/\
+:$HOME/.local/bin\
+:$HOME/Scripts/\
+:$HOME/apps/\
+:$PATH
 
 # Scripts for Mac
 if [[ -e ~/macscripts/ ]];
@@ -237,6 +241,7 @@ alias rmux="ranger-cd && tmux new -s `echo '${PWD##*/}'`"
 alias t=task
 alias th="task priority:H"
 alias tl="task priority:H or priority:"
+alias alamux='TERM=screen-256color tmux'
 
 if command -v thefuck 1>/dev/null 2>&1; then
     eval $(thefuck --alias)

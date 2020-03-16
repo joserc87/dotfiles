@@ -4,13 +4,14 @@ DMENU="${DMENU:-dmenu}"
 
 OPTION=$(echo '1. Select AWS profile
 2. My Jiras
-3. Deploy
-4. Config
-5. Gif rec
-6. Meme selector
-7. ASCII ART
-8. Gitmoji select
-9. Edit script' \
+3. Copy Jira
+4. Deploy
+5. Config
+6. Gif rec
+7. Meme selector
+8. ASCII ART
+9. Gitmoji select
+10. Edit script' \
     | $DMENU -i -l 10)
 
 notify() {
@@ -24,31 +25,35 @@ case $OPTION in
     "2. My Jiras")
         jira-select-mine
     ;;
-    "3. Deploy")
+    "3. Copy Jira")
+        jira-dmenu \
+            | xsel --clipboard --input
+    ;;
+    "4. Deploy")
         deploy ls \
             | $DMENU -p Deploy \
             | xargs -I {} deploy "{}" \
             | xargs -I {} notify-send -a Script "{}"
     ;;
-    "4. Config")
+    "5. Config")
         EDITOR=editi3 config $(config ls | $DMENU -i -l 10 -p Config)
     ;;
-    "5. Gif rec")
+    "6. Gif rec")
         gifrec
     ;;
-    "6. Meme selector")
+    "7. Meme selector")
         memesel
     ;;
-    "7. ASCII ART")
+    "8. ASCII ART")
         cat ~/Documents/ascii-art.txt \
             | $DMENU -l 10 -p ASCII \
             | tr -d '\n' \
             | ~/Scripts/copy
     ;;
-    "8. Gitmoji select")
+    "9. Gitmoji select")
         gitmoji-menu
     ;;
-    "9. Edit script")
+    "10. Edit script")
         FILE=$(ls ~/Scripts | $DMENU -i -l 20 -p Script)
         editi3 ~/Scripts/$FILE
     ;;

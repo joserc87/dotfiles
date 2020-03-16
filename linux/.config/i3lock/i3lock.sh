@@ -28,6 +28,7 @@ playerctl pause || true
 # Mute slack
 source ~/.tokens
 # slack-cli snooze start 180 || echo "Failed to snooze slack"
+~/Scripts/slack-status || echo "Failed to change slack status"
 
 # Log the lock
 echo "L $(timestamp)" >> $lockfile
@@ -85,3 +86,5 @@ echo "U $(timestamp)" >> $lockfile
 notify-send "DUNST_COMMAND_RESUME"
 # Unmute slack
 # slack-cli snooze end
+slack-cli status edit " " ":python:" || echo "Failed to change slack status"
+

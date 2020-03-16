@@ -1,6 +1,8 @@
 #!/bin/bash
 
-gitmoji -l \
+gitmoji=/home/jose/.nvm/versions/node/v11.14.0/bin/gitmoji
+
+$gitmoji -l \
     | dmenu -i -l 10 \
     | awk '{print $3}' \
     | tr -d "\n" \

@@ -29,13 +29,12 @@ Plugin 'godlygeek/tabular'
 " Tabularize is much better
 " Plugin 'junegunn/vim-easy-align'
 " Debugger
-Plugin 'joonty/vdebug' 
+"Plugin 'joonty/vdebug' 
 " Syntax highlighting for json
 Plugin 'elzr/vim-json'
 " Arduino IDE
-Plugin '4Evergreen4/vim-hardy'
-"CSS colors
-Plugin 'chrisbra/Colorizer'
+" Plugin '4Evergreen4/vim-hardy'
+Plugin 'tpope/vim-repeat'
 
 " COLOR SCHEMES:
 Plugin 'srcery-colors/srcery-vim'
@@ -50,11 +49,12 @@ Plugin 'Raimondi/delimitMate'
 " By pressing C-c after {, it will put the pointer in the line between { and }
 imap <C-c> <CR><Esc>O
 " Autocompletion
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 " let g:ycm_add_preview_to_completeopt=0
 " let g:ycm_confirm_extra_conf=0
 " set completeopt-=preview
 " Plugin 'marijnh/tern_for_vim'
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 " JAVASCRIPT:
 Plugin 'jelera/vim-javascript-syntax'
@@ -69,10 +69,11 @@ Plugin 'pangloss/vim-javascript'
 
 " CSS:
 Plugin 'ap/vim-css-color'
+Plugin 'chrisbra/Colorizer'
 
 " RAILS:
 " Plugin 'tpope/vim-rails'
 " Plugin 'jgdavey/vim-turbux'
 
 " DASH INTEGRATION:
-Plugin 'rizzatti/dash.vim'
+" Plugin 'rizzatti/dash.vim'
