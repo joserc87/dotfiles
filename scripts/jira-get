@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-SRC=/home/jose/git/jira
+SRC=$HOME/git/jira
+venv=jira-scripts
 
 # Activate environment
 export PYENV_ROOT="$HOME/.pyenv"
@@ -9,7 +10,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-pyenv activate teamstats 1>/dev/null 2>&1
+pyenv activate $venv 1>/dev/null 2>&1
 
 /usr/bin/env python $SRC/jira.py "$@"
 
