@@ -80,7 +80,11 @@ Plugin 'dart-lang/dart-vim-plugin'
 " DASH INTEGRATION:
 Plugin 'rizzatti/dash.vim'
 
+" OpenScad
+Plugin 'sirtaj/vim-openscad'
+
 " THEMES:
 Plugin 'morhetz/gruvbox'
 Plugin 'sonph/onehalf', {'rtp': 'vim/'}
 Plugin 'joshdick/onedark'
+
