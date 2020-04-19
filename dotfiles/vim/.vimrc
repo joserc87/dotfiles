@@ -143,7 +143,7 @@ else
 endif
 " Uncomment for transparent vim background if you are ready to be made fun of
 " in #rice.
-" hi Normal guibg=NONE ctermbg=NONE
+hi Normal guibg=NONE ctermbg=NONE
 
 " FONT:
 " -----

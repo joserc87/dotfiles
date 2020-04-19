@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+if [ $# != 1 ]; then
+    echo "Usage: $0 [search]"
+fi
+
+pid=$(docker ps | grep $1 | awk '{print $1}')
+matches=$(echo "$pid" | wc -l)
+
+if [ -z "$pid" ]; then
+    echo "ID not found for docker $1"
+elif [ "$matches" != "1" ]; then
+    printf "Ambiguous match. These containers match the search query:\n$pid\n"
+else
+    echo $matches
+    echo "Attaching to container $pid"
+    docker exec -it $pid sh
+fi
+

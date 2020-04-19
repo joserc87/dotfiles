@@ -1,6 +1,6 @@
 #!/bin/bash
 
-gitmoji=/home/jose/.nvm/versions/node/v11.14.0/bin/gitmoji
+gitmoji=$HOME/.nvm/versions/node/v11.14.0/bin/gitmoji
 
 $gitmoji -l \
     | dmenu -i -l 10 \
