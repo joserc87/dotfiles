@@ -1,4 +1,5 @@
 # Colors (Gruvbox dark)
+background_opacity: 0.5
 colors:
   # Default colors
   primary:

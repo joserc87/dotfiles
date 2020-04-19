@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+picom-kawase \
+    --blur-method kawase \
+    --experimental-backends \
+    --backend glx \
+    --blur-strength 10 \
+    --config ~/.config/picom.conf

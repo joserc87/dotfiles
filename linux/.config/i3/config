@@ -263,6 +263,8 @@ bindsym $mod+F1 focus output left
 bindsym $mod+F2 focus output right
 bindsym $mod+Shift+F1 move workspace to output left
 bindsym $mod+Shift+F2 move workspace to output right
+bindsym F13 move left
+bindsym F14 move right
 
 # Open applications on specific workspaces
 assign [class="Firefox"] $ws3
