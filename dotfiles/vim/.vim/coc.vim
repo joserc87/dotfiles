@@ -68,6 +68,9 @@ nmap <leader>rn <Plug>(coc-rename)
 " Remap for format selected region
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+vmap <C-M-l>  <Plug>(coc-format-selected)
+" nmap <C-M-l>  :call CocAction('format')
+nmap <C-M-l>  <Plug>(coc-format)
 
 augroup mygroup
   autocmd!

@@ -71,7 +71,7 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " TAGBAR:
 " ------
-nmap <F8> ;TagbarToggle<CR>
+" nmap <F8> ;TagbarToggle<CR>
 
 " VIMUX:
 " -----
@@ -120,6 +120,9 @@ au BufRead,BufNewFile *.spl set syntax=spell
 autocmd FileType html setlocal softtabstop=4 shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType javascript setlocal softtabstop=2 shiftwidth=2 tabstop=2 expandtab
 
+" PYTHON:
+autocmd FileType python set foldmethod=indent
+
 "        _   _               
 "   ___ | |_| |__   ___ _ __ 
 "  / _ \| __| '_ \ / _ \ '__|
@@ -147,13 +150,6 @@ endif
 " UNSAFE
 " set exrc
 
-" GUI:
-" Remove the scroll bars:
-set guioptions-=r
-set guioptions-=R
-set guioptions-=l
-set guioptions-=L
-
 " LOCALVIRC:
 let g:localvimrc_sandbox = 0
 let g:localvimrc_persistent = 1
@@ -168,11 +164,6 @@ set secure
 if has ("autocmd")
 	autocmd bufwritepost .vimrc source $MYVIMRC
 endif
-
-" set cursorline
-" set cursorcolumn
-" highlight CursorLine ctermbg=Yellow cterm=bold guibg=#2b2b2b
-" highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#2b2b2b
 
 " Autocompletion
 set wildmode=longest,list,full
@@ -225,3 +216,6 @@ nnoremap td  :tabclose<CR>
 "nnoremap th :tabnext<CR>
 "nnoremap tl :tabprev<CR>
 "nnoremap tn :tabnew<CR>
+
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
