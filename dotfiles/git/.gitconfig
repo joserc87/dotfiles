@@ -9,8 +9,8 @@
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [user]
-	name = Jose Ramon Cano
-	email = jcano@ravenpack.com
+	name = Jose Ramon Cano Yribarren
+	email = joserc87@gmail.com
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
