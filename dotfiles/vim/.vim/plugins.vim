@@ -6,7 +6,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'altercation/vim-colors-solarized'
+" Plugin 'altercation/vim-colors-solarized'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'vimwiki'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -14,10 +14,9 @@ Plugin 'benmills/vimux'
 " Git
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
-Plugin 'tommcdo/vim-fubitive'
 Plugin 'airblade/vim-gitgutter'
 " A class outliner for vim
-Plugin 'majutsushi/tagbar'
+" Plugin 'majutsushi/tagbar'
 " Plugin 'klen/python-mode'
 " Per-project vimrc
 Plugin 'embear/vim-localvimrc'
@@ -80,7 +79,11 @@ Plugin 'dart-lang/dart-vim-plugin'
 " DASH INTEGRATION:
 " Plugin 'rizzatti/dash.vim'
 
+" OpenScad
+Plugin 'sirtaj/vim-openscad'
+
 " THEMES:
 Plugin 'morhetz/gruvbox'
 Plugin 'sonph/onehalf', {'rtp': 'vim/'}
 Plugin 'joshdick/onedark'
+
