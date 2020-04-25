@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+
+processes=$(ps ax)
+
+function execute_once {
+    if ! echo $processes | grep $1 > /dev/null; then
+        echo "Running $1"
+        $@
+    else
+        echo "Skipping $1"
+    fi
+}
+
+execute_once nitrogen --restore
+sleep 1
+execute_once compton-blur -b
+execute_once station
