@@ -28,7 +28,7 @@ Plugin 'godlygeek/tabular'
 " Tabularize is much better
 " Plugin 'junegunn/vim-easy-align'
 " Debugger
-"Plugin 'joonty/vdebug' 
+"Plugin 'joonty/vdebug'
 " Syntax highlighting for json
 Plugin 'elzr/vim-json'
 " Arduino IDE
