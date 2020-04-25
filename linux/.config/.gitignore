@@ -1,0 +1,19 @@
+# Ignore everything
+*
+
+# ...even if they are in subdirectories
+!*/
+
+# But not these files...
+!.gitignore
+!alacritty/**
+!clipit/**
+!compton.conf/**
+!cura/**
+!i3/**
+!i3blocks/**
+!i3lock/**
+!ranger/**
+!README.md/**
+!rofi/**
+!qtile/**

@@ -1,3 +1,7 @@
 bookmarks
 history
 tagged
+.vim
+__pycache__/
+*.py[cod]
+~
