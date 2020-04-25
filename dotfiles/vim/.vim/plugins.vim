@@ -2,7 +2,7 @@
 " PLUGINS:
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'scrooloose/syntastic'
+"" Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -34,16 +34,11 @@ Plugin 'elzr/vim-json'
 " Plugin '4Evergreen4/vim-hardy'
 Plugin 'tpope/vim-repeat'
 
-" COLOR SCHEMES:
-Plugin 'srcery-colors/srcery-vim'
-Plugin 'crusoexia/vim-monokai'
-
-
 " CODE:
 " Indentation
-Plugin 'nathanaelkane/vim-indent-guides'
+"" Plugin 'nathanaelkane/vim-indent-guides'
 " Automatically add some closing quotes
-Plugin 'Raimondi/delimitMate'
+"" Plugin 'Raimondi/delimitMate'
 " By pressing C-c after {, it will put the pointer in the line between { and }
 imap <C-c> <CR><Esc>O
 " Autocompletion
@@ -56,7 +51,8 @@ Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 " JAVASCRIPT:
 Plugin 'jelera/vim-javascript-syntax'
-Plugin 'pangloss/vim-javascript'
+"" TODO: Enable this for javascript
+"" Plugin 'pangloss/vim-javascript'
 
 " TYPESCRIPT:
 " tsuquyomi disabled because it lags when the file is saved
@@ -66,7 +62,7 @@ Plugin 'pangloss/vim-javascript'
 " Plugin 'Quramy/vim-js-pretty-template'
 
 " CSS:
-Plugin 'ap/vim-css-color'
+" Plugin 'ap/vim-css-color'
 Plugin 'chrisbra/Colorizer'
 
 " RAILS:
@@ -74,7 +70,7 @@ Plugin 'chrisbra/Colorizer'
 " Plugin 'jgdavey/vim-turbux'
 
 " DART:
-Plugin 'dart-lang/dart-vim-plugin'
+"" Plugin 'dart-lang/dart-vim-plugin'
 
 " DASH INTEGRATION:
 " Plugin 'rizzatti/dash.vim'
@@ -84,6 +80,9 @@ Plugin 'sirtaj/vim-openscad'
 
 " THEMES:
 Plugin 'morhetz/gruvbox'
-Plugin 'sonph/onehalf', {'rtp': 'vim/'}
-Plugin 'joshdick/onedark'
+"Plugin 'sonph/onehalf', {'rtp': 'vim/'}
+"Plugin 'joshdick/onedark'
+"Plugin 'srcery-colors/srcery-vim'
+"Plugin 'crusoexia/vim-monokai'
+
 

@@ -48,13 +48,16 @@ source ~/.vim/theme.vim
 " Smarter tab line for airline:
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
+" let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 " automatically populate the g:airline_symbols
 let g:airline_powerline_fonts = 1
 
 " NERDTREE:
 " --------
 nmap <leader>ne ;NERDTreeFocus<CR>
+nmap <leader>nf ;NERDTreeFind<CR>
+nmap <leader>nn ;NERDTreeToggle<CR>
 
 " EASY ALIGN:
 " ----------
@@ -80,6 +83,8 @@ au BufNewFile ~/vimwiki/diary/*.md :silent 0r !~/.vim/bin/generate-vimwiki-diary
 " --------
 " Autodelete fugitive buffers
 autocmd BufReadPost fugitive://* set bufhidden=delete
+nmap <Leader>gs ;Git<CR>
+nmap <Leader>gd ;Gdiffsplit<CR>
 
 " TAGBAR:
 " ------
@@ -95,6 +100,24 @@ if has ("autocmd")
     autocmd FileType groovy nmap <Leader>t ;call VimuxRunCommand("gradle test")<CR>
     autocmd FileType groovy nmap <Leader>tp ;call VimuxRunCommand("gradle build && ./run.sh")<CR>
 endif
+
+" VIM GUTTER
+" ----------
+let g:gitgutter_map_keys = 0
+nmap ) <Plug>(GitGutterNextHunk)
+nmap ( <Plug>(GitGutterPrevHunk)
+nmap <Leader>hs <Plug>(GitGutterStageHunk)
+nmap <Leader>hu <Plug>(GitGutterUndoHunk)
+nmap <Leader>hp <Plug>(GitGutterPreviewHunk)
+set foldtext=gitgutter#fold#foldtext()
+highlight GitGutterAdd    gui=bold guifg=#009900 guibg=NONE ctermfg=2 ctermbg=NONE
+highlight GitGutterChange gui=bold guifg=#bbbb00 guibg=NONE ctermfg=3 ctermbg=NONE
+highlight GitGutterDelete gui=bold guifg=#ff2222 guibg=NONE ctermfg=1 ctermbg=NONE
+let g:gitgutter_sign_added = '++'
+let g:gitgutter_sign_modified = '~~'
+let g:gitgutter_sign_removed = '--'
+let g:gitgutter_sign_removed_first_line = '‾‾'
+let g:gitgutter_sign_modified_removed = 'ww'
 
 " OTHER PLUGINS:
 source ~/.vim/ctrlp.vim
@@ -205,7 +228,8 @@ vnoremap : ;
 inoremap jj <ESC>
 
 " Open vimrc
-nmap <leader>v ;vsplit $MYVIMRC<CR>
+nmap <leader>v ;e $MYVIMRC<CR>
+nmap <leader>V ;vsplit $MYVIMRC<CR>
 
 " NAVIGATION:
 " WINDOW
@@ -217,6 +241,11 @@ nnoremap <C-H> <C-W><C-H>
 nmap <leader>bl ;bnext<CR>
 nmap <leader>bh ;bprevious<CR>
 nmap <leader>bq ;bp <BAR> bd #<CR>
+nmap <M-j> ;tabnext<CR>
+nmap <M-k> ;tabprevious<CR>
+nmap <M-l> ;bnext<CR>
+nmap <M-h> ;bprevious<CR>
+nmap <M-q> ;bp <BAR> bd #<CR>
 " QUICKFIX
 nmap <leader>cc ;copen<CR>
 nmap <leader>cl ;cn<CR>
@@ -231,11 +260,11 @@ nnoremap tl  :tablast<CR>
 nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnext<Space>
 nnoremap tm  :tabm<Space>
-nnoremap td  :tabclose<CR>
+nnoremap tq  :tabclose<CR>
 " Alternatively use
 "nnoremap th :tabnext<CR>
 "nnoremap tl :tabprev<CR>
 "nnoremap tn :tabnew<CR>
 
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+vnoremap <C-M-J> :m '>+1<CR>gv=gv
+vnoremap <C-M-K> :m '<-2<CR>gv=gv
