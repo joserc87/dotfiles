@@ -22,6 +22,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'embear/vim-localvimrc'
 " Useful for XML/HTML
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
 " To align text
 Plugin 'godlygeek/tabular'
 " Tabularize is much better
