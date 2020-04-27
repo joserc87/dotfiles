@@ -55,7 +55,7 @@ def make_screen(systray=False):
             background=COLS["dark_4"],
             # background=COLS["deus_3"],
             highlight_method="line",
-            inactive=COLS["dark_2"],
+            inactive=COLS["dark_3"],
             active=COLS["light_2"],
             disable_drag=True,
             borderwidth=2,
@@ -131,6 +131,7 @@ def make_screen(systray=False):
             padding=1,
             **FONT_PARAMS
         ),
+
         # Current battery level
         ShellScript(
             fname="battery.sh",
@@ -139,6 +140,7 @@ def make_screen(systray=False):
             padding=1,
             **FONT_PARAMS
         ) if running_on_batteries else None,
+
         # Wifi strength
         ShellScript(
             fname="wifi-signal.sh",
@@ -147,14 +149,17 @@ def make_screen(systray=False):
             padding=1,
             **FONT_PARAMS
         ) if running_on_batteries else None,
+
         # Volume % : scroll mouse wheel to change volume
         *widget_with_label(widget.Volume, "",  "#70fdff"),
-        # Current time
-        *widget_with_label(widget.Clock, "",
-                format="%d/%m %a %I:%M"),
+
         # Keyboard layout
         *widget_with_label(widget.KeyboardLayout, "", "#AAAAFF",
                 configured_keyboards=['us', 'es']),
+
+        # Current time
+        *widget_with_label(widget.Clock, "",
+                format="%d/%m %a %I:%M"),
         # Visual indicator of the current layout for this workspace.
         widget.CurrentLayoutIcon(
             custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],

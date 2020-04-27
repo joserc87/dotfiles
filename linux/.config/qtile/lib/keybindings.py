@@ -1,6 +1,6 @@
 from libqtile.config import Key
 from lib.keys import (
-    ALT, TAB, CTRL, SHIFT, RETURN, SPACE
+    ALT, TAB, CTRL, SHIFT, RETURN, SPACE, ASCII_TILDE
 )
 from libqtile.command import lazy
 from lib.settings import (
@@ -56,6 +56,6 @@ keys = [
 ]
 
 # Keybindings for switching groups
-for i in groups:
-    keys.append(Key([MODKEY], i.name, lazy.group[i.name].toscreen()))
-    keys.append(Key([MODKEY, SHIFT], i.name, lazy.window.togroup(i.name)))
+for g, k in zip(groups, [ASCII_TILDE] + list('1234567890')):
+    keys.append(Key([MODKEY], k, lazy.group[g.name].toscreen()))
+    keys.append(Key([MODKEY, SHIFT], k, lazy.window.togroup(g.name)))
