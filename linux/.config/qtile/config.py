@@ -15,6 +15,7 @@ from lib.groups import groups
 from lib.layouts import layouts
 from lib.hooks import *
 from lib.mouse import mouse
+from lib.screens import screens
 
 
 def main(qtile):

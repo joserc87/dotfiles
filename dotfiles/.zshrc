@@ -8,6 +8,7 @@
 # infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
 #tic $TERM.ti"
 export TERMINFO="$HOME/.terminfo"
+export TERM=xterm-256color
 
 # for neovim
 export XDG_CONFIG_HOME="~/.config/"
