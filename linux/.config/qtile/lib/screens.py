@@ -50,7 +50,7 @@ def make_screen(systray=False):
             # this_screen_border=COLS["blue_0"],
             this_screen_border=COLS["purple_4"],
             # highlight_color=COLS["blue_0"],
-            highlight_color=COLS["purple_4"],
+            highlight_color=COLS["dark_4"],
             urgent_border=COLS["red_1"],
             background=COLS["dark_4"],
             # background=COLS["deus_3"],
@@ -65,7 +65,8 @@ def make_screen(systray=False):
         widget.TextBox(
             font="Arial", foreground=COLS["dark_4"],
             # font="Arial", foreground=COLS["deus_3"],
-            text="◤ ", fontsize=50, padding=-5
+            text="◣  ", fontsize=50, padding=-5
+            # text="◤ ", fontsize=50, padding=-5
         ),
         # Show the title for the focused window
         widget.WindowName(**FONT_PARAMS),
@@ -113,6 +114,7 @@ def make_screen(systray=False):
             width=50,
             **FONT_PARAMS
         ),
+        _separator(),
         # IP information
         # ShellScript(
         #     fname="ipadr.sh",
@@ -131,6 +133,7 @@ def make_screen(systray=False):
             padding=1,
             **FONT_PARAMS
         ),
+        _separator(),
 
         # Current battery level
         ShellScript(
@@ -175,7 +178,7 @@ def make_screen(systray=False):
         blocks.insert(-1, _separator())
 
     # return Screen(top=bar.Bar(blocks, 25, background=COLS["deus_1"]))
-    return Screen(bottom=bar.Bar(blocks, 20, background=COLS["dark_2"]))
+    return Screen(bottom=bar.Bar(blocks, 24, background=COLS["dark_2"]))
 
 class ShellScript(base.ThreadedPollText):
     '''

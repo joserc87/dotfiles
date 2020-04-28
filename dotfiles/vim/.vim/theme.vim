@@ -65,3 +65,12 @@ set guioptions-=L
 " set cursorcolumn
 " highlight CursorLine ctermbg=Yellow cterm=bold guibg=#2b2b2b
 " highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#2b2b2b
+
+" TWEAKS:
+hi SignColumn guibg=None
+
+" let s:N1   = [ '#00005f' , '#df0ff0' , 17  , 190 ]
+" let s:N2   = [ '#ffffff' , '#444444' , 255 , 238 ]
+" let s:N3   = [ '#9cffd3' , '#202020' , 85  , 234 ]
+" let g:airline#themes#dark_minimal#palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
+let g:airline#themes#dark_minimal#palette.normal = airline#themes#generate_color_map([ '#00005f' , '#df0ff0' , 17  , 190 ], [ '#ffffff' , '#444444' , 255 , 238 ], [ '#9cffd3' , '#202020' , 85  , 234 ])

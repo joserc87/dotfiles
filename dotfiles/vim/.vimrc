@@ -33,9 +33,6 @@ filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 " filetype plugin on
 
-" THEME:
-source ~/.vim/theme.vim
-
 "        _             _           
 "  _ __ | |_   _  __ _(_)_ __  ___ 
 " | '_ \| | | | |/ _` | | '_ \/ __|
@@ -52,6 +49,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 " automatically populate the g:airline_symbols
 let g:airline_powerline_fonts = 1
+let g:airline_theme='dark'
 
 " NERDTREE:
 " --------
