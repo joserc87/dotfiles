@@ -157,8 +157,10 @@ def make_screen(systray=False):
         *widget_with_label(widget.Volume, "",  "#70fdff"),
 
         # Keyboard layout
-        *widget_with_label(widget.KeyboardLayout, "", "#AAAAFF",
-                configured_keyboards=['us', 'es']),
+        # Disabled until this is released
+        # https://github.com/qtile/qtile/issues/1446
+        # *widget_with_label(widget.KeyboardLayout, "", "#AAAAFF",
+        #         configured_keyboards=['us', 'es']),
 
         # Current time
         *widget_with_label(widget.Clock, "",
