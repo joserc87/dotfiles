@@ -99,7 +99,7 @@ if has ("autocmd")
     autocmd FileType groovy nmap <Leader>tp ;call VimuxRunCommand("gradle build && ./run.sh")<CR>
 endif
 
-" VIM GUTTER
+" VIM GUTTER:
 " ----------
 let g:gitgutter_map_keys = 0
 nmap ) <Plug>(GitGutterNextHunk)
@@ -264,5 +264,11 @@ nnoremap tq  :tabclose<CR>
 "nnoremap tl :tabprev<CR>
 "nnoremap tn :tabnew<CR>
 
+" IDE:
+nnoremap <C-M-F> :Ag<space>
+
 vnoremap <C-M-J> :m '>+1<CR>gv=gv
 vnoremap <C-M-K> :m '<-2<CR>gv=gv
+
+" THEME:
+source ~/.vim/theme.vim

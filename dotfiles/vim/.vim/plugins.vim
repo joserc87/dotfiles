@@ -34,7 +34,8 @@ Plugin 'elzr/vim-json'
 " Arduino IDE
 " Plugin '4Evergreen4/vim-hardy'
 Plugin 'tpope/vim-repeat'
-
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plugin 'junegunn/fzf.vim'
 " CODE:
 " Indentation
 "" Plugin 'nathanaelkane/vim-indent-guides'
