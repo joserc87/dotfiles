@@ -76,14 +76,6 @@ let wiki_1.nested_syntaxes = {
             \'json': 'json',
             \'sh': 'shell',
             \}
-highlight VimwikiHeader1 gui=bold guifg=#ff0000 cterm=bold ctermfg=9
-highlight VimwikiHeader2 gui=bold guifg=#ffff00 cterm=bold ctermfg=11
-highlight VimwikiHeader3 gui=bold guifg=#00ff00 cterm=bold ctermfg=4
-highlight VimwikiHeader4 gui=bold guifg=#ff00ff cterm=bold ctermfg=5
-highlight VimwikiHeader5 gui=bold guifg=#00ffff cterm=bold ctermfg=6
-highlight VimwikiHeader6 gui=bold guifg=#ffff00 cterm=bold ctermfg=2
-
-
 let g:vimwiki_list = [wiki_1]
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 nmap <A-PageUp> <Plug>(VimwikiDiaryPrevDay)

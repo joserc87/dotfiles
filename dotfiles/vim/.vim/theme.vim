@@ -78,3 +78,13 @@ hi SignColumn guibg=None
 " let s:N3   = [ '#9cffd3' , '#202020' , 85  , 234 ]
 " let g:airline#themes#dark_minimal#palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
 " let g:airline#themes#dark_minimal#palette.normal = airline#themes#generate_color_map([ '#00005f' , '#df0ff0' , 17  , 190 ], [ '#ffffff' , '#444444' , 255 , 238 ], [ '#9cffd3' , '#202020' , 85  , 234 ])
+
+" VIMWIKI:
+" -------
+"
+highlight VimwikiHeader1 gui=bold guifg=#FB4934 cterm=bold ctermfg=9
+highlight VimwikiHeader2 gui=bold guifg=#FABD2F cterm=bold ctermfg=11
+highlight VimwikiHeader3 gui=bold guifg=#FE8019 cterm=bold ctermfg=2
+highlight VimwikiHeader4 gui=bold guifg=#B16286 cterm=bold ctermfg=5
+highlight VimwikiHeader5 gui=bold guifg=#458588 cterm=bold ctermfg=6
+highlight VimwikiHeader6 gui=bold guifg=#689D6A cterm=bold ctermfg=4
