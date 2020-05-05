@@ -231,9 +231,11 @@ vnoremap : ;
 " jj goes to normal mode
 inoremap jj <ESC>
 
-" Open vimrc
+" Open vimrc and other vim configs
 nmap <leader>v ;e $MYVIMRC<CR>
 nmap <leader>V ;vsplit $MYVIMRC<CR>
+autocmd BufRead init.vim nmap <buffer> <leader>p ;e ~/.vim/plugins.vim<CR>
+autocmd BufRead init.vim nmap <buffer> <leader>t ;e ~/.vim/theme.vim<CR>
 
 " NAVIGATION:
 " WINDOW
