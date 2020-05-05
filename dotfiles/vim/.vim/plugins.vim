@@ -64,7 +64,7 @@ Plugin 'jelera/vim-javascript-syntax'
 " Plugin 'Quramy/vim-js-pretty-template'
 
 " CSS:
-" Plugin 'ap/vim-css-color'
+Plugin 'ap/vim-css-color'
 Plugin 'chrisbra/Colorizer'
 
 " RAILS:
