@@ -236,6 +236,7 @@ nmap <leader>v ;e $MYVIMRC<CR>
 nmap <leader>V ;vsplit $MYVIMRC<CR>
 autocmd BufRead init.vim nmap <buffer> <leader>p ;e ~/.vim/plugins.vim<CR>
 autocmd BufRead init.vim nmap <buffer> <leader>t ;e ~/.vim/theme.vim<CR>
+autocmd BufRead init.vim nmap <buffer> <leader>c ;e ~/.vim/coc.vim<CR>
 
 " NAVIGATION:
 " WINDOW
@@ -252,6 +253,7 @@ nmap <M-k> ;tabprevious<CR>
 nmap <M-l> ;bnext<CR>
 nmap <M-h> ;bprevious<CR>
 nmap <M-q> ;bp <BAR> bd #<CR>
+nmap <backspace> <C-^>
 " QUICKFIX
 nmap <leader>cc ;copen<CR>
 nmap <leader>cl ;cn<CR>
