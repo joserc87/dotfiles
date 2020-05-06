@@ -22,6 +22,7 @@ keys = [
     Key([MODKEY, SHIFT], 'q', lazy.window.kill()),
     Key([MODKEY], 'F5', term_exe('mocp')),
     Key([MODKEY], DELETE, exe('logoff')),
+    Key([MODKEY], 'c', exe('compton-toggle')),
     # TODO: Add Screenshots like i3-scrot
 
     # Move Focus

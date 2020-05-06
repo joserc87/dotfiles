@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if ps aux | grep "bash *\s/usr/local/bin/compton-blur"; then
+    killall picom-kawase
+else
+    compton-blur -b
+fi
+
