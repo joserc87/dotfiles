@@ -2,6 +2,7 @@
 
 list() {
     echo "${1}i3"
+    echo "${1}qtile"
     echo "${1}bar"
     echo "${1}nvim"
     echo "${1}vim-plugins"
@@ -30,7 +31,10 @@ case $1 in
         list
     ;;
     i3)
-        $EDITOR ~/.config/i3/config
+        cd ~/.config/i3/ && $EDITOR config
+    ;;
+    qtile)
+        cd ~/.config/qtile/ && $EDITOR config.py
     ;;
     bar)
         $EDITOR ~/.config/i3blocks/config
@@ -48,7 +52,7 @@ case $1 in
         $EDITOR ~/.Xresources && xrdb ~/.Xresources
     ;;
     config)
-        $EDITOR ~/Scripts/config
+        $EDITOR ~/scripts/config
     ;;
     tmux)
         $EDITOR ~/.tmux.conf
