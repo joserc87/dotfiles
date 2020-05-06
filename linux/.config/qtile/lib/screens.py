@@ -22,7 +22,7 @@ def widget_with_label(widget_class, label, color=None, *args, **kwargs):
     return [
         widget.TextBox(label,**font_params) if label else None,
         widget_class(
-            *args, 
+            *args,
             **font_params,
             **kwargs
         ),
@@ -32,6 +32,7 @@ def widget_with_label(widget_class, label, color=None, *args, **kwargs):
 # Screens
 # ----------------------------------------------------------------------------
 def make_screen(systray=False):
+    possition = 'top'
     """Defined as a function so that I can duplicate this on other monitors"""
     bat0_path = '/sys/class/power_supply/BATT0'
     running_on_batteries = os.path.exists(bat0_path)
@@ -40,7 +41,7 @@ def make_screen(systray=False):
         widget.TextBox(
             font="Arial", foreground=COLS["dark_4"],
             # font="Arial", foreground=COLS["deus_3"],
-            text="◢", fontsize=50, padding=-1
+            text="◥" if possition == 'top' else "◢", fontsize=50, padding=-1
         ),
         widget.GroupBox(
             other_current_screen_border=COLS["orange_0"],
@@ -65,7 +66,7 @@ def make_screen(systray=False):
         widget.TextBox(
             font="Arial", foreground=COLS["dark_4"],
             # font="Arial", foreground=COLS["deus_3"],
-            text="◣  ", fontsize=50, padding=-5
+            text="◤" if possition == 'top' else "◣", fontsize=50, padding=-5
             # text="◤ ", fontsize=50, padding=-5
         ),
         # Show the title for the focused window
@@ -180,7 +181,9 @@ def make_screen(systray=False):
         blocks.insert(-1, _separator())
 
     # return Screen(top=bar.Bar(blocks, 25, background=COLS["deus_1"]))
-    return Screen(bottom=bar.Bar(blocks, 24, background=COLS["dark_2"]))
+    my_bar = bar.Bar(blocks, 24, background=COLS["dark_2"])
+
+    return Screen(**{possition: my_bar})
 
 class ShellScript(base.ThreadedPollText):
     '''
