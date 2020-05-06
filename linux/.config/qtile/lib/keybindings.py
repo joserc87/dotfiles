@@ -51,7 +51,7 @@ keys = [
 
     # Layout
     Key([MODKEY, CTRL], SPACE, lazy.window.toggle_floating()),
-    Key([MODKEY, SHIFT], SPACE, lazy.prev_layout()),
+    Key([MODKEY, SHIFT], SPACE, exe('switchkblayout')),
     Key([MODKEY], SPACE, lazy.next_layout()),
     Key([MODKEY], 'f', lazy.window.toggle_fullscreen()),
 ]

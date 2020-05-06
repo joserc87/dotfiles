@@ -1,4 +1,5 @@
-layout=`setxkbmap -print | grep xkb_symbols | cut -d'+' -f 2`
+#!/usr/bin/env bash
+layout=$(setxkbmap -print | grep xkb_symbols | cut -d'+' -f 2)
 
 if [ "$layout" = "us" ]; then
     other_layout="es"
