@@ -10,3 +10,6 @@ mouse = [
          start=lazy.window.get_size()),
     Click([MODKEY], "Button2", lazy.window.bring_to_front())
 ]
+
+follow_mouse_focus = False
+

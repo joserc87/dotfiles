@@ -14,7 +14,7 @@ from lib.keybindings import keys
 from lib.groups import groups
 from lib.layouts import layouts
 from lib.hooks import *
-from lib.mouse import mouse
+from lib.mouse import *
 from lib.screens import screens
 
 
