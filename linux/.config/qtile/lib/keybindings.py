@@ -46,8 +46,8 @@ keys = [
 
     # Alter Window Size
     Key([MODKEY], 'minus', lazy.layout.shrink()),
-    Key([MODKEY], 'plus', lazy.layout.grow()),
-    Key([MODKEY], 'equal', lazy.layout.reset()),
+    Key([MODKEY], 'equal', lazy.layout.grow()),
+    Key([MODKEY, SHIFT], 'equal', lazy.layout.reset()),
     Key([MODKEY], 'm', lazy.layout.maximize()),
     Key([MODKEY], 'n', lazy.layout.normalize()),
 
