@@ -166,7 +166,10 @@ fi
 # Python
 export PYTHONPATH=~/dev/whatsapp/cortado/yowsup/:.:$PYTHONPATH
 # Android tools:
-export PATH=~/Library/Android/sdk/platform-tools/:/Applications/MacPorts/MacVim.app/Contents/MacOS/:$PATH
+export PATH=\
+~/Library/Android/sdk/platform-tools/\
+:/Applications/MacPorts/MacVim.app/Contents/MacOS/\
+:$PATH
 # Antlr
 export CLASSPATH=.:/usr/local/lib/antlr-4.5.3-complete.jar:$CLASSPATH
 alias antlr4='java -jar /usr/local/lib/antlr-4.5.3-complete.jar'
@@ -186,7 +189,11 @@ fi
 
 # User defined scripts:
 # Scripts folder is present for Linux and Mac OS
-export PATH=$HOME/bin/\
+export PATH=\
+~/Library/Android/sdk/platform-tools/\
+:/Applications/MacPorts/MacVim.app/Contents/MacOS/\
+:/opt/flutter/.pub-cache/bin\
+:$HOME/bin/\
 :$HOME/.local/bin\
 :$HOME/Scripts/\
 :$HOME/apps/\
@@ -206,8 +213,6 @@ fi
 
 # Python
 export PYTHONPATH=~/dev/whatsapp/cortado/yowsup/:.:$PYTHONPATH
-# Android tools:
-export PATH=~/Library/Android/sdk/platform-tools/:/Applications/MacPorts/MacVim.app/Contents/MacOS/:$PATH
 # Antlr
 export CLASSPATH=.:/usr/local/lib/antlr-4.5.3-complete.jar:$CLASSPATH
 alias antlr4='java -jar /usr/local/lib/antlr-4.5.3-complete.jar'
