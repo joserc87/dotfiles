@@ -165,6 +165,9 @@ autocmd FileType javascript setlocal softtabstop=2 shiftwidth=2 tabstop=2 expand
 " PYTHON:
 autocmd FileType python set foldmethod=indent
 
+" XML:
+autocmd FileType xml set formatexpr=xmlformat#Format()
+
 "        _   _               
 "   ___ | |_| |__   ___ _ __ 
 "  / _ \| __| '_ \ / _ \ '__|

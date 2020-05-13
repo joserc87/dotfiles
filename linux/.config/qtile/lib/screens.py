@@ -71,6 +71,8 @@ def make_screen(systray=False):
         ),
         # Show the title for the focused window
         widget.WindowName(**FONT_PARAMS),
+        # widget.TaskList(**FONT_PARAMS),
+        widget.Pomodoro(**FONT_PARAMS),
         # Allow for quick command execution
         widget.Prompt(
             cursor_color=COLS["light_3"],
