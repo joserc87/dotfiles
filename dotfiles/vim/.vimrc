@@ -163,6 +163,7 @@ autocmd FileType html setlocal softtabstop=4 shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType javascript setlocal softtabstop=2 shiftwidth=2 tabstop=2 expandtab
 
 " PYTHON:
+set foldmethod=syntax
 autocmd FileType python set foldmethod=indent
 
 " XML:

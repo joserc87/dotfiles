@@ -13,6 +13,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'benmills/vimux'
 " Git
 Plugin 'tpope/vim-fugitive'
+Plugin 'junegunn/gv.vim'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'airblade/vim-gitgutter'
 " A class outliner for vim
@@ -75,7 +76,7 @@ Plugin 'chrisbra/Colorizer'
 " Plugin 'jgdavey/vim-turbux'
 
 " DART:
-"" Plugin 'dart-lang/dart-vim-plugin'
+Plugin 'dart-lang/dart-vim-plugin'
 
 " DASH INTEGRATION:
 " Plugin 'rizzatti/dash.vim'
