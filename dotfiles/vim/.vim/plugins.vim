@@ -50,6 +50,9 @@ imap <C-c> <CR><Esc>O
 " set completeopt-=preview
 " Plugin 'marijnh/tern_for_vim'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+Plugin 'janko/vim-test'
+Plugin 'tpope/vim-dispatch'
+" Plugin '5long/pytest-vim-compiler'
 
 " JAVASCRIPT:
 Plugin 'jelera/vim-javascript-syntax'
