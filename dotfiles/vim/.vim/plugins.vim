@@ -37,6 +37,7 @@ Plugin 'elzr/vim-json'
 Plugin 'tpope/vim-repeat'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
+Plugin 'airblade/vim-rooter'
 " CODE:
 " Indentation
 "" Plugin 'nathanaelkane/vim-indent-guides'
