@@ -17,6 +17,5 @@ from lib.hooks import *
 from lib.mouse import *
 from lib.screens import screens
 
-
 def main(qtile):
     pass

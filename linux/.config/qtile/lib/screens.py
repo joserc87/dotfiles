@@ -8,6 +8,7 @@ from libqtile.config import Screen, hook
 from libqtile.widget import base
 
 from .settings import COLS, FONT_PARAMS, WITH_SYS_TRAY, SCRIPT_DIR
+from .utils import window_switch_to_screen_or_pull_group
 
 def _separator():
     # return widget.Sep(linewidth=2, foreground=COLS["dark_3"])
@@ -244,3 +245,4 @@ screens = [
     make_screen(systray=WITH_SYS_TRAY),
     make_screen(systray=False)
 ]
+

@@ -8,7 +8,8 @@ from lib.settings import (
     DEFAULT_TERMINAL
 )
 from lib.keys import DELETE
-from lib.utils import exe, term_exe
+from lib.utils import (exe, term_exe, kick_to_next_screen, go_to_next_screen,
+        go_to_group_or_switch_screen)
 from lib.groups import groups
 
 # Keybindings
@@ -56,9 +57,35 @@ keys = [
     Key([MODKEY, SHIFT], SPACE, exe('switchkblayout')),
     Key([MODKEY], SPACE, lazy.next_layout()),
     Key([MODKEY], 'f', lazy.window.toggle_fullscreen()),
+
+    # Screens
+    Key([MODKEY], 'i', lazy.function(go_to_next_screen, -1)),
+    Key([MODKEY], 'o', lazy.function(go_to_next_screen)),
+    Key([MODKEY], 'q', lazy.function(go_to_next_screen, -1)),
+    Key([MODKEY], 'w', lazy.function(go_to_next_screen)),
+    Key([MODKEY, SHIFT], 'i', lazy.function(kick_to_next_screen, -1)),
+    Key([MODKEY, SHIFT], 'o', lazy.function(kick_to_next_screen)),
 ]
 
 # Keybindings for switching groups
 for g, k in zip(groups, [GRAVE] + list('1234567890')):
-    keys.append(Key([MODKEY], k, lazy.group[g.name].toscreen()))
+    # keys.append(Key([MODKEY], k, lazy.group[g.name].toscreen()))
+    keys.append(Key([MODKEY], k, lazy.function(go_to_group_or_switch_screen, g.name)))
     keys.append(Key([MODKEY, SHIFT], k, lazy.window.togroup(g.name)))
+    
+
+def modifier_window_commands(match, spawn, *keys):
+    # Use switch_window by default (just mod)
+    # Use pull_window_here with additional ctrl
+    # spawn new window with additional shift
+    # Use pull_window_group_here with additional shift (mod, "shift", "control")
+    mapping = (
+        ([mod], switch_window(**match)),
+        ([mod, "control"], pull_window_here(**match)),
+        ([mod, "shift"], lazy.spawn(spawn)),
+        ([mod, "shift", "control"], pull_window_group_here(**match)))
+    return [Key(mods, key, command)
+            for mods, command in mapping
+            for key in keys]
+
+
