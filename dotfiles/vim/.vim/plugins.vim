@@ -1,3 +1,11 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" ---- Plugin list: ---- "
+Plugin 'VundleVim/Vundle.vim'
 
 " PLUGINS:
 Plugin 'scrooloose/nerdtree'
@@ -91,5 +99,10 @@ Plugin 'morhetz/gruvbox'
 "Plugin 'joshdick/onedark'
 "Plugin 'srcery-colors/srcery-vim'
 "Plugin 'crusoexia/vim-monokai'
+"
+" ---- End Plugin list: ---- "
 
-
+call vundle#end()
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+" filetype plugin on
