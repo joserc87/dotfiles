@@ -6,5 +6,5 @@
 .tern-project
 .lvimrc
 .ropeproject
-.vim
+# .vim
 jose-pc.py

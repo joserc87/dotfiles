@@ -4,7 +4,7 @@
 " | |___| |_| |  | |_____|  __/ 
 "  \____|\__|_|  |_|     |_|    
                               
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = '<c-o>'
 let g:ctrlp_cmd = 'CtrlPMRU'
 " Make ctrlp find dotfiles too
 let g:ctrlp_show_hidden = 1

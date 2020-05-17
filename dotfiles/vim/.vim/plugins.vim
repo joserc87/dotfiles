@@ -38,14 +38,14 @@ Plugin 'godlygeek/tabular'
 " Plugin 'junegunn/vim-easy-align'
 " Debugger
 "Plugin 'joonty/vdebug'
-" Syntax highlighting for json
-Plugin 'elzr/vim-json'
 " Arduino IDE
 " Plugin '4Evergreen4/vim-hardy'
 Plugin 'tpope/vim-repeat'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
 Plugin 'airblade/vim-rooter'
+Plugin 'voldikss/vim-floaterm'
+
 " CODE:
 " Indentation
 "" Plugin 'nathanaelkane/vim-indent-guides'
@@ -68,6 +68,8 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'jelera/vim-javascript-syntax'
 "" TODO: Enable this for javascript
 "" Plugin 'pangloss/vim-javascript'
+" Syntax highlighting for json
+Plugin 'elzr/vim-json'
 
 " TYPESCRIPT:
 " tsuquyomi disabled because it lags when the file is saved

@@ -328,3 +328,4 @@ export JIRA_USER=jcano
 alias my-jiras="jira-get 'code,summary' assignee=$JIRA_USER status='Open' separator=' '"
 
 HISTSIZE=999999999
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g ""'
