@@ -35,7 +35,7 @@ def widget_with_label(widget_class, label, color=None, *args, **kwargs):
 def make_screen(systray=False):
     position = 'top'
     """Defined as a function so that I can duplicate this on other monitors"""
-    bat0_path = '/sys/class/power_supply/BATT0'
+    bat0_path = '/sys/class/power_supply/BAT0'
     running_on_batteries = os.path.exists(bat0_path)
     blocks = [
         # Marker for the start of the groups to give a nice bg: ◢■■■■■■■◤
@@ -140,13 +140,16 @@ def make_screen(systray=False):
         _separator(),
 
         # Current battery level
-        ShellScript(
-            fname="battery.sh",
-            update_interval=60,
-            markup=True,
-            padding=1,
-            **FONT_PARAMS
-        ) if running_on_batteries else None,
+        *(widget_with_label(
+            widget.Battery, "B",  "#70fdff"
+        ) if running_on_batteries else []),
+        # ShellScript(
+        #     fname="battery.sh",
+        #     update_interval=60,
+        #     markup=True,
+        #     padding=1,
+        #     **FONT_PARAMS
+        # ) if running_on_batteries else None,
 
         # Wifi strength
         ShellScript(
