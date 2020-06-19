@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-
-# Edits a script
-FILE_PATH=`which $1`
-$EDITOR $FILE_PATH

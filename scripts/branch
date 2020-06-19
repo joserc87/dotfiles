@@ -1,4 +1,0 @@
-branch_name=$(jira-dmenu --snake | sed 's/:/_/g' || exit -1)
-if [ $branch_name ]; then
-    git checkout -b $branch_name
-fi
