@@ -375,3 +375,7 @@ function checkout {
         | sed 's/remotes\///' \
         | xargs git checkout
 }
+
+function vimjson {
+    jq . $@| nvim -c 'set syntax=json' -
+}
