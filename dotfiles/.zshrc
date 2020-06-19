@@ -11,7 +11,7 @@ export TERMINFO="$HOME/.terminfo"
 export TERM=xterm-256color
 
 # for neovim
-export XDG_CONFIG_HOME="~/.config/"
+export XDG_CONFIG_HOME="$HOME/.config/"
 # vi style incremental search
 # look at www.drbunsen.org/the-text-triumvirate/
 
