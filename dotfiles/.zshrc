@@ -329,3 +329,38 @@ alias my-jiras="jira-get 'code,summary' assignee=$JIRA_USER status='Open' separa
 
 HISTSIZE=999999999
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g ""'
+function selectJira {
+    FZF="fzf --height 7" jira-dmenu --snake | sed 's/:/_/g' || exit -1
+}
+
+function branch {
+    branch_name=$(selectJira)
+    if [ $branch_name ]; then
+        git checkout -b $branch_name
+    fi
+}
+
+function compton-toggle {
+    if ps aux | grep "bash\s/.*/compton-blur"; then
+        killall picom-kawase
+    else
+        compton-blur -b
+    fi
+}
+
+function edsh {
+    # Edits a script
+    FILE_PATH=`which $1`
+    $EDITOR $FILE_PATH
+}
+
+function nocaps {
+    setxkbmap -option ctrl:nocaps
+}
+
+function checkout {
+    git branch -a \
+        | fzf \
+        | sed 's/remotes\///' \
+        | xargs git checkout
+}
