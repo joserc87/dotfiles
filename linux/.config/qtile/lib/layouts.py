@@ -15,7 +15,7 @@ _max_layout_settings = {
 
 # Layouts
 layouts = [
-    layout.MonadTall(name='Tall', **_layout_common_settings, margin=24),
+    layout.MonadTall(name='Tall', **_layout_common_settings, margin=48),
     # layout.VerticalTile(name='VerticalTile'),
     layout.Max(name='Full', **_layout_common_settings),
 ]

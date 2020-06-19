@@ -119,7 +119,8 @@ def go_to_group_or_switch_screen(qtile, group_name):
                 qtile.cmd_to_screen(group_screen_index)
             else:
                 # Toggle back:
-                qtile.current_screen.cmd_prev_group()
+                # qtile.current_screen.cmd_prev_group()
+                qtile.current_screen.cmd_toggle_group(group_name)
         else:
             #screen = qtile.screens[qtile.current_screen]
             qtile.current_screen.cmd_toggle_group(group_name)
