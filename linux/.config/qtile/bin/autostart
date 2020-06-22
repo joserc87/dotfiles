@@ -11,8 +11,8 @@ function execute_once {
     fi
 }
 
-execute_once nitrogen --restore
+nitrogen --restore
 sleep 1
-execute_once compton-blur -b
+compton-blur -b
 execute_once station
-execute_once xset r rate 200 50
+xset r rate 200 50

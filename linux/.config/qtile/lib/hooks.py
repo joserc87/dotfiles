@@ -6,8 +6,7 @@ from lib.settings import FLOATING_WINDOWS
 
 @hook.subscribe.startup
 def startup():
-    # execute(command.autostart)
-    pass
+    execute(command.autostart)
 
 
 @hook.subscribe.client_new
