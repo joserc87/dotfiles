@@ -379,3 +379,5 @@ function checkout {
 function vimjson {
     jq . $@| nvim -c 'set syntax=json' -
 }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
