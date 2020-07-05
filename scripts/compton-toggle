@@ -5,4 +5,3 @@ if ps aux | grep "bash\s/.*/compton-blur"; then
 else
     compton-blur -b
 fi
-

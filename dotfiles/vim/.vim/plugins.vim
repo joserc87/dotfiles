@@ -1,110 +1,119 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" Automagic installation of Plug
+" As seen in https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" set nocompatible              " be iMproved, required
+" filetype off                  " required
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
 " ---- Plugin list: ---- "
-Plugin 'VundleVim/Vundle.vim'
+Plug 'VundleVim/Vundle.vim'
 
 " PLUGINS:
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-"" Plugin 'scrooloose/syntastic'
-Plugin 'kien/ctrlp.vim'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-" Plugin 'altercation/vim-colors-solarized'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'vimwiki'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'benmills/vimux'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+"" Plug 'scrooloose/syntastic'
+Plug 'kien/ctrlp.vim'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" Plug 'altercation/vim-colors-solarized'
+Plug 'easymotion/vim-easymotion'
+Plug 'vimwiki/vimwiki'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'benmills/vimux'
 " Git
-Plugin 'tpope/vim-fugitive'
-Plugin 'junegunn/gv.vim'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'junegunn/gv.vim'
+Plug 'tpope/vim-unimpaired'
+Plug 'airblade/vim-gitgutter'
 " A class outliner for vim
-" Plugin 'majutsushi/tagbar'
-" Plugin 'klen/python-mode'
+" Plug 'majutsushi/tagbar'
+" Plug 'klen/python-mode'
 " Per-project vimrc
-Plugin 'embear/vim-localvimrc'
+Plug 'embear/vim-localvimrc'
 " Useful for XML/HTML
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 " To align text
-Plugin 'godlygeek/tabular'
+Plug 'godlygeek/tabular'
 " Tabularize is much better
-" Plugin 'junegunn/vim-easy-align'
+" Plug 'junegunn/vim-easy-align'
 " Debugger
-"Plugin 'joonty/vdebug'
+"Plug 'joonty/vdebug'
 " Arduino IDE
-" Plugin '4Evergreen4/vim-hardy'
-Plugin 'tpope/vim-repeat'
-Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plugin 'junegunn/fzf.vim'
-Plugin 'airblade/vim-rooter'
-Plugin 'voldikss/vim-floaterm'
+" Plug '4Evergreen4/vim-hardy'
+Plug 'tpope/vim-repeat'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'
+Plug 'voldikss/vim-floaterm'
 
 " CODE:
 " Indentation
-"" Plugin 'nathanaelkane/vim-indent-guides'
+"" Plug 'nathanaelkane/vim-indent-guides'
 " Automatically add some closing quotes
-"" Plugin 'Raimondi/delimitMate'
+"" Plug 'Raimondi/delimitMate'
 " By pressing C-c after {, it will put the pointer in the line between { and }
 imap <C-c> <CR><Esc>O
 " Autocompletion
-" Plugin 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 " let g:ycm_add_preview_to_completeopt=0
 " let g:ycm_confirm_extra_conf=0
 " set completeopt-=preview
-" Plugin 'marijnh/tern_for_vim'
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-Plugin 'janko/vim-test'
-Plugin 'tpope/vim-dispatch'
-" Plugin '5long/pytest-vim-compiler'
+" Plug 'marijnh/tern_for_vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'janko/vim-test'
+Plug 'tpope/vim-dispatch'
+" Plug '5long/pytest-vim-compiler'
 
 " JAVASCRIPT:
-Plugin 'jelera/vim-javascript-syntax'
+Plug 'jelera/vim-javascript-syntax'
 "" TODO: Enable this for javascript
-"" Plugin 'pangloss/vim-javascript'
+"" Plug 'pangloss/vim-javascript'
 " Syntax highlighting for json
-Plugin 'elzr/vim-json'
+Plug 'elzr/vim-json'
 
 " TYPESCRIPT:
 " tsuquyomi disabled because it lags when the file is saved
-" Plugin 'Shougo/vimproc.vim', {'do' : 'make'}
-" Plugin 'Quramy/tsuquyomi'
-" Plugin 'leafgarland/typescript-vim'
-" Plugin 'Quramy/vim-js-pretty-template'
+" Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+" Plug 'Quramy/tsuquyomi'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'Quramy/vim-js-pretty-template'
 
 " CSS:
-Plugin 'ap/vim-css-color'
-Plugin 'chrisbra/Colorizer'
+Plug 'ap/vim-css-color'
+Plug 'chrisbra/Colorizer'
 
 " RAILS:
-" Plugin 'tpope/vim-rails'
-" Plugin 'jgdavey/vim-turbux'
+" Plug 'tpope/vim-rails'
+" Plug 'jgdavey/vim-turbux'
 
 " DART:
-Plugin 'dart-lang/dart-vim-plugin'
+Plug 'dart-lang/dart-vim-plugin'
 
 " DASH INTEGRATION:
-" Plugin 'rizzatti/dash.vim'
+" Plug 'rizzatti/dash.vim'
 
 " OpenScad
-Plugin 'sirtaj/vim-openscad'
+Plug 'sirtaj/vim-openscad'
 
 " THEMES:
-Plugin 'morhetz/gruvbox'
-"Plugin 'sonph/onehalf', {'rtp': 'vim/'}
-"Plugin 'joshdick/onedark'
-"Plugin 'srcery-colors/srcery-vim'
-"Plugin 'crusoexia/vim-monokai'
+Plug 'morhetz/gruvbox'
+"Plug 'sonph/onehalf', {'rtp': 'vim/'}
+"Plug 'joshdick/onedark'
+"Plug 'srcery-colors/srcery-vim'
+"Plug 'crusoexia/vim-monokai'
 "
-" ---- End Plugin list: ---- "
+" ---- End Plug list: ---- "
 
-call vundle#end()
+call plug#end()
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 " filetype plugin on

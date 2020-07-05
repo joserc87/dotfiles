@@ -8,9 +8,10 @@ IN_PROGRESS=$(jira-get "code,summary" assignee=$USER status="In Progress" separa
 
 JIRAS=$(echo -e "$IN_PROGRESS\n$RECENT")
 
+FZF=${FZF:-"dmenu -i -l 10"}
 
 # Get a jira code from the saved ones or a new one
-selected_jira=$(echo "$JIRAS" | dmenu -i -l 10 | sed 's/\[\*\]//')
+selected_jira=$(echo "$JIRAS" | $FZF | sed 's/\[\*\]//')
 
 # If the user enters a number, assume BIG project
 re='^[0-9]+$'

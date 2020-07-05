@@ -11,7 +11,7 @@ export TERMINFO="$HOME/.terminfo"
 export TERM=xterm-256color
 
 # for neovim
-export XDG_CONFIG_HOME="~/.config/"
+export XDG_CONFIG_HOME="$HOME/.config/"
 # vi style incremental search
 # look at www.drbunsen.org/the-text-triumvirate/
 
@@ -329,3 +329,53 @@ alias my-jiras="jira-get 'code,summary' assignee=$JIRA_USER status='Open' separa
 
 HISTSIZE=999999999
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g ""'
+
+# Fix for Python in VIM:
+# https://vi.stackexchange.com/questions/7644/use-vim-with-virtualenv/7654#7654
+if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
+  source "${VIRTUAL_ENV}/bin/activate"
+  touch ~/hack_worked
+fi
+
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
+function selectJira {
+    FZF="fzf --height 7" jira-dmenu --snake | sed 's/:/_/g' || exit -1
+}
+
+function branch {
+    branch_name=$(selectJira)
+    if [ $branch_name ]; then
+        git checkout -b $branch_name
+    fi
+}
+
+function compton-toggle {
+    if ps aux | grep "bash\s/.*/compton-blur"; then
+        killall picom-kawase
+    else
+        compton-blur -b
+    fi
+}
+
+function edsh {
+    # Edits a script
+    FILE_PATH=`which $1`
+    $EDITOR $FILE_PATH
+}
+
+function nocaps {
+    setxkbmap -option ctrl:nocaps
+}
+
+function checkout {
+    git branch -a \
+        | fzf \
+        | sed 's/remotes\///' \
+        | xargs git checkout
+}
+
+function vimjson {
+    jq . $@| nvim -c 'set syntax=json' -
+}

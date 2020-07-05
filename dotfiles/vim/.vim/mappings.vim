@@ -32,7 +32,7 @@ nnoremap <M-k> :tabprevious<CR>
 nnoremap <M-l> :bnext<CR>
 nnoremap <M-h> :bprevious<CR>
 nnoremap <M-q> :bp <BAR> bd #<CR>
-nnoremap <backspace> <C-^>
+" nnoremap <backspace> <C-^>
 " QUICKFIX
 nnoremap <leader>cc :copen<CR>
 nnoremap <leader>cl :cn<CR>
@@ -54,3 +54,6 @@ nnoremap <C-M-F> :Ag<space>
 
 vnoremap <C-M-J> :m '>+1<CR>gv=gv
 vnoremap <C-M-K> :m '<-2<CR>gv=gv
+
+nnoremap cn *``cgn
+nnoremap cN *``cgN
