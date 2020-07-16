@@ -22,7 +22,7 @@ V='#bb00bbbb'  # verifying
 lockfile=~/.lock.log
 
 # Pause the music
-playerctl pause || true
+# playerctl pause || true
 
 
 # Mute slack

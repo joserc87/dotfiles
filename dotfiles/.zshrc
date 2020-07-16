@@ -372,7 +372,7 @@ function nocaps {
 function checkout {
     git branch -a \
         | fzf \
-        | sed 's/remotes\///' \
+        | sed 's/remotes\/origin\///' \
         | xargs git checkout
 }
 
