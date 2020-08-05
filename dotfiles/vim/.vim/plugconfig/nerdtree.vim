@@ -3,7 +3,7 @@
 nnoremap <leader>ne :NERDTreeFocus<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
 nnoremap <leader>nn :NERDTreeToggle<CR>
-
+let NERDTreeQuitOnOpen=1
 " NERDTress File highlighting
 """ function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
 """     exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
