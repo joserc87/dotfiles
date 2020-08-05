@@ -1,7 +1,7 @@
 from libqtile.config import Key
 from lib.keys import (
     ALT, TAB, CTRL, SHIFT, RETURN, SPACE, GRAVE,
-    DELETE, PRINT
+    DELETE, PRINT, BACKSPACE
 )
 from libqtile.command import lazy
 from lib.settings import (
@@ -17,7 +17,8 @@ keys = [
 
     # General
     Key([MODKEY, SHIFT], 'r', lazy.restart()),
-    Key([MODKEY], 'Return', exe(DEFAULT_TERMINAL)),
+    Key([MODKEY], RETURN, exe(DEFAULT_TERMINAL)),
+    Key([MODKEY], BACKSPACE, exe(DEFAULT_TERMINAL)),
     Key([MODKEY], 'd', exe('dmenu_run')),
     Key([MODKEY], 'z', exe('morc_menu')),
     Key([MODKEY, SHIFT], 'q', lazy.window.kill()),
