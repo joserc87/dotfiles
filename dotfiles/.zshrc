@@ -306,7 +306,8 @@ fi
 # ORACLE #
 ##########
 
-export ORACLE_HOME=/usr/lib/oracle/12.2/client64/lib/
+# export ORACLE_HOME=/usr/lib/oracle/12.2/client64/lib/
+export ORACLE_HOME=/usr/lib/
 export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib/
 
 export NVM_DIR="$HOME/.nvm"
