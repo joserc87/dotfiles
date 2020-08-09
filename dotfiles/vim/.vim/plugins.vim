@@ -101,8 +101,12 @@ Plug 'dart-lang/dart-vim-plugin'
 " DASH INTEGRATION:
 " Plug 'rizzatti/dash.vim'
 
-" OpenScad
+" OpenScad:
 Plug 'sirtaj/vim-openscad'
+
+" ICONS:
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " THEMES:
 Plug 'morhetz/gruvbox'

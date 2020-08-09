@@ -2,6 +2,8 @@
 Key definitions
 """
 
+# Key definitions in https://github.com/qtile/qtile/blob/master/libqtile/xkeysyms.py
+
 ALT = 'mod1'
 WIN = 'mod4'
 TAB = 'Tab'
@@ -12,3 +14,5 @@ SPACE = 'space'
 DELETE = 'Delete'
 ASCII_TILDE = 'asciitilde'
 GRAVE = 'grave'
+PRINT = 'Print'
+BACKSPACE = 'BackSpace'

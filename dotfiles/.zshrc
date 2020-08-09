@@ -15,12 +15,15 @@ export XDG_CONFIG_HOME="$HOME/.config/"
 # vi style incremental search
 # look at www.drbunsen.org/the-text-triumvirate/
 
+# nano? hell no!
+[ $EDITOR = $(which nano) ] && unset EDITOR
+
 # If neovim exists, use nvim, otherwise use vim
 if ! type nvim >/dev/null; then
-    export EDITOR="vim"
+    export EDITOR=${EDITOR:-vim}
     alias nvim=vim
 else
-    export EDITOR="nvim"
+    export EDITOR=${EDITOR:-nvim}
     # This is just because I am used to type $ vim instead of $ nvim
     alias vim=nvim
 fi
@@ -306,7 +309,8 @@ fi
 # ORACLE #
 ##########
 
-export ORACLE_HOME=/usr/lib/oracle/12.2/client64/lib/
+# export ORACLE_HOME=/usr/lib/oracle/12.2/client64/lib/
+export ORACLE_HOME=/usr/lib/
 export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib/
 
 export NVM_DIR="$HOME/.nvm"
@@ -372,10 +376,12 @@ function nocaps {
 function checkout {
     git branch -a \
         | fzf \
-        | sed 's/remotes\///' \
+        | sed 's/remotes\/origin\///' \
         | xargs git checkout
 }
 
 function vimjson {
     jq . $@| nvim -c 'set syntax=json' -
 }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

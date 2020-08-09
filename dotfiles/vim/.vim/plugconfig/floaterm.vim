@@ -12,3 +12,9 @@ nnoremap <leader>fs :FloatermNew zsh<CR>
 nnoremap <leader>fr :FloatermNew ranger<CR>
 nnoremap <leader>fp :FloatermNew  wintype='normal' position='right' width=0.5 ipython<CR>
 nnoremap <leader>ff :FloatermToggle<CR>
+tnoremap <leader>ff <C-\><C-n>:FloatermToggle<CR>
+
+nnoremap <leader>fh :FloatermPrev<CR>
+tnoremap <leader>fh <C-\><C-n>:FloatermPrev<CR>
+nnoremap <leader>fl :FloatermNext<CR>
+tnoremap <leader>fl <C-\><C-n>:FloatermNext<CR>

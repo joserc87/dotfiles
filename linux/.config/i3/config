@@ -385,8 +385,8 @@ mode "resize" {
 }
 
 # Lock screen
-bindsym $mod+shift+x exec --no-startup-id blurlock
-# bindsym $mod+shift+x exec ~/.config/i3lock/i3lock.sh
+# bindsym $mod+shift+x exec --no-startup-id blurlock
+bindsym $mod+shift+x exec ~/.config/i3lock/i3lock.sh
 #bindsym $mod+Print exec gnome-screenshot -a
 bindsym $mod+ctrl+3 exec gnome-screenshot
 bindsym $mod+ctrl+4 exec gnome-screenshot -a && find ~/Pictures/Screenshot\ from* | tail -1 | xargs -I@ dragon @

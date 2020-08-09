@@ -1,13 +1,13 @@
 from libqtile.config import Key
 from lib.keys import (
-    ALT, TAB, CTRL, SHIFT, RETURN, SPACE, GRAVE
+    ALT, TAB, CTRL, SHIFT, RETURN, SPACE, GRAVE,
+    DELETE, PRINT, BACKSPACE
 )
 from libqtile.command import lazy
 from lib.settings import (
     MODKEY, DEFAULT_TERMINAL, APP_LAUNCHER,
     DEFAULT_TERMINAL
 )
-from lib.keys import DELETE
 from lib.utils import (exe, term_exe, kick_to_next_screen, go_to_next_screen,
         go_to_group_or_switch_screen)
 from lib.groups import groups
@@ -17,7 +17,8 @@ keys = [
 
     # General
     Key([MODKEY, SHIFT], 'r', lazy.restart()),
-    Key([MODKEY], 'Return', exe(DEFAULT_TERMINAL)),
+    Key([MODKEY], RETURN, exe(DEFAULT_TERMINAL)),
+    Key([MODKEY], BACKSPACE, exe(DEFAULT_TERMINAL)),
     Key([MODKEY], 'd', exe('dmenu_run')),
     Key([MODKEY], 'z', exe('morc_menu')),
     Key([MODKEY, SHIFT], 'q', lazy.window.kill()),
@@ -27,6 +28,7 @@ keys = [
     Key([MODKEY, SHIFT], 'e', lazy.shutdown()),
 
     # TODO: Add Screenshots like i3-scrot
+    Key([MODKEY], PRINT, lazy.spawn(["scrot", "-s"])),
 
     # Move Focus
     Key([ALT], TAB, lazy.layout.next()),
