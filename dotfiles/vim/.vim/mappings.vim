@@ -19,10 +19,11 @@ nnoremap <leader>V :vsplit $MYVIMRC<CR>
 
 " NAVIGATION:
 " WINDOW
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" This is done with tmux navigation
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
 " BUFFER
 nnoremap <leader>bl :bnext<CR>
 nnoremap <leader>bh :bprevious<CR>
