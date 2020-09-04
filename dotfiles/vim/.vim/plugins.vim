@@ -54,6 +54,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
 Plug 'voldikss/vim-floaterm'
+Plug 'kshenoy/vim-signature'
 
 " CODE:
 " Indentation

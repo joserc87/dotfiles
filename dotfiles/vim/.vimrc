@@ -12,6 +12,7 @@
 
 source ~/.vim/settings.vim
 source ~/.vim/plugins.vim
+source ~/.vim/plugconfig/tmux_navigator.vim
 source ~/.vim/plugconfig/airline.vim
 source ~/.vim/plugconfig/coc.vim
 source ~/.vim/plugconfig/ctrlp.vim
