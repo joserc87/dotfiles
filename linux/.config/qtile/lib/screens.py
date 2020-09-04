@@ -88,6 +88,7 @@ def make_screen(systray=False):
             objname="org.mpris.MediaPlayer2.spotify",
             display_metadata=['xesam:title', 'xesam:artist'],
             scroll_chars=None,
+            width=250,
             stop_pause_text='',
         ),
         # Resource usage graphs
