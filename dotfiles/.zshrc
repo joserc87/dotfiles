@@ -214,13 +214,6 @@ then
     export PATH=~/Scripts/:/usr/local/Cellar/python/2.7.10_2/bin/:$PATH
 fi
 
-# Python
-export PYTHONPATH=~/dev/whatsapp/cortado/yowsup/:.:$PYTHONPATH
-# Antlr
-export CLASSPATH=.:/usr/local/lib/antlr-4.5.3-complete.jar:$CLASSPATH
-alias antlr4='java -jar /usr/local/lib/antlr-4.5.3-complete.jar'
-alias grun='java org.antlr.v4.gui.TestRig'
-
 # Disable warning when .oh-my-zsh is shared between users
 # https://github.com/robbyrussell/oh-my-zsh/issues/6835#issuecomment-390216875
 ZSH_DISABLE_COMPFIX=true
@@ -300,6 +293,7 @@ alias t=task
 alias th="task priority:H"
 alias tl="task priority:H or priority:"
 alias alamux='TERM=screen-256color tmux'
+alias gs='git status'
 
 if command -v thefuck 1>/dev/null 2>&1; then
     eval $(thefuck --alias)
