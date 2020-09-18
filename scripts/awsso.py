@@ -1,8 +1,9 @@
-from os import path
+from os import path, environ
 
+HOME = environ.get('HOME', '/home/jose')
 CREDENTIALS_PATH = path.join(
     # path.expanduser('~'),
-    '/home/jose',
+    HOME,
     '.aws/credentials'
 )
 
