@@ -167,7 +167,7 @@ then
 fi
 
 # Python
-export PYTHONPATH=~/dev/whatsapp/cortado/yowsup/:.:$PYTHONPATH
+export PYTHONPATH=.:$PYTHONPATH
 # Android tools:
 export PATH=\
 ~/Library/Android/sdk/platform-tools/\
@@ -326,7 +326,7 @@ export JIRA_USER=jcano
 alias my-jiras="jira-get 'code,summary' assignee=$JIRA_USER status='Open' separator=' '"
 
 HISTSIZE=999999999
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g ""'
+export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -f -g ""'
 
 # Fix for Python in VIM:
 # https://vi.stackexchange.com/questions/7644/use-vim-with-virtualenv/7654#7654
@@ -376,6 +376,10 @@ function checkout {
 
 function vimjson {
     jq . $@| nvim -c 'set syntax=json' -
+}
+
+function freeze {
+    pip freeze | grep $1
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
