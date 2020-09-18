@@ -35,7 +35,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'airblade/vim-gitgutter'
 " A class outliner for vim
 " Plug 'majutsushi/tagbar'
-" Plug 'klen/python-mode'
 " Per-project vimrc
 Plug 'embear/vim-localvimrc'
 " Useful for XML/HTML
@@ -52,9 +51,15 @@ Plug 'godlygeek/tabular'
 Plug 'tpope/vim-repeat'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-rooter'
+" Plug 'airblade/vim-rooter'
 Plug 'voldikss/vim-floaterm'
 Plug 'kshenoy/vim-signature'
+Plug 'kana/vim-textobj-user'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'lucapette/vim-textobj-underscore'
+Plug 'wellle/targets.vim'
+Plug 'idbrii/textobj-word-column.vim'
+Plug 'itchyny/vim-cursorword'
 
 " CODE:
 " Indentation
@@ -70,9 +75,14 @@ imap <C-c> <CR><Esc>O
 " set completeopt-=preview
 " Plug 'marijnh/tern_for_vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dense-analysis/ale'
 Plug 'janko/vim-test'
 Plug 'tpope/vim-dispatch'
 " Plug '5long/pytest-vim-compiler'
+
+" PYTHON:
+" Plug 'klen/python-mode'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 " JAVASCRIPT:
 Plug 'jelera/vim-javascript-syntax'

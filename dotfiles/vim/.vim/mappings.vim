@@ -58,3 +58,8 @@ vnoremap <C-M-K> :m '<-2<CR>gv=gv
 
 nnoremap cn *``cgn
 nnoremap cN *``cgN
+
+" CLIPBOARD:
+nnoremap yy  "+Y
+nnoremap +  "+
+vnoremap +  "+

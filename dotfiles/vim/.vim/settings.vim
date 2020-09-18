@@ -15,6 +15,7 @@ set number relativenumber " shows number + relative. Otherwise, set rnu
 if !has('nvim')
   set ttymouse=xterm2
 endif
+" set clipboard=unnamedplus
 
 " Enable per-project .vimrc's
 " UNSAFE
@@ -46,3 +47,4 @@ endif
 let g:python_host_prog = '~/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '~/.pyenv/versions/neovim3/bin/python'
 let $EDITOR = 'floaterm'
+let g:ale_disable_lsp = 1
