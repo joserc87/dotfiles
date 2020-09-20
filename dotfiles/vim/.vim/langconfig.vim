@@ -34,4 +34,4 @@ autocmd FileType xml set formatexpr=xmlformat#Format()
 " PYTHON:
 set foldmethod=syntax
 autocmd FileType python set foldmethod=indent
-
+autocmd BufNewFile,BufRead *.py set foldmethod=indent

@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
-PROJ_DIR=/home/jose/code/gmail
+PROJ_DIR=$HOME/code/gmail
 PREV_DIR=$(pwd)
 
 cd $PROJ_DIR
