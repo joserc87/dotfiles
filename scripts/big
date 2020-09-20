@@ -27,9 +27,10 @@ def paste(arg):
 
 
 def is_jira_code(txt):
-    for code in ['BIG', 'RSP', 'MNT', 'DEX', 'PCP', 'TA']:
-        if txt[:len(code)+1] == code + '-':
-            return True
+    if txt:
+        for code in ['BIG', 'RSP', 'MNT', 'DEX', 'PCP', 'TA']:
+            if txt[:len(code)+1] == code + '-':
+                return True
     return False
 
 

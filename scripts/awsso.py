@@ -1,8 +1,8 @@
-from os import path
+from os import path, environ
 
 CREDENTIALS_PATH = path.join(
     # path.expanduser('~'),
-    '/home/jose',
+    environ.get('HOME', '/home/jose'),
     '.aws/credentials'
 )
 
@@ -15,6 +15,7 @@ profile_mapping = {
     '221539845528': 'bigdata-gpbullhound',
     '163889103523': 'bigdata-covalis',
     '159931895472': 'data-marketplace-stg',
+    '320822578831': 'RPA ProdIreland (Common)',
 }
 
 

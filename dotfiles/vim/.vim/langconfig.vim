@@ -20,6 +20,10 @@ au BufRead,BufNewFile *.g4 set syntax=antlr
 autocmd FileType html setlocal softtabstop=4 shiftwidth=4 tabstop=4 noexpandtab
 " JS:
 autocmd FileType javascript setlocal softtabstop=2 shiftwidth=2 tabstop=2 expandtab
+set foldmethod=syntax
+set foldcolumn=1
+let javaScript_fold=1
+set foldlevelstart=99
 
 " SPELL:
 au BufRead,BufNewFile *.spl set syntax=spell
