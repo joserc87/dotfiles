@@ -1,0 +1,14 @@
+{
+    // To use Microsoft Python Language Server:
+    // as https://github.com/neoclide/coc-python#get-start
+    "python.jediEnabled": false,
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "/home/jcano/.pyenv/versions/neovim3/bin/black",
+    "python.jediPath": "/home/jcano/.pyenv/versions/neovim3/lib/python3.7/site-packages/",
+    // "python.pythonPath": "/home/jcano/.pyenv/versions/neovim3/bin/python",
+    "python.sortImports.path": "/home/jcano/.pyenv/versions/neovim3/bin/isort",
+    "diagnostic.displayByAle": true
+    // "python.jediPath": "/home/jcano/.pyenv/versions/3.7.7/lib/python3.7/site-packages",
+    // "python.pythonPath": "/home/jcano/.pyenv/shims/python",
+    // "python.jediPath": "/home/jcano/.pyenv/versions/3.6.9/envs/dumpy/lib/python3.6/site-packages"
+}
