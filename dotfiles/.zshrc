@@ -290,10 +290,13 @@ alias rcd=ranger-cd
 # Ranger + Tmux
 alias rmux="ranger-cd && tmux new -s `echo '${PWD##*/}'`"
 alias t=task
-alias th="task priority:H"
-alias tl="task priority:H or priority:"
+# alias th="task priority:H"
+# alias tl="task priority:H or priority:"
 alias alamux='TERM=screen-256color tmux'
 alias gs='git status'
+alias tt="tmux new -s base -c ~ || tmux attach -t base -c ~"
+alias ta="tmux attach"
+alias tn="tmux new"
 
 if command -v thefuck 1>/dev/null 2>&1; then
     eval $(thefuck --alias)
