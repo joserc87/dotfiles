@@ -8,6 +8,7 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 " nnoremap <Leader>gs :Git<CR>
 nnoremap <Leader>gd :Gdiffsplit<CR>
 nnoremap <Leader>gp :Gpush<CR>
+nnoremap <Leader>gP :Gpull<CR>
 nnoremap <Leader>gl :Glog<CR>
 
 " Gitlab
