@@ -148,7 +148,10 @@ def parse_search_query(arg):
 
 def update_aws_credentials(arg):
     profile_name = awsso.update_credentials()
-    if profile_name:
+    if profile_name == '':
+        notify('The profile name cannot be found')
+        return True
+    elif profile_name:
         notify(f'Updated AWS credentials to profile {profile_name}')
         return True
     else:
