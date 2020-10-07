@@ -63,3 +63,6 @@ nnoremap cN *``cgN
 nnoremap yy  "+Y
 nnoremap +  "+
 vnoremap +  "+
+
+" TOGGLE:
+nnoremap <leader>sa :set laststatus=0<CR>:AirlineToggle<CR>
