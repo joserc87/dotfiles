@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#OTHER_BROWSER='jumanji' # For instance /usr/bin/firefox
+JIRA_BROWSER='firefox' # For instance /usr/bin/firefox
+DEV_BROWSER='chromium-browser' # For instance /usr/bin/firefox
+NORMAL_BROWSER='firefox' # For instance /usr/bin/firefox
+BROWSER_OPTIONS='' # Optional, for command line options passed to browser
+XDG_OPEN='/usr/bin/xdg-open'
+
+if echo "$1" | grep -q '^https\?:\/\/jira\.ravenpack\.com'; then
+    # i3-msg workspace '7: '
+    "$JIRA_BROWSER" $BROWSER_OPTIONS ${*}
+    exit 0
+elif echo "$1" | grep -q '^.*.bigdata.com'; then
+    # i3-msg workspace '4: '
+    "$DEV_BROWSER" $BROWSER_OPTIONS ${*}
+    exit 0
+else
+    # i3-msg workspace '3: '
+    "$NORMAL_BROWSER" $BROWSER_OPTIONS ${*}
+    exit 0
+fi
+
+"$XDG_OPEN" ${*}
