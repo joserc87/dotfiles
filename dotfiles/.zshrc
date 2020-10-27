@@ -8,7 +8,8 @@
 # infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
 #tic $TERM.ti"
 export TERMINFO="$HOME/.terminfo"
-export TERM=xterm-256color
+# export TERM=xterm-256color
+export TERM=screen-256color
 
 # for neovim
 export XDG_CONFIG_HOME="$HOME/.config/"
@@ -167,7 +168,7 @@ then
 fi
 
 # Python
-export PYTHONPATH=.:$PYTHONPATH
+export PYTHONPATH=.:./ravenpack:$PYTHONPATH
 # Android tools:
 export PATH=\
 ~/Library/Android/sdk/platform-tools/\
@@ -384,5 +385,7 @@ function vimjson {
 function freeze {
     pip freeze | grep $1
 }
+
+alias pytest py.test
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
