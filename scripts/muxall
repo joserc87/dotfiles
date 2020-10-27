@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+function base {
+    cd ~
+    tmuxp load -d base
+}
+
+function entitytool {
+    cd ~/git/entitytool
+    tmuxp load -d entitytool
+}
+
+function webapps {
+    cd ~/git/webapps
+    tmuxp load -d webapps
+}
+
+function pysync {
+    cd ~/git/pysync
+    tmuxp load -d pysync
+}
+
+function all {
+    base
+    entitytool
+    webapps
+    pysync
+}
+
+all
