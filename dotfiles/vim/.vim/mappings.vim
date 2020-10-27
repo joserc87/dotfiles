@@ -14,7 +14,7 @@ vnoremap : ;
 inoremap jj <ESC>
 
 " Open vimrc and other vim configs
-nnoremap <leader>v :e $MYVIMRC<CR>
+nnoremap <leader>vv :e $MYVIMRC<CR>
 nnoremap <leader>V :vsplit $MYVIMRC<CR>
 
 " NAVIGATION:
@@ -51,7 +51,23 @@ nnoremap tm  :tabm<Space>
 nnoremap tq  :tabclose<CR>
 
 " IDE:
+" Search:
 nnoremap <C-M-F> :Ag<space>
+nnoremap <leader>/ :Ag<space>
+
+" Buffers:
+nnoremap <leader>bb :Buffers<CR>
+nnoremap <leader>bh :History<CR>
+nnoremap <leader>bl :BLines<CR>
+nnoremap <leader>bL :Lines<CR>
+
+" Git:
+nnoremap <leader>gh :BCommits<CR>
+nnoremap <leader>gH :Commits<CR>
+
+" Command:
+nnoremap <leader><C-R> :History:<CR>
+nnoremap <leader>: :Commands:<CR>
 
 vnoremap <C-M-J> :m '>+1<CR>gv=gv
 vnoremap <C-M-K> :m '<-2<CR>gv=gv
@@ -66,3 +82,12 @@ vnoremap +  "+
 
 " TOGGLE:
 nnoremap <leader>sa :set laststatus=0<CR>:AirlineToggle<CR>
+function! BgToggleSol()
+    if (&background == "light")
+      set background=dark 
+    else
+       set background=light 
+    endif
+endfunction
+
+nnoremap <silent> <F5> :call BgToggleSol()<cr>

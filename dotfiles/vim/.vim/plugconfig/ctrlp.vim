@@ -9,7 +9,7 @@ let g:ctrlp_cmd = 'CtrlPMRU'
 " Make ctrlp find dotfiles too
 let g:ctrlp_show_hidden = 1
 " List the buffers with CtrlP
-nnoremap <leader>bb :CtrlPBuffer<CR>
+" nnoremap <leader>bb :CtrlPBuffer<CR>
 " Ignore some files:
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = {
