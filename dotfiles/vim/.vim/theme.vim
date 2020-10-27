@@ -8,6 +8,7 @@
 " COLOR SCHEMES:
 " -------------
 
+" set background=dark    " Setting dark mode
 set background=dark    " Setting dark mode
 syntax on
 set termguicolors      " True colors
@@ -32,13 +33,17 @@ elseif has ("unix")
     colorscheme monokai
   else
     colorscheme gruvbox
+    let g:gruvbox_contrast_dark='medium'
+    let g:gruvbox_contrast_light='medium'
+    " colorscheme solarized
+    let g:airline_theme='gruvbox'
     " let g:airline_theme='onehalfdark'
   endif
 else
   colorscheme torte
 endif
 " Transparent backround
-hi Normal guibg=None ctermbg=None
+" hi Normal guibg=None ctermbg=None
 
 " FONT:
 " -----
