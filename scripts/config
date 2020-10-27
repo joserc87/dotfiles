@@ -13,6 +13,7 @@ list() {
     echo "${1}task"
     echo "${1}aws"
     echo "${1}notif"
+    echo "${1}alacritty"
 }
 
 if [ "$#" -ne 1 ]; then
@@ -68,6 +69,9 @@ case $1 in
     ;;
     notif)
         $EDITOR ~/.config/dunst/dunstrc
+    ;;
+    alacritty)
+        $EDITOR ~/.config/alacritty/alacritty.yml
     ;;
     shortlist)
         echo i3 nvim vim-plugins zsh xresources tmux stuff config
