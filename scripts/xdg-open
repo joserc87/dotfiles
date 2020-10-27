@@ -2,16 +2,19 @@
 
 #OTHER_BROWSER='jumanji' # For instance /usr/bin/firefox
 JIRA_BROWSER='firefox' # For instance /usr/bin/firefox
-DEV_BROWSER='chromium-browser' # For instance /usr/bin/firefox
-NORMAL_BROWSER='firefox' # For instance /usr/bin/firefox
+DEV_BROWSER='chromium' # For instance /usr/bin/chromium-browser
+NORMAL_BROWSER='brave' # For instance /usr/bin/brave
 BROWSER_OPTIONS='' # Optional, for command line options passed to browser
 XDG_OPEN='/usr/bin/xdg-open'
 
-if echo "$1" | grep -q '^https\?:\/\/jira\.ravenpack\.com'; then
+JIRA_PATTERN='^https\?:\/\/jira\.ravenpack\.com'
+DEV_PATTERN='^.*\.bigdata.com\|^.*localhost:\|^.*ravenpack.com\|entity-tool'
+
+if echo "$1" | grep -q "$JIRA_PATTERN"; then
     # i3-msg workspace '7: '
     "$JIRA_BROWSER" $BROWSER_OPTIONS ${*}
     exit 0
-elif echo "$1" | grep -q '^.*.bigdata.com'; then
+elif echo "$1" | grep -q "$DEV_PATTERN"; then
     # i3-msg workspace '4: '
     "$DEV_BROWSER" $BROWSER_OPTIONS ${*}
     exit 0
