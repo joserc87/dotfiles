@@ -1,3 +1,5 @@
+#!/bin/bash
+
 dotfiles=""
 
 symlink_home () {
