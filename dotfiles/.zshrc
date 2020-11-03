@@ -386,6 +386,6 @@ function freeze {
     pip freeze | grep $1
 }
 
-alias pytest py.test
+alias lg=lazygit
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
