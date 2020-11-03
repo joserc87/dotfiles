@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 info() {
     printf "\033[34m$1\\033[39m$2"
