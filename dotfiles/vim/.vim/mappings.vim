@@ -62,8 +62,24 @@ nnoremap <leader>bl :BLines<CR>
 nnoremap <leader>bL :Lines<CR>
 
 " Git:
+" Shamelessly copied from https://gist.github.com/actionshrimp/6493611
+function! ToggleGStatus()
+    if buflisted(bufname('.git/index'))
+        bd .git/index
+    else
+        Gstatus
+    endif
+endfunction
+command ToggleGStatus :call ToggleGStatus()
 nnoremap <leader>gh :BCommits<CR>
 nnoremap <leader>gH :Commits<CR>
+nnoremap <Leader>gd :Gdiffsplit<CR>
+nnoremap <Leader>gp :Gpush<CR>
+nnoremap <Leader>gP :Gpull<CR>
+nnoremap <Leader>gl :Glog<CR>
+nnoremap <Leader>gg :FloatermNew lazygit<CR>
+nnoremap <Leader>gs :ToggleGStatus<CR>
+
 
 " Command:
 nnoremap <leader><C-R> :History:<CR>
