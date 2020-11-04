@@ -54,6 +54,8 @@ nnoremap tq  :tabclose<CR>
 " Search:
 nnoremap <C-M-F> :Ag<space>
 nnoremap <leader>/ :Ag<space>
+vnoremap <leader>/ y:Ag<space><C-R>=escape(@",'/\')<CR><CR>
+vnoremap / y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " Buffers:
 nnoremap <leader>bb :Buffers<CR>
