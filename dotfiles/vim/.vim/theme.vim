@@ -72,9 +72,9 @@ set guioptions-=L
 " set cursorcolumn
 " highlight CursorLine ctermbg=Yellow cterm=bold guibg=#2b2b2b
 " highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#2b2b2b
-highlight VertSplit ctermbg=Yellow guibg=#1C1C1C guifg=#1C1C1C
-highlight LineNr ctermbg=Yellow guibg=None guifg=#FABD2F
-highlight CursorLineNr ctermbg=Yellow guibg=None guifg=#FABD2F
+highlight VertSplit ctermbg=Black guibg=#1C1C1C guifg=#1C1C1C
+highlight LineNr ctermbg=Black guibg=None guifg=#FABD2F
+highlight CursorLineNr ctermbg=Black guibg=None guifg=#FABD2F
 
 hi SignColumn guibg=None
 

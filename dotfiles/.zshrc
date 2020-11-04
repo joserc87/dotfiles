@@ -181,7 +181,7 @@ alias grun='java org.antlr.v4.gui.TestRig'
 
 # -- JOSE --
 # rbenv
-if which rbenv > /dev/null;
+if which rbenv &> /dev/null;
 then
     eval "$(rbenv init -)";
 fi
