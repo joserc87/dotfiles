@@ -181,7 +181,7 @@ alias grun='java org.antlr.v4.gui.TestRig'
 
 # -- JOSE --
 # rbenv
-if which rbenv > /dev/null;
+if which rbenv &> /dev/null;
 then
     eval "$(rbenv init -)";
 fi
@@ -342,6 +342,8 @@ fi
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
+alias pytest py.test
+
 function selectJira {
     FZF="fzf --height 7" jira-dmenu --snake | sed 's/:/_/g' || exit -1
 }
@@ -387,5 +389,17 @@ function freeze {
 }
 
 alias lg=lazygit
+
+function fzf-pacman {
+    pacman -Slq \
+        | fzf --multi --preview 'pacman -Si {1}' \
+        | xargs -ro sudo pacman -S
+}
+
+function fzf-yay {
+    yay -Slq \
+        | fzf --multi --preview 'yay -Si {1}' \
+        | xargs -ro yay -S
+}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
