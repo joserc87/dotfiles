@@ -79,6 +79,8 @@ Plug 'dense-analysis/ale'
 Plug 'janko/vim-test'
 Plug 'tpope/vim-dispatch'
 Plug '5long/pytest-vim-compiler'
+Plug 'puremourning/vimspector'
+Plug 'szw/vim-maximizer'
 
 " PYTHON:
 " Plug 'klen/python-mode'
