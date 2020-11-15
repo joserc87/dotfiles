@@ -10,3 +10,6 @@
 jose-pc.py
 .idea
 .pyc
+.dir-locals.el
+.projectile
+setup.cfg

@@ -8,7 +8,8 @@
 # infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
 #tic $TERM.ti"
 export TERMINFO="$HOME/.terminfo"
-export TERM=xterm-256color
+# export TERM=xterm-256color
+export TERM=screen-256color
 
 # for neovim
 export XDG_CONFIG_HOME="$HOME/.config/"
@@ -108,7 +109,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+export DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -167,7 +168,7 @@ then
 fi
 
 # Python
-export PYTHONPATH=.:$PYTHONPATH
+export PYTHONPATH=.:./ravenpack:$PYTHONPATH
 # Android tools:
 export PATH=\
 ~/Library/Android/sdk/platform-tools/\
@@ -180,7 +181,7 @@ alias grun='java org.antlr.v4.gui.TestRig'
 
 # -- JOSE --
 # rbenv
-if which rbenv > /dev/null;
+if which rbenv &> /dev/null;
 then
     eval "$(rbenv init -)";
 fi
@@ -290,10 +291,13 @@ alias rcd=ranger-cd
 # Ranger + Tmux
 alias rmux="ranger-cd && tmux new -s `echo '${PWD##*/}'`"
 alias t=task
-alias th="task priority:H"
-alias tl="task priority:H or priority:"
+# alias th="task priority:H"
+# alias tl="task priority:H or priority:"
 alias alamux='TERM=screen-256color tmux'
 alias gs='git status'
+alias tt="tmux new -s base -c ~ || tmux attach -t base -c ~"
+alias ta="tmux attach"
+alias tn="tmux new"
 
 if command -v thefuck 1>/dev/null 2>&1; then
     eval $(thefuck --alias)
@@ -338,6 +342,8 @@ fi
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
+alias pytest py.test
+
 function selectJira {
     FZF="fzf --height 7" jira-dmenu --snake | sed 's/:/_/g' || exit -1
 }
@@ -380,6 +386,20 @@ function vimjson {
 
 function freeze {
     pip freeze | grep $1
+}
+
+alias lg=lazygit
+
+function fzf-pacman {
+    pacman -Slq \
+        | fzf --multi --preview 'pacman -Si {1}' \
+        | xargs -ro sudo pacman -S
+}
+
+function fzf-yay {
+    yay -Slq \
+        | fzf --multi --preview 'yay -Si {1}' \
+        | xargs -ro yay -S
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -8,6 +8,7 @@
 " COLOR SCHEMES:
 " -------------
 
+" set background=dark    " Setting dark mode
 set background=dark    " Setting dark mode
 syntax on
 set termguicolors      " True colors
@@ -32,13 +33,17 @@ elseif has ("unix")
     colorscheme monokai
   else
     colorscheme gruvbox
+    let g:gruvbox_contrast_dark='medium'
+    let g:gruvbox_contrast_light='medium'
+    " colorscheme solarized
+    let g:airline_theme='gruvbox'
     " let g:airline_theme='onehalfdark'
   endif
 else
   colorscheme torte
 endif
 " Transparent backround
-hi Normal guibg=None ctermbg=None
+" hi Normal guibg=None ctermbg=None
 
 " FONT:
 " -----
@@ -67,9 +72,9 @@ set guioptions-=L
 " set cursorcolumn
 " highlight CursorLine ctermbg=Yellow cterm=bold guibg=#2b2b2b
 " highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#2b2b2b
-highlight VertSplit ctermbg=Yellow guibg=#1C1C1C guifg=#1C1C1C
-highlight LineNr ctermbg=Yellow guibg=None guifg=#FABD2F
-highlight CursorLineNr ctermbg=Yellow guibg=None guifg=#FABD2F
+highlight VertSplit ctermbg=Black guibg=#1C1C1C guifg=#1C1C1C
+highlight LineNr ctermbg=Black guibg=None guifg=#FABD2F
+highlight CursorLineNr ctermbg=Black guibg=None guifg=#FABD2F
 
 hi SignColumn guibg=None
 

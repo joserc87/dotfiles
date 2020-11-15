@@ -76,6 +76,8 @@ def modify_credentials(data, profile_name, new_values):
         profile_data = data[start:end]
         modified_profile = modify_profile_data(profile_data, new_values)
         data = data[:start] + modified_profile + data[end:]
+    else:
+        return None
 
     return data
 
@@ -106,7 +108,11 @@ def copy_profile(name_from, name_to='default'):
         lines = read_credentials(CREDENTIALS_PATH)
         data = ''.join(copy_profile_lines(
             lines, name_from, name_to))
-        write_credentials(CREDENTIALS_PATH, data)
+        if data:
+            write_credentials(CREDENTIALS_PATH, data)
+            return True
+        else:
+            return False
     except Exception as e:
         print(e)
         return False
@@ -172,9 +178,13 @@ def update_credentials():
         profile_name = profile_mapping.get(sso_profile_name.split('_')[0])
         assert profile_name and new_values and lines
 
-        data = ''.join(modify_credentials(lines, profile_name, new_values))
-        write_credentials(CREDENTIALS_PATH, data)
-        return profile_name
+        data = modify_credentials(lines, profile_name, new_values)
+        if data:
+            data = ''.join(data)
+            write_credentials(CREDENTIALS_PATH, data)
+            return profile_name
+        else:
+            return ''
     except Exception as e:
         print(e)
         return False
