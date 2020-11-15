@@ -9,6 +9,8 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 nnoremap <Leader>gd :Gdiffsplit<CR>
 nnoremap <Leader>gp :Gpush<CR>
 nnoremap <Leader>gl :Glog<CR>
+" Very useful to see other revisions of the current buffer
+nnoremap <Leader>gh :0Glog<CR>
 
 " Gitlab
 let g:fugitive_gitlab_domains = ['https://gitlab.ravenpack.com']
