@@ -13,9 +13,11 @@ nnoremap <leader>fs :FloatermNew zsh<CR>
 nnoremap <leader>fr :FloatermNew ranger<CR>
 nnoremap <leader>fp :FloatermNew  --wintype=normal --position=right --width=0.4 ipython<CR>
 nnoremap <leader>fP :FloatermNew  --wintype=normal --position=right --width=0.4 python<CR>
+nnoremap <Leader>fg :FloatermNew lazygit<CR>
 
 nnoremap <leader>ff :FloatermToggle<CR>
 tnoremap <leader>ff <C-\><C-n>:FloatermToggle<CR>
+tnoremap <leader>fg <C-\><C-n>:FloatermToggle<CR>
 tnoremap <leader>fj <C-\><C-n>
 
 nnoremap <leader>fh :FloatermPrev<CR>
