@@ -85,7 +85,6 @@ nnoremap <Leader>gd :Gdiffsplit<CR>
 nnoremap <Leader>gp :Gpush<CR>
 nnoremap <Leader>gP :Gpull<CR>
 nnoremap <Leader>gl :Glog<CR>
-nnoremap <Leader>gg :FloatermNew lazygit<CR>
 nnoremap <Leader>gs :ToggleGStatus<CR>
 " }}}
 "

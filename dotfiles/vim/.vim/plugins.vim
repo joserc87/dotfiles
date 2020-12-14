@@ -79,6 +79,7 @@ Plug 'dense-analysis/ale'
 Plug 'janko/vim-test'
 Plug 'tpope/vim-dispatch'
 Plug '5long/pytest-vim-compiler'
+" Plug 'alfredodeza/pytest'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 
