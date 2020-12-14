@@ -20,8 +20,8 @@ elif echo "$1" | grep -q "$DEV_PATTERN"; then
     exit 0
 else
     # i3-msg workspace '3: '
-    "$NORMAL_BROWSER" $BROWSER_OPTIONS ${*}
+    # Calling always the browser cause errors when trying to open an application
+    # "$NORMAL_BROWSER" $BROWSER_OPTIONS ${*}
+    "$XDG_OPEN" ${*}
     exit 0
 fi
-
-"$XDG_OPEN" ${*}
