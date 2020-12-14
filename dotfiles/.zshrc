@@ -8,8 +8,9 @@
 # infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
 #tic $TERM.ti"
 export TERMINFO="$HOME/.terminfo"
-# export TERM=xterm-256color
-export TERM=screen-256color
+export TERM=xterm-256color
+# This one makes ranger crash
+# export TERM=screen-256color
 
 # for neovim
 export XDG_CONFIG_HOME="$HOME/.config/"
