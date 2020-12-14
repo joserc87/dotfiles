@@ -41,3 +41,5 @@
 	default = simple
 [web]
 	browser = firefox
+[pull]
+	rebase = true
