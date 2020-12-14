@@ -27,7 +27,6 @@ keys = [
     Key([MODKEY], DELETE, exe('logoff')),
     Key([MODKEY], 'c', exe('compton-toggle')),
     Key([MODKEY, SHIFT], 'e', lazy.shutdown()),
-    Key([MODKEY, CTRL], 'e', lazy.shutdown()),
 
     # TODO: Add Screenshots like i3-scrot
     Key([MODKEY], PRINT, lazy.spawn(["scrot", "-s"])),
