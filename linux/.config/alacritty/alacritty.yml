@@ -7,6 +7,8 @@ background_opacity: 1
 #E     # - /home/jcano/.config/alacritty/alacritty.solarized.dark.yml
 #E     # - ./alacritty.solarized.light.yml
 #E     # - ./alacritty.yml
+font:
+  size: 16.0
 schemes:
 
   gruvbox_light: &gruvbox_light
@@ -67,8 +69,6 @@ schemes:
   padding:
     x: 10
     y: 10
-  font:
-    size: 12.0
 
   monokai: &monokai
     # Default colors
