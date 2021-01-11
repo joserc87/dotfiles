@@ -175,6 +175,30 @@ def pull_window_here(**kwargs):
 
     return lazy.function(callback)
 
+
+def toggle_gaps():
+    def callback(qtile):
+        layout = qtile.current_group.current_layout
+        if layout <= 1:
+            qtile.current_group.use_layout(1 - layout)
+
+    return lazy.function(callback)
+
+
+def next_layout():
+    def callback(qtile):
+        group = qtile.current_group
+        layout = group.current_layout
+        if layout <= 1:
+            group.previous_layout = layout
+            group.use_layout(2)
+        else:
+            group.use_layout(group.previous_layout)
+
+    return lazy.function(callback)
+
+
+
 def windows_matching_shuffle(qtile, **kwargs):
     """return a list of windows matching window_match_re with **kwargs,
     ordered so that the current Window (if it matches) comes last

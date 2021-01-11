@@ -18,12 +18,16 @@ _spawn = {
 }
 _names = "#"
 
+_terminal_windows = [0, 1, 2, 5, 8, 10]
+
+
 def _create_group(i):
     name = _names[i]
     matches = [Match(wm_class=_matches[i])] if i in _matches else None
     spawn = _spawn[i] if i in _spawn else None
     init = True
-    return Group(name, matches=matches, spawn=spawn, init=init)
+    layout = "GapsBig" if i in _terminal_windows else "GapsSmall"
+    return Group(name, matches=matches, spawn=spawn, init=init, layout=layout)
+
 
 groups = [_create_group(i) for i in range(len(_names))]
-

@@ -8,8 +8,10 @@ from lib.settings import (
     MODKEY, DEFAULT_TERMINAL, APP_LAUNCHER,
     DEFAULT_TERMINAL
 )
-from lib.utils import (exe, term_exe, kick_to_next_screen, go_to_next_screen,
-        go_to_group_or_switch_screen)
+from lib.utils import (
+    exe, term_exe, kick_to_next_screen, go_to_next_screen,
+    go_to_group_or_switch_screen, next_layout, toggle_gaps
+)
 from lib.groups import groups
 
 # Keybindings
@@ -63,14 +65,14 @@ keys = [
     # Layout
     Key([MODKEY, CTRL], SPACE, lazy.window.toggle_floating()),
     Key([MODKEY, SHIFT], SPACE, exe('switchkblayout')),
-    Key([MODKEY], SPACE, lazy.next_layout()),
+    Key([MODKEY], SPACE, next_layout()),
     Key([MODKEY], 'r', lazy.window.toggle_fullscreen()),
 
     # Screens
     # Key([MODKEY], 'i', lazy.function(go_to_next_screen, -1)),
     # Key([MODKEY], 'o', lazy.function(go_to_next_screen)),
-    Key([MODKEY], 'q', lazy.function(go_to_next_screen, -1)),
-    Key([MODKEY], 'w', lazy.function(go_to_next_screen)),
+    Key([MODKEY], 'q', toggle_gaps()),
+    Key([MODKEY], 'w', toggle_gaps()),
     Key([MODKEY], SEMICOLON, lazy.function(go_to_next_screen)),
     Key([MODKEY, CTRL], 'h', lazy.function(kick_to_next_screen, -1)),
     Key([MODKEY, CTRL], 'l', lazy.function(kick_to_next_screen)),

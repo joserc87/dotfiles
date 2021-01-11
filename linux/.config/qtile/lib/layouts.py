@@ -15,7 +15,11 @@ _max_layout_settings = {
 
 # Layouts
 layouts = [
-    layout.MonadTall(name='Tall', **_layout_common_settings, margin=48),
+    layout.MonadTall(name='GapsBig', **_layout_common_settings, margin=192),
+    layout.MonadTall(name='GapsSmall', **_layout_common_settings, margin=48),
+    # layout.Floating(**_layout_common_settings),
     # layout.VerticalTile(name='VerticalTile'),
     layout.Max(name='Full', **_layout_common_settings),
+    # layout.Zoomy(**_layout_common_settings),
+    # layout.Slice(**_layout_common_settings),
 ]
