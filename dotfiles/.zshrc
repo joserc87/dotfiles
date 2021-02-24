@@ -169,7 +169,7 @@ then
 fi
 
 # Python
-export PYTHONPATH=.:./ravenpack:$PYTHONPATH
+export PYTHONPATH=.:./ravenpack:./python:$PYTHONPATH
 # Android tools:
 export PATH=\
 ~/Library/Android/sdk/platform-tools/\
