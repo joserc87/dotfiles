@@ -1,7 +1,7 @@
 from libqtile.config import Key
 from lib.keys import (
     ALT, TAB, CTRL, SHIFT, RETURN, SPACE, GRAVE,
-    DELETE, PRINT, BACKSPACE, SEMICOLON, COMMA
+    DELETE, PRINT, BACKSPACE, SEMICOLON, COMMA, ESCAPE
 )
 from libqtile.command import lazy
 from lib.settings import (
@@ -28,7 +28,8 @@ keys = [
     Key([MODKEY], 'F5', term_exe('mocp')),
     Key([MODKEY], DELETE, exe('logoff')),
     Key([MODKEY], 'c', exe('compton-toggle')),
-    Key([MODKEY, SHIFT], 'e', lazy.shutdown()),
+    Key([MODKEY, SHIFT], 'e', exe('sgtk-bar')),
+    Key([MODKEY, SHIFT], ESCAPE, lazy.shutdown()),
 
     # TODO: Add Screenshots like i3-scrot
     Key([MODKEY], PRINT, lazy.spawn(["scrot", "-s"])),

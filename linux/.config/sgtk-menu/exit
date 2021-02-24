@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Lock",
+    "exec": "swaylock -f -c 000000",
+    "icon": "lock"
+  },
+  {
+    "name": "Logout",
+    "exec": "qtile-cmd -o cmd -f shutdown",
+    "icon": "exit"
+  },
+  {
+    "name": "Suspend",
+    "exec": "systemctl -i suspend",
+    "icon": "system-suspend-symbolic"
+  },
+  {
+    "name": "Reboot",
+    "exec": "systemctl reboot",
+    "icon": "reload"
+  },
+  {
+    "name": "Shutdown",
+    "exec": "systemctl -i poweroff",
+    "icon": "window-close"
+  }
+]
