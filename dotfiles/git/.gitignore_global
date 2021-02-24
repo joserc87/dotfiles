@@ -13,3 +13,4 @@ jose-pc.py
 .dir-locals.el
 .projectile
 setup.cfg
+.vimspector.json
