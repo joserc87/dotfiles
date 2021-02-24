@@ -139,42 +139,38 @@ plugins=(git)
 
 # User configuration
 
-#export PATH="/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.6.7/bin:~/.composer/vendor/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.6.7/bin:~/.composer/vendor/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin/:/usr/local/bin/"
-# export MANPATH="/usr/local/man:$MANPATH"
-
+function add_path {
+    [[ -e "$1" ]] && export PATH="$1:$PATH"
+}
 # -- JOSE --
-# Path to the Gems:
-if [[ -e ~/.gem/ruby/2.4.0/bin ]];
-then
-    export PATH=~/.gem/ruby/2.4.0/bin/:$PATH
-fi
 # Deprecated:
 # export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 # export PATH="$HOME/Dev/spell/build/install/spell/bin:$PATH"
 
 # User defined scripts:
 # Scripts folder is present for Linux and Mac OS
-export PATH=~/scripts/:$PATH
 
-# Scripts for Mac
-if [[ -e ~/macscripts/ ]];
-then
-    export PATH=~/macscripts/:$PATH
+# In reverse order of priority
+add_path "$HOME/.gem/ruby/2.4.0/bin"
+add_path "/usr/local/Cellar/python/2.7.10_2/bin/"
+add_path "$HOME/Library/Android/sdk/platform-tools/"
+add_path "/Applications/MacPorts/MacVim.app/Contents/MacOS/"
+add_path "/opt/flutter/.pub-cache/bin"
+add_path "$HOME/macscripts/"
+add_path "$HOME/scripts/"
+add_path "$HOME/Scripts/"
+add_path "$HOME/.local/bin"
+add_path "$HOME/bin/"
+add_path "$HOME/apps/"
+add_path "$HOME/.pyenv/bin"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
 fi
+add_path "$HOME/.cargo/bin"
 
-# Python for Mac
-if [[ -e /usr/local/Cellar/python/2.7.10_2/bin/ ]];
-then
-    export PATH=~/Scripts/:/usr/local/Cellar/python/2.7.10_2/bin/:$PATH
-fi
-
+#
 # Python
 export PYTHONPATH=.:./ravenpack:$PYTHONPATH
-# Android tools:
-export PATH=\
-~/Library/Android/sdk/platform-tools/\
-:/Applications/MacPorts/MacVim.app/Contents/MacOS/\
-:$PATH
 # Antlr
 export CLASSPATH=.:/usr/local/lib/antlr-4.5.3-complete.jar:$CLASSPATH
 alias antlr4='java -jar /usr/local/lib/antlr-4.5.3-complete.jar'
@@ -191,30 +187,6 @@ fi
 #then
 #    export PATH=~/.gem/ruby/2.4.0/bin/:$PATH
 #fi
-
-# User defined scripts:
-# Scripts folder is present for Linux and Mac OS
-export PATH=\
-~/Library/Android/sdk/platform-tools/\
-:/Applications/MacPorts/MacVim.app/Contents/MacOS/\
-:/opt/flutter/.pub-cache/bin\
-:$HOME/bin/\
-:$HOME/.local/bin\
-:$HOME/Scripts/\
-:$HOME/apps/\
-:$PATH
-
-# Scripts for Mac
-if [[ -e ~/macscripts/ ]];
-then
-    export PATH=~/macscripts/:$PATH
-fi
-
-# Python for Mac
-if [[ -e /usr/local/Cellar/python/2.7.10_2/bin/ ]];
-then
-    export PATH=~/Scripts/:/usr/local/Cellar/python/2.7.10_2/bin/:$PATH
-fi
 
 # Disable warning when .oh-my-zsh is shared between users
 # https://github.com/robbyrussell/oh-my-zsh/issues/6835#issuecomment-390216875
@@ -315,16 +287,6 @@ export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib/
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-#########
-# PYENV #
-#########
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
 
 alias inp="pyenv activate big"
 export JIRA_USER=jcano
