@@ -170,7 +170,12 @@ add_path "$HOME/.cargo/bin"
 
 #
 # Python
-export PYTHONPATH=.:./ravenpack:$PYTHONPATH
+export PYTHONPATH=.:./ravenpack:./python:$PYTHONPATH
+# Android tools:
+export PATH=\
+~/Library/Android/sdk/platform-tools/\
+:/Applications/MacPorts/MacVim.app/Contents/MacOS/\
+:$PATH
 # Antlr
 export CLASSPATH=.:/usr/local/lib/antlr-4.5.3-complete.jar:$CLASSPATH
 alias antlr4='java -jar /usr/local/lib/antlr-4.5.3-complete.jar'

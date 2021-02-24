@@ -48,3 +48,6 @@ let g:python_host_prog = '~/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '~/.pyenv/versions/neovim3/bin/python'
 let $EDITOR = 'floaterm'
 let g:ale_disable_lsp = 1
+
+" FIRENVIM:
+au BufEnter jira.ravenpack.com_*.txt set filetype=markdown

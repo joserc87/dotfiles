@@ -55,6 +55,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'voldikss/vim-floaterm'
 Plug 'kshenoy/vim-signature'
 Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-entire'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'lucapette/vim-textobj-underscore'
 Plug 'wellle/targets.vim'
@@ -130,6 +131,9 @@ Plug 'morhetz/gruvbox'
 "Plug 'crusoexia/vim-monokai'
 "
 " ---- End Plug list: ---- "
+
+" OTHER:
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 call plug#end()
 filetype plugin indent on    " required
