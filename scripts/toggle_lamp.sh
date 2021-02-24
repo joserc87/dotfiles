@@ -8,11 +8,17 @@ DESK_LAMP=1
 STATE_URL=$API/lights/1
 lamp_on=$(curl $API/lights/$DESK_LAMP | jq .state.on)
 
+BRIGHTNESS=${1:-255}
 
 if [[ $lamp_on == 'true' ]]; then
-    echo "Then lamp is on. Turning off."
-    curl -X PUT "$API/lights/$DESK_LAMP/state" -d '{"on":false}'
+    if [[ -z "$1" ]]; then
+        echo "The lamp is on. Turning off."
+        curl -X PUT "$API/lights/$DESK_LAMP/state" -d '{"on":false}'
+    else
+        echo "The lamp is on. Adjusting."
+        curl -X PUT "$API/lights/$DESK_LAMP/state" -d "{\"on\":true,\"bri\":$BRIGHTNESS}"
+    fi
 else
-    echo "Then lamp is off. Turning on."
-    curl -X PUT "$API/lights/$DESK_LAMP/state" -d '{"on":true,"bri":255}'
+    echo "The lamp is off. Turning on."
+    curl -X PUT "$API/lights/$DESK_LAMP/state" -d "{\"on\":true,\"bri\":$BRIGHTNESS}"
 fi
