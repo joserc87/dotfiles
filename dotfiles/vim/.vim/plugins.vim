@@ -131,6 +131,9 @@ Plug 'morhetz/gruvbox'
 "
 " ---- End Plug list: ---- "
 
+" OTHER:
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
 call plug#end()
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
