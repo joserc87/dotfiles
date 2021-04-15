@@ -118,7 +118,8 @@ nmap <leader>dbc <Plug>VimspectorToggleConditionalBreakpoint
 
 " Command: {{{
 nnoremap <leader><C-R> :History:<CR>
-nnoremap <leader>: :Commands:<CR>
+nnoremap <leader>: :Commands<CR>
+nnoremap <leader>; :Commands<CR>
 
 vnoremap <C-M-J> :m '>+1<CR>gv=gv
 vnoremap <C-M-K> :m '<-2<CR>gv=gv

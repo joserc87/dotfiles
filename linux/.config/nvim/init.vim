@@ -25,6 +25,7 @@ source ~/.vim/plugconfig/test.vim
 source ~/.vim/plugconfig/vimwiki.vim
 source ~/.vim/plugconfig/fzf.vim
 source ~/.vim/plugconfig/floaterm.vim
+source ~/.vim/plugconfig/firenvim.vim
 source ~/.vim/langconfig.vim
 source ~/.vim/macros.vim
 source ~/.vim/mappings.vim
