@@ -14,3 +14,4 @@ jose-pc.py
 .projectile
 setup.cfg
 .vimspector.json
+.python-version
