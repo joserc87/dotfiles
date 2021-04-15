@@ -275,7 +275,7 @@ alias alamux='TERM=screen-256color tmux'
 alias gs='git status'
 alias tt="tmux new -s base -c ~ || tmux attach -t base -c ~"
 alias ta="tmux attach"
-alias tn="tmux new"
+alias tn="tmux new -s "
 
 if command -v thefuck 1>/dev/null 2>&1; then
     eval $(thefuck --alias)
@@ -368,6 +368,10 @@ function fzf-yay {
     yay -Slq \
         | fzf --multi --preview 'yay -Si {1}' \
         | xargs -ro yay -S
+}
+
+function testhere {
+    shtuff as testrunner
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
