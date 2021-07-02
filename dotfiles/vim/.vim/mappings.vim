@@ -29,8 +29,8 @@ nnoremap <leader>V :vsplit $MYVIMRC<CR>
 nnoremap <leader>bl :bnext<CR>
 nnoremap <leader>bh :bprevious<CR>
 nnoremap <leader>bq :bp <BAR> bd #<CR>
-nnoremap <M-j> :tabnext<CR>
-nnoremap <M-k> :tabprevious<CR>
+" nnoremap <M-j> :tabnext<CR>
+" nnoremap <M-k> :tabprevious<CR>
 nnoremap <M-l> :bnext<CR>
 nnoremap <M-h> :bprevious<CR>
 nnoremap <M-q> :bp <BAR> bd #<CR>
@@ -54,6 +54,7 @@ nnoremap tq  :tabclose<CR>
 
 " IDE: {{{
 " Search:
+" nnoremap <C-p> :Files<CR>
 nnoremap <C-M-F> :Ag<space>
 nnoremap <leader>/ :Ag<space>
 vnoremap <leader>/ y:Ag<space><C-R>=escape(@",'/\')<CR><CR>
@@ -144,5 +145,13 @@ function! BgToggleSol()
     endif
 endfunction
 
+nnoremap <F4> :set relativenumber! number! showmode! showcmd! hidden! ruler!<CR> :AirlineToggle<CR>:set laststatus=0<CR>:set cmdheight=1<CR>
 nnoremap <silent> <F5> :call BgToggleSol()<cr>
 " }}}
+
+" Execute line under cursor
+nnoremap <leader>x :exe getline('.')<CR>
+nnoremap <leader>nw :GonvimFilerOpen<CR>
+nnoremap <leader>nW :GonvimWorkspaceNew<CR>
+nnoremap <leader>nh :GonvimWorkspacePrevious<CR>
+nnoremap <leader>nl :GonvimWorkspaceNext<CR>

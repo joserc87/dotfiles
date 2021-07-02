@@ -23,7 +23,8 @@ Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
 Plug 'easymotion/vim-easymotion'
-Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
+Plug 'tools-life/taskwiki'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 " Git
@@ -34,7 +35,7 @@ Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'airblade/vim-gitgutter'
 " A class outliner for vim
-" Plug 'majutsushi/tagbar'
+Plug 'preservim/tagbar'
 " Per-project vimrc
 Plug 'embear/vim-localvimrc'
 " Useful for XML/HTML
@@ -61,6 +62,10 @@ Plug 'lucapette/vim-textobj-underscore'
 Plug 'wellle/targets.vim'
 Plug 'idbrii/textobj-word-column.vim'
 Plug 'itchyny/vim-cursorword'
+" Telescope
+" Plug 'nvim-lua/popup.nvim'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-telescope/telescope.nvim'
 
 " CODE:
 " Indentation
@@ -84,6 +89,7 @@ Plug '5long/pytest-vim-compiler'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 
+Plug 'honza/vim-snippets'
 " PYTHON:
 " Plug 'klen/python-mode'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
@@ -134,6 +140,8 @@ Plug 'morhetz/gruvbox'
 
 " OTHER:
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
+Plug 'itchyny/calendar.vim'
 
 call plug#end()
 filetype plugin indent on    " required

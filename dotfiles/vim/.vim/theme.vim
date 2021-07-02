@@ -44,19 +44,23 @@ else
 endif
 " Transparent backround
 " hi Normal guibg=None ctermbg=None
+hi Normal ctermbg=None
 
 " FONT:
 " -----
 
-if has("gui_running")
-  if has("gui_gtk2")
-    set guifont=Inconsolata\ 12
-  elseif has("gui_macvim")
-    set guifont=Menlo\ Regular:h14
-  elseif has("gui_win32")
-    " set guifont=Consolas:h11:cANSI
-    set guifont=Ubuntu\ Mono:h11:cANSI
-  endif
+if exists('g:neovide') || has('gui_running')
+  " set guifont=NotoSansMono\ Nerd\ Font
+  set guifont=NotoSansMono\ Nerd\ Font:h8,Noto\ Emoji:h26,Noto\ Color\ Emoji:h26,DejaVu\ Sans\ Mono:h26
+  " set guifont=Terminess\ TTF\ Nerd\ Font\ Mono:26;Noto\ Emoji:h26,Noto\ Color\ Emoji:h26,DejaVu\ Sans\ Mono:h26
+  " if has("gui_gtk2")
+  "   set guifont=Inconsolata\ 12
+  " elseif has("gui_macvim")
+  "   set guifont=Menlo\ Regular:h14
+  " elseif has("gui_win32")
+  "   " set guifont=Consolas:h11:cANSI
+  "   set guifont=Ubuntu\ Mono:h11:cANSI
+  " endif
 endif
 
 " GUI:
@@ -93,3 +97,6 @@ highlight VimwikiHeader3 gui=bold guifg=#FE8019 cterm=bold ctermfg=2
 highlight VimwikiHeader4 gui=bold guifg=#B16286 cterm=bold ctermfg=5
 highlight VimwikiHeader5 gui=bold guifg=#458588 cterm=bold ctermfg=6
 highlight VimwikiHeader6 gui=bold guifg=#689D6A cterm=bold ctermfg=4
+
+highlight Floaterm guibg=none
+highlight FloatermBorder guibg=none guifg=orchid
