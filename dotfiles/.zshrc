@@ -18,7 +18,7 @@ export XDG_CONFIG_HOME="$HOME/.config/"
 # look at www.drbunsen.org/the-text-triumvirate/
 
 # nano? hell no!
-[ $EDITOR = $(which nano) ] && unset EDITOR
+[ "$EDITOR" = "$(which nano)" ] && unset EDITOR
 
 # If neovim exists, use nvim, otherwise use vim
 if ! type nvim >/dev/null; then
@@ -372,6 +372,14 @@ function fzf-yay {
 
 function testhere {
     shtuff as testrunner
+}
+
+function saw {
+    docker run --rm -it -v ~/.aws:~/.aws tbrock/saw $@
+}
+
+function tw {
+    taskwarrior-tui
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
