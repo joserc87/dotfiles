@@ -14,6 +14,11 @@ _max_layout_settings = {
 }
 
 # Layouts
+floating_layout = layout.Floating(float_rules=[
+    dict(wmclass='float'),
+    dict(wmclass='floating'),
+    dict(wmclass="zoom"),
+])
 layouts = [
     layout.MonadTall(name='GapsBig', **_layout_common_settings, margin=192),
     layout.MonadTall(name='GapsSmall', **_layout_common_settings, margin=48),

@@ -1,4 +1,4 @@
-from libqtile.config import Group, Match
+from libqtile.config import Group, Match, ScratchPad, DropDown
 
 _matches = {
     3: ["Brave-browser"],
@@ -30,4 +30,20 @@ def _create_group(i):
     return Group(name, matches=matches, spawn=spawn, init=init, layout=layout)
 
 
-groups = [_create_group(i) for i in range(len(_names))]
+def create_dropdown(name, cmd):
+    return DropDown(
+        name, cmd, on_focus_lost_hide=True, x=0.25, y=0.25, width=0.5, height=0.5,
+    )
+
+
+_taskwarrior_cmd = """alacritty \
+    --class float \
+    -o font.size=16 \
+    -o background_opacity=0.5 \
+    -t 'TaskWarrior' \
+    -e taskwarrior-tui \
+    """  # -r small"""
+
+_scratchpad = ScratchPad("scratchpad", [create_dropdown("task", _taskwarrior_cmd)])
+
+groups = [_create_group(i) for i in range(len(_names))] + [_scratchpad]

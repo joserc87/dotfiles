@@ -12,7 +12,7 @@ from lib.settings import MODKEY, DEFAULT_TERMINAL, APP_LAUNCHER
 # Parts of the config
 from lib.keybindings import keys
 from lib.groups import groups
-from lib.layouts import layouts
+from lib.layouts import layouts, floating_layout
 from lib.hooks import *
 from lib.mouse import *
 from lib.screens import screens
