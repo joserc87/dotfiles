@@ -1,0 +1,85 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+snippet postit "A Jira card" b
+{panel:bgColor=#FFFFCE}
+${1: Content}
+{panel}
+endsnippet
+
+snippet ustory "A User Story card" b
+{panel:bgColor=#FFFFCE}
+*As a* ${1:user}
+*I want* ${2:to do this}
+*so that* ${3:I can get that}
+{panel}
+endsnippet
+
+snippet code "Code" b
+{code:${1:Language}}
+${2:Code}
+{code}
+endsnippet
+
+snippet noformat "Unformatted text" b
+{noformat}
+${1:Content}
+{noformat}
+endsnippet
+
+snippet python "Python code" b
+{code:python}
+${1:print("Hello world")}
+{code}
+endsnippet
+
+snippet sql "SQL code" b
+{code:sql}
+${1:SELECT *
+  FROM TABLE
+ WHERE CONDITION}
+{code}
+endsnippet
+
+snippet select "SQL select" b
+{code:sql}
+SELECT ${1:*}
+  FROM ${2:Table}
+ WHERE ${3:Condition}
+{code}
+endsnippet
+
+snippet json "JSON object" b
+{code:javascript}
+${1:\{
+  "key": "value"
+\}}
+{code}
+endsnippet
+
+snippet link "Link"
+[${1:Link title}|${2:Url}]
+endsnippet

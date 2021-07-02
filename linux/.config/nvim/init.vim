@@ -15,7 +15,6 @@ source ~/.vim/plugins.vim
 source ~/.vim/plugconfig/tmux_navigator.vim
 source ~/.vim/plugconfig/airline.vim
 source ~/.vim/plugconfig/coc.vim
-source ~/.vim/plugconfig/ctrlp.vim
 source ~/.vim/plugconfig/easyalign.vim
 source ~/.vim/plugconfig/easymotion.vim
 source ~/.vim/plugconfig/fugitive.vim

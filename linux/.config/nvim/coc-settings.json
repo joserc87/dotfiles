@@ -8,8 +8,9 @@
     "python.jediPath": "~/.pyenv/versions/neovim3/lib/python3.7/site-packages/",
     // "python.pythonPath": "~/.pyenv/versions/neovim3/bin/python",
     "python.sortImports.path": "~/.pyenv/versions/neovim3/bin/isort",
-    "diagnostic.displayByAle": true
+    "diagnostic.displayByAle": true,
     // "python.jediPath": "~/.pyenv/versions/3.7.7/lib/python3.7/site-packages",
     // "python.pythonPath": "~/.pyenv/shims/python",
     // "python.jediPath": "~/.pyenv/versions/3.6.9/envs/dumpy/lib/python3.6/site-packages"
+    "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
 }
