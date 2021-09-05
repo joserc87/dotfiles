@@ -4,63 +4,81 @@ import os
 import sys
 import datetime
 import re
+from tasklib import TaskWarrior
+
+
+def get_tw_project_names():
+    tw = TaskWarrior("~/.task")
+    tasks = tw.tasks.pending()
+    projects = list({t["project"] for t in tasks if t["project"]})
+    return projects
+
+
+def get_all_parent_project_names(project):
+    if project:
+        parts = project.split(".")
+        return [project, *get_all_parent_project_names(".".join(parts[:-1]))]
+    return [project]
+
+
+def fill_missing_parent_project_names(project_names):
+    names = []
+    for p in project_names:
+        names.extend(get_all_parent_project_names(p))
+    return set(names)
 
 
 def today():
     date = datetime.date.today()
-    return date.strftime('%d - %A')
+    return date.strftime("%d - %A")
+
+
+def today_full():
+    date = datetime.date.today()
+    return date.strftime("%Y-%m-%d")
+
+
+def tomorrow_full():
+    date = datetime.date.today() + datetime.timedelta(days=1)
+    return date.strftime("%Y-%m-%d")
+
+
+def get_project_header(project, before_date):
+    levels = len([dot for dot in project if dot == "."])
+
+    hashtags = "#" * (levels + 3)
+    only_parent_tasks = f"project.not:{project}." if levels == 0 else ""
+    return f"{hashtags} {project} | -COMPLETED -WAITING project:{project} {only_parent_tasks} entry.before:{before_date} | project:{project}"
 
 
 def render_template():
-    d = get_vimwiki_dir()
-    yesterday = get_yesterday_filename()
+    template = """% {date}
 
-    template = """
 # {date}
 
-## Todo
+## Projects:
 
-{migrated_tasks}
-- [ ]
+{projects}
+
+## Done | end:{full_date}
 
 ## Notes
 
 """
 
+    ## Todo | -COMPLETED -WAITING project.not:personal entry.before:{full_date} | project:TOOL
+    project_names = get_tw_project_names()
+    project_names = fill_missing_parent_project_names(project_names)
+    project_names = sorted(project_names)
+    tomorrow = tomorrow_full()
+    projects = [get_project_header(project, tomorrow) for project in project_names if project]
+    projects = "\n\n".join(projects)
     content = template.format(
         date=today(),
-        migrated_tasks=get_migrated_tasks(os.path.join(d, yesterday))[:-1],
+        full_date=today_full(),
+        projects=projects,
     )
     return content
 
-
-def get_vimwiki_dir():
-    if len(sys.argv) >= 2:
-        filename = sys.argv[1]
-        folder = filename.rsplit('/', 1)[0]
-    else:
-        folder = '/home/jose/vimwiki/diary'
-    return folder
-
-
-def get_yesterday_filename():
-    d = get_vimwiki_dir()
-    for f in sorted(os.listdir(d), reverse=True):
-        full_path = os.path.join(d, f)
-        if os.path.isfile(full_path) and re.match(r'\d\d\d\d-\d\d-\d\d\.md', f):
-            return f
-    return None
-
-
-def get_migrated_tasks(filename):
-    content = ''
-    in_migration = False
-    with open(filename) as f:
-        for line in f:
-            if line.startswith('- [>]') or (line.startswith(' ') and in_migration):
-                content += line.replace('[>]', '[ ]')
-                in_migration = True
-            in_migration = False
-    return content
 
 print(render_template())
