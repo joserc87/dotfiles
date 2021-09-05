@@ -18,6 +18,9 @@ inoremap jj <ESC>
 nnoremap <leader>vv :e $MYVIMRC<CR>
 nnoremap <leader>V :vsplit $MYVIMRC<CR>
 
+" Sensible Y. For old Y, just do yy!
+nnoremap Y y$
+
 " NAVIGATION: {{{
 " WINDOW
 " This is done with tmux navigation
@@ -155,3 +158,6 @@ nnoremap <leader>nw :GonvimFilerOpen<CR>
 nnoremap <leader>nW :GonvimWorkspaceNew<CR>
 nnoremap <leader>nh :GonvimWorkspacePrevious<CR>
 nnoremap <leader>nl :GonvimWorkspaceNext<CR>
+"
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)

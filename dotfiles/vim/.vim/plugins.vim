@@ -27,6 +27,7 @@ Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 Plug 'tools-life/taskwiki'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
+Plug 'tpope/vim-dotenv'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
@@ -41,6 +42,7 @@ Plug 'embear/vim-localvimrc'
 " Useful for XML/HTML
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-abolish'
 " To align text
 Plug 'godlygeek/tabular'
 " Tabularize is much better
@@ -90,9 +92,16 @@ Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 
 Plug 'honza/vim-snippets'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" DB:
+Plug 'kristijanhusak/vim-packager', { 'type': 'opt' }
+Plug 'tpope/vim-dadbod', { 'branch': 'async-query' }
+Plug 'kristijanhusak/vim-dadbod-ui'
+
 " PYTHON:
 " Plug 'klen/python-mode'
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 " JAVASCRIPT:
 Plug 'jelera/vim-javascript-syntax'
@@ -130,7 +139,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " THEMES:
-Plug 'morhetz/gruvbox'
+" Plug 'morhetz/gruvbox'
+Plug 'sainnhe/gruvbox-material'
 "Plug 'sonph/onehalf', {'rtp': 'vim/'}
 "Plug 'joshdick/onedark'
 "Plug 'srcery-colors/srcery-vim'

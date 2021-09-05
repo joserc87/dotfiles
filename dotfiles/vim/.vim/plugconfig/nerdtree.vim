@@ -74,8 +74,9 @@ let g:NERDTreeExtensionHighlightColor['Dockerfile'] = s:dockerBlue " sets the co
 let g:WebDevIconsDefaultFolderSymbolColor = s:beige " sets the color for folders that did not match any rule
 let g:WebDevIconsDefaultFileSymbolColor = s:blue
 let g:DevIconsEnableFoldersOpenClose = 1 "Enables different glyphs for open and closed folders
-highlight NERDTreeDir guifg=s:beige guibg=NONE
 " call NERDTreeHighlightFile('NERDTreeDir', '#' . s:beige, 'none', '#' . s:beige, 0)
 " call NERDTreeHighlightFile('NERDTreeDirSlash', '#' . s:beige, 'none', 'white', 'black')
+
+highlight NERDTreeDir guifg=s:beige guibg=NONE
 autocmd FileType nerdtree highlight NERDTreeDir guifg=none ctermfg=none guibg=NONE ctermbg=NONE
 autocmd FileType nerdtree highlight NERDTreeDirSlash guifg=none ctermfg=none guibg=NONE ctermbg=NONE

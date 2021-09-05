@@ -32,12 +32,20 @@ elseif has ("unix")
   if has("gui_running")
     colorscheme monokai
   else
-    colorscheme gruvbox
+    colorscheme gruvbox-material
     let g:gruvbox_contrast_dark='medium'
     let g:gruvbox_contrast_light='medium'
     " colorscheme solarized
     let g:airline_theme='gruvbox'
+
     " let g:airline_theme='onehalfdark'
+    let g:airline_theme='gruvbox_material'
+    "
+    let g:gruvbox_material_palette = 'original'
+    " let g:gruvbox_material_background = 'hard'
+    " let g:gruvbox_material_background = 'medium'
+
+    colorscheme gruvbox-material
   endif
 else
   colorscheme torte
@@ -76,11 +84,16 @@ set guioptions-=L
 " set cursorcolumn
 " highlight CursorLine ctermbg=Yellow cterm=bold guibg=#2b2b2b
 " highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#2b2b2b
-highlight VertSplit ctermbg=Black guibg=#1C1C1C guifg=#1C1C1C
-highlight LineNr ctermbg=Black guibg=None guifg=#FABD2F
+" highlight VertSplit ctermbg=Black guibg=#1C1C1C guifg=#1C1C1C
+" highlight VertSplit ctermbg=none guibg=none guifg=none
+highlight VertSplit ctermbg=Black guibg=#323030 guifg=#323030
+set fillchars+=vert:\ 
+" highlight LineNr ctermbg=Black guibg=None guifg=#FABD2F
 highlight CursorLineNr ctermbg=Black guibg=None guifg=#FABD2F
 
 hi SignColumn guibg=None
+set signcolumn=auto
+set foldcolumn=0
 
 " let s:N1   = [ '#00005f' , '#df0ff0' , 17  , 190 ]
 " let s:N2   = [ '#ffffff' , '#444444' , 255 , 238 ]

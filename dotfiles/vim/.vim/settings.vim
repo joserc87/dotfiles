@@ -30,7 +30,7 @@ let g:localvimrc_persistent = 1
 set secure
 "
 " Autocompletion
-set wildmode=longest,list,full
+" set wildmode=longest,list,full
 
 " This allows buffers to be hidden if you've modified a buffer.
 " This is almost a must if you wish to use buffers in this way.

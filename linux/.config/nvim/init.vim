@@ -20,11 +20,13 @@ source ~/.vim/plugconfig/easymotion.vim
 source ~/.vim/plugconfig/fugitive.vim
 source ~/.vim/plugconfig/gitgutter.vim
 source ~/.vim/plugconfig/nerdtree.vim
+source ~/.vim/plugconfig/dadbod.vim
 source ~/.vim/plugconfig/test.vim
 source ~/.vim/plugconfig/vimwiki.vim
 source ~/.vim/plugconfig/fzf.vim
 source ~/.vim/plugconfig/floaterm.vim
 source ~/.vim/plugconfig/firenvim.vim
+source ~/.vim/plugconfig/treesitter.vim
 source ~/.vim/langconfig.vim
 source ~/.vim/macros.vim
 source ~/.vim/mappings.vim
