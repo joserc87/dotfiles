@@ -175,6 +175,7 @@ export PYTHONPATH=.:./ravenpack:./python:$PYTHONPATH
 export PATH=\
 ~/Library/Android/sdk/platform-tools/\
 :/Applications/MacPorts/MacVim.app/Contents/MacOS/\
+:/opt/oracle/instantclient_21_1/\
 :$PATH
 # Antlr
 export CLASSPATH=.:/usr/local/lib/antlr-4.5.3-complete.jar:$CLASSPATH
@@ -287,7 +288,10 @@ fi
 
 # export ORACLE_HOME=/usr/lib/oracle/12.2/client64/lib/
 export ORACLE_HOME=/usr/lib/
-export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib/
+export LD_LIBRARY_PATH=\
+/usr/lib/oracle/12.2/client64/lib/\
+:/opt/oracle/instantclient_21_1/\
+:$LD_LIBRARY_PATH
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
