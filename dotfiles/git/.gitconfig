@@ -43,3 +43,5 @@
 	browser = firefox
 [pull]
 	rebase = true
+[pager]
+	log = gitmoji-log | less --tabs=4 -rFX
