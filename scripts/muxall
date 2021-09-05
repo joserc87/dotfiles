@@ -25,6 +25,7 @@ function all {
     entitytool
     webapps
     pysync
+    tmux attach -t base
 }
 
 all
