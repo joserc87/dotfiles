@@ -24,6 +24,22 @@
 #
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
 
-snippet TOOL "TOOL" bA
-### TOOL-${1}: ${2:title} | project:TOOL.${1}
+snippet TOOL- "TOOL" bA
+#### TOOL-${1}: ${2:title} | project:TOOL.${1}
+endsnippet
+
+snippet RPA- "RPA" bA
+#### RPA-${1}: ${2:title} | project:RPA.${1}
+endsnippet
+
+snippet sql "SQL" b
+\`\`\`sql
+${1}
+\`\`\`
+endsnippet
+
+snippet py "Python" b
+\`\`\`python
+>>> ${1}
+\`\`\`
 endsnippet
