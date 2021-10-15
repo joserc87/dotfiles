@@ -15,3 +15,5 @@ jose-pc.py
 setup.cfg
 .vimspector.json
 .python-version
+coc-settings.json
+**/.vim/sessions
