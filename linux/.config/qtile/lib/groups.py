@@ -35,15 +35,21 @@ def create_dropdown(name, cmd):
         name, cmd, on_focus_lost_hide=True, x=0.25, y=0.25, width=0.5, height=0.5,
     )
 
+def _alacritty_run(cmd):
+    return f"""alacritty \
+        --class float \
+        -o font.size=16 \
+        -o background_opacity=0.8 \
+        -t 'scratchpad' \
+        -e sh -c "sleep 0.1 && {cmd}" \
+        """  # -r small"""
 
-_taskwarrior_cmd = """alacritty \
-    --class float \
-    -o font.size=16 \
-    -o background_opacity=0.5 \
-    -t 'TaskWarrior' \
-    -e taskwarrior-tui \
-    """  # -r small"""
+_taskwarrior_cmd = _alacritty_run("taskwarrior-tui")
+_vimwiki_cmd = _alacritty_run("nvim -c VimwikiMakeDiaryNote")
 
-_scratchpad = ScratchPad("scratchpad", [create_dropdown("task", _taskwarrior_cmd)])
+_scratchpad = ScratchPad("scratchpad", [
+    create_dropdown("task", _taskwarrior_cmd),
+    create_dropdown("diary", _vimwiki_cmd),
+])
 
 groups = [_create_group(i) for i in range(len(_names))] + [_scratchpad]

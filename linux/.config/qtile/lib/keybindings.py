@@ -77,7 +77,8 @@ keys = [
     Key([MODKEY], SEMICOLON, lazy.function(go_to_next_screen)),
     Key([MODKEY, CTRL], 'h', lazy.function(kick_to_next_screen, -1)),
     Key([MODKEY, CTRL], 'l', lazy.function(kick_to_next_screen)),
-    Key([], 'F12', lazy.group['scratchpad'].dropdown_toggle('task')),
+    Key([], 'F12', lazy.group['scratchpad'].dropdown_toggle('diary')),
+    Key([SHIFT], 'F12', lazy.group['scratchpad'].dropdown_toggle('task')),
 ]
 
 # Keybindings for switching groups
