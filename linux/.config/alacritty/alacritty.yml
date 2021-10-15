@@ -1,4 +1,4 @@
-background_opacity: 1
+background_opacity: 1.0
 #E import:
 #E     # - /home/jcano/.config/alacritty/alacritty.gruvbox.dark.yml
 #E     - ./alacritty.gruvbox.light.yml
