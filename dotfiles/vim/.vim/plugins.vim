@@ -1,4 +1,4 @@
-" Automagic installation of Plug
+"/home/jcano/git/entitytool/ravenpack/reporting/views/categoryreport.py Automagic installation of Plug
 " As seen in https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -64,10 +64,12 @@ Plug 'lucapette/vim-textobj-underscore'
 Plug 'wellle/targets.vim'
 Plug 'idbrii/textobj-word-column.vim'
 Plug 'itchyny/vim-cursorword'
+" Plug 'glepnir/dashboard-nvim'
 " Telescope
-" Plug 'nvim-lua/popup.nvim'
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'rmagatti/auto-session'
 
 " CODE:
 " Indentation
@@ -93,6 +95,7 @@ Plug 'szw/vim-maximizer'
 
 Plug 'honza/vim-snippets'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'tpope/vim-projectionist'
 
 " DB:
 Plug 'kristijanhusak/vim-packager', { 'type': 'opt' }
@@ -102,6 +105,7 @@ Plug 'kristijanhusak/vim-dadbod-ui'
 " PYTHON:
 " Plug 'klen/python-mode'
 " Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'mattboehm/vim-unstack'
 
 " JAVASCRIPT:
 Plug 'jelera/vim-javascript-syntax'

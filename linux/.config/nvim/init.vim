@@ -20,6 +20,7 @@ source ~/.vim/plugconfig/easymotion.vim
 source ~/.vim/plugconfig/fugitive.vim
 source ~/.vim/plugconfig/gitgutter.vim
 source ~/.vim/plugconfig/nerdtree.vim
+source ~/.vim/plugconfig/dashboard.vim
 source ~/.vim/plugconfig/dadbod.vim
 source ~/.vim/plugconfig/test.vim
 source ~/.vim/plugconfig/vimwiki.vim
