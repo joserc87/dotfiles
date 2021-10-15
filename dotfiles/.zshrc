@@ -302,7 +302,9 @@ export JIRA_USER=jcano
 alias my-jiras="jira-get 'code,summary' assignee=$JIRA_USER status='Open' separator=' '"
 
 HISTSIZE=999999999
-export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -f -g ""'
+
+# -U to Ignore VCS ignore files (.gitignore)
+export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -U -f -g ""'
 
 # Fix for Python in VIM:
 # https://vi.stackexchange.com/questions/7644/use-vim-with-virtualenv/7654#7654
