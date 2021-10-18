@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-ADDR="http://192.168.18.2"
+ADDR="http://192.168.0.15"
 USR="qtDL80G1DEeUctazVqefajK18GXPS2BbOa6WdQHK"
 API="$ADDR/api/$USR"
-DESK_LAMP=1
+DESK_LAMP=6
 
 STATE_URL=$API/lights/1
 lamp_on=$(curl $API/lights/$DESK_LAMP | jq .state.on)

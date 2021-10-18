@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
 if [[ $1 == on ]]; then 
-    slack-cli status edit "In the zone. Ping if needed." ":tomato:"
+    slack-cli status edit "Focused" ":tomato:"
     slack-cli snooze start 15
+    notify-send "🍅 POMODORO" "\n\nStarting 15 minutes of focus"
     sleep 900
     slack-cli status edit " " ":python:"
+    notify-send "🍅 POMODORO" "\n\nBreak time!"
 elif [[ $1 == off ]]; then 
     echo enable pomodoro
     slack-cli snooze end
     slack-cli status edit " " ":python:"
+    notify-send "🍅 POMODORO" "\n\nPomodoro canceled"
 else
     echo Error. Wrong arguments
 fi
