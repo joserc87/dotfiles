@@ -70,6 +70,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'rmagatti/auto-session'
+Plug 'rmagatti/session-lens'
 
 " CODE:
 " Indentation

@@ -161,3 +161,7 @@ nnoremap <leader>nl :GonvimWorkspaceNext<CR>
 "
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
+
+" TELESCOPE: {{{
+    nnoremap <leader><leader> :Telescope<CR>
+" }}}
