@@ -60,7 +60,7 @@ nnoremap tq  :tabclose<CR>
 " nnoremap <C-p> :Files<CR>
 nnoremap <C-M-F> :Ag<space>
 nnoremap <leader>/ :Ag<space>
-vnoremap <leader>/ y:Ag<space><C-R>=escape(@",'/\')<CR><CR>
+vnoremap <leader>/ y:Ag<space><C-R>=escape(@",'/\')<CR><CR>!tests/unit_tests/ !tests/integration/tests/ !import 
 vnoremap / y/\V<C-R>=escape(@",'/\')<CR><CR>
 " }}}
 
@@ -119,6 +119,8 @@ nmap <leader>db <Plug>VimspectorToggleBreakpoint
 nmap <leader>dbc <Plug>VimspectorToggleConditionalBreakpoint
 " }}}
 
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
 
 " Command: {{{
 nnoremap <leader><C-R> :History:<CR>
@@ -158,10 +160,33 @@ nnoremap <leader>nw :GonvimFilerOpen<CR>
 nnoremap <leader>nW :GonvimWorkspaceNew<CR>
 nnoremap <leader>nh :GonvimWorkspacePrevious<CR>
 nnoremap <leader>nl :GonvimWorkspaceNext<CR>
-"
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
+
 
 " TELESCOPE: {{{
     nnoremap <leader><leader> :Telescope<CR>
+" }}}
+"
+" LSP config: {{{
+    nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+    nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
+    nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+    nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+    nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+    nnoremap <silent> gk <cmd>lua vim.lsp.buf.signature_help()<CR>
+    nnoremap <silent> gp <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+    nnoremap <silent> gn <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+
+
+    "xnoremap <leader>f  <Plug>(coc-format-selected)
+    "nnoremap <leader>f  <Plug>(coc-format-selected)
+    "vnoremap <C-M-l>  <Plug>(coc-format-selected)
+    "nnoremap <C-M-l>  <Plug>(coc-format)
+    vnoremap <leader>cf  <cmd>lua vim.lsp.buf.formatting()<CR>
+    nnoremap <leader>cf  <cmd>lua vim.lsp.buf.formatting()<CR>
+" }}}
+
+" NvimTree: {{{
+    nnoremap <leader>nn <cmd>NvimTreeToggle<cr>
+    nnoremap <leader>ne <cmd>NvimTreeFocus<cr>
+    nnoremap <leader>nf <cmd>NvimTreeFindFile<cr>
 " }}}

@@ -58,7 +58,9 @@ endsnippet
 
 snippet sql "SQL code" b
 {code:sql}
-${1}
+${1:`!v
+getreg("+")
+`}
 {code}
 endsnippet
 
@@ -78,6 +80,27 @@ ${1:\{
 {code}
 endsnippet
 
+snippet @kinga "Kinga jira name" i
+[~kklimaszewska]
+endsnippet
+
+snippet @juanma "Juanma jira name" i
+[~jjacquet]
+endsnippet
+
+snippet @martin "Martin jira name" i
+[~msilva]
+endsnippet
+
 snippet link "Link"
 [${1:Link title}|${2:Url}]
+endsnippet
+
+snippet DoD "Definition Of Done" b
+{panel:bgColor=#CEFFD1|title= (/) *DoD*}
+*Code Review:* ${1:@author} on MR [!${2:NUM}|https://gitlab.ravenpack.com/python/entitytool/merge_requests/${2:NUM}]
+*Test Coverage:* Added ${3:X} unit tests and ${4:X} integration tests. ${5:Y}% coverage on the file. ${6:Z}% coverage in the whole project.
+*Acceptance Criteria:* ${7:???}
+*Documentation:* Added to Changelog.
+{panel}
 endsnippet

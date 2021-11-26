@@ -15,8 +15,13 @@ call plug#begin('~/.vim/plugged')
 Plug 'VundleVim/Vundle.vim'
 
 " PLUGINS:
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'scrooloose/nerdtree'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+" Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+Plug 'kyazdani42/nvim-tree.lua'
+
 "" Plug 'scrooloose/syntastic'
 " Plug 'ctrlpvim/ctrlp.vim'
 Plug 'bling/vim-airline'
@@ -24,7 +29,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
 Plug 'easymotion/vim-easymotion'
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
-Plug 'tools-life/taskwiki'
+" Plug 'tools-life/taskwiki'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'tpope/vim-dotenv'
@@ -85,13 +90,47 @@ imap <C-c> <CR><Esc>O
 " let g:ycm_confirm_extra_conf=0
 " set completeopt-=preview
 " Plug 'marijnh/tern_for_vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" COC
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Coq
+" main one
+""" Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+""" " 9000+ Snippets
+""" Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+""" 
+""" " lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
+""" " Need to **configure separately**
+""" Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
+""" " - shell repl
+""" " - nvim lua api
+""" " - scientific calculator
+""" " - comment banner
+""" " - etc
+""" "
+
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'glepnir/lspsaga.nvim'
+
+Plug 'SirVer/ultisnips'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'folke/trouble.nvim'
+
 Plug 'dense-analysis/ale'
 Plug 'janko/vim-test'
 Plug 'tpope/vim-dispatch'
 Plug '5long/pytest-vim-compiler'
 " Plug 'alfredodeza/pytest'
 Plug 'puremourning/vimspector'
+Plug 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
 Plug 'szw/vim-maximizer'
 
 Plug 'honza/vim-snippets'
@@ -141,7 +180,6 @@ Plug 'sirtaj/vim-openscad'
 
 " ICONS:
 Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " THEMES:
 " Plug 'morhetz/gruvbox'
@@ -162,3 +200,7 @@ call plug#end()
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 " filetype plugin on
+
+
+" Todoist
+Plug 'romgrk/todoist.nvim', { 'do': ':TodoistInstall' }

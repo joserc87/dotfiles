@@ -5,6 +5,7 @@
 noremap <silent> <leader>tn :TestNearest<CR>
 noremap <silent> <leader>tN :TestNearest -strategy=floaterm -vv<CR>
 noremap <silent> <leader>tm :TestNearest -strategy=shtuff -vv<CR>
+noremap <silent> <leader>td :TestNearest -strategy=vimspectorpy -vv<CR>
 noremap <silent> <leader>tf :TestFile<CR>
 noremap <silent> <leader>tF :TestFile -strategy=shtuff -vv<CR>
 noremap <silent> <leader>ts :TestSuite -vv -m \"not slow and not skip and not knownfail and not require_cache\" core/tests/unit_tests<CR>
@@ -29,3 +30,6 @@ let g:dispatch_compilers['pyunit'] = 'pytest'
 let g:shtuff_receiver = 'testrunner'
 
 autocmd FileType python let b:dispatch = 'pytest%'
+
+
+let g:vimspectorpy#launcher = "tmux"
