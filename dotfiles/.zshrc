@@ -163,14 +163,15 @@ add_path "$HOME/.local/bin"
 add_path "$HOME/bin/"
 add_path "$HOME/apps/"
 add_path "$HOME/.pyenv/bin"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
 add_path "$HOME/.cargo/bin"
 
-#
 # Python
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv init --path)"
+fi
 export PYTHONPATH=.:./ravenpack:./python:$PYTHONPATH
+
 # Android tools:
 export PATH=\
 ~/Library/Android/sdk/platform-tools/\
@@ -386,6 +387,38 @@ function saw {
 
 function tw {
     taskwarrior-tui
+}
+
+function startvpn {
+    sudo systemctl start openvpn-client@ravenpack.service
+}
+
+function stopvpn {
+    sudo systemctl stop openvpn-client@ravenpack.service
+}
+
+function code {
+    PROJECTS='entitytool\npysync\nwebapps\ndatamodels\nops\nconfig'
+    project=$(echo $PROJECTS | fzf)
+    case $project in
+        webapps)
+            project="git/python/webapps"
+            ;;
+        datamodels)
+            project="git/ravenpack"
+            ;;
+        ops)
+            project="git/ops/operations"
+            ;;
+        config)
+            project="code/config-files/"
+            ;;
+        *)
+            project="git/$project"
+            ;;
+    esac
+    cd ~/"$project"
+    nvim
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
