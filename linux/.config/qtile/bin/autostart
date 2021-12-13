@@ -14,5 +14,6 @@ function execute_once {
 nitrogen --restore
 sleep 1
 compton-blur -b
-execute_once station
-xset r rate 200 50
+execute_once ferdi
+xset r rate 180 70
+indicator-sound-switcher

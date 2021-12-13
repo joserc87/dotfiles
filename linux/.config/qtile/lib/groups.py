@@ -5,7 +5,7 @@ _matches = {
     4: ["Chromium"],
     6: ["Slack"],
     7: ["Firefox"],
-    9: ["Station"],
+    9: ["Ferdi"],
     10: ["Spotify"],
 }
 _spawn = {
@@ -13,7 +13,7 @@ _spawn = {
     4: ["chromium"],
     6: ["slack"],
     7: ["firefox"],
-    9: ["station"],
+    9: ["ferdi"],
     # 10: ["spotify"],
 }
 _names = "#"

@@ -188,7 +188,8 @@ def make_screen(systray=False):
         blocks.insert(-1, _separator())
 
     # return Screen(top=bar.Bar(blocks, 25, background=COLS["deus_1"]))
-    my_bar = bar.Bar(blocks, 24, background=COLS["dark_2"])
+    # my_bar = bar.Bar(blocks, 24, background=COLS["dark_2"])
+    my_bar = bar.Bar(blocks, 24, background=COLS["dark_1_trans"])
 
     return Screen(**{position: my_bar})
 

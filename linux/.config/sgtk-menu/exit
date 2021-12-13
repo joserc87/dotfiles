@@ -6,7 +6,7 @@
   },
   {
     "name": "Logout",
-    "exec": "qtile-cmd -o cmd -f shutdown",
+    "exec": "qtile -o cmd -f shutdown",
     "icon": "exit"
   },
   {

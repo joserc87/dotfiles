@@ -71,6 +71,8 @@ COLS = {
     "dark_5": "#665c54",
     "dark_6": "#7c6f64",
     "gray_0": "#928374",
+    "dark_1_trans": "#282828B0",
+    "transparent": "#00000000",
     "light_0": "#f9f5d7",
     "light_1": "#fbf1c7",
     "light_2": "#f2e5bc",

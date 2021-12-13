@@ -6,7 +6,9 @@ from .settings import COLS
 from libqtile.config import Match
 
 _layout_common_settings = dict(
-    border_focus=COLS['purple_4']
+    border_focus=COLS['purple_4'],
+    border_normal=COLS['dark_1'],
+    single_border_width=0,
 )
 
 _max_layout_settings = {
