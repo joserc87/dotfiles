@@ -66,6 +66,13 @@ def render_template():
 
 """
 
+    # Parts:
+    # % {date}
+    # {date}
+    # {projects}
+    ## Done | end:{full_date}
+    ## Notes
+
     ## Todo | -COMPLETED -WAITING project.not:personal entry.before:{full_date} | project:TOOL
     project_names = get_tw_project_names()
     project_names = fill_missing_parent_project_names(project_names)

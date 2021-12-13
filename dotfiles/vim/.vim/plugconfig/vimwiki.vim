@@ -10,6 +10,7 @@ let wiki_root.nested_syntaxes = {
             \'js': 'javascript',
             \'json': 'json',
             \'sh': 'shell',
+            \'vim': 'vim',
             \}
 let wiki_root.template_path = '~/vimwiki/templates/'
 let wiki_root.template_default = 'default'
