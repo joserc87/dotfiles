@@ -29,10 +29,11 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
 Plug 'easymotion/vim-easymotion'
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
-" Plug 'tools-life/taskwiki'
+Plug 'tools-life/taskwiki'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'tpope/vim-dotenv'
+
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
@@ -82,8 +83,6 @@ Plug 'rmagatti/session-lens'
 "" Plug 'nathanaelkane/vim-indent-guides'
 " Automatically add some closing quotes
 "" Plug 'Raimondi/delimitMate'
-" By pressing C-c after {, it will put the pointer in the line between { and }
-imap <C-c> <CR><Esc>O
 " Autocompletion
 " Plug 'Valloric/YouCompleteMe'
 " let g:ycm_add_preview_to_completeopt=0
@@ -122,19 +121,22 @@ Plug 'SirVer/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'folke/trouble.nvim'
 
-Plug 'dense-analysis/ale'
+" Code
 Plug 'janko/vim-test'
 Plug 'tpope/vim-dispatch'
-Plug '5long/pytest-vim-compiler'
-" Plug 'alfredodeza/pytest'
 Plug 'puremourning/vimspector'
-Plug 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
+
+" Lint
+" Ale is useful, but temporarily dissabled
+" Plug 'dense-analysis/ale'
+Plug 'folke/trouble.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" Windows
 Plug 'szw/vim-maximizer'
 
 Plug 'honza/vim-snippets'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'tpope/vim-projectionist'
 
 " DB:
@@ -143,9 +145,12 @@ Plug 'tpope/vim-dadbod', { 'branch': 'async-query' }
 Plug 'kristijanhusak/vim-dadbod-ui'
 
 " PYTHON:
+" Plug 'alfredodeza/pytest'
 " Plug 'klen/python-mode'
 " Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug '5long/pytest-vim-compiler'
 Plug 'mattboehm/vim-unstack'
+Plug 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
 
 " JAVASCRIPT:
 Plug 'jelera/vim-javascript-syntax'

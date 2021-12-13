@@ -113,3 +113,5 @@ highlight VimwikiHeader6 gui=bold guifg=#689D6A cterm=bold ctermfg=4
 
 highlight Floaterm guibg=none
 highlight FloatermBorder guibg=none guifg=orchid
+highlight Normal guibg=none
+highlight EndOfBuffer guibg=none guifg=None
