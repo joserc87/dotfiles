@@ -3,6 +3,6 @@
 picom-kawase \
     --blur-method kawase \
     --experimental-backends \
+    --blur-strength 3 \
     --backend glx \
-    --blur-strength 10 \
     --config ~/.config/picom.conf
