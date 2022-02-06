@@ -69,16 +69,40 @@ nnoremap tq  :tabclose<CR>
 " IDE: {{{
     " Search:
     " nnoremap <C-p> :Files<CR>
-    nnoremap <C-M-F> :Ag<space>
-    nnoremap <leader>/ :Ag<space>
-    vnoremap <leader>/ y:Ag<space><C-R>=escape(@",'/\')<CR><CR>!tests/unit_tests/ !tests/integration/tests/ !import 
+    nnoremap <silent> <C-p> :FloatermNew --disposable --autoclose=2 fzf --preview '~/.vim/plugged/fzf.vim/bin/preview.sh {}'<CR>
+    nnoremap <silent> <C-M-F> :Ag<space>
+    nnoremap <silent> <leader>/ :Ag<space>
+    vnoremap <silent> <leader>/ y:Ag<space><C-R>=escape(@",'/\')<CR><CR>!tests/unit_tests/ !tests/integration/tests/ !import 
     vnoremap / y/\V<C-R>=escape(@",'/\')<CR><CR>
-    nnoremap <leader>vw :call fzf#run(fzf#wrap({'source': 'fd --type f --exclude "site_html" --exclude "presentations" --exclude "diary" . ~/vimwiki'}))<CR>
-    nnoremap <leader>vv :call fzf#run(fzf#wrap({'source': 'fd --type f -I --follow --exclude "plugged" . ~/.config/nvim/ ~/.vim/'}))<CR>
+    nnoremap <silent> <leader>vw :call fzf#run(fzf#wrap({'source': 'fd --type f --exclude "site_html" --exclude "presentations" --exclude "diary" . ~/vimwiki'}))<CR>
+    nnoremap <silent> <leader>vv :call fzf#run(fzf#wrap({'source': 'fd --type f -I --follow --exclude "plugged" . ~/.config/nvim/ ~/.vim/'}))<CR>
     " Open vimrc and other vim configs
-    nnoremap <leader>V :vsplit $MYVIMRC<CR>
+    nnoremap <silent> <leader>V :vsplit $MYVIMRC<CR>
 
-    nnoremap <leader>vs :call fzf#run(fzf#wrap({'source': 'fd --type f --follow . ~/scripts/ '}))<CR>
+    nnoremap <silent> <leader>vs :call fzf#run(fzf#wrap({'source': 'fd --type f --follow . ~/scripts/ '}))<CR>
+" }}}
+
+" FLOATERM: {{{
+    " nnoremap <C-p> :FloatermNew fzf<CR>
+    nnoremap <silent> <leader>fz :FloatermNew fzf --preview '~/.vim/plugged/fzf.vim/bin/preview.sh {}'<CR>
+    nnoremap <silent> <leader>fs :FloatermNew zsh<CR>
+    nnoremap <silent> <leader>fr :FloatermNew ranger<CR>
+    nnoremap <silent> <leader>fp :FloatermNew  --wintype=normal --position=right --width=0.4 ipython<CR>
+    nnoremap <silent> <leader>fP :FloatermNew  --wintype=normal --position=right --width=0.4 python<CR>
+    nnoremap <silent> <Leader>fg :FloatermNew --disposable --autoclose=2 lazygit<CR>
+    nnoremap <silent> <Leader>ft :FloatermNew --disposable --autoclose=2 taskwarrior-tui<CR>
+    nnoremap <silent> <leader>ff :FloatermToggle<CR>
+    tnoremap <silent> <leader>ff <C-\><C-n>:FloatermToggle<CR>
+    tnoremap <silent> <leader>fg <C-\><C-n>:FloatermToggle<CR>
+    tnoremap <silent> <leader>fj <C-\><C-n>
+
+    nnoremap <silent> <leader>fh :FloatermPrev<CR>
+    tnoremap <silent> <leader>fh <C-\><C-n>:FloatermPrev<CR>
+    nnoremap <silent> <leader>fl :FloatermNext<CR>
+    tnoremap <silent> <leader>fl <C-\><C-n>:FloatermNext<CR>
+
+    nnoremap <silent> <leader>f> :FloatermSend<CR>
+    vnoremap <silent> <leader>f> :FloatermSend<CR>
 " }}}
 
 " TEST: {{{
@@ -212,6 +236,9 @@ noremap <silent> <leader>tT :TestLast -strategy=shtuff -vv<CR>
     "nnoremap <C-M-l>  <Plug>(coc-format)
     vnoremap <leader>cf  <cmd>lua vim.lsp.buf.formatting()<CR>
     nnoremap <leader>cf  <cmd>lua vim.lsp.buf.formatting()<CR>
+
+    nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+    vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
 " }}}
 
 " NVIMTREE: {{{
