@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import sys
-from libqtile.command import InteractiveCommandClient
+from libqtile.command.client import InteractiveCommandClient
 
 c = InteractiveCommandClient()
 
