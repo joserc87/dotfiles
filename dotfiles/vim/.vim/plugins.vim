@@ -92,7 +92,9 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
-Plug 'glepnir/lspsaga.nvim'
+" Using fork of lspsaga until main supports nvim > 5.1
+Plug 'tami5/lspsaga.nvim'
+" Plug 'glepnir/lspsaga.nvim'
 
 " SNIPPETS:
 Plug 'SirVer/ultisnips'
@@ -129,7 +131,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 """ Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 """ " 9000+ Snippets
 """ Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-""" 
+"""
 """ " lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
 """ " Need to **configure separately**
 """ Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
@@ -150,12 +152,12 @@ Plug 'tpope/vim-dadbod', { 'branch': 'async-query' }
 Plug 'kristijanhusak/vim-dadbod-ui'
 
 " PYTHON:
-" Plug 'alfredodeza/pytest'
-" Plug 'klen/python-mode'
-" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug '5long/pytest-vim-compiler'
 Plug 'mattboehm/vim-unstack'
 Plug 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
+" Plug 'alfredodeza/pytest'
+" Plug 'klen/python-mode'
+" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 " JAVASCRIPT:
 Plug 'jelera/vim-javascript-syntax'
@@ -216,12 +218,12 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 
 " THEMES:
-" Plug 'morhetz/gruvbox'
 Plug 'sainnhe/gruvbox-material'
-"Plug 'sonph/onehalf', {'rtp': 'vim/'}
-"Plug 'joshdick/onedark'
-"Plug 'srcery-colors/srcery-vim'
-"Plug 'crusoexia/vim-monokai'
+" Plug 'morhetz/gruvbox'
+" Plug 'sonph/onehalf', {'rtp': 'vim/'}
+" Plug 'joshdick/onedark'
+" Plug 'srcery-colors/srcery-vim'
+" Plug 'crusoexia/vim-monokai'
 
 " DASHBOARD:
 " Plug 'glepnir/dashboard-nvim'
