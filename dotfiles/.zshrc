@@ -168,7 +168,7 @@ add_path "$HOME/.cargo/bin"
 # Python
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
-  eval "$(pyenv init --path)"
+  # eval "$(pyenv init --path)"
 fi
 export PYTHONPATH=.:./ravenpack:./python:$PYTHONPATH
 
