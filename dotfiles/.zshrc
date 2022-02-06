@@ -152,14 +152,24 @@ add_path "$HOME/Scripts/"
 add_path "$HOME/.local/bin"
 add_path "$HOME/bin/"
 add_path "$HOME/apps/"
-add_path "$HOME/.pyenv/bin"
 add_path "$HOME/.cargo/bin"
+add_path "$HOME/.pyenv/bin"
 
 # Python
 if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
   eval "$(pyenv virtualenv init -)"
-  # eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
+  eval "$(pyenv init --path)"
+  __pyenv_version_ps1 (){
+      local ret=$?;
+      if [ -n "${PYENV_VERSION}" ]; then
+          echo -n "(${PYENV_VERSION}) "
+      fi
+      return $?
+  }
+
+  export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+  PS1="\$(__pyenv_version_ps1)${PS1}"
 fi
 export PYTHONPATH=.:./ravenpack:./python:$PYTHONPATH
 
@@ -289,7 +299,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-alias inp="pyenv activate big"
 export JIRA_USER=jcano
 alias my-jiras="jira-get 'code,summary' assignee=$JIRA_USER status='Open' separator=' '"
 
