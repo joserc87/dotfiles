@@ -2,11 +2,6 @@
 # CUSTOM OPTIONS ADDED BY ME:
 #############################
 
-# in neovim, <C-H> won't work:
-# Solution found at https://github.com/neovim/neovim/wiki/FAQ#my-ctrl-h-mapping-doesnt-work
-# if .terminfo does not exist, apply
-# infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
-#tic $TERM.ti"
 export TERMINFO="$HOME/.terminfo"
 export TERM=xterm-256color
 # This one makes ranger crash
