@@ -1,3 +1,4 @@
+window.opacity: 0.8
 window.opacity: 1.0
 #E import:
 #E     # - /home/jcano/.config/alacritty/alacritty.gruvbox.dark.yml

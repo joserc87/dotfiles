@@ -2,11 +2,6 @@
 # CUSTOM OPTIONS ADDED BY ME:
 #############################
 
-# in neovim, <C-H> won't work:
-# Solution found at https://github.com/neovim/neovim/wiki/FAQ#my-ctrl-h-mapping-doesnt-work
-# if .terminfo does not exist, apply
-# infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
-#tic $TERM.ti"
 export TERMINFO="$HOME/.terminfo"
 export TERM=xterm-256color
 # This one makes ranger crash
@@ -35,11 +30,6 @@ bindkey -v
 # TMUXINATOR
 if hash tmuxinator 2>/dev/null; then
     alias mux=tmuxinator
-fi
-
-# i3lock + suspend
-if hash i3lock 2>/dev/null; then
-    alias suspend="i3lock -c 000000 && systemctl suspend"
 fi
 
 # Add this so we don't have to type cd
@@ -318,6 +308,22 @@ source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
 alias pytest py.test
+#
+# i3lock + suspend
+function suspend {
+    toggle_lamp.sh off
+    if hash i3lock 2>/dev/null; then
+        i3lock -c 000000
+    fi
+    sleep 1
+    systemctl suspend
+}
+
+function poweroff {
+    toggle_lamp.sh off
+    /usr/bin/poweroff
+}
+
 
 function selectJira {
     FZF="fzf --height 7" jira-dmenu --snake | sed 's/:/_/g' || exit -1
