@@ -1,0 +1,66 @@
+# [Created by task 2.5.3 5/12/2021 11:49:59]
+# Taskwarrior program configuration file.
+# For more documentation, see http://taskwarrior.org or try 'man task', 'man task-color',
+# 'man task-sync' or 'man taskrc'
+
+# Here is an example of entries that use the default, override and blank values
+#   variable=foo   -- By specifying a value, this overrides the default
+#   variable=      -- By specifying no value, this means no default
+#   #variable=foo  -- By commenting out the line, or deleting it, this uses the default
+
+# Use the command 'task show' to see all defaults and overrides
+
+# Files
+data.location=~/.task
+
+# Color theme (uncomment one to use)
+#include /usr/share/doc/task/rc/light-16.theme
+#include /usr/share/doc/task/rc/light-256.theme
+include /usr/share/doc/task/rc/dark-16.theme
+#include /usr/share/doc/task/rc/dark-256.theme
+#include /usr/share/doc/task/rc/dark-red-256.theme
+#include /usr/share/doc/task/rc/dark-green-256.theme
+#include /usr/share/doc/task/rc/dark-blue-256.theme
+#include /usr/share/doc/task/rc/dark-violets-256.theme
+#include /usr/share/doc/task/rc/dark-yellow-green.theme
+#include /usr/share/doc/task/rc/dark-gray-256.theme
+#include /usr/share/doc/task/rc/dark-gray-blue-256.theme
+#include /usr/share/doc/task/rc/solarized-dark-256.theme
+#include /usr/share/doc/task/rc/solarized-light-256.theme
+#include /usr/share/doc/task/rc/no-color.theme
+
+uda.reviewed.type=date
+uda.reviewed.label=Reviewed
+report._reviewed.description=Tasksh review report.  Adjust the filter to your needs.
+report._reviewed.columns=uuid
+report._reviewed.sort=reviewed+,modified+
+report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
+uda.taskwarrior-tui.task-report.show-info=false
+
+report.small.description=A small report for a modal
+report.small.columns=id,project,description.count
+report.small.labels=ID,Proj,Desc
+# report.small.columns=project,description.count
+# report.small.labels=Proj,Desc
+report.small.filter=status:pending,project.not:personal
+report.small.sort=start-,urgency-
+
+report.next.filter=status:pending limit:page project.not:personal
+
+taskd.certificate=/home/jcano/.secret/intheam.private.certificate.pem
+taskd.key=/home/jcano/.secret/intheam.private.key.pem
+taskd.ca=/home/jcano/.secret/intheam.ca.crt
+taskd.server=inthe.am:53589
+taskd.credentials=inthe_am/joserc87/c7735aa3-07b1-4846-acb5-a51d50a62d89
+taskd.trust=strict
+
+report.week.description=A report for the week
+report.week.labels=UUID,Project,Description
+report.week.columns=uuid.short,project.full,description.count
+# report.small.columns=project,description.count
+# report.small.labels=Proj,Desc
+report.week.filter=end.after:today-7d
+report.week.sort=start-
+
+# I don't want annotations in the next report
+report.next.columns=id,start.age,entry.age,depends,priority,project,tags,recur,scheduled.countdown,due.relative,until.remaining,description.count,urgency
