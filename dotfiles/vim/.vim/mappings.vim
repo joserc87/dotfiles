@@ -71,7 +71,7 @@ nnoremap tq  :tabclose<CR>
     " nnoremap <C-p> :Files<CR>
     nnoremap <silent> <C-p> :FloatermNew --disposable --autoclose=2 fzf --preview '~/.vim/plugged/fzf.vim/bin/preview.sh {}'<CR>
     nnoremap <silent> <C-M-F> :Ag<space>
-    nnoremap <silent> <leader>/ :Ag<space>
+    nnoremap <leader>/ :Ag<space>
     vnoremap <silent> <leader>/ y:Ag<space><C-R>=escape(@",'/\')<CR><CR>!tests/unit_tests/ !tests/integration/tests/ !import 
     vnoremap / y/\V<C-R>=escape(@",'/\')<CR><CR>
     nnoremap <silent> <leader>vw :call fzf#run(fzf#wrap({'source': 'fd --type f --exclude "site_html" --exclude "presentations" --exclude "diary" . ~/vimwiki'}))<CR>
@@ -106,20 +106,20 @@ nnoremap tq  :tabclose<CR>
 " }}}
 
 " TEST: {{{
-" autocmd FileType python nnoremap <Leader>t :call VimuxRunCommand("pytest")<CR>
-" Unit testing
-noremap <silent> <leader>tn :TestNearest<CR>
-noremap <silent> <leader>tN :TestNearest -strategy=floaterm -vv<CR>
-noremap <silent> <leader>tm :TestNearest -strategy=shtuff -vv<CR>
-noremap <silent> <leader>td :TestNearest -strategy=vimspectorpy -vv<CR>
-noremap <silent> <leader>tf :TestFile<CR>
-noremap <silent> <leader>tF :TestFile -strategy=shtuff -vv<CR>
-noremap <silent> <leader>ts :TestSuite -vv -m \"not slow and not skip and not knownfail and not require_cache\" tests/unit_tests<CR>
-noremap <silent> <leader>tS :TestSuite -strategy=shtuff -vv -m \"not slow and not skip and not knownfail and not require_cache\" tests/unit_tests/<CR>
-noremap <silent> <leader>tl :TestLast -vv<CR>
-noremap <silent> <leader>tg :TestVisit -vv<CR>
-noremap <silent> <leader>tt :TestLast<CR>
-noremap <silent> <leader>tT :TestLast -strategy=shtuff -vv<CR>
+    " autocmd FileType python nnoremap <Leader>t :call VimuxRunCommand("pytest")<CR>
+    " Unit testing
+    noremap <silent> <leader>tn :TestNearest<CR>
+    noremap <silent> <leader>tN :TestNearest -strategy=floaterm -vv<CR>
+    noremap <silent> <leader>tm :TestNearest -strategy=shtuff -vv<CR>
+    noremap <silent> <leader>td :TestNearest -strategy=vimspectorpy -vv<CR>
+    noremap <silent> <leader>tf :TestFile<CR>
+    noremap <silent> <leader>tF :TestFile -strategy=shtuff -vv<CR>
+    noremap <silent> <leader>ts :TestSuite -vv -m \"not slow and not skip and not knownfail and not require_cache\" tests/unit_tests<CR>
+    noremap <silent> <leader>tS :TestSuite -strategy=shtuff -vv -m \"not slow and not skip and not knownfail and not require_cache\" tests/unit_tests/<CR>
+    noremap <silent> <leader>tl :TestLast -vv<CR>
+    noremap <silent> <leader>tg :TestVisit -vv<CR>
+    noremap <silent> <leader>tt :TestLast<CR>
+    noremap <silent> <leader>tT :TestLast -strategy=shtuff -vv<CR>
 " }}}
 
 " BUFFERS: {{{
@@ -234,7 +234,10 @@ noremap <silent> <leader>tT :TestLast -strategy=shtuff -vv<CR>
     "nnoremap <leader>f  <Plug>(coc-format-selected)
     "vnoremap <C-M-l>  <Plug>(coc-format-selected)
     "nnoremap <C-M-l>  <Plug>(coc-format)
-    vnoremap <leader>cf  <cmd>lua vim.lsp.buf.formatting()<CR>
+
+    " vnoremap <leader>cf  <cmd>lua vim.lsp.buf.formatting()<CR>
+    " nnoremap <leader>cf  <cmd>lua vim.lsp.buf.formatting()<CR>
+    vnoremap <leader>cf  :Format black<CR>
     nnoremap <leader>cf  <cmd>lua vim.lsp.buf.formatting()<CR>
 
     nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
