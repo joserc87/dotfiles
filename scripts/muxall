@@ -11,7 +11,7 @@ function entitytool {
 }
 
 function webapps {
-    cd ~/git/webapps
+    cd ~/git/python/webapps
     tmuxp load -d webapps
 }
 
