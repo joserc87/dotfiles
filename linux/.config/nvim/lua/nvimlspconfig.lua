@@ -1,4 +1,5 @@
 require'lspconfig'.pyright.setup{}
+-- require'lspconfig'.pylsp.setup{}
 
 vim.diagnostic.config({
   -- To disable:

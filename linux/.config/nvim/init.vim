@@ -35,6 +35,7 @@ luafile ~/.config/nvim/lua/telescope.lua
 luafile ~/.config/nvim/lua/autosession.lua
 luafile ~/.config/nvim/lua/nvimlspconfig.lua
 luafile ~/.config/nvim/lua/lspsagaconf.lua
+luafile ~/.config/nvim/lua/formattingconf.lua
 luafile ~/.config/nvim/lua/nvimcmp.lua
 luafile ~/.config/nvim/lua/troubleconfig.lua
 luafile ~/.config/nvim/lua/nvimtree.lua

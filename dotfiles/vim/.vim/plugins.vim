@@ -96,6 +96,9 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'tami5/lspsaga.nvim'
 " Plug 'glepnir/lspsaga.nvim'
 
+" FORMAT:
+Plug 'mhartington/formatter.nvim'
+
 " SNIPPETS:
 Plug 'SirVer/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
