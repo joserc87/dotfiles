@@ -1,0 +1,28 @@
+session_name: entitytool
+# start_directory: ./ # load session relative to config location (project root).
+# before_script: cd ~/git/entitytool #./.tmuxp-before-script.sh
+start_directory: ~/git/entitytool # load session relative to config location (project root).
+shell_command_before:
+- 'pyenv activate entitytool'
+windows:
+- window_name: vim
+  focus: True
+  layout: main-vertical
+  panes:
+  - vim
+- window_name: srv
+  layout: tiled
+  panes:
+  - shell_command:
+      - cd ravenpack
+      - python manage.py runserver
+  #- git status
+- window_name: test
+  layout: main-vertical
+  panes:
+  - shell_command:
+      - cd ravenpack
+      - shtuff as testrunner
+      # - pytest tests/unit_tests/
+#  - make serve
+#  - make SPHINXBUILD='poetry run sphinx-build' watch

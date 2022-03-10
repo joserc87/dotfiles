@@ -1,0 +1,23 @@
+session_name: webapps
+# start_directory: ./ # load session relative to config location (project root).
+# before_script: cd ~/git/webapps #./.tmuxp-before-script.sh
+start_directory: ~/git/python/webapps # load session relative to config location (project root).
+shell_command_before:
+- 'pyenv activate webapps'
+windows:
+- window_name: vim
+  focus: True
+  layout: main-vertical
+  panes:
+  - vim
+- window_name: srv
+  layout: tiled
+  panes:
+  - echo python server/runserver.py
+  - shell_command:
+      - cd frontend
+      - echo yarn start
+  - echo python server/runrt.py
+  - git status
+#  - make serve
+#  - make SPHINXBUILD='poetry run sphinx-build' watch
