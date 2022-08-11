@@ -1,7 +1,7 @@
 session_name: pysync
 # start_directory: ./ # load session relative to config location (project root).
 # before_script: cd ~/git/pysync #./.tmuxp-before-script.sh
-start_directory: ~/git/pysync # load session relative to config location (project root).
+start_directory: ~/git/python/pysync # load session relative to config location (project root).
 shell_command_before:
 - 'pyenv activate pysync'
 windows:

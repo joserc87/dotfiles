@@ -7,9 +7,12 @@ start_directory: ~/ # load session relative to config location (project root).
 windows:
 - window_name: base
   focus: True
-  layout: main-vertical
+  layout: tiled
   panes:
   - startvpn
+  - sudo pacman -Syuu
+  - yay -Syuu
+  - echo "TEST"
 - window_name: code
   layout: main-horizontal
   start_directory: ~/code/
