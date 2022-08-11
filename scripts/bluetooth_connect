@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+bluetoothctl power on
+bluetoothctl devices \
+    | dmenu -l 10 \
+    | cut -f2 -d' ' \
+    | xargs bluetoothctl connect

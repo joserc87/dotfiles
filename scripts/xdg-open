@@ -7,8 +7,12 @@ BROWSER='brave-browser.desktop' # For instance /usr/bin/brave
 BROWSER_OPTIONS='' # Optional, for command line options passed to browser
 XDG_OPEN='/usr/bin/xdg-open'
 
-JIRA_PATTERN='^https\?:\/\/jira\.ravenpack\.com'
+#JIRA_PATTERN='^https\?:\/\/jira\.ravenpack\.com'
+JIRA_SERVER_PATTERN='jira\.ravenpack\.com'
+JIRA_CLOUD_PATTERN='ravenpack\.atlassian\.net'
+JIRA_PATTERN='https\?:\/\/\('$JIRA_SERVER_PATTERN'\|'$JIRA_CLOUD_PATTERN'\)'
 DEV_PATTERN='^.*\.bigdata.com\|^.*localhost:\|.*staging.ravenpack.com\|\.*app.ravenpack.com\|^\.*entitytool'
+
 
 if echo "$1" | grep -q "$JIRA_PATTERN"; then
     # i3-msg workspace '7: '

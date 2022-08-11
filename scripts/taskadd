@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+
+# If we don't add the task, don't annotate
+set -e
+
+url=$(xclip -out -selection clipboard)
+
+task_name=$(echo "" | dmenu -p "task name")
+
+task add $task_name
+ID=$(task +LATEST ids)
+
+if [[ "$url" =~ https?://* ]]; then
+    task $ID annotate "$url"
+fi
