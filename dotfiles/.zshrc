@@ -125,7 +125,7 @@ export DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git virtualenv)
 
 # User configuration
 
@@ -154,12 +154,16 @@ add_path "$HOME/bin/"
 add_path "$HOME/apps/"
 add_path "$HOME/.cargo/bin"
 add_path "$HOME/.pyenv/bin"
+add_path "$HOME/go/bin"
 
 # Python
 if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv virtualenv init -)"
-  eval "$(pyenv init -)"
+  #eval "$(pyenv virtualenv init -)"
+  #eval "$(pyenv init -)"
+  #eval "$(pyenv init --path)"
+
   eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
   __pyenv_version_ps1 (){
       local ret=$?;
       if [ -n "${PYENV_VERSION}" ]; then
@@ -200,6 +204,8 @@ fi
 # https://github.com/robbyrussell/oh-my-zsh/issues/6835#issuecomment-390216875
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
+# Show the virtualenv
+PROMPT+='%{$fg_bold[magenta]%}$(virtualenv_prompt_info)%{$reset_color%} '
 
 # Virtualenv/VirtualenvWrapper
 export WORKON_HOME=$HOME/.virtualenvs
