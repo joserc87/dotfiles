@@ -175,6 +175,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
   export PYENV_VIRTUALENV_DISABLE_PROMPT=1
   PS1="\$(__pyenv_version_ps1)${PS1}"
 fi
+
 export PYTHONPATH=.:./ravenpack:./python:$PYTHONPATH
 
 # Android tools:
@@ -289,6 +290,9 @@ alias tn="tmux new -s "
 if command -v thefuck 1>/dev/null 2>&1; then
     eval $(thefuck --alias)
 fi
+if command -v zoxide 1>/dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
+fi
 
 ##########
 # ORACLE #
@@ -329,7 +333,8 @@ alias pytest py.test
 function suspend {
     toggle_lamp.sh off
     if hash i3lock 2>/dev/null; then
-        i3lock -c 000000
+        i3lock-fancy
+        # i3lock -c 000000
     fi
     sleep 1
     systemctl suspend
@@ -411,12 +416,18 @@ function tw {
     taskwarrior-tui
 }
 
+VPN_SERVICE=openvpn-client@ravenpack.service
+
+function isvpnrunning {
+    systemctl is-active --quiet $VPN_SERVICE
+}
+
 function startvpn {
-    sudo systemctl start openvpn-client@ravenpack.service
+    isvpnrunning && echo "VPN is already running" || sudo systemctl start $VPN_SERVICE
 }
 
 function stopvpn {
-    sudo systemctl stop openvpn-client@ravenpack.service
+    sudo systemctl stop $VPN_SERVICE
 }
 
 function code {
@@ -441,6 +452,9 @@ function code {
     esac
     cd ~/"$project"
     nvim
+}
+function screenoff {
+    sleep 1 ; xset dpms force off
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
