@@ -72,7 +72,7 @@ nnoremap tq  :tabclose<CR>
     nnoremap <silent> <C-p> :FloatermNew --disposable --autoclose=2 fzf --preview '~/.vim/plugged/fzf.vim/bin/preview.sh {}'<CR>
     nnoremap <silent> <C-M-F> :Ag<space>
     nnoremap <leader>/ :Ag<space>
-    vnoremap <silent> <leader>/ y:Ag<space><C-R>=escape(@",'/\')<CR><CR>!tests/unit_tests/ !tests/integration/tests/ !import 
+    vnoremap <silent> <leader>/ y:Ag<space><C-R>=escape(@",'/\')<CR><CR>!tests/unit_tests/ !tests/integration/tests/ !import
     vnoremap / y/\V<C-R>=escape(@",'/\')<CR><CR>
     nnoremap <silent> <leader>vw :call fzf#run(fzf#wrap({'source': 'fd --type f --exclude "site_html" --exclude "presentations" --exclude "diary" . ~/vimwiki'}))<CR>
     nnoremap <silent> <leader>vv :call fzf#run(fzf#wrap({'source': 'fd --type f -I --follow --exclude "plugged" . ~/.config/nvim/ ~/.vim/'}))<CR>
@@ -89,7 +89,8 @@ nnoremap tq  :tabclose<CR>
     nnoremap <silent> <leader>fr :FloatermNew ranger<CR>
     nnoremap <silent> <leader>fp :FloatermNew  --wintype=normal --position=right --width=0.4 ipython<CR>
     nnoremap <silent> <leader>fP :FloatermNew  --wintype=normal --position=right --width=0.4 python<CR>
-    nnoremap <silent> <Leader>fg :FloatermNew --disposable --autoclose=2 lazygit<CR>
+    nnoremap <silent> <Leader>fg :FloatermNew --disposable --autoclose=2 --width=0.9 --height=0.9 lazygit<CR>
+    " nnoremap <silent> <Leader>fg :LazyGit <CR>
     nnoremap <silent> <Leader>ft :FloatermNew --disposable --autoclose=2 taskwarrior-tui<CR>
     nnoremap <silent> <leader>ff :FloatermToggle<CR>
     tnoremap <silent> <leader>ff <C-\><C-n>:FloatermToggle<CR>
@@ -109,7 +110,7 @@ nnoremap tq  :tabclose<CR>
     " autocmd FileType python nnoremap <Leader>t :call VimuxRunCommand("pytest")<CR>
     " Unit testing
     noremap <silent> <leader>tn :TestNearest<CR>
-    noremap <silent> <leader>tN :TestNearest -strategy=floaterm -vv<CR>
+    noremap <silent> <leader>tN :TestNearest -strategy=floaterm<CR>
     noremap <silent> <leader>tm :TestNearest -strategy=shtuff -vv<CR>
     noremap <silent> <leader>td :TestNearest -strategy=vimspectorpy -vv<CR>
     noremap <silent> <leader>tf :TestFile<CR>
@@ -148,6 +149,8 @@ nnoremap tq  :tabclose<CR>
     nnoremap <Leader>gP :Gpull<CR>
     nnoremap <Leader>gl :Glog<CR>
     nnoremap <Leader>gs :ToggleGStatus<CR>
+    " diff against master, useful for MRs
+    nnoremap <Leader>gm :Gvdiffsplit origin/master<CR>
 " }}}
 "
 " DEBUGGER: {{{
@@ -237,8 +240,8 @@ nnoremap tq  :tabclose<CR>
 
     " vnoremap <leader>cf  <cmd>lua vim.lsp.buf.formatting()<CR>
     " nnoremap <leader>cf  <cmd>lua vim.lsp.buf.formatting()<CR>
-    vnoremap <leader>cf  :Format black<CR>
-    nnoremap <leader>cf  <cmd>lua vim.lsp.buf.formatting()<CR>
+    nnoremap <leader>cf  :Format black<CR>
+    vnoremap <leader>cf  <cmd>lua vim.lsp.buf.formatting()<CR>
 
     nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
     vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
@@ -248,4 +251,5 @@ nnoremap tq  :tabclose<CR>
     nnoremap <leader>nn <cmd>NvimTreeToggle<cr>
     nnoremap <leader>ne <cmd>NvimTreeFocus<cr>
     nnoremap <leader>nf <cmd>NvimTreeFindFile<cr>
+    nnoremap <leader>nr <cmd>NvimTreeRefresh<cr>
 " }}}

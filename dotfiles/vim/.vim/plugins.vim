@@ -68,6 +68,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
+" Plug 'kdheepak/lazygit.nvim'
 
 " FILE_NAVIGATION:
 Plug 'kyazdani42/nvim-tree.lua'
@@ -201,7 +202,7 @@ Plug 'sirtaj/vim-openscad'
 
 " WIKI:
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
-Plug 'tools-life/taskwiki'
+"Plug 'tools-life/taskwiki'
 Plug 'itchyny/calendar.vim'
 
 " TMUX:
