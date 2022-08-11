@@ -1,5 +1,5 @@
 window.opacity: 0.8
-window.opacity: 1.0
+# window.opacity: 1.0
 #E import:
 #E     # - /home/jcano/.config/alacritty/alacritty.gruvbox.dark.yml
 #E     - ./alacritty.gruvbox.light.yml
@@ -9,7 +9,7 @@ window.opacity: 1.0
 #E     # - ./alacritty.solarized.light.yml
 #E     # - ./alacritty.yml
 font:
-  size: 16.0
+  size: 14.0
 schemes:
 
   gruvbox_light: &gruvbox_light
