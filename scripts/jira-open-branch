@@ -1,0 +1,14 @@
+#!/usr/bin/zsh
+
+# Open the Jira based on the current branch
+function currentbranch {
+    git branch --show-current
+}
+JIRA_PATTERN='^(RSP|RPA|TOOL|MNT|TOOL)-[0-9]+'
+
+JIRA_CODE=$(currentbranch | grep -oE "$JIRA_PATTERN")
+if [ $? -eq 0 ]; then
+    jira-open "$JIRA_CODE"
+else
+    echo Unrecognized branch $(currentbranch)
+fi
