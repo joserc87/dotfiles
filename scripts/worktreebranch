@@ -4,12 +4,24 @@ function listbranches {
     git branch --format='%(refname:short)'
 }
 
-branch="$(listbranches | fzf --height 40%)"
-
-if [ $? != 0 ];
+if [ $# -gt 1 ];
 then
-    exit 1
+    echo "Usage: worktreebranch [branch]"
+    exit
+elif [ $# -eq 1 ];
+then
+    if [ $1 = "HEAD" ];
+    then
+        branch=$(git branch --show-current)
+        [ $? != 0 ] && exit 1;
+    else
+        branch=$1
+    fi
+else
+    branch="$(listbranches | fzf --height 40%)"
+    [ $? != 0 ] && exit 1;
 fi
+
 
 rootdir=$(git rev-parse --show-toplevel)
 project_name=$(basename "$rootdir")
@@ -28,7 +40,7 @@ function check_worktree_exists_or_create {
     if [ $? = 0 ]
     then
         >&2 echo Worktree $branch exists
-        worktreedir="$(echo "$worktree" -n1 | awk '{print $1}')"
+        worktreedir="$(echo "$worktree" | awk '{print $1}')"
     else
         worktreedir="$rootdir/../$project_name-forest/$branch"
         git worktree add "$worktreedir" "$branch"
