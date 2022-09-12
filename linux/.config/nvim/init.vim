@@ -39,6 +39,7 @@ luafile ~/.config/nvim/lua/formattingconf.lua
 luafile ~/.config/nvim/lua/nvimcmp.lua
 luafile ~/.config/nvim/lua/troubleconfig.lua
 luafile ~/.config/nvim/lua/nvimtree.lua
+luafile ~/.config/nvim/lua/lualineconfig.lua
 source ~/.vim/lsp.vim
 source ~/.vim/langconfig.vim
 source ~/.vim/macros.vim
