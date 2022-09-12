@@ -61,6 +61,8 @@ def _alacritty_run(cmd):
     return f"""alacritty \
         --class float \
         -o font.size=16 \
+        -o window.padding.x=16 \
+        -o window.padding.y=16 \
         -o window.opacity=0.8 \
         -t 'scratchpad' \
         -e sh -c "sleep 0.1 && {cmd}" \

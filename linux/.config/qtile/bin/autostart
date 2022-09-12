@@ -11,9 +11,13 @@ function execute_once {
     fi
 }
 
+#autoscreen
 nitrogen --restore
 sleep 1
-compton-blur -b
 execute_once ferdium
 xset r rate 180 70
 indicator-sound-switcher
+nm-applet
+
+sleep 10
+compton-blur
