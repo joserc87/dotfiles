@@ -278,7 +278,7 @@ function ranger-cd {
 alias rcd=ranger-cd
 # Ranger + Tmux
 alias rmux="ranger-cd && tmux new -s `echo '${PWD##*/}'`"
-alias t=task
+alias t='task ready'
 # alias th="task priority:H"
 # alias tl="task priority:H or priority:"
 alias alamux='TERM=screen-256color tmux'

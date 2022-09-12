@@ -1,19 +1,26 @@
 #!/usr/bin/sh
 
 function set_screen {
-    notify-send "setting screen $1"
     "$HOME/.screenlayout/$1.sh"
-    killall -s SIGUSR1 qtile
+    sleep 1
+    # Do not restart qtile to avoid infinite loop on startup script
+    # killall -s SIGUSR1 qtile
+    sleep 1
+    notify-send "setting screen $1"
 }
 
 function check_screen {
     xrandr -q | grep "$1"
 }
 
-# 4K screen at home
-check_screen "HDMI1 connected (normal left inverted right x axis y axis)" && \
-    check_screen "3840x2160     60.00 +  50.00    59.94    30.00    29.97" && \
-    set_screen "1monitor4k" && exit
+# vertical at home
+lsusb -d "17e9:" && set_screen "home_vertical" && exit
+
+# # 4K screen at home
+# check_screen "HDMI1 connected (normal left inverted right x axis y axis)" && \
+#     check_screen "3840x2160     60.00 +  50.00    59.94    30.00    29.97" && \
+#     set_screen "1monitor4k" && exit
+
 # If connected, quit
 check_screen "HDMI1 connected 3840x2160+1920+0 (normal left inverted right x axis y axis) 630mm x 360mm" && exit
 

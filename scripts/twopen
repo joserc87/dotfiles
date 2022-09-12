@@ -5,4 +5,4 @@ task status:pending export \
     | jq -r '.[] | .uuid + "          " + (try (.tags|join(",")) catch "----") + "     " + .description' \
     | dmenu -l 10 \
     | cut -f1 -d' ' \
-    | xargs taskopen
+    | xargs -I{} echo taskopen '{}' url
