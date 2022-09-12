@@ -50,8 +50,11 @@ Plug 'nvim-lua/plenary.nvim'
 " Window maximizer
 Plug 'szw/vim-maximizer'
 " Airline
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'bling/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+"
+" LuaLine
+Plug 'nvim-lualine/lualine.nvim'
 
 " Indentation
 "" Plug 'nathanaelkane/vim-indent-guides'
@@ -223,6 +226,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 
 " THEMES:
 Plug 'sainnhe/gruvbox-material'
+Plug 'navarasu/onedark.nvim'
 " Plug 'morhetz/gruvbox'
 " Plug 'sonph/onehalf', {'rtp': 'vim/'}
 " Plug 'joshdick/onedark'

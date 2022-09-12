@@ -29,20 +29,16 @@ elseif has ("mac")
   let g:airline_theme='onehalfdark'
 " LINUX
 elseif has ("unix")
-  colorscheme gruvbox-material
-  let g:gruvbox_contrast_dark='medium'
-  let g:gruvbox_contrast_light='medium'
-  " colorscheme solarized
-  let g:airline_theme='gruvbox'
-
-  " let g:airline_theme='onehalfdark'
-  let g:airline_theme='gruvbox_material'
-  "
-  let g:gruvbox_material_palette = 'original'
-  " let g:gruvbox_material_background = 'hard'
-  " let g:gruvbox_material_background = 'medium'
-
-  colorscheme gruvbox-material
+  """ Gruvbox
+  """ colorscheme gruvbox-material
+  """ let g:gruvbox_contrast_dark='medium'
+  """ let g:gruvbox_contrast_light='medium'
+  """ let g:airline_theme='gruvbox_material'
+  """ let g:gruvbox_material_palette = 'original'
+  let g:onedark_config = {
+      \ 'style': 'deep',
+  \}
+  colorscheme onedark
 else
   colorscheme torte
 endif
@@ -110,5 +106,8 @@ highlight VimwikiHeader6 gui=bold guifg=#689D6A cterm=bold ctermfg=4
 
 highlight Floaterm guibg=none
 highlight FloatermBorder guibg=none guifg=orchid
-highlight Normal guibg=#282828
+
+" Custom Background color
+"highlight Normal guibg=#282828
+
 highlight EndOfBuffer guibg=none guifg=None
