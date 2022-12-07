@@ -10,9 +10,7 @@ windows:
   layout: tiled
   panes:
   - startvpn
-  - sudo pacman -Syuu
-  - yay -Syuu
-  - echo "TEST"
+  - read && yay -Syuu
 - window_name: code
   layout: main-horizontal
   start_directory: ~/code/

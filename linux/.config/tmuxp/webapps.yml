@@ -13,11 +13,12 @@ windows:
 - window_name: srv
   layout: tiled
   panes:
-  - echo python server/runserver.py
+  - read && docker-compose -f docker-compose.vdp.yml up --detach
+  - read && python server/runserver.py
   - shell_command:
       - cd frontend
-      - echo yarn start
-  - echo python server/runrt.py
-  - git status
+      - nvm use 14
+      - read && yarn start
+  - read && python server/runrt.py
 #  - make serve
 #  - make SPHINXBUILD='poetry run sphinx-build' watch

@@ -10,19 +10,19 @@ windows:
   layout: main-vertical
   panes:
   - vim
-- window_name: srv
-  layout: tiled
-  panes:
-  - shell_command:
-      - cd ravenpack
-      - python manage.py runserver
-  #- git status
-- window_name: test
-  layout: main-vertical
-  panes:
-  - shell_command:
-      - cd ravenpack
-      - shtuff as testrunner
-      # - pytest tests/unit_tests/
+# - window_name: srv
+#   layout: tiled
+#   panes:
+#   - shell_command:
+#       - cd ravenpack
+#       - python manage.py runserver
+#   #- git status
+# - window_name: test
+#   layout: main-vertical
+#   panes:
+#   - shell_command:
+#       - cd ravenpack
+#       - shtuff as testrunner
+#       # - pytest tests/unit_tests/
 #  - make serve
 #  - make SPHINXBUILD='poetry run sphinx-build' watch
