@@ -1,0 +1,8 @@
+#!/usr/bin/sh
+
+for prg in slack ferdium pavucontrol blueman-manager spotify firefox chromium
+do
+    killall "$prg" 2>/dev/null
+done
+
+sudo systemctl stop docker
