@@ -34,6 +34,7 @@ floating_layout = layout.Floating(
         Match(wm_class="float"),
         Match(wm_class="floating"),
         Match(wm_class="zoom"),
+        Match(wm_class="dragon-drop"),
     ]
 )
 layouts = [
@@ -43,7 +44,7 @@ layouts = [
     layout.MonadTall(name="NoGaps", **_layout_common_settings, margin=1),
     # layout.Floating(**_layout_common_settings),
     # layout.VerticalTile(name='VerticalTile'),
-    layout.Max(name="Full", **_layout_common_settings),
+    layout.Max(name="Full", **_max_layout_settings),
     # layout.Zoomy(**_layout_common_settings),
     # layout.Slice(**_layout_common_settings),
 ]

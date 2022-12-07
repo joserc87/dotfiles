@@ -70,10 +70,11 @@ def _alacritty_run(cmd):
 
 _taskwarrior_cmd = _alacritty_run("taskwarrior-tui")
 _vimwiki_cmd = _alacritty_run("nvim -c VimwikiMakeDiaryNote")
+_obsidian_cmd = "obsidian"
 
 _scratchpad = ScratchPad("scratchpad", [
     create_dropdown("task", _taskwarrior_cmd),
-    create_dropdown("diary", _vimwiki_cmd),
+    create_dropdown("diary", _obsidian_cmd),
 ])
 
 groups = [_create_group(i) for i in range(len(_names))] + [_scratchpad]

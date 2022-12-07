@@ -22,15 +22,19 @@ BAR_STYLE = dict(
 
 def widget_with_label(widget_class, label, color=None, *args, **kwargs):
     font_params = {**BAR_STYLE}
+    widget_params = {**BAR_STYLE}
+    font_kwargs = {k: v for k, v in kwargs.items() if k not in ["width", "height"]}
+    font_params.update(font_kwargs)
+    widget_params.update(kwargs)
     if color:
         font_params['foreground'] = color
-    font_params.update(kwargs)
+        widget_params['foreground'] = color
 
     return [
-        widget.TextBox(label,**font_params) if label else None,
+        widget.TextBox(label,**font_params, width=20) if label else None,
         widget_class(
             *args,
-            **font_params,
+            **widget_params,
         ),
         _separator() if label else None,
     ]
@@ -79,9 +83,9 @@ def make_screen(systray=False):
             **BAR_STYLE,
         ),
         # Show the title for the focused window
-        widget.WindowName(**BAR_STYLE),
-        # widget.TaskList(**BAR_STYLE),
-        widget.Pomodoro(**BAR_STYLE),
+        # widget.WindowName(**BAR_STYLE),
+        widget.TaskList(**BAR_STYLE),
+        # widget.Pomodoro(**BAR_STYLE),
         # Allow for quick command execution
         widget.Prompt(
             cursor_color=COLS["light_3"],
@@ -96,8 +100,10 @@ def make_screen(systray=False):
             objname="org.mpris.MediaPlayer2.spotify",
             display_metadata=['xesam:title', 'xesam:artist'],
             scroll_chars=None,
-            width=250,
-            stop_pause_text='',
+            width=150,
+            playing_text=' {track}',
+            stopped_text=' {track}',
+            paused_text=' {track}',
             **BAR_STYLE,
         ),
         # Resource usage graphs
