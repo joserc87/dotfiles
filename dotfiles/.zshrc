@@ -176,7 +176,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
   PS1="\$(__pyenv_version_ps1)${PS1}"
 fi
 
-export PYTHONPATH=.:./ravenpack:./python:$PYTHONPATH
+export PYTHONPATH=.:..:./ravenpack:./python:$PYTHONPATH
 
 # Android tools:
 export PATH=\
@@ -422,8 +422,20 @@ function isvpnrunning {
     systemctl is-active --quiet $VPN_SERVICE
 }
 
+function shouldvpnrun {
+    ! ping -c 1 -W 1 192.168.1.5 > /dev/null
+}
+
 function startvpn {
-    isvpnrunning && echo "VPN is already running" || sudo systemctl start $VPN_SERVICE
+    if ! shouldvpnrun; then
+        echo "VPN not needed"
+        return
+    fi
+    if isvpnrunning; then
+        echo "VPN is already running"
+        return
+    fi
+    sudo systemctl start $VPN_SERVICE ||
 }
 
 function stopvpn {
@@ -431,11 +443,14 @@ function stopvpn {
 }
 
 function code {
-    PROJECTS='entitytool\npysync\nwebapps\ndatamodels\nops\nconfig'
+    PROJECTS='entitytool\npysync\nwebapps\ndumpy\ndatamodels\nops\nconfig'
     project=$(echo $PROJECTS | fzf)
     case $project in
         webapps)
             project="git/python/webapps"
+            ;;
+        dumpy)
+            project="git/python/dumpy"
             ;;
         datamodels)
             project="git/ravenpack"
