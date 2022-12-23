@@ -69,10 +69,11 @@ nnoremap tq  :tabclose<CR>
 " IDE: {{{
     " Search:
     " nnoremap <C-p> :Files<CR>
-    nnoremap <silent> <C-p> :FloatermNew --disposable --autoclose=2 fzf --preview '~/.vim/plugged/fzf.vim/bin/preview.sh {}'<CR>
+    " nnoremap <silent> <C-p> :FloatermNew --disposable --autoclose=2 fzf --preview '~/.vim/plugged/fzf.vim/bin/preview.sh {}'<CR>
+    nnoremap <C-p> :Telescope find_files<CR>
     nnoremap <silent> <C-M-F> :Ag<space>
     nnoremap <leader>/ :Ag<space>
-    vnoremap <silent> <leader>/ y:Ag<space><C-R>=escape(@",'/\')<CR><CR>!tests/unit_tests/ !tests/integration/tests/ !import
+    vnoremap <silent> <leader>/ y:Ag<space><C-R>=escape(@",'/\')<CR><CR>!tests !import<Space>
     vnoremap / y/\V<C-R>=escape(@",'/\')<CR><CR>
     nnoremap <silent> <leader>vw :call fzf#run(fzf#wrap({'source': 'fd --type f --exclude "site_html" --exclude "presentations" --exclude "diary" . ~/vimwiki'}))<CR>
     nnoremap <silent> <leader>vv :call fzf#run(fzf#wrap({'source': 'fd --type f -I --follow --exclude "plugged" . ~/.config/nvim/ ~/.vim/'}))<CR>
@@ -97,10 +98,8 @@ nnoremap tq  :tabclose<CR>
     tnoremap <silent> <leader>fg <C-\><C-n>:FloatermToggle<CR>
     tnoremap <silent> <leader>fj <C-\><C-n>
 
-    nnoremap <silent> <leader>fh :FloatermPrev<CR>
-    tnoremap <silent> <leader>fh <C-\><C-n>:FloatermPrev<CR>
-    nnoremap <silent> <leader>fl :FloatermNext<CR>
-    tnoremap <silent> <leader>fl <C-\><C-n>:FloatermNext<CR>
+    tnoremap <silent> <leader>fH <C-\><C-n>:FloatermPrev<CR>
+    tnoremap <silent> <leader>fL <C-\><C-n>:FloatermNext<CR>
 
     nnoremap <silent> <leader>f> :FloatermSend<CR>
     vnoremap <silent> <leader>f> :FloatermSend<CR>
@@ -124,9 +123,9 @@ nnoremap tq  :tabclose<CR>
 " }}}
 
 " BUFFERS: {{{
-    nnoremap <leader>bb :Buffers<CR>
-    nnoremap <leader>bh :History<CR>
-    nnoremap <leader>bl :BLines<CR>
+    nnoremap <leader>bb :Telescope buffers<CR>
+    nnoremap <leader>bh :Telescope oldfiles<CR>
+    nnoremap <leader>bl :Telescope current_buffer_fuzzy_find<CR>
     nnoremap <leader>bL :Lines<CR>
 " }}}
 
