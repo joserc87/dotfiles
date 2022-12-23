@@ -351,10 +351,11 @@ function gnight {
         -t 'scratchpad' \
         -e zsh -c 'sleep 0.1 && sleep_routine'
         #--class float \
-    #toggle_lamp.sh off
-    #/usr/bin/poweroff
+    toggle_lamp.sh off
+    /usr/bin/poweroff
 }
 
+alias poweroff gnight
 
 function selectJira {
     FZF="fzf --height 7" jira-dmenu --snake | sed 's/:/_/g' || exit -1
