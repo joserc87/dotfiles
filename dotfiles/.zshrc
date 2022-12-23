@@ -278,7 +278,7 @@ function ranger-cd {
 alias rcd=ranger-cd
 # Ranger + Tmux
 alias rmux="ranger-cd && tmux new -s `echo '${PWD##*/}'`"
-alias t='task ready'
+alias t='task'
 # alias th="task priority:H"
 # alias tl="task priority:H or priority:"
 alias alamux='TERM=screen-256color tmux'
@@ -316,6 +316,8 @@ HISTSIZE=999999999
 
 # -U to Ignore VCS ignore files (.gitignore)
 export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -U -f -g ""'
+export TESTSHTUFF=testrunner
+
 
 # Fix for Python in VIM:
 # https://vi.stackexchange.com/questions/7644/use-vim-with-virtualenv/7654#7654
@@ -405,7 +407,7 @@ function fzf-yay {
 }
 
 function testhere {
-    shtuff as testrunner
+    shtuff as $TESTSHTUFF
 }
 
 function saw {
@@ -442,34 +444,34 @@ function stopvpn {
     sudo systemctl stop $VPN_SERVICE
 }
 
-function code {
-    PROJECTS='entitytool\npysync\nwebapps\ndumpy\ndatamodels\nops\nconfig'
-    project=$(echo $PROJECTS | fzf)
-    case $project in
-        webapps)
-            project="git/python/webapps"
-            ;;
-        dumpy)
-            project="git/python/dumpy"
-            ;;
-        datamodels)
-            project="git/ravenpack"
-            ;;
-        ops)
-            project="git/ops/operations"
-            ;;
-        config)
-            project="code/config-files/"
-            ;;
-        *)
-            project="git/$project"
-            ;;
-    esac
-    cd ~/"$project"
-    nvim
-}
 function screenoff {
     sleep 1 ; xset dpms force off
+}
+
+listprojects() {
+    find ~/git/ -maxdepth 2 -mindepth 2 -type d \
+        | grep forest -v \
+        | grep '/hr/' -v
+    find ~/git/python/ -maxdepth 2 -mindepth 2 -type d \
+        | grep forest
+}
+
+code() {
+    PROJECTS='entitytool\npysync\nwebapps\ndumpy\ndatamodels\nops\nconfig'
+    project=$(listprojects | fzf || exit)
+    [[ -z "$project" ]] && return
+    cd "$project"
+    pyenv activate
+    nvim
+}
+
+tdd() {
+    project=$(listprojects | fzf || exit)
+    [[ -z "$project" ]] && return
+    echo Testing in $project
+    cd "$project"
+    testhere
+    shtuff into $TESTSHTUFF "pyenv activate"
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
