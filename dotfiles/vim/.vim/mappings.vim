@@ -253,3 +253,9 @@ nnoremap tq  :tabclose<CR>
     nnoremap <leader>nf <cmd>NvimTreeFindFile<cr>
     nnoremap <leader>nr <cmd>NvimTreeRefresh<cr>
 " }}}
+
+" Obsidian: {{{
+    autocmd FileType vimwiki nnoremap <CR> :ObsidianFollowLink<CR>
+    nnoremap <leader>ww :ObsidianToday<cr>
+    nnoremap <leader>wh :ObsidianYesterday<cr>
+" }}}

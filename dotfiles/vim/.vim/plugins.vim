@@ -81,6 +81,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " Telescope
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'rmagatti/auto-session'
 Plug 'rmagatti/session-lens'
 " Nerdtree
@@ -204,9 +205,11 @@ Plug 'sirtaj/vim-openscad'
 """"""""
 
 " WIKI:
-Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
+"Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 "Plug 'tools-life/taskwiki'
 Plug 'itchyny/calendar.vim'
+Plug 'preservim/vim-markdown'
+Plug 'epwalsh/obsidian.nvim'
 
 " TMUX:
 Plug 'christoomey/vim-tmux-navigator'
