@@ -49,9 +49,11 @@ hi Normal ctermbg=None
 " FONT:
 " -----
 
+set guifont=Noto\ Sans\ Mono:h14,Noto\ Emoji:h14,Noto\ Color\ Emoji:h14,DejaVu\ Sans\ Mono:h14
 if exists('g:neovide') || has('gui_running')
   " set guifont=NotoSansMono\ Nerd\ Font
   set guifont=Noto\ Sans\ Mono:h16,Noto\ Emoji:h16,Noto\ Color\ Emoji:h16,DejaVu\ Sans\ Mono:h16
+  set guifont=Noto\ Sans\ Mono:h14,Noto\ Emoji:h14,Noto\ Color\ Emoji:h14,DejaVu\ Sans\ Mono:h14
   "set guifont=NotoSansMono:h8,Noto\ Emoji:h26,Noto\ Color\ Emoji:h26,DejaVu\ Sans\ Mono:h26
   " set guifont=Terminess\ TTF\ Nerd\ Font\ Mono:26;Noto\ Emoji:h26,Noto\ Color\ Emoji:h26,DejaVu\ Sans\ Mono:h26
   " if has("gui_gtk2")
