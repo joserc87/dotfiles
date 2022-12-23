@@ -39,6 +39,7 @@ uda.taskwarrior-tui.task-report.show-info=false
 uda.taskwarrior-tui.shortcuts.1=taskopen
 uda.taskwarrior-tui.shortcuts.2=~/.config/taskwarrior-tui/shortcut-scripts/myscript.sh
 uda.taskwarrior-tui.shortcuts.9=task sync
+uda.taskwarrior-tui.task-report.next.filter=+READY
 
 report.small.description=A small report for a modal
 report.small.columns=id,project,description.count
@@ -67,3 +68,6 @@ report.week.sort=start-
 
 # I don't want annotations in the next report
 report.next.columns=id,start.age,entry.age,depends,priority,project,tags,recur,scheduled.countdown,due.relative,until.remaining,description.count,urgency
+
+report.ready.columns=id,start.age,entry.age,depends.indicator,priority,project,tags,recur.indicator,scheduled.countdown,due.countdown,until.remaining,description.count,urgency
+default.command=ready
