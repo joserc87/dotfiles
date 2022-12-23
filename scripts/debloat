@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-for prg in slack ferdium pavucontrol blueman-manager spotify firefox chromium
+for prg in slack ferdium pavucontrol blueman-manager spotify firefox chromium picom
 do
     killall "$prg" 2>/dev/null
 done
