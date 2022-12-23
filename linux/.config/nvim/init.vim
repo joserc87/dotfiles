@@ -31,15 +31,12 @@ source ~/.vim/plugconfig/floaterm.vim
 source ~/.vim/plugconfig/firenvim.vim
 source ~/.vim/plugconfig/treesitter.vim
 " lua require('telescope')
+luafile ~/.config/nvim/lua/pluginconf.lua
 luafile ~/.config/nvim/lua/telescopeconf.lua
-luafile ~/.config/nvim/lua/autosession.lua
 luafile ~/.config/nvim/lua/nvimlspconfig.lua
-luafile ~/.config/nvim/lua/lspsagaconf.lua
 luafile ~/.config/nvim/lua/formattingconf.lua
 luafile ~/.config/nvim/lua/nvimcmp.lua
-luafile ~/.config/nvim/lua/troubleconfig.lua
 luafile ~/.config/nvim/lua/nvimtree.lua
-luafile ~/.config/nvim/lua/lualineconfig.lua
 source ~/.vim/lsp.vim
 source ~/.vim/langconfig.vim
 source ~/.vim/macros.vim
