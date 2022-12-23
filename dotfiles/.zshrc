@@ -342,9 +342,17 @@ function suspend {
     systemctl suspend
 }
 
-function poweroff {
-    toggle_lamp.sh off
-    /usr/bin/poweroff
+function gnight {
+    alacritty \
+        -o font.size=16 \
+        -o window.padding.x=16 \
+        -o window.padding.y=16 \
+        -o window.opacity=0.8 \
+        -t 'scratchpad' \
+        -e zsh -c 'sleep 0.1 && sleep_routine'
+        #--class float \
+    #toggle_lamp.sh off
+    #/usr/bin/poweroff
 }
 
 

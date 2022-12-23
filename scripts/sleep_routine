@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+
+# What we do when shutting down
+task sync
+
+cd ~/code/braindump
+git diff-index --quiet HEAD || lazygit
+
+function review_directory {
+    cd "$1" && git diff-index --quiet HEAD || lazygit
+
+}
+review_directory ~/code/braindump
+review_directory ~/code/dotfiles
+
+sleep 1
