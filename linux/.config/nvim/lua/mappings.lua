@@ -1,9 +1,4 @@
 -- [[ Basic Keymaps ]]
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 
 -- Map ; to : so we don't have to press shift
 vim.keymap.set({ 'n', 'v' }, ';', ':', {})
@@ -206,6 +201,7 @@ end, group = group, pattern = "*.md" })
 --autocmd FileType vimwiki nnoremap <CR> :ObsidianFollowLink<CR>
 vim.keymap.set('n', '<leader>ww', ':ObsidianToday<cr>')
 vim.keymap.set('n', '<leader>wh', ':ObsidianYesterday<cr>')
+
 -- place this in one of your configuration file(s)
 local hop = require('hop')
 local directions = require('hop.hint').HintDirection
