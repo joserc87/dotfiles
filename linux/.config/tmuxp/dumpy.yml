@@ -1,0 +1,18 @@
+session_name: dumpy
+# start_directory: ./ # load session relative to config location (project root).
+# before_script: cd ~/git/python/dumpy #./.tmuxp-before-script.sh
+start_directory: ~/git/python/dumpy # load session relative to config location (project root).
+shell_command_before:
+- 'pyenv activate dumpy'
+windows:
+- window_name: vim
+  focus: True
+  layout: main-vertical
+  panes:
+  - vim
+- window_name: srv
+  layout: tiled
+  panes:
+  - pytest tests/unit
+#  - make serve
+#  - make SPHINXBUILD='poetry run sphinx-build' watch
