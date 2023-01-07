@@ -12,21 +12,15 @@
 
 source ~/.vim/settings.vim
 source ~/.vim/plugins.vim
-source ~/.vim/plugconfig/tmux_navigator.vim
+source ~/.vim/plugconfig/plugconfig.vim
 source ~/.vim/plugconfig/airline.vim
 " source ~/.vim/plugconfig/coc.vim
-source ~/.vim/plugconfig/easyalign.vim
 source ~/.vim/plugconfig/easymotion.vim
-source ~/.vim/plugconfig/fugitive.vim
 source ~/.vim/plugconfig/gitgutter.vim
 " source ~/.vim/plugconfig/nerdtree.vim
-" source ~/.vim/plugconfig/chadtree.vim
-source ~/.vim/plugconfig/chadtree.vim
 source ~/.vim/plugconfig/dashboard.vim
-source ~/.vim/plugconfig/dadbod.vim
 source ~/.vim/plugconfig/test.vim
 source ~/.vim/plugconfig/vimwiki.vim
-source ~/.vim/plugconfig/fzf.vim
 source ~/.vim/plugconfig/floaterm.vim
 source ~/.vim/plugconfig/firenvim.vim
 source ~/.vim/plugconfig/treesitter.vim
