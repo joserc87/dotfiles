@@ -1,0 +1,23 @@
+services:
+  'gitlab.ravenpack.com': 'gitlab:gitlab.ravenpack.com'
+gui:
+  showFileTree: false
+customCommands:
+  - key: '<f1>'
+    command: 'glab mr view -w'
+    context: 'global'
+  - key: '<f2>'
+    command: 'jira-open-branch'
+    context: 'global'
+  - key: '<f1>'
+    command: 'glab mr view -w {{.SelectedLocalBranch.Name}}'
+    context: 'localBranches'
+  - key: '<f2>'
+    command: 'jira-open-branch {{.SelectedLocalBranch.Name}}'
+    context: 'localBranches'
+  - key: '<f3>'
+    command: 'worktreebranch {{.SelectedLocalBranch.Name}}'
+    context: 'localBranches'
+  - key: '<f3>'
+    command: 'dragon-drop {{.SelectedFile.Name}}'
+    context: 'files'

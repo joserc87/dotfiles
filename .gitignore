@@ -7,3 +7,4 @@ __pycache__
 # We ignore .vim globally, but not in the config repo
 !.vim
 plugged
+linux/.config/lazygit/state.yml
