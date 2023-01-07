@@ -48,3 +48,4 @@ require('lspsaga').init_lsp_saga {
   diagnostic_header_icon = '   ',
   code_action_icon = ' ',
 }
+require'hop'.setup()
