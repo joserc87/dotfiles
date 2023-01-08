@@ -24,6 +24,21 @@ require('telescope').setup {
       },
     },
   },
+  pickers = {
+    buffers = {
+      show_all_buffers = true,
+      sort_lastused = true,
+      --theme = "dropdown",
+      mappings = {
+        n = {
+          ["dd"] = "delete_buffer",
+        },
+        i = {
+          ["<c-d>"] = "delete_buffer",
+        }
+      }
+    }
+  },
   extensions = {
     fzf = {
       fuzzy = true,                    -- false will only do exact matching
