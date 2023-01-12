@@ -463,10 +463,10 @@ listprojects() {
         | grep '/hr/' -v
     find ~/git/python/ -maxdepth 2 -mindepth 2 -type d \
         | grep forest
+    find ~/code/ -maxdepth 1
 }
 
 code() {
-    PROJECTS='entitytool\npysync\nwebapps\ndumpy\ndatamodels\nops\nconfig'
     project=$(listprojects | fzf || exit)
     [[ -z "$project" ]] && return
     cd "$project"
