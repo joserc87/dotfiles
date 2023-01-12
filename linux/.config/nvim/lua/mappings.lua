@@ -80,6 +80,7 @@ vim.keymap.set('n', '<leader>/', function()
     previewer = false,
   })
 end, { desc = '[/] Fuzzily search in current buffer]' })
+vim.keymap.set('v', '<leader>/', '"zy:Telescope live_grep default_text=<C-r>z<cr>')
 vim.keymap.set('n', '<leader>s', ':Telescope<CR>', { desc = '[S]earch telescope command' })
 vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })

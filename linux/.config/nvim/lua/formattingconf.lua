@@ -16,6 +16,7 @@ local formatter = require('formatter')
 formatter.setup {
   logging = true,
   filetype = {
+    lua = { require("formatter.filetypes.lua").stylua },
     typescript = eslint_fmt,
     typescriptreact = eslint_fmt,
     javascript = eslint_fmt,

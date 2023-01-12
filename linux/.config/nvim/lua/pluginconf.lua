@@ -244,3 +244,19 @@ vim.api.nvim_create_autocmd("BufReadPost", { callback = function()
   vim.bo.bufhidden = 'delete'
 end, pattern = 'fugitive://*' })
 vim.g.fugitive_gitlab_domains = { 'https://gitlab.ravenpack.com' }
+
+vim.g.firenvim_config = {
+    globalSettings = {
+      alt = 'all'
+      --takeover = 'never'
+    },
+    localSettings = {
+      ['.*'] = {
+        cmdline = 'neovim',
+        content = 'text',
+        priority = 0,
+        selector = 'textarea',
+        takeover = 'never',
+      },
+    }
+}
