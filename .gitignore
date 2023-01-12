@@ -8,3 +8,4 @@ __pycache__
 !.vim
 plugged
 linux/.config/lazygit/state.yml
+linux/.config/dconf/user
