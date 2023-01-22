@@ -8,3 +8,5 @@ __pycache__
 !.vim
 plugged
 linux/.config/cura/4.11/*
+linux/.config/lazygit/state.yml
+linux/.config/dconf/user

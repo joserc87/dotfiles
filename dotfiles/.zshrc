@@ -125,7 +125,7 @@ export DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git virtualenv)
 
 # User configuration
 
@@ -152,16 +152,31 @@ add_path "$HOME/Scripts/"
 add_path "$HOME/.local/bin"
 add_path "$HOME/bin/"
 add_path "$HOME/apps/"
-add_path "$HOME/.pyenv/bin"
 add_path "$HOME/.cargo/bin"
+add_path "$HOME/.pyenv/bin"
+add_path "$HOME/go/bin"
 
 # Python
 if command -v pyenv 1>/dev/null 2>&1; then
+  #eval "$(pyenv virtualenv init -)"
+  #eval "$(pyenv init -)"
+  #eval "$(pyenv init --path)"
+
+  eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv init -)"
-  # eval "$(pyenv init --path)"
+  __pyenv_version_ps1 (){
+      local ret=$?;
+      if [ -n "${PYENV_VERSION}" ]; then
+          echo -n "(${PYENV_VERSION}) "
+      fi
+      return $?
+  }
+
+  export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+  PS1="\$(__pyenv_version_ps1)${PS1}"
 fi
-export PYTHONPATH=.:./ravenpack:./python:$PYTHONPATH
+
+export PYTHONPATH=.:..:./ravenpack:./python:$PYTHONPATH
 
 # Android tools:
 export PATH=\
@@ -190,6 +205,8 @@ fi
 # https://github.com/robbyrussell/oh-my-zsh/issues/6835#issuecomment-390216875
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
+# Show the virtualenv
+PROMPT+='%{$fg_bold[magenta]%}$(virtualenv_prompt_info)%{$reset_color%} '
 
 # Virtualenv/VirtualenvWrapper
 export WORKON_HOME=$HOME/.virtualenvs
@@ -261,7 +278,7 @@ function ranger-cd {
 alias rcd=ranger-cd
 # Ranger + Tmux
 alias rmux="ranger-cd && tmux new -s `echo '${PWD##*/}'`"
-alias t=task
+alias t='task'
 # alias th="task priority:H"
 # alias tl="task priority:H or priority:"
 alias alamux='TERM=screen-256color tmux'
@@ -272,6 +289,9 @@ alias tn="tmux new -s "
 
 if command -v thefuck 1>/dev/null 2>&1; then
     eval $(thefuck --alias)
+fi
+if command -v zoxide 1>/dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
 fi
 
 ##########
@@ -289,7 +309,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-alias inp="pyenv activate big"
 export JIRA_USER=jcano
 alias my-jiras="jira-get 'code,summary' assignee=$JIRA_USER status='Open' separator=' '"
 
@@ -297,6 +316,8 @@ HISTSIZE=999999999
 
 # -U to Ignore VCS ignore files (.gitignore)
 export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -U -f -g ""'
+export TESTSHTUFF=testrunner
+
 
 # Fix for Python in VIM:
 # https://vi.stackexchange.com/questions/7644/use-vim-with-virtualenv/7654#7654
@@ -314,17 +335,27 @@ alias pytest py.test
 function suspend {
     toggle_lamp.sh off
     if hash i3lock 2>/dev/null; then
-        i3lock -c 000000
+        i3lock-fancy
+        # i3lock -c 000000
     fi
     sleep 1
     systemctl suspend
 }
 
-function poweroff {
+function gnight {
+    alacritty \
+        -o font.size=16 \
+        -o window.padding.x=16 \
+        -o window.padding.y=16 \
+        -o window.opacity=0.8 \
+        -t 'scratchpad' \
+        -e zsh -c 'sleep 0.1 && sleep_routine'
+        #--class float \
     toggle_lamp.sh off
     /usr/bin/poweroff
 }
 
+alias poweroff gnight
 
 function selectJira {
     FZF="fzf --height 7" jira-dmenu --snake | sed 's/:/_/g' || exit -1
@@ -385,7 +416,7 @@ function fzf-yay {
 }
 
 function testhere {
-    shtuff as testrunner
+    shtuff as $TESTSHTUFF
 }
 
 function saw {
@@ -396,36 +427,60 @@ function tw {
     taskwarrior-tui
 }
 
+VPN_SERVICE=openvpn-client@ravenpack.service
+
+function isvpnrunning {
+    systemctl is-active --quiet $VPN_SERVICE
+}
+
+function shouldvpnrun {
+    ! ping -c 1 -W 1 192.168.1.5 > /dev/null
+}
+
 function startvpn {
-    sudo systemctl start openvpn-client@ravenpack.service
+    if ! shouldvpnrun; then
+        echo "VPN not needed"
+        return
+    fi
+    if isvpnrunning; then
+        echo "VPN is already running"
+        return
+    fi
+    sudo systemctl start $VPN_SERVICE ||
 }
 
 function stopvpn {
-    sudo systemctl stop openvpn-client@ravenpack.service
+    sudo systemctl stop $VPN_SERVICE
 }
 
-function code {
-    PROJECTS='entitytool\npysync\nwebapps\ndatamodels\nops\nconfig'
-    project=$(echo $PROJECTS | fzf)
-    case $project in
-        webapps)
-            project="git/python/webapps"
-            ;;
-        datamodels)
-            project="git/ravenpack"
-            ;;
-        ops)
-            project="git/ops/operations"
-            ;;
-        config)
-            project="code/config-files/"
-            ;;
-        *)
-            project="git/$project"
-            ;;
-    esac
-    cd ~/"$project"
+function screenoff {
+    sleep 1 ; xset dpms force off
+}
+
+listprojects() {
+    find ~/git/ -maxdepth 2 -mindepth 2 -type d \
+        | grep forest -v \
+        | grep '/hr/' -v
+    find ~/git/python/ -maxdepth 2 -mindepth 2 -type d \
+        | grep forest
+    find ~/code/ -maxdepth 1
+}
+
+code() {
+    project=$(listprojects | fzf || exit)
+    [[ -z "$project" ]] && return
+    cd "$project"
+    pyenv activate
     nvim
+}
+
+tdd() {
+    project=$(listprojects | fzf || exit)
+    [[ -z "$project" ]] && return
+    echo Testing in $project
+    cd "$project"
+    testhere
+    shtuff into $TESTSHTUFF "pyenv activate"
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

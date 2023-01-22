@@ -1,0 +1,77 @@
+#!/usr/bin/bash
+function listbranches {
+    git branch --show-current;
+    git branch --format='%(refname:short)'
+}
+
+if [ $# -gt 1 ];
+then
+    echo "Usage: worktreebranch [branch]"
+    exit
+elif [ $# -eq 1 ];
+then
+    if [ $1 = "HEAD" ];
+    then
+        branch=$(git branch --show-current)
+        [ $? != 0 ] && exit 1;
+    else
+        branch=$1
+    fi
+else
+    branch="$(listbranches | fzf --height 40%)"
+    [ $? != 0 ] && exit 1;
+fi
+
+
+rootdir=$(git rev-parse --show-toplevel)
+project_name=$(basename "$rootdir")
+
+echo branch $branch
+
+worktreedir="$rootdir/../$project_name-forest/$branch"
+
+function worktree_exists {
+    git worktree list | grep -F "[$1]"
+}
+
+function check_worktree_exists_or_create {
+    git fetch
+    worktree="$(worktree_exists $branch)"
+    if [ $? = 0 ]
+    then
+        >&2 echo Worktree $branch exists
+        worktreedir="$(echo "$worktree" | awk '{print $1}')"
+    else
+        worktreedir="$rootdir/../$project_name-forest/$branch"
+        git worktree add "$worktreedir" "$branch"
+        >&2 echo "Worktree $worktreedir created"
+    fi
+    echo "$worktreedir"
+}
+
+worktreedir="$(check_worktree_exists_or_create)"
+TMUX_SESSION="$project_name-$branch"
+
+function create_session {
+    tmux has-session -t "$1" 2> /dev/null
+    if [ $? != 0 ]
+    then
+        echo Creating session "$1" "$worktreedir"
+        TMUX= tmux new -s "$1" -d -c "$worktreedir"
+    fi
+    tmux attach -t "$1"
+
+    tmux new-window -t "$1:1" -n Description -S -c "$worktreedir"
+    tmux new-window -t "$1:2" -n Description -S -c "$worktreedir"
+}
+
+function run {
+    tmux send -t "$TMUX_SESSION:$1" "$2" ENTER
+}
+
+create_session "$TMUX_SESSION"
+
+run 1 "git pull"
+run 1 "nvim"
+run 2 "echo 'git worktree remove .'"
+tmux switch-client -t $"$TMUX_SESSION"

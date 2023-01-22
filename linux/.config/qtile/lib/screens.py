@@ -12,23 +12,33 @@ from .utils import window_switch_to_screen_or_pull_group
 
 def _separator():
     # return widget.Sep(linewidth=2, foreground=COLS["dark_3"])
-    return widget.Sep(linewidth=2, foreground=COLS["deus_1"])
+    return widget.Sep(linewidth=2, foreground=COLS["deus_1"], background=COLS["deus_1"])
 
+
+BAR_STYLE = dict(
+    background=COLS["dark_4"],
+    **FONT_PARAMS,
+)
 
 def widget_with_label(widget_class, label, color=None, *args, **kwargs):
-    font_params = {**FONT_PARAMS}
+    font_params = {**BAR_STYLE}
+    widget_params = {**BAR_STYLE}
+    font_kwargs = {k: v for k, v in kwargs.items() if k not in ["width", "height"]}
+    font_params.update(font_kwargs)
+    widget_params.update(kwargs)
     if color:
         font_params['foreground'] = color
+        widget_params['foreground'] = color
 
     return [
-        widget.TextBox(label,**font_params) if label else None,
+        widget.TextBox(label,**font_params, width=20) if label else None,
         widget_class(
             *args,
-            **font_params,
-            **kwargs
+            **widget_params,
         ),
         _separator() if label else None,
     ]
+
 # Purple: 1DB954. Use it somewhere!
 # Screens
 # ----------------------------------------------------------------------------
@@ -40,9 +50,11 @@ def make_screen(systray=False):
     blocks = [
         # Marker for the start of the groups to give a nice bg: ◢■■■■■■■◤
         widget.TextBox(
-            font="Arial", foreground=COLS["dark_4"],
+            #font="Arial",
             # font="Arial", foreground=COLS["deus_3"],
-            text="◥" if position == 'top' else "◢", fontsize=50, padding=-1
+            text=" "*3 if position == 'top' else " "*3,
+            #text="◥" if position == 'top' else "◢", fontsize=50, padding=-1,
+            **BAR_STYLE,
         ),
         widget.GroupBox(
             other_current_screen_border=COLS["orange_0"],
@@ -54,33 +66,33 @@ def make_screen(systray=False):
             # highlight_color=COLS["blue_0"],
             highlight_color=COLS["dark_4"],
             urgent_border=COLS["red_1"],
-            background=COLS["dark_4"],
             # background=COLS["deus_3"],
             highlight_method="line",
             inactive=COLS["dark_3"],
             active=COLS["light_2"],
             disable_drag=True,
             borderwidth=2,
-            **FONT_PARAMS,
+            **BAR_STYLE,
         ),
         # Marker for the end of the groups to give a nice bg: ◢■■■■■■■◤
         widget.TextBox(
-            font="Arial", foreground=COLS["dark_4"],
+            #font="Arial",
             # font="Arial", foreground=COLS["deus_3"],
-            text="◤" if position == 'top' else "◣", fontsize=50, padding=-5
-            # text="◤ ", fontsize=50, padding=-5
+            text=" "*3 if position == 'top' else " "*3,
+            #text="◤" if position == 'top' else "◣", fontsize=50, padding=-5,
+            **BAR_STYLE,
         ),
         # Show the title for the focused window
-        widget.WindowName(**FONT_PARAMS),
-        # widget.TaskList(**FONT_PARAMS),
-        widget.Pomodoro(**FONT_PARAMS),
+        # widget.WindowName(**BAR_STYLE),
+        widget.TaskList(**BAR_STYLE),
+        # widget.Pomodoro(**BAR_STYLE),
         # Allow for quick command execution
         widget.Prompt(
             cursor_color=COLS["light_3"],
             # ignore_dups_history=True,
             bell_style="visual",
             prompt="λ : ",
-            **FONT_PARAMS
+            **BAR_STYLE
         ),
         _separator(),
         *widget_with_label(widget.Mpris2, "", "#1DB954",
@@ -88,8 +100,11 @@ def make_screen(systray=False):
             objname="org.mpris.MediaPlayer2.spotify",
             display_metadata=['xesam:title', 'xesam:artist'],
             scroll_chars=None,
-            width=250,
-            stop_pause_text='',
+            width=150,
+            playing_text=' {track}',
+            stopped_text=' {track}',
+            paused_text=' {track}',
+            **BAR_STYLE,
         ),
         # Resource usage graphs
         widget.CPUGraph(
@@ -99,7 +114,7 @@ def make_screen(systray=False):
             line_width=1,
             type="line",
             width=50,
-            **FONT_PARAMS
+            **BAR_STYLE,
         ),
         widget.MemoryGraph(
             border_color=COLS["blue_2"],
@@ -108,7 +123,7 @@ def make_screen(systray=False):
             line_width=1,
             type="line",
             width=50,
-            **FONT_PARAMS
+            **BAR_STYLE
         ),
         widget.NetGraph(
             border_color=COLS["green_1"],
@@ -117,7 +132,7 @@ def make_screen(systray=False):
             line_width=1,
             type="line",
             width=50,
-            **FONT_PARAMS
+            **BAR_STYLE
         ),
         _separator(),
         # IP information
@@ -126,7 +141,7 @@ def make_screen(systray=False):
         #     update_interval=10,
         #     markup=True,
         #     padding=1,
-        #     **FONT_PARAMS
+        #     **BAR_STYLE
         # ),
         # Available apt upgrades
         widget.CheckUpdates(
@@ -136,7 +151,7 @@ def make_screen(systray=False):
             update_interval=600,
             markup=True,
             padding=1,
-            **FONT_PARAMS
+            **BAR_STYLE
         ),
         _separator(),
 
@@ -149,7 +164,7 @@ def make_screen(systray=False):
         #     update_interval=60,
         #     markup=True,
         #     padding=1,
-        #     **FONT_PARAMS
+        #     **BAR_STYLE
         # ) if running_on_batteries else None,
 
         # Wifi strength
@@ -158,7 +173,7 @@ def make_screen(systray=False):
 #             update_interval=60,
 #             markup=True,
 #             padding=1,
-#             **FONT_PARAMS
+#             **BAR_STYLE
 #         ) if running_on_batteries else None,
 
         # Volume % : scroll mouse wheel to change volume
@@ -176,7 +191,7 @@ def make_screen(systray=False):
         # Visual indicator of the current layout for this workspace.
         widget.CurrentLayoutIcon(
             custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
-            **FONT_PARAMS
+            **BAR_STYLE
         ),
     ]
     # Remove disabled widgets
@@ -248,6 +263,7 @@ def make_screen(systray=False):
 #       qtile trays both crap out...)
 screens = [
     make_screen(systray=WITH_SYS_TRAY),
-    make_screen(systray=False)
+    make_screen(systray=False),
+    make_screen(systray=False),
 ]
 

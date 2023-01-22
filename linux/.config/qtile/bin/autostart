@@ -11,9 +11,13 @@ function execute_once {
     fi
 }
 
+autorandr --change
 nitrogen --restore
 sleep 1
-compton-blur -b
-execute_once ferdi
+execute_once ferdium
 xset r rate 180 70
 indicator-sound-switcher
+nm-applet
+
+sleep 10
+compton-blur

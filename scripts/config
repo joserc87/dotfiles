@@ -14,6 +14,7 @@ list() {
     echo "${1}aws"
     echo "${1}notif"
     echo "${1}alacritty"
+    echo "${1}ssh"
 }
 
 if [ "$#" -ne 1 ]; then
@@ -72,6 +73,9 @@ case $1 in
     ;;
     alacritty)
         $EDITOR ~/.config/alacritty/alacritty.yml
+    ;;
+    ssh)
+        $EDITOR ~/.ssh/config
     ;;
     shortlist)
         echo i3 nvim vim-plugins zsh xresources tmux stuff config

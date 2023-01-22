@@ -6,18 +6,23 @@ function base {
 }
 
 function entitytool {
-    cd ~/git/entitytool
+    cd ~/git/python/entitytool
     tmuxp load -d entitytool
 }
 
 function webapps {
-    cd ~/git/webapps
+    cd ~/git/python/webapps
     tmuxp load -d webapps
 }
 
 function pysync {
-    cd ~/git/pysync
+    cd ~/git/python/pysync
     tmuxp load -d pysync
+}
+
+function dumpy {
+    cd ~/git/python/dumpy
+    tmuxp load -d dumpy
 }
 
 function all {
@@ -25,6 +30,7 @@ function all {
     entitytool
     webapps
     pysync
+    dumpy
     tmux attach -t base
 }
 

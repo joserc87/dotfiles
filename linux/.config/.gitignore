@@ -1,8 +1,8 @@
 # Ignore everything
-*
+#*/
 
 # ...even if they are in subdirectories
-!*/
+#!*/
 
 # But not these files...
 !.gitignore
@@ -19,3 +19,24 @@
 !qtile/**
 !nvim/**
 !sgtk-menu/**
+
+Bitwarden
+Bitwarden CLI
+BraveSoftware
+cef_user_data
+chromium
+cura
+falkon
+Ferdium
+GIMP
+glab-cli
+JetBrains
+Kvantum
+libreoffice
+lvim
+obsidian
+pulse
+Slack
+spotify
+tg
+zoomus.conf

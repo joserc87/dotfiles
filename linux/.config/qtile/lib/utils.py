@@ -175,12 +175,38 @@ def pull_window_here(**kwargs):
 
     return lazy.function(callback)
 
+NUM_GAPS_LAYOUTS = 4
+NUM_LAYOUTS = 5
+FULL_LAYOUT = NUM_LAYOUTS - 1
+SATELITE_LAYOUT = 0
 
-def toggle_gaps():
+SPOTIFY_GROUP = 10
+
+def set_current_monad_layout(group, next_prev=1):
+    monad_layout = getattr(group, 'monad_layout', 0)
+    monad_layout = max(1, min(monad_layout + next_prev, NUM_GAPS_LAYOUTS - 1))
+    group.monad_layout = monad_layout
+    return monad_layout
+
+def current_layout_is_monad(group):
+    return 0 < group.current_layout < NUM_GAPS_LAYOUTS
+
+
+def increase_gaps():
     def callback(qtile):
-        layout = qtile.current_group.current_layout
-        if layout <= 1:
-            qtile.current_group.use_layout(1 - layout)
+        group = qtile.current_group
+        new_layout = set_current_monad_layout(group, +1)
+        if current_layout_is_monad(group):
+            group.use_layout(new_layout)
+
+    return lazy.function(callback)
+
+def decrease_gaps():
+    def callback(qtile):
+        group = qtile.current_group
+        new_layout = set_current_monad_layout(group, -1)
+        if current_layout_is_monad(group):
+            group.use_layout(new_layout)
 
     return lazy.function(callback)
 
@@ -189,14 +215,32 @@ def next_layout():
     def callback(qtile):
         group = qtile.current_group
         layout = group.current_layout
-        if layout <= 1:
-            group.previous_layout = layout
-            group.use_layout(2)
+        if group.name == "spotify":
+            satelite_switch_full(group, layout)
         else:
-            group.use_layout(group.previous_layout)
+            monad_switch_full(group, layout)
 
     return lazy.function(callback)
 
+
+def monad_switch_full(group, layout):
+    if layout == FULL_LAYOUT:
+        next_layout = getattr(group, 'monad_layout', 2)
+    elif current_layout_is_monad(group):
+        next_layout = FULL_LAYOUT
+    else:
+        next_layout = layout + 1
+
+    group.use_layout(next_layout)
+
+
+def satelite_switch_full(group, layout):
+    if layout == FULL_LAYOUT:
+        next_layout = SATELITE_LAYOUT
+    else:
+        next_layout = FULL_LAYOUT
+
+    group.use_layout(next_layout)
 
 
 def windows_matching_shuffle(qtile, **kwargs):

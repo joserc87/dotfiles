@@ -1,0 +1,19 @@
+session_name: pysync
+# start_directory: ./ # load session relative to config location (project root).
+# before_script: cd ~/git/pysync #./.tmuxp-before-script.sh
+start_directory: ~/git/python/pysync # load session relative to config location (project root).
+shell_command_before:
+- 'pyenv activate pysync'
+windows:
+- window_name: vim
+  focus: True
+  layout: main-vertical
+  panes:
+  - vim
+- window_name: srv
+  layout: tiled
+  panes:
+  - echo python web_app/api/app.py
+  - git status
+#  - make serve
+#  - make SPHINXBUILD='poetry run sphinx-build' watch

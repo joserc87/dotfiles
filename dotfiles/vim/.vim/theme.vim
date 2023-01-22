@@ -29,24 +29,16 @@ elseif has ("mac")
   let g:airline_theme='onehalfdark'
 " LINUX
 elseif has ("unix")
-  if has("gui_running")
-    colorscheme monokai
-  else
-    colorscheme gruvbox-material
-    let g:gruvbox_contrast_dark='medium'
-    let g:gruvbox_contrast_light='medium'
-    " colorscheme solarized
-    let g:airline_theme='gruvbox'
-
-    " let g:airline_theme='onehalfdark'
-    let g:airline_theme='gruvbox_material'
-    "
-    let g:gruvbox_material_palette = 'original'
-    " let g:gruvbox_material_background = 'hard'
-    " let g:gruvbox_material_background = 'medium'
-
-    colorscheme gruvbox-material
-  endif
+  """ Gruvbox
+  """ colorscheme gruvbox-material
+  """ let g:gruvbox_contrast_dark='medium'
+  """ let g:gruvbox_contrast_light='medium'
+  """ let g:airline_theme='gruvbox_material'
+  """ let g:gruvbox_material_palette = 'original'
+  let g:onedark_config = {
+      \ 'style': 'deep',
+  \}
+  colorscheme onedark
 else
   colorscheme torte
 endif
@@ -57,9 +49,12 @@ hi Normal ctermbg=None
 " FONT:
 " -----
 
+set guifont=Noto\ Sans\ Mono:h14,Noto\ Emoji:h14,Noto\ Color\ Emoji:h14,DejaVu\ Sans\ Mono:h14
 if exists('g:neovide') || has('gui_running')
   " set guifont=NotoSansMono\ Nerd\ Font
-  set guifont=NotoSansMono\ Nerd\ Font:h8,Noto\ Emoji:h26,Noto\ Color\ Emoji:h26,DejaVu\ Sans\ Mono:h26
+  set guifont=Noto\ Sans\ Mono:h16,Noto\ Emoji:h16,Noto\ Color\ Emoji:h16,DejaVu\ Sans\ Mono:h16
+  set guifont=Noto\ Sans\ Mono:h14,Noto\ Emoji:h14,Noto\ Color\ Emoji:h14,DejaVu\ Sans\ Mono:h14
+  "set guifont=NotoSansMono:h8,Noto\ Emoji:h26,Noto\ Color\ Emoji:h26,DejaVu\ Sans\ Mono:h26
   " set guifont=Terminess\ TTF\ Nerd\ Font\ Mono:26;Noto\ Emoji:h26,Noto\ Color\ Emoji:h26,DejaVu\ Sans\ Mono:h26
   " if has("gui_gtk2")
   "   set guifont=Inconsolata\ 12
@@ -113,5 +108,8 @@ highlight VimwikiHeader6 gui=bold guifg=#689D6A cterm=bold ctermfg=4
 
 highlight Floaterm guibg=none
 highlight FloatermBorder guibg=none guifg=orchid
-highlight Normal guibg=none
+
+" Custom Background color
+"highlight Normal guibg=#282828
+
 highlight EndOfBuffer guibg=none guifg=None
