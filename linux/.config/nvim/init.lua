@@ -1,6 +1,6 @@
 -- Install packer
-require("settings")
 require("plugins")
+require("settings")
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
