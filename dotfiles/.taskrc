@@ -71,3 +71,9 @@ report.next.columns=id,start.age,entry.age,depends,priority,project,tags,recur,s
 
 report.ready.columns=id,start.age,entry.age,depends.indicator,priority,project,tags,recur.indicator,scheduled.countdown,due.countdown,until.remaining,description.count,urgency
 default.command=ready
+news.version=2.6.0
+context.home.read=+home
+context.home.write=+home
+context.work.read=+work
+context.work.write=+work
+context=work
