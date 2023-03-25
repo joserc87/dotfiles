@@ -85,18 +85,15 @@ vim.keymap.set('n', '<leader>s', ':Telescope<CR>', { desc = '[S]earch telescope 
 vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sg', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+  { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sb', require('telescope.builtin').buffers, { desc = '[S]earch [B]uffers' })
-vim.keymap.set('n', '<leader>sv', function ()
-  require('telescope.builtin').find_files({ search_dirs = { '~/code/dotfiles/linux/.config/nvim/', '~/.vim/' } } )
+vim.keymap.set('n', '<leader>sv', function()
+  require('telescope.builtin').find_files({ search_dirs = { '~/code/dotfiles/linux/.config/nvim/', '~/.vim/' } })
 end, { desc = '[S]earch [V]im config files' })
-vim.keymap.set('n', '<leader>ss', function ()
-  require('telescope.builtin').find_files({ search_dirs = { '~/code/dotfiles/scripts/' } } )
-end, { desc = '[S]earch [S]scripts' })
--- TODO: Change this with :ObsidianQuickSearch
-vim.keymap.set('n', '<leader>sW', function ()
-  require('telescope.builtin').find_files({ search_dirs = { '~/code/braindump/work/' } } )
+vim.keymap.set('n', '<leader>ss', function()
+  require('telescope.builtin').find_files({ search_dirs = { '~/code/dotfiles/scripts/' } })
 end, { desc = '[S]earch [S]scripts' })
 vim.keymap.set('n', '<leader>;', require('telescope.builtin').commands, { desc = 'Search Commands' })
 vim.keymap.set('n', '<leader>:', require('telescope.builtin').command_history, { desc = 'Search Command History' })
@@ -152,7 +149,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<C-?>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -162,9 +159,9 @@ local on_attach = function(_, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
   -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
+  -- vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+  --   vim.lsp.buf.format()
+  -- end, { desc = 'Format current buffer with LSP' })
 end
 
 -- TEST:
@@ -175,16 +172,18 @@ vim.keymap.set('n', '<leader>tm', ':TestNearest -strategy=shtuff -vv<CR>')
 vim.keymap.set('n', '<leader>td', ':TestNearest -strategy=vimspectorpy -vv<CR>')
 vim.keymap.set('n', '<leader>tf', ':TestFile<CR>')
 vim.keymap.set('n', '<leader>tF', ':TestFile -strategy=shtuff -vv<CR>')
-vim.keymap.set('n', '<leader>ts', ':TestSuite -vv -m \"not slow and not skip and not knownfail and not require_cache\" tests/unit_tests<CR>')
-vim.keymap.set('n', '<leader>tS', ':TestSuite -strategy=shtuff -vv -m \"not slow and not skip and not knownfail and not require_cache\" tests/unit_tests/<CR>')
+vim.keymap.set('n', '<leader>ts',
+  ':TestSuite -vv -m \"not slow and not skip and not knownfail and not require_cache\" tests/unit_tests<CR>')
+vim.keymap.set('n', '<leader>tS',
+  ':TestSuite -strategy=shtuff -vv -m \"not slow and not skip and not knownfail and not require_cache\" tests/unit_tests/<CR>')
 vim.keymap.set('n', '<leader>tl', ':TestLast -vv<CR>')
 vim.keymap.set('n', '<leader>tg', ':TestVisit -vv<CR>')
 vim.keymap.set('n', '<leader>tt', ':TestLast<CR>')
 vim.keymap.set('n', '<leader>tT', ':TestLast -strategy=shtuff -vv<CR>')
 
 -- LSP:
-vim.keymap.set('n', 'cf', ':Format black<CR>')
-vim.keymap.set({ 'n', 'v' }, 'cf', vim.lsp.buf.format)
+vim.keymap.set('n', 'cf', ':Format<CR>')
+--vim.keymap.set({ 'n', 'v' }, 'cf', vim.lsp.buf.format)
 
 
 -- NVIMTREE:
@@ -194,7 +193,7 @@ vim.keymap.set('n', '<leader>nf', '<cmd>NvimTreeFindFile<cr>')
 vim.keymap.set('n', '<leader>nr', '<cmd>NvimTreeRefresh<cr>')
 
 -- Obsidian:
-local group = vim.api.nvim_create_augroup("ObsidianMapping", { clear = true})
+local group = vim.api.nvim_create_augroup("ObsidianMapping", { clear = true })
 vim.api.nvim_create_autocmd("BufEnter", { callback = function(arg)
   local bufnr = arg['buf']
   vim.keymap.set('n', '<CR>', ':ObsidianFollowLink<CR>', { buffer = bufnr, desc = "Follow links in obsidian" })
@@ -202,22 +201,30 @@ end, group = group, pattern = "*.md" })
 --autocmd FileType vimwiki nnoremap <CR> :ObsidianFollowLink<CR>
 vim.keymap.set('n', '<leader>ww', ':ObsidianToday<cr>')
 vim.keymap.set('n', '<leader>wh', ':ObsidianYesterday<cr>')
+vim.keymap.set('n', '<leader>sW', ':ObsidianQuickSwitch<cr>', { desc = '[S]earch [W]iki' })
+--vim.keymap.set('n', '<leader>sW', function ()
+--  --require('telescope.builtin').find_files({ search_dirs = { '~/code/braindump/work/' } } )
+--end, { desc = '[S]earch [S]scripts' })
 
 -- place this in one of your configuration file(s)
 local hop = require('hop')
 local directions = require('hop.hint').HintDirection
 vim.keymap.set('', 'f', function()
   hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
-end, {remap=true})
+end, { remap = true })
 vim.keymap.set('', 'F', function()
   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
-end, {remap=true})
+end, { remap = true })
 vim.keymap.set('', 't', function()
   hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
-end, {remap=true})
+end, { remap = true })
 vim.keymap.set('', 'T', function()
   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
-end, {remap=true})
+end, { remap = true })
 
 vim.keymap.set('', '<leader>h', ':HopChar2<CR>')
 vim.keymap.set('', 's', ':HopChar2<CR>')
+
+local mappings = {}
+mappings.on_attach = on_attach
+return mappings

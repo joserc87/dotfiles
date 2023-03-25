@@ -5,36 +5,41 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- 4 spaces instead of a tab
-vim.g.tabstop = 4
-vim.g.shiftwidth = 4
-vim.g.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 
 -- Reload files automatically
-vim.g.autoread = true
+vim.opt.autoread = true
 
 -- Don't write backup files
-vim.g.backup = false
-vim.g.writebackup = false
-vim.g.swapfile = false
+vim.opt.backup = false
+vim.opt.writebackup = false
+vim.opt.swapfile = false
 
 -- Open new split panes to right and bottom, which feels more natural than
 -- Vim's default
-vim.g.splitbelow = true
-vim.g.splitright = true
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 -- Shows number + relative. Otherwise, set rnu
-vim.g.number = true
-vim.g.relativenumber = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+
+-- Folding with treesitter
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldenable = false
 
 -- Enable per-project .vimrc
--- vim.g.exrc = true
+-- vim.opt.exrc = true
 --
 
 vim.g.localvimrc_sandbox = 0
 vim.g.localvimrc_persistent = 1
 -- Because we enable external .vimrc's, we prevent :autocmd, shell and write
 -- commands being run inside project-specific .vimrc unless they are owned by
-vim.g.secure = true
+vim.opt.secure = true
 
 vim.g.python_host_prog = '~/.pyenv/versions/neovim2/bin/python'
 vim.g.python3_host_prog = '~/.pyenv/versions/neovim3/bin/python'

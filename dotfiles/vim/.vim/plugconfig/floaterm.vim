@@ -6,4 +6,3 @@ let g:floaterm_height=0.8
 let g:floaterm_wintitle=0
 let g:floaterm_autoclose=1
 let g:floaterm_opener = 'edit'
-

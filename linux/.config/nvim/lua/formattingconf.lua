@@ -32,7 +32,7 @@ formatter.setup {
       function ()
         return {
           exe = '~/.pyenv/shims/isort',
-          args = {"-"},
+          args = {"--profile", "black", "-"},
           stdin = true,
         }
       end

@@ -1,3 +1,7 @@
+local g = vim.g
+local v = vim.v
+local bo = vim.bo
+
 -- Obsidian
 require("obsidian").setup({
   dir = "~/code/braindump/work",
@@ -20,6 +24,10 @@ vim.keymap.set(
   end,
   { noremap = false, expr = true}
 )
+-- Markdown
+vim.g.vim_markdown_folding_disabled = true
+--vim.g.vim_markdown_override_foldtext = false
+--vim.g.vim_markdown_folding_level = 3
 
 -- Autosession
 -- require('auto-session').setup({
@@ -88,7 +96,9 @@ require('nvim-treesitter.configs').setup {
   ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help' },
 
   highlight = { enable = true },
+  -- Why was it disabled for python??
   indent = { enable = true, disable = { 'python' } },
+  -- indent = { enable = true },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -144,6 +154,13 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
+-- Hack to make treesitter folding work after opening file with telescope
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+    pattern = { "*" },
+    command = "normal zR",
+    --command = "normal zx",
+})
+
 
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -182,11 +199,13 @@ mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
+local mappings = require("mappings")
+
 mason_lspconfig.setup_handlers {
   function(server_name)
     require('lspconfig')[server_name].setup {
       capabilities = capabilities,
-      on_attach = on_attach,
+      on_attach = mappings.on_attach,
       settings = servers[server_name],
     }
   end,
@@ -241,11 +260,11 @@ require'hop'.setup()
 
 -- FUGITIVE:
 vim.api.nvim_create_autocmd("BufReadPost", { callback = function()
-  vim.bo.bufhidden = 'delete'
+  bo.bufhidden = 'delete'
 end, pattern = 'fugitive://*' })
-vim.g.fugitive_gitlab_domains = { 'https://gitlab.ravenpack.com' }
+g.fugitive_gitlab_domains = { 'https://gitlab.ravenpack.com' }
 
-vim.g.firenvim_config = {
+g.firenvim_config = {
     globalSettings = {
       alt = 'all'
       --takeover = 'never'
@@ -260,3 +279,35 @@ vim.g.firenvim_config = {
       },
     }
 }
+
+-- VimTest
+-- with the help from https://github.com/skbolton/titan/blob/main/nvim/nvim/lua/testing.lua
+g["test#python#runner"] = 'pytest'
+g["test#python#options"] = {
+  suite='-m "not slow and not skip and not knownfail and not require_cache"',
+}
+-- g["test#strategy"] = "neovim"
+g["test#strategy"] = "dispatch"
+-- g["test#python#pytest#options"] = "--color=no --tb=short -q"
+g["g:test#preserve_screen"] = 1
+-- g["test#custom_runners"] = {'Python': ['Py_Test']}
+
+g.dispatch_compilers = {
+  ['./vendor/bin/'] = 'pytest',
+  pyunit = 'pytest'
+}
+g.shtuff_receiver = 'testrunner'
+
+g.dispatch_compilers = {python = 'pytest%'}
+-- autocmd FileType python let b:dispatch = 'pytest%'
+
+g["g:vimspectorpy#launcher"] = "tmux"
+
+-- Floaterm
+g.floaterm_gitcommit = 'floaterm'
+g.floaterm_autoinsert = 1
+g.floaterm_width = 0.8
+g.floaterm_height = 0.8
+g.floaterm_wintitle = 0
+g.floaterm_autoclose = 1
+g.floaterm_opener  =  'edit'

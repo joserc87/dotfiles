@@ -209,7 +209,7 @@ Plug 'sirtaj/vim-openscad'
 "Plug 'tools-life/taskwiki'
 Plug 'itchyny/calendar.vim'
 Plug 'preservim/vim-markdown'
-Plug 'epwalsh/obsidian.nvim'
+Plug 'joserc87/obsidian.nvim'
 
 " TMUX:
 Plug 'christoomey/vim-tmux-navigator'
