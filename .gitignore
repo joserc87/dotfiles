@@ -9,3 +9,15 @@ __pycache__
 plugged
 
 dotfiles/git/.gitconfig
+linux/.config/lazygit/state.yml
+linux/.config/dconf/user
+linux/.config/QtProject.conf
+linux/.config/configstore/update-notifier-npm.json
+linux/.config/flameshot/flameshot.ini
+linux/.config/gtk-2.0/gtkfilechooser.ini
+linux/.config/htop/htoprc
+linux/.config/manjaro/manjaro-settings-manager.conf
+linux/.config/QtProject.conf
+linux/.config/mimeapps.list
+linux/.config/pavucontrol.ini
+linux/.config/zoom.conf
