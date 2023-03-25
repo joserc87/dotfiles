@@ -177,7 +177,7 @@ def make_screen(systray=False):
 #         ) if running_on_batteries else None,
 
         # Volume % : scroll mouse wheel to change volume
-        *widget_with_label(widget.Volume, "",  "#70fdff"),
+        *widget_with_label(widget.Volume, "",  "#70fdff", volume_app="select_audio"),
 
         # Keyboard layout
         # Disabled until this is released
