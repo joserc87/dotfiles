@@ -1,0 +1,28 @@
+#!/usr/bin/bash
+
+list_sinks() {
+    pacmd list-sinks \
+        | grep 'alsa.card_name =\|index:' \
+        | sed 'N;s/\n//' \
+        | sed 's/\s\+\**\sindex:\s\([0-9]\+\)\s\+alsa.card_name = "\(.*\)"/\1\t\2/'
+}
+get_mouse_coords() {
+    eval $(xdotool getmouselocation --shell)
+}
+select_sink() {
+    get_mouse_coords
+    list_sinks | cut -d'	' -f2 | dmenu -i  -l 10 -x $X -y $Y -w 300 -m 0
+}
+
+sink_name=$(select_sink)
+[[ -z "$sink_name" ]] && exit -1
+
+sink_num=$(list_sinks | grep "$sink_name" | cut -d'	' -f1)
+[[ -z "$sink_num" ]] && exit -1
+
+pacmd set-default-sink $sink_num
+notify-send \
+    -i /usr/share/icons/Papirus-Dark/16x16/actions/speaker.svg \
+    -t 10000 \
+    "Audio Sink" \
+    "Changed the audio output to \n\n$sink_num: <b>$sink_name</b>"

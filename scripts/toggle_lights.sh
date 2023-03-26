@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ADDR="http://192.168.18.2"
+ADDR="http://192.168.100.125"
 USR="qtDL80G1DEeUctazVqefajK18GXPS2BbOa6WdQHK"
 API="$ADDR/api/$USR"
 DESK_LAMP=1

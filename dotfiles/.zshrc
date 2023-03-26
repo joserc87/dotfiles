@@ -77,6 +77,7 @@ source ~/.tokens
 # time that oh-my-zsh is loaded.
 # The following would be the default theme
 ZSH_THEME="robbyrussell"
+ZSH_THEME="joserc"
 # ZSH_THEME="agnoster"
 # ZSH_THEME="lambda-gister"
 # ZSH_THEME="node"
@@ -463,6 +464,7 @@ listprojects() {
         | grep '/hr/' -v
     find ~/git/python/ -maxdepth 2 -mindepth 2 -type d \
         | grep forest
+    find ~/git/python/tools/apps/ -maxdepth 1 -mindepth 1 -type d
     find ~/code/ -maxdepth 1
 }
 
@@ -479,8 +481,8 @@ tdd() {
     [[ -z "$project" ]] && return
     echo Testing in $project
     cd "$project"
+    (sleep 1 && shtuff into $TESTSHTUFF "pyenv activate")&
     testhere
-    shtuff into $TESTSHTUFF "pyenv activate"
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

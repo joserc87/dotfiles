@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+set -e
+
+FILE=~/bookmarks.txt
+
+function select_bookmark {
+    cat "$FILE" | cut -d ';' -f1 | dmenu -l 20
+}
+
+function get_url {
+    grep "^$1;" "$FILE" | cut -d ';' -f2
+}
+
+bookmark=$(select_bookmark)
+echo selected "$bookmark"
+url=$(get_url "$bookmark")
+[ -z "$url" ] && echo No URL | echo Opening "$url" && xdg-open "$url"

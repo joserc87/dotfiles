@@ -1,0 +1,19 @@
+session_name: cdk
+# start_directory: ./ # load session relative to config location (project root).
+# before_script: cd ~/git/ops/rp-cdk #./.tmuxp-before-script.sh
+start_directory: ~/git/ops/rp-cdk # load session relative to config location (project root).
+shell_command_before:
+- 'pyenv activate cdk'
+windows:
+- window_name: vim
+  focus: True
+  layout: main-vertical
+  panes:
+  - vim
+- window_name: srv
+  layout: tiled
+  panes:
+    - cd rpa && cdk --profile vdp-dev-ireland -c environment=vdp-dev-ireland diff vdp-dev-ireland-vdp -e
+
+#  - make serve
+#  - make SPHINXBUILD='poetry run sphinx-build' watch
