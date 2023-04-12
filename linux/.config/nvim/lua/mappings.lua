@@ -168,10 +168,10 @@ end
 vim.keymap.set('t', '<leader>fL', '<C-\\><C-n>:FloatermNext<CR>')
 vim.keymap.set('n', '<leader>tn', ':TestNearest<CR>')
 vim.keymap.set('n', '<leader>tN', ':TestNearest -strategy=floaterm<CR>')
-vim.keymap.set('n', '<leader>tm', ':TestNearest -strategy=shtuff -vv<CR>')
+vim.keymap.set('n', '<leader>tm', ':TestNearest -strategy=shtuff<CR>')
 vim.keymap.set('n', '<leader>td', ':TestNearest -strategy=vimspectorpy -vv<CR>')
 vim.keymap.set('n', '<leader>tf', ':TestFile<CR>')
-vim.keymap.set('n', '<leader>tF', ':TestFile -strategy=shtuff -vv<CR>')
+vim.keymap.set('n', '<leader>tF', ':TestFile -strategy=shtuff<CR>')
 vim.keymap.set('n', '<leader>ts',
   ':TestSuite -vv -m \"not slow and not skip and not knownfail and not require_cache\" tests/unit_tests<CR>')
 vim.keymap.set('n', '<leader>tS',
