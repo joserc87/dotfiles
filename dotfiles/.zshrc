@@ -77,7 +77,7 @@ source ~/.tokens
 # time that oh-my-zsh is loaded.
 # The following would be the default theme
 ZSH_THEME="robbyrussell"
-ZSH_THEME="joserc"
+# ZSH_THEME="joserc"
 # ZSH_THEME="agnoster"
 # ZSH_THEME="lambda-gister"
 # ZSH_THEME="node"
@@ -157,26 +157,6 @@ add_path "$HOME/.cargo/bin"
 add_path "$HOME/.pyenv/bin"
 add_path "$HOME/go/bin"
 
-# Python
-if command -v pyenv 1>/dev/null 2>&1; then
-  #eval "$(pyenv virtualenv init -)"
-  #eval "$(pyenv init -)"
-  #eval "$(pyenv init --path)"
-
-  eval "$(pyenv init --path)"
-  eval "$(pyenv init -)"
-  __pyenv_version_ps1 (){
-      local ret=$?;
-      if [ -n "${PYENV_VERSION}" ]; then
-          echo -n "(${PYENV_VERSION}) "
-      fi
-      return $?
-  }
-
-  export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-  PS1="\$(__pyenv_version_ps1)${PS1}"
-fi
-
 export PYTHONPATH=.:..:./ravenpack:./python:$PYTHONPATH
 
 # Android tools:
@@ -246,6 +226,26 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Python
+if command -v pyenv 1>/dev/null 2>&1; then
+  #eval "$(pyenv virtualenv init -)"
+  #eval "$(pyenv init -)"
+  #eval "$(pyenv init --path)"
+
+  eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
+  __pyenv_version_ps1 (){
+      local ret=$?;
+      if [ -n "${PYENV_VERSION}" ]; then
+          echo -n "(${PYENV_VERSION}) "
+      fi
+      return $?
+  }
+
+  export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+  PS1="\$(__pyenv_version_ps1)${PS1}"
+fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
