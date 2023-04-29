@@ -19,8 +19,6 @@ formatter.setup {
     lua = { require("formatter.filetypes.lua").stylua },
     typescript = eslint_fmt,
     typescriptreact = eslint_fmt,
-    javascript = eslint_fmt,
-    javascriptreact = eslint_fmt,
     python = {
       function ()
         return {
@@ -36,6 +34,14 @@ formatter.setup {
           stdin = true,
         }
       end
+    },
+    go = { require("formatter.filetypes.go").gofmt },
+    -- Use the special "*" filetype for defining formatter configurations on
+    -- any filetype
+    ["*"] = {
+      -- "formatter.filetypes.any" defines default configurations for any
+      -- filetype
+      require("formatter.filetypes.any").remove_trailing_whitespace
     },
   }
 }
