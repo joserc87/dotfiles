@@ -46,3 +46,5 @@
 	rebase = true
 [pager]
     #log = gitmoji-log | less --tabs=4 -rFX
+[init]
+	defaultBranch = main
