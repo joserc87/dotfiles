@@ -459,21 +459,34 @@ function screenoff {
 }
 
 listprojects() {
-    find ~/git/ -maxdepth 2 -mindepth 2 -type d \
+    [ -d ~/git/ ] && \
+        find ~/git/ -maxdepth 2 -mindepth 2 -type d \
         | grep forest -v \
         | grep '/hr/' -v
-    find ~/git/python/ -maxdepth 2 -mindepth 2 -type d \
+    [ -d ~/git/ ] && \
+        find ~/git/python/ -maxdepth 2 -mindepth 2 -type d \
         | grep forest
-    find ~/git/python/tools/apps/ -maxdepth 1 -mindepth 1 -type d
-    find ~/code/ -maxdepth 1
+    [ -d ~/git/ ] && \
+        find ~/git/python/tools/apps/ -maxdepth 1 -mindepth 1 -type d
+    [ -d ~/code/ ] && \
+        find ~/code/ -maxdepth 1
 }
 
 code() {
     project=$(listprojects | fzf || exit)
     [[ -z "$project" ]] && return
+    project_name=$(basename "$project")
     cd "$project"
-    pyenv activate
-    nvim
+    dirty_files=$(git status --porcelain | sed s/^...// | tr '\n' ' ')
+    if [[ -n "$TMUX" ]]; then
+        pyenv activate
+        nvim
+    else
+        tmux new -d -s "$project_name"
+        sleep 1
+        tmux send-keys -t "$project_name.1" "vim $dirty_files\n" Enter
+        tmux attach -t "$project_name"
+    fi
 }
 
 tdd() {
