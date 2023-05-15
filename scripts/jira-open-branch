@@ -9,7 +9,7 @@ else
     branch=$(git branch --show-current)
 fi
 
-JIRA_PATTERN='^(RSP|RPA|TOOL|MNT|TOOL)-[0-9]+'
+JIRA_PATTERN='^(RSP|RPA|TOOL|MNT|DS|CLD|SA|TWOS|ET)-[0-9]+'
 
 JIRA_CODE=$(echo "$branch" | grep -oE "$JIRA_PATTERN")
 if [ $? -eq 0 ]; then
