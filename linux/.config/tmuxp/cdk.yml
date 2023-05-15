@@ -10,10 +10,17 @@ windows:
   layout: main-vertical
   panes:
   - vim
-- window_name: srv
+- window_name: cdk
   layout: tiled
   panes:
-    - cd rpa && cdk --profile vdp-dev-ireland -c environment=vdp-dev-ireland diff vdp-dev-ireland-vdp -e
+    - shell_command:
+      - cd aux-tools/cdk-container/
+      - ./rp-cdk1
+      - activate rpa
+      - clear
+      - cmd: cdk --profile common-dev-ireland -c environment=common-dev-ireland diff monitoring -e
+        enter: false
+    # - cd rpa && cdk --profile vdp-dev-ireland -c environment=vdp-dev-ireland diff vdp-dev-ireland-vdp -e
 
 #  - make serve
 #  - make SPHINXBUILD='poetry run sphinx-build' watch
