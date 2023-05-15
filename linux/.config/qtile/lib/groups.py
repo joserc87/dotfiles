@@ -14,7 +14,8 @@ _spawn = {
     6: ["slack"],
     7: ["firefox"],
     9: ["ferdium"],
-    10: ["spotify", "blueman-manager", "pavucontrol"],
+    # Disabled: "blueman-manager", "pavucontrol"
+    10: ["spotify"],
 }
 _layout_opts = {
     10: dict(
