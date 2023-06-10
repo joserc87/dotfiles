@@ -14,4 +14,4 @@ function get_url {
 bookmark=$(select_bookmark)
 echo selected "$bookmark"
 url=$(get_url "$bookmark")
-[ -z "$url" ] && echo No URL | echo Opening "$url" && xdg-open "$url"
+[ -z "$url" ] && echo No URL || echo Opening "$url" && xdg-open "$url"

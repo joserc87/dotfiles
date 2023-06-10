@@ -21,3 +21,4 @@ linux/.config/QtProject.conf
 linux/.config/mimeapps.list
 linux/.config/pavucontrol.ini
 linux/.config/zoom.conf
+linux/.config/ngrok/ngrok.yml

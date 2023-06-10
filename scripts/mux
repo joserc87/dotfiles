@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+function base {
+    tmuxp load -d base
+}
+
+function entitytool {
+    tmuxp load -d entitytool
+}
+
+function webapps {
+    tmuxp load -d webapps
+}
+
+function monitoring-proxy {
+    tmuxp load -d monitoring-proxy
+}
+
+function pysync {
+    tmuxp load -d pysync
+}
+
+function dumpy {
+    tmuxp load -d dumpy
+}
+
+function python-api {
+    tmuxp load -d python-api
+}
+
+function python-api {
+    tmuxp load -d cdk
+}
+
+function all {
+    tmuxp load -d base
+    # tmuxp load -d entitytool
+    tmuxp load -d webapps
+    # tmuxp load -d pysync
+    tmuxp load -d dumpy
+    tmuxp load -d python-api
+    tmuxp load -d monitoring-proxy
+    tmuxp load -d cdk
+    tmux attach -t base
+}
+
+parse_args() {
+    echo $1
+    case "$1" in
+        all)
+             all
+             ;;
+         '')
+             opt=$(tmuxp ls | fzf)
+             [[ -z "$opt" ]] || tmuxp load -d "$opt"
+             ;;
+         *)
+             opt=$(tmuxp ls | grep "$1" | fzf)
+             [[ -z "$opt" ]] || tmuxp load -d "$opt"
+             ;;
+    esac
+}
+
+parse_args $@

@@ -157,90 +157,12 @@ add_path "$HOME/.cargo/bin"
 add_path "$HOME/.pyenv/bin"
 add_path "$HOME/go/bin"
 
-export PYTHONPATH=.:..:./ravenpack:./python:$PYTHONPATH
-
-# Android tools:
-export PATH=\
-~/Library/Android/sdk/platform-tools/\
-:/Applications/MacPorts/MacVim.app/Contents/MacOS/\
-:/opt/oracle/instantclient_21_1/\
-:$PATH
-# Antlr
-export CLASSPATH=.:/usr/local/lib/antlr-4.5.3-complete.jar:$CLASSPATH
-alias antlr4='java -jar /usr/local/lib/antlr-4.5.3-complete.jar'
-alias grun='java org.antlr.v4.gui.TestRig'
-
-# -- JOSE --
-# rbenv
-if which rbenv &> /dev/null;
-then
-    eval "$(rbenv init -)";
-fi
-# Path to the Gems:
-#if [[ -e ~/.gem/ruby/2.4.0/bin ]];
-#then
-#    export PATH=~/.gem/ruby/2.4.0/bin/:$PATH
-#fi
-
-# Disable warning when .oh-my-zsh is shared between users
-# https://github.com/robbyrussell/oh-my-zsh/issues/6835#issuecomment-390216875
-ZSH_DISABLE_COMPFIX=true
-source $ZSH/oh-my-zsh.sh
-# Show the virtualenv
-PROMPT+='%{$fg_bold[magenta]%}$(virtualenv_prompt_info)%{$reset_color%} '
-
-# Virtualenv/VirtualenvWrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/git
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
-if [[ -f /usr/local/bin/virtualenvwrapper.sh ]];
-then
-    source /usr/local/bin/virtualenvwrapper.sh
-elif [[ -f /usr/bin/virtualenvwrapper.sh ]];
-then
-    source /usr/bin/virtualenvwrapper.sh
-fi
-
-if [[ -f /opt/asdf-vm/asdf.sh ]];
-then
-    source /opt/asdf-vm/asdf.sh
-fi
-
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 # Python
 if command -v pyenv 1>/dev/null 2>&1; then
   #eval "$(pyenv virtualenv init -)"
-  #eval "$(pyenv init -)"
+  eval "$(pyenv init -)"
   #eval "$(pyenv init --path)"
 
-  eval "$(pyenv init --path)"
-  eval "$(pyenv init -)"
   __pyenv_version_ps1 (){
       local ret=$?;
       if [ -n "${PYENV_VERSION}" ]; then
@@ -253,9 +175,38 @@ if command -v pyenv 1>/dev/null 2>&1; then
   PS1="\$(__pyenv_version_ps1)${PS1}"
 fi
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+export PYTHONPATH=.:..:./ravenpack:./python:$PYTHONPATH
 
-# alias checktws="find -type f -exec egrep -l \" +$\" {} \;"
+# Android tools:
+export PATH=\
+~/Library/Android/sdk/platform-tools/\
+:/Applications/MacPorts/MacVim.app/Contents/MacOS/\
+:/opt/oracle/instantclient_21_1/\
+:$PATH
+# Antlr
+
+# -- JOSE --
+# Disable warning when .oh-my-zsh is shared between users
+# https://github.com/robbyrussell/oh-my-zsh/issues/6835#issuecomment-390216875
+ZSH_DISABLE_COMPFIX=true
+source $ZSH/oh-my-zsh.sh
+# Show the virtualenv
+PROMPT+='%{$fg_bold[magenta]%}$(virtualenv_prompt_info)%{$reset_color%} '
+
+# Virtualenv/VirtualenvWrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/git
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
 function checktws() {
     if [ "$1" != "" ]
     then
@@ -265,14 +216,12 @@ function checktws() {
     fi
 }
 
-
 # Automatically change the directory in bash after closing ranger
 #
 # This is a bash function for .bashrc to automatically change the directory to
 # the last visited one after ranger quits.
 # To undo the effect of this function, you can type "cd -" to return to the
 # original directory.
-
 function ranger-cd {
     tempfile="$(mktemp -t tmp.XXXXXX)"
     /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
@@ -336,7 +285,7 @@ fi
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
-alias pytest py.test
+#alias pytest py.test
 #
 # i3lock + suspend
 function suspend {
@@ -490,7 +439,7 @@ code() {
     else
         tmux new -d -s "$project_name"
         sleep 1
-        tmux send-keys -t "$project_name.1" "vim $dirty_files" Enter
+        tmux send-keys -t "$project_name.1" "vim $dirty_files\n" Enter
         tmux attach -t "$project_name"
     fi
 }

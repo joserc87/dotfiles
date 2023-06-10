@@ -1,7 +1,11 @@
 #!/usr/bin/zsh
 
-# Open a Jira by code.
+JIRA_SERVER_PATTERN='^(RSP|RPA|TOOL|MNT)-[0-9]+'
+JIRA_CLOUD_PATTERN='^(DS|CLD|SA|TWOS|ET)-[0-9]+'
+JIRA_SERVER_URL="https://jira.ravenpack.com"
+JIRA_CLOUD_URL="https://ravenpack.atlassian.net"
 
+# Open a Jira by code.
 open_command () {
 	emulate -L zsh
 	setopt shwordsplit
@@ -36,8 +40,17 @@ NAMED_JIRA=$(jira-get code,summary code=$JIRA separator=" ")
 echo "$NAMED_JIRA\n$( cat $RECENT_JIRAS )" | awk '!x[$0]++' > $RECENT_JIRAS
 
 # Go to destkop 7
-i3-msg workspace '7: '
+#i3-msg workspace '7: '
+
+echo "Opening jira $JIRA"
+if echo "$JIRA" | grep -oE "$JIRA_CLOUD_PATTERN" > /dev/null; then
+    echo "Using Jira cloud"
+    JIRA_URL=$JIRA_CLOUD_URL
+else
+    echo "Using Jira server"
+    JIRA_URL=$JIRA_SERVER_URL
+fi
+
 
 # open 
-open_command "https://jira.ravenpack.com/browse/$JIRA"
-
+open_command "$JIRA_URL/browse/$JIRA"
