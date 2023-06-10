@@ -202,6 +202,12 @@ then
     source /usr/bin/virtualenvwrapper.sh
 fi
 
+if [[ -f /opt/asdf-vm/asdf.sh ]];
+then
+    source /opt/asdf-vm/asdf.sh
+fi
+
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -484,7 +490,7 @@ code() {
     else
         tmux new -d -s "$project_name"
         sleep 1
-        tmux send-keys -t "$project_name.1" "vim $dirty_files\n" Enter
+        tmux send-keys -t "$project_name.1" "vim $dirty_files" Enter
         tmux attach -t "$project_name"
     fi
 }
