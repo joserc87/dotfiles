@@ -5,7 +5,7 @@ Inspired partly by https://github.com/fscherf/qtile-config/blob/master/config.py
 
 from libqtile import hook
 
-from lib.keys import ALT, TAB, CTRL, SHIFT, RETURN
+from lib.keys import ALT, TAB, CTRL, SHIFT, RETURN, UNDERSCORE
 from lib.settings import MODKEY, DEFAULT_TERMINAL, APP_LAUNCHER
 # from lib.default import layout_deafults
 

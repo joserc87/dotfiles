@@ -25,7 +25,7 @@ _main_satelite = {
 }
 # 4K
 # GAP = 48
-GAP = 32
+GAP = 16
 
 # Layouts
 floating_layout = layout.Floating(

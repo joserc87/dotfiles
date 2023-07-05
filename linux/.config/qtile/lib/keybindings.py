@@ -6,6 +6,7 @@ from lib.keys import (
     SHIFT,
     RETURN,
     SPACE,
+    UNDERSCORE,
     GRAVE,
     DELETE,
     PRINT,
@@ -72,6 +73,7 @@ keys = [
     Key([MODKEY], "n", lazy.layout.normalize()),
     # Layout
     Key([MODKEY, CTRL], SPACE, lazy.window.toggle_floating()),
+    Key([MODKEY, CTRL], UNDERSCORE, lazy.window.toggle_minimize()),
     Key([MODKEY, SHIFT], SPACE, exe("switchkblayout")),
     Key([MODKEY], SPACE, next_layout()),
     Key([MODKEY], "r", lazy.window.toggle_fullscreen()),
