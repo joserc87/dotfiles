@@ -339,7 +339,10 @@ function edsh {
 }
 
 function nocaps {
+    # Use Caps Lock as Ctrl
     setxkbmap -option ctrl:nocaps
+    # Tap Caps Lock for Escape
+    xcape -e '#66=Escape'
 }
 
 function checkout {
@@ -409,6 +412,10 @@ function stopvpn {
     sudo systemctl stop $VPN_SERVICE
 }
 
+function restartvpn {
+    stopvpn && startvpn
+}
+
 function screenoff {
     sleep 1 ; xset dpms force off
 }
@@ -423,6 +430,8 @@ listprojects() {
         | grep forest
     [ -d ~/git/ ] && \
         find ~/git/python/tools/apps/ -maxdepth 1 -mindepth 1 -type d
+    [ -d ~/git/ ] && \
+        find ~/git/python/tools/libs/ -maxdepth 1 -mindepth 1 -type d
     [ -d ~/code/ ] && \
         find ~/code/ -maxdepth 1
 }
