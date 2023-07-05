@@ -1,0 +1,10 @@
+session_name: libs
+start_directory: ~/git/python/tools/libs
+shell_command_before:
+- 'pyenv activate authclient'
+windows:
+- window_name: vim
+  focus: True
+  layout: main-vertical
+  panes:
+  - vim

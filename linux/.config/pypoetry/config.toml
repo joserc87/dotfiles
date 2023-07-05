@@ -1,0 +1,5 @@
+[repositories.ravenpack]
+url = "ssh://pypi.ravenpack.com"
+
+[experimental]
+new-installer = false

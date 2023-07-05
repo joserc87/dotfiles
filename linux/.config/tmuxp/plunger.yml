@@ -1,0 +1,11 @@
+session_name: plunger
+# start_directory: ./ # load session relative to config location (project root).
+start_directory: ~/git/python/tools/apps/admin-pages
+shell_command_before:
+- 'pyenv activate'
+windows:
+- window_name: vim
+  focus: True
+  layout: main-vertical
+  panes:
+  - vim

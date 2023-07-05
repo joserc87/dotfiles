@@ -15,7 +15,7 @@ windows:
   panes:
     - shell_command:
       - cd aux-tools/cdk-container/
-      - ./rp-cdk1
+      - ./rp-cdk2
       - activate rpa
       - clear
       - cmd: cdk --profile common-dev-ireland -c environment=common-dev-ireland diff monitoring -e
