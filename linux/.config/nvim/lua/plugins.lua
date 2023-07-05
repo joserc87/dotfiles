@@ -74,6 +74,13 @@ require('packer').startup(function(use)
 
   -- UI:
   use 'voldikss/vim-floaterm'
+  use({
+    "kdheepak/lazygit.nvim",
+    -- optional for floating window border decoration
+    requires = {
+      "nvim-lua/plenary.nvim",
+    },
+  })
   use 'kshenoy/vim-signature'
   use 'itchyny/vim-cursorword'
   -- use 'nvim-lua/popup.nvim'
@@ -112,6 +119,17 @@ require('packer').startup(function(use)
   use({
       "iamcco/markdown-preview.nvim",
       run = function() vim.fn["mkdp#util#install"]() end,
+  })
+
+  -- Focus mode:
+  use({
+	"Pocco81/true-zen.nvim",
+	config = function()
+		 require("true-zen").setup {
+			-- your config goes here
+			-- or just leave it empty :)
+		 }
+	end,
   })
 
   -- INTEGRATIONS:

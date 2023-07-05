@@ -67,7 +67,12 @@ vim.keymap.set({ 'n' }, 'tt', ':tabnew<CR>')
 vim.keymap.set({ 'n' }, 'tn', ':tabnext<Space>')
 vim.keymap.set({ 'n' }, 'tm', ':tabm<Space>')
 vim.keymap.set({ 'n' }, 'tq', ':tabclose<CR>')
-vim.keymap.set({ 'n' }, '<leader>m', ':MaximizerToggle!<CR>')
+vim.keymap.set({ 'n' }, '<leader>m',  ':silent! TZNarrow<CR>')
+vim.keymap.set({ 'n' }, '<leader>zn', ':silent! TZNarrow<CR>', {})
+vim.keymap.set({ 'v' }, '<leader>zn', "'<,'>TZNarrow<CR>", {})
+vim.keymap.set({ 'n' }, '<leader>zf', ':silent! TZFocus<CR>', {})
+vim.keymap.set({ 'n' }, '<leader>zm', ':silent! TZMinimalist<CR>', {})
+vim.keymap.set({ 'n' }, '<leader>za', ':silent! TZAtaraxis<CR>', {})
 
 
 -- See `:help telescope.builtin`
@@ -85,8 +90,11 @@ vim.keymap.set('n', '<leader>s', ':Telescope<CR>', { desc = '[S]earch telescope 
 vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+vim.keymap.set('n', '<leader>sg', require('telescope').extensions.live_grep_args.live_grep_args,
   { desc = '[S]earch by [G]rep' })
+--vim.keymap.set('n', '<leader>sg', function()
+--  require('telescope.builtin').grep_string({ shorten_path = true, word_match = "-w", only_sort_text = true, search = '' })
+--end, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sb', require('telescope.builtin').buffers, { desc = '[S]earch [B]uffers' })
 vim.keymap.set('n', '<leader>sv', function()
