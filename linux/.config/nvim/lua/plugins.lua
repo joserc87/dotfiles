@@ -115,7 +115,7 @@ require('packer').startup(function(use)
   -- Plug 'tools-life/taskwiki'
   use 'itchyny/calendar.vim'
   use 'preservim/vim-markdown'
-  use 'joserc87/obsidian.nvim'
+  use 'epwalsh/obsidian.nvim'
   use({
       "iamcco/markdown-preview.nvim",
       run = function() vim.fn["mkdp#util#install"]() end,
@@ -162,6 +162,7 @@ require('packer').startup(function(use)
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
+  use 'xiyaowong/telescope-emoji.nvim'
 
   -- FORMAT:
   use 'mhartington/formatter.nvim'

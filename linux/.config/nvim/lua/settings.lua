@@ -43,7 +43,11 @@ vim.opt.secure = true
 
 vim.g.python_host_prog = '~/.pyenv/versions/neovim2/bin/python'
 vim.g.python3_host_prog = '~/.pyenv/versions/neovim3/bin/python'
-vim.env.EDITOR = 'floaterm'
+-- vim.env.EDITOR = 'floaterm'
+--vim.fn.setenv("GIT_EDITOR", "nvr -cc split --remote-wait +'set bufhidden=wipe'")
+--vim.fn.setenv("EDITOR", "floaterm")
+vim.g.lazygit_use_neovim_remote = 1
+
 -- Open Jira as markdown. To be tested...
 -- au BufEnter jira.ravenpack.com_*.txt set filetype=markdown
 vim.api.nvim_create_autocmd("BufEnter", { callback = function(arg)
