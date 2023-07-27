@@ -1,6 +1,6 @@
-session_name: plunger
+session_name: dumpy-api
 # start_directory: ./ # load session relative to config location (project root).
-start_directory: ~/git/python/tools/apps/admin-pages
+start_directory: ~/git/python/tools/apps/dumpy-api
 shell_command_before:
 - 'pyenv activate'
 windows:
