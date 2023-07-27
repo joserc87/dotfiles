@@ -10,20 +10,9 @@ require("obsidian").setup({
   },
   completion = {
     nvim_cmp = false, -- if using nvim-cmp, otherwise set to false
+    prepend_note_id = true,
   }
 })
-vim.keymap.set(
-  "n",
-  "gf",
-  function()
-    if require('obsidian').util.cursor_on_markdown_link() then
-      return "<cmd>ObsidianFollowLink<CR>"
-    else
-      return "gf"
-    end
-  end,
-  { noremap = false, expr = true}
-)
 -- Markdown
 vim.g.vim_markdown_folding_disabled = true
 --vim.g.vim_markdown_override_foldtext = false
@@ -311,6 +300,8 @@ g.floaterm_height = 0.8
 g.floaterm_wintitle = 0
 g.floaterm_autoclose = 1
 g.floaterm_opener  =  'edit'
+
+g.lazygit_use_neovim_remote = 1 -- fallback to 0 if neovim-remote is not installed
 
 -- Coverage:
 require("coverage").setup({
