@@ -2,6 +2,9 @@ services:
   'gitlab.ravenpack.com': 'gitlab:gitlab.ravenpack.com'
 gui:
   showFileTree: false
+os:
+  editCommand: 'nvim'
+  editCommandTemplate: 'nvim  -- {{filename}}'
 customCommands:
   - key: '<f1>'
     command: 'glab mr view -w'

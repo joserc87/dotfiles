@@ -16,13 +16,25 @@ export XDG_CONFIG_HOME="$HOME/.config/"
 [ "$EDITOR" = "$(which nano)" ] && unset EDITOR
 
 # If neovim exists, use nvim, otherwise use vim
-if ! type nvim >/dev/null; then
-    export EDITOR=${EDITOR:-vim}
-    alias nvim=vim
-else
-    export EDITOR=${EDITOR:-nvim}
+# if ! type nvim >/dev/null; then
+#     export EDITOR=${EDITOR:-vim}
+#     alias nvim=vim
+# else
+#     export EDITOR=${EDITOR:-nvim}
+#     # This is just because I am used to type $ vim instead of $ nvim
+#     alias vim=nvim
+# fi
+if [ -n "$NVIM" ]; then
+    export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+    export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+    alias nvim=nvr -cc split --remote-wait +'set bufhidden=wipe'
+elif type nvim >/dev/null; then
+    export VISUAL="nvim"
+    export EDITOR="nvim"
     # This is just because I am used to type $ vim instead of $ nvim
     alias vim=nvim
+else
+    export EDITOR=${EDITOR:-vim}
 fi
 export SHELL="/bin/zsh"
 bindkey -v
@@ -353,7 +365,7 @@ function checkout {
 }
 
 function vimjson {
-    jq . $@| nvim -c 'set syntax=json' -
+    jq . $@| $EDITOR -c 'set syntax=json' -
 }
 
 function freeze {
@@ -444,11 +456,11 @@ code() {
     dirty_files=$(git status --porcelain | sed s/^...// | tr '\n' ' ')
     if [[ -n "$TMUX" ]]; then
         pyenv activate
-        nvim
+        $EDITOR
     else
         tmux new -d -s "$project_name"
         sleep 1
-        tmux send-keys -t "$project_name.1" "vim $dirty_files\n" Enter
+        tmux send-keys -t "$project_name.1" "$EDITOR $dirty_files\n" Enter
         tmux attach -t "$project_name"
     fi
 }
