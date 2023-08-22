@@ -5,8 +5,8 @@ _matches = {
     4: ["Chromium"],
     6: ["Slack"],
     7: ["Firefox"],
-    9: ["Ferdi"],
-    10: ["Spotify"],
+    9: ["Ferdium"],
+    10: ["Spotify", "pavucontrol"],
 }
 _spawn = {
     3: ["brave"],

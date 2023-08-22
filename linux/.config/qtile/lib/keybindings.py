@@ -43,9 +43,11 @@ keys = [
     Key([MODKEY], DELETE, exe("logoff")),
     Key([MODKEY, SHIFT], "c", exe("compton-toggle")),
     Key([MODKEY, SHIFT], "e", exe("sgtk-bar")),
-    Key([MODKEY, SHIFT], ESCAPE, lazy.shutdown()),
+    # Key([MODKEY, SHIFT], ESCAPE, lazy.shutdown()),
     # TODO: Add Screenshots like i3-scrot
     Key([MODKEY], PRINT, lazy.spawn(["scrot", "-s"])),
+    Key([MODKEY, SHIFT], "4", lazy.spawn(["flameshot", "gui"])),
+    Key([MODKEY], "4", lazy.spawn(["flameshot", "screen"])),
     # Move Focus
     Key([ALT], TAB, lazy.layout.next()),
     Key([ALT, SHIFT], TAB, lazy.layout.previous()),
