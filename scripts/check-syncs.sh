@@ -17,7 +17,7 @@ function check_git_status {
     msg="The folder has some files to push to git
 
     $dir"
-    ACTION=$(dunstify --action="default,OpenLazyGit" "Changes to push" "$msg")
+    ACTION=$(dunstify -t 600000 --action="default,OpenLazyGit" "Changes to push" "$msg")
 
     case "$ACTION" in
     "default")
