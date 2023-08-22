@@ -1,6 +1,10 @@
 require'nvim-tree'.setup {
-  disable_netrw       = true,
+  -- We can disable netrw but it's useful to open links with gx
+  -- disable_netrw       = true,
+  -- hijack_netrw        = true,
+  disable_netrw       = false,
   hijack_netrw        = true,
+
   tab = {
     sync = {
       open = true
@@ -42,10 +46,6 @@ require'nvim-tree'.setup {
     width = 30,
     hide_root_folder = false,
     side = 'left',
-    mappings = {
-      custom_only = false,
-      list = {}
-    }
   },
   actions = {
     open_file = {
