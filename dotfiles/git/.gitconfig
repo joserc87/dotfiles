@@ -28,15 +28,15 @@
 	lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
 	lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
 	oneline-with-dates = log --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(bold cyan)%as%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
-    # Pretty prints the log
-    # Idea taken from: https://gist.github.com/mikecharles/e808c77ddcc5ff239fe2696c61ffe1f1
-    #tree = "!f() { git log $@ --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit ; }; f"
-    tree = "!f() { git log $@ --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %<(50,trunc)%s %Cgreen(%cr) %C(reset)' --abbrev-commit ; }; f"
+	# Pretty prints the log
+	# Idea taken from: https://gist.github.com/mikecharles/e808c77ddcc5ff239fe2696c61ffe1f1
+	# tree = "!f() { git log $@ --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit ; }; f"
+	tree = "!f() { git log $@ --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %<(50,trunc)%s %Cgreen(%cr) %C(reset)' --abbrev-commit ; }; f"
 	stash-unapply = !git stash show -p | git apply -R
-    # Just because I get tired of writing the same commands over and over and over and over again
-    s = !"git status"
-    d = !"git diff"
-    ds = !"git diff --staged"
+	# Just because I get tired of writing the same commands over and over and over and over again
+	s = !"git status"
+	d = !"git diff"
+	ds = !"git diff --staged"
 	change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
 [push]
 	default = simple
