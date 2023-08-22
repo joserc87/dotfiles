@@ -26,6 +26,16 @@ require('packer').startup(function(use)
     },
   }
 
+  use { -- I don't really use fidget, but it's giving me a warning and I have to force the legacy tag
+    'j-hui/fidget.nvim',
+    tag = 'legacy',
+    config = function()
+      require("fidget").setup {
+	-- options
+      }
+    end,
+  }
+
   use { -- Autocompletion
     'hrsh7th/nvim-cmp',
     requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
