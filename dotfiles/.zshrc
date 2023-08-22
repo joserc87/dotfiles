@@ -251,7 +251,6 @@ alias t='task'
 # alias tl="task priority:H or priority:"
 alias alamux='TERM=screen-256color tmux'
 alias gs='git status'
-alias tt="tmux new -s base -c ~ || tmux attach -t base -c ~"
 alias ta="tmux attach"
 alias tn="tmux new -s "
 
