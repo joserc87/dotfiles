@@ -11,7 +11,7 @@ get_mouse_coords() {
 }
 select_sink() {
     get_mouse_coords
-    list_sinks | cut -d'	' -f2 | dmenu -i  -l 10 -x $X -y $Y -w 300 -m 0
+    list_sinks | cut -d'	' -f2 | dmenu -i  -l 10 -x $X -y $Y -w 300 # -m 0
 }
 
 sink_name=$(select_sink)
