@@ -9,6 +9,7 @@ vim.keymap.set({ 'i' }, 'jj', '<Esc>', { desc = '[jj] Go to normal mode' })
 
 -- Sensible Y. For old Y, just do yy!
 vim.keymap.set({ 'n' }, 'Y', 'y$')
+vim.keymap.set({ 'n' }, 'y%', ':let @" = expand("%") . ":" . line(".")<CR>')
 vim.keymap.set({ 'v' }, '+', '"+y')
 vim.keymap.set({ 'n' }, '+', '"+p')
 
