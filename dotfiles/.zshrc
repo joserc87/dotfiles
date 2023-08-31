@@ -33,6 +33,7 @@ elif type nvim >/dev/null; then
     export EDITOR="nvim"
     # This is just because I am used to type $ vim instead of $ nvim
     alias vim=nvim
+    alias v=nvim
 else
     export EDITOR=${EDITOR:-vim}
 fi
