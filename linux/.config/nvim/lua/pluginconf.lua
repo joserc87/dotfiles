@@ -8,6 +8,11 @@ require("obsidian").setup({
   daily_notes = {
       folder = "diary"
   },
+  templates = {
+    subdir = "templates",
+    date_format = "%Y-%m-%d-%a",
+    time_format = "%H:%M",
+  },
   completion = {
     nvim_cmp = false, -- if using nvim-cmp, otherwise set to false
     prepend_note_id = true,
