@@ -1,6 +1,7 @@
 from libqtile.config import Group, Match, ScratchPad, DropDown
 
 _matches = {
+    0: ["obsidian"],
     3: ["Brave-browser"],
     4: ["Chromium"],
     6: ["Slack"],
@@ -9,6 +10,7 @@ _matches = {
     10: ["Spotify", "pavucontrol"],
 }
 _spawn = {
+    0: ["obsidian"],
     3: ["brave"],
     4: ["chromium"],
     6: ["slack"],
