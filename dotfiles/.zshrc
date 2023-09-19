@@ -293,7 +293,7 @@ export TESTSHTUFF=testrunner
 # Fix for Python in VIM:
 # https://vi.stackexchange.com/questions/7644/use-vim-with-virtualenv/7654#7654
 if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
-  source "${VIRTUAL_ENV}/bin/activate"
+# source "${VIRTUAL_ENV}/bin/activate"  # commented out by conda initialize
   touch ~/hack_worked
 fi
 
@@ -477,4 +477,51 @@ tdd() {
     testhere
 }
 
+#######
+# AWS #
+#######
+
+ddb_list_tables() {
+	aws dynamodb list-tables | jq -r '.TableNames[]' | fzf
+}
+ddb_select_table() {
+	export LAST_DDB_TABLE=$(ddb_list_tables)
+}
+ddb_ensure_has_table_selected() {
+	[[ -z "$LAST_DDB_TABLE" ]] && ddb_select_table
+}
+ddb_describe_table() {
+	ddb_ensure_has_table_selected
+	aws dynamodb describe-table --table-name "$LAST_DDB_TABLE"
+}
+ddb_get_item() {
+	ddb_ensure_has_table_selected
+	aws dynamodb query \
+	    --table-name "$LAST_DDB_TABLE" \
+	    --key-condition-expression 'id = :value' \
+	    --expression-attribute-values '{
+	        ":value": {"S": "'"$1"'"}
+	    }'
+}
+ddb_preview() {
+	ddb_ensure_has_table_selected
+	aws dynamodb scan --table-name "$LAST_DDB_TABLE" | jq -r '.Items[].id.S'
+}
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/jcano/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/jcano/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/jcano/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/jcano/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
