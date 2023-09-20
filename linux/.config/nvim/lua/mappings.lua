@@ -197,10 +197,12 @@ vim.keymap.set('n', 'cf', ':Format<CR>')
 
 
 -- NVIMTREE:
-vim.keymap.set('n', '<leader>nn', '<cmd>NvimTreeToggle<cr>')
-vim.keymap.set('n', '<leader>ne', '<cmd>NvimTreeFocus<cr>')
-vim.keymap.set('n', '<leader>nf', '<cmd>NvimTreeFindFile<cr>')
-vim.keymap.set('n', '<leader>nr', '<cmd>NvimTreeRefresh<cr>')
+--vim.keymap.set('n', '<leader>nn', '<cmd>NvimTreeToggle<cr>')
+--vim.keymap.set('n', '<leader>ne', '<cmd>NvimTreeFocus<cr>')
+--vim.keymap.set('n', '<leader>nf', '<cmd>NvimTreeFindFile<cr>')
+--vim.keymap.set('n', '<leader>nr', '<cmd>NvimTreeRefresh<cr>')
+vim.keymap.set('n', '<leader>nn', '<cmd>Oil .<cr>')
+vim.keymap.set('n', '<leader>nf', '<cmd>Oil<cr>')
 
 -- Obsidian:
 local group = vim.api.nvim_create_augroup("ObsidianMapping", { clear = true })
