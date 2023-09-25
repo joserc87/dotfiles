@@ -192,7 +192,7 @@ vim.keymap.set('n', '<leader>tt', ':TestLast<CR>')
 vim.keymap.set('n', '<leader>tT', ':TestLast -strategy=shtuff -vv<CR>')
 
 -- LSP:
-vim.keymap.set('n', 'cf', ':Format<CR>')
+vim.keymap.set('n', '<leader>cf', ':Format<CR>')
 --vim.keymap.set({ 'n', 'v' }, 'cf', vim.lsp.buf.format)
 
 
