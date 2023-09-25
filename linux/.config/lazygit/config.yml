@@ -24,3 +24,7 @@ customCommands:
   - key: '<f3>'
     command: 'dragon-drop {{.SelectedFile.Name}}'
     context: 'files'
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
