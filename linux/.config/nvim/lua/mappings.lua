@@ -202,6 +202,7 @@ vim.keymap.set('n', '<leader>cf', ':Format<CR>')
 --vim.keymap.set('n', '<leader>nf', '<cmd>NvimTreeFindFile<cr>')
 --vim.keymap.set('n', '<leader>nr', '<cmd>NvimTreeRefresh<cr>')
 vim.keymap.set('n', '<leader>nn', '<cmd>Oil .<cr>')
+vim.keymap.set('n', '<leader>ne', '<cmd>Oil .<cr>')
 vim.keymap.set('n', '<leader>nf', '<cmd>Oil<cr>')
 
 -- Obsidian:
@@ -209,8 +210,9 @@ local group = vim.api.nvim_create_augroup("ObsidianMapping", { clear = true })
 vim.api.nvim_create_autocmd("BufEnter", { callback = function(arg)
   local bufnr = arg['buf']
   vim.keymap.set('n', '<CR>', ':ObsidianFollowLink<CR>', { buffer = bufnr, desc = "Follow links in obsidian" })
-  vim.keymap.set('n', '<leader>tt', ':MarkdownPreviewToggle<CR>', { buffer = bufnr, desc = "Togglles the perview of the markdown" })
-  vim.keymap.set('n', '<C-p>', ':ObsidianQuickSwitch<CR>', { buffer = bufnr, desc = "Togglles the perview of the markdown" })
+  vim.keymap.set('n', '<leader>tt', ':MarkdownPreviewToggle<CR>', { buffer = bufnr, desc = "Toglles the perview of the markdown" })
+  -- I should get used to <leader>wp instead
+  -- vim.keymap.set('n', '<C-p>', ':ObsidianQuickSwitch<CR>', { buffer = bufnr, desc = "Finds a file  in the docs" })
 end, group = group, pattern = "*.md" })
 --autocmd FileType vimwiki nnoremap <CR> :ObsidianFollowLink<CR>
 vim.keymap.set('n', '<leader>ww', ':ObsidianToday<cr>')
