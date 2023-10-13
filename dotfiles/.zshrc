@@ -376,6 +376,7 @@ function freeze {
 }
 
 alias lg=lazygit
+alias tt="tt -quotes ~/Documents/en.txt"
 
 function fzf-pacman {
     pacman -Slq \
