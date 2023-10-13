@@ -4,7 +4,7 @@ local bo = vim.bo
 
 -- Obsidian
 require("obsidian").setup({
-  dir = "~/code/braindump/work",
+  dir = "~/code/braindump/brain",
   daily_notes = {
       folder = "diary"
   },
@@ -279,11 +279,13 @@ g.firenvim_config = {
 -- with the help from https://github.com/skbolton/titan/blob/main/nvim/nvim/lua/testing.lua
 g["test#python#runner"] = 'pytest'
 g["test#python#options"] = {
-  suite='-m "not slow and not skip and not knownfail and not require_cache"',
+  suite='-vv -m "not slow and not skip and not knownfail and not require_cache"',
 }
 -- g["test#strategy"] = "neovim"
 g["test#strategy"] = "dispatch"
 -- g["test#python#pytest#options"] = "--color=no --tb=short -q"
+
+-- If we want the window not closing if the test pass:
 g["g:test#preserve_screen"] = 1
 -- g["test#custom_runners"] = {'Python': ['Py_Test']}
 
