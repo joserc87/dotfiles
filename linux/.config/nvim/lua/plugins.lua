@@ -52,6 +52,10 @@ require('packer').startup(function(use)
     },
   }
 
+  use {
+    'github/copilot.vim'
+  }
+
   use { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     run = function()

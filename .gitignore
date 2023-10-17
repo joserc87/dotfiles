@@ -28,3 +28,4 @@ linux/.config/spotify-tui/.spotify_token_cache.json
 linux/.config/epdfview/main.conf
 linux/.config/libfm/libfm.conf
 linux/.config/pcmanfm/default/pcmanfm.conf
+linux/.config/github-copilot/hosts.json
