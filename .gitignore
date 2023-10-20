@@ -29,3 +29,5 @@ linux/.config/epdfview/main.conf
 linux/.config/libfm/libfm.conf
 linux/.config/pcmanfm/default/pcmanfm.conf
 linux/.config/github-copilot/hosts.json
+linux/.config/nextjs-nodejs/config.json
+linux/.config/sst-nodejs/config.json
