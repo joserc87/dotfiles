@@ -43,6 +43,10 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- nnoremap <C-K> <C-W><C-K>
 -- nnoremap <C-L> <C-W><C-L>
 -- nnoremap <C-H> <C-W><C-H>
+vim.keymap.set({ 'n' }, '<C-J>', ':TmuxNavigateDown<CR>')
+vim.keymap.set({ 'n' }, '<C-K>', ':TmuxNavigateUp<CR>')
+vim.keymap.set({ 'n' }, '<C-L>', ':TmuxNavigateRight<CR>')
+vim.keymap.set({ 'n' }, '<C-H>', ':TmuxNavigateLeft<CR>')
 -- BUFFER
 vim.keymap.set({ 'n' }, '<leader>bl', ':bnext<CR>')
 vim.keymap.set({ 'n' }, '<leader>bh', ':bprevious<CR>')

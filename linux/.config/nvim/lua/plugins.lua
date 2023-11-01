@@ -79,6 +79,11 @@ require('packer').startup(function(use)
     end
   }
   use 'christoomey/vim-tmux-navigator'
+  -- Not migrated yet
+  -- use ({
+  --   'aserowy/tmux.nvim',
+  --   config = function() return require("tmux").setup() end
+  -- })
   use 'benmills/vimux'
 
   -- EDIT:
