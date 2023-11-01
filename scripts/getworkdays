@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+# This script is used to get the workdays between two dates.
+
+import datetime
+import sys
+
+
+def getworkdays(startdate, enddate):
+    # Get the workdays between two dates.
+    # startdate and enddate are datetime.date objects.
+    # Return a list of datetime.date objects.
+    workdays = []
+    for i in range((enddate - startdate).days + 1):
+        day = startdate + datetime.timedelta(days=i)
+        if day.weekday() < 5:
+            workdays.append(day)
+    return workdays
+
+
+if __name__ == "__main__":
+    # Get the startdate and enddate from the command line.
+    if len(sys.argv) != 3:
+        print("Usage: getworkdays.py startdate enddate")
+        sys.exit()
+    startdate = datetime.datetime.strptime(sys.argv[1], "%Y-%m-%d").date()
+    enddate = datetime.datetime.strptime(sys.argv[2], "%Y-%m-%d").date()
+    # Print the number of workdays.
+    print(len(getworkdays(startdate, enddate)))
