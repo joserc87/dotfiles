@@ -10,19 +10,19 @@ from lib.settings import DEFAULT_TERMINAL
 
 
 def exe(*args, **kwargs):
-    """ Just does the lazy.span """
+    """Just does the lazy.span"""
     return lazy.spawn(*args, **kwargs)
 
 
 def term_exe(command):
-    """ Run command from the terminal """
+    """Run command from the terminal"""
     # Change DEFAULT_TERMINAL with get_alternatives
-    return exe(f'{DEFAULT_TERMINAL} -e {command}')
+    return exe(f"{DEFAULT_TERMINAL} -e {command}")
 
 
 def get_bin(file):
-    """ Gets the path of a script from the bin subfolder """
-    return os.path.join(os.path.dirname(__file__), os.pardir, f'bin/{file}')
+    """Gets the path of a script from the bin subfolder"""
+    return os.path.join(os.path.dirname(__file__), os.pardir, f"bin/{file}")
 
 
 def get_alternatives(alternatives):
@@ -36,7 +36,7 @@ def get_alternatives(alternatives):
         return False
 
     results = []
-    for d in os.environ['PATH'].split(':'):
+    for d in os.environ["PATH"].split(":"):
         try:
             for proc in os.listdir(d):
                 if proc in alternatives:
@@ -60,7 +60,7 @@ def execute(command):
     """
 
     if not type(command) == list:
-        command = command.split(' ')
+        command = command.split(" ")
 
     return subprocess.Popen(command)
 
@@ -79,39 +79,38 @@ def execute_once(command):
 
 
 class command:
-    terminal = get_alternatives([
-        'alacritty',
-        'terminator',
-        'gnome-terminal',
-        'xterm'
-    ])
-    autostart = get_bin('autostart')
-    lock = get_bin('lock')
-    suspend = get_bin('suspend')
-    hibernate = get_bin('hibernate')
+    terminal = get_alternatives(["alacritty", "terminator", "gnome-terminal", "xterm"])
+    autostart = get_bin("autostart")
+    lock = get_bin("lock")
+    suspend = get_bin("suspend")
+    hibernate = get_bin("hibernate")
 
 
 # kick a window to another screen (handy during presentations)
 def kick_to_next_screen(qtile, direction=1):
-    other_scr_index = (qtile.screens.index(qtile.current_screen) + direction) % len(qtile.screens)
+    other_scr_index = (qtile.screens.index(qtile.current_screen) + direction) % len(
+        qtile.screens
+    )
     othergroup = None
     for group in qtile.cmd_groups().values():
-        if group['screen'] == other_scr_index:
-            othergroup = group['name']
+        if group["screen"] == other_scr_index:
+            othergroup = group["name"]
             break
     if othergroup:
         qtile.move_to_group(othergroup)
 
 
 def go_to_next_screen(qtile, direction=1):
-    other_scr_index = (qtile.screens.index(qtile.current_screen) + direction) % len(qtile.screens)
+    other_scr_index = (qtile.screens.index(qtile.current_screen) + direction) % len(
+        qtile.screens
+    )
     qtile.cmd_to_screen(other_scr_index)
 
 
 def go_to_group_or_switch_screen(qtile, group_name):
     group = qtile.cmd_groups().get(group_name)
     if group:
-        group_screen_index = group['screen']
+        group_screen_index = group["screen"]
         current_screen_index = qtile.screens.index(qtile.current_screen)
         # group_screen_index = qtile.screens.index(screen) if screen is not None else None
         if group_screen_index is not None:
@@ -122,11 +121,13 @@ def go_to_group_or_switch_screen(qtile, group_name):
                 # qtile.current_screen.cmd_prev_group()
                 qtile.current_screen.cmd_toggle_group(group_name)
         else:
-            #screen = qtile.screens[qtile.current_screen]
+            # screen = qtile.screens[qtile.current_screen]
             qtile.current_screen.cmd_toggle_group(group_name)
+
 
 # Taken from
 # https://gist.github.com/TauPan/9c09bd9defc5ac3c9e06
+
 
 def window_switch_to_screen_or_pull_group(**kwargs):
     """If the group of the window matched by match_window_re with the
@@ -153,19 +154,14 @@ switch_window = window_switch_to_screen_or_pull_group
 def make_sticky(qtile, *args):
     window = qtile.current_window
     screen = qtile.current_screen.index
-    window.static(
-        screen,
-        window.x,
-        window.y,
-        window.width,
-        window.height)
+    window.static(screen, window.x, window.y, window.width, window.height)
 
 
 def pull_window_here(**kwargs):
-
     """pull the matched window to the current group and focus it
     matching behaviour is the same as in switch_to
     """
+
     def callback(qtile):
         windows = windows_matching_shuffle(qtile, **kwargs)
         if windows:
@@ -175,6 +171,7 @@ def pull_window_here(**kwargs):
 
     return lazy.function(callback)
 
+
 NUM_GAPS_LAYOUTS = 4
 NUM_LAYOUTS = 5
 FULL_LAYOUT = NUM_LAYOUTS - 1
@@ -182,11 +179,16 @@ SATELITE_LAYOUT = 0
 
 SPOTIFY_GROUP = 10
 
+
 def set_current_monad_layout(group, next_prev=1):
-    monad_layout = getattr(group, 'monad_layout', 0)
+    default_monad_layout = (
+        group.current_layout if 0 < group.current_layout < NUM_GAPS_LAYOUTS else 0
+    )
+    monad_layout = getattr(group, "monad_layout", default_monad_layout)
     monad_layout = max(1, min(monad_layout + next_prev, NUM_GAPS_LAYOUTS - 1))
     group.monad_layout = monad_layout
     return monad_layout
+
 
 def current_layout_is_monad(group):
     return 0 < group.current_layout < NUM_GAPS_LAYOUTS
@@ -200,6 +202,7 @@ def increase_gaps():
             group.use_layout(new_layout)
 
     return lazy.function(callback)
+
 
 def decrease_gaps():
     def callback(qtile):
@@ -225,7 +228,7 @@ def next_layout():
 
 def monad_switch_full(group, layout):
     if layout == FULL_LAYOUT:
-        next_layout = getattr(group, 'monad_layout', 2)
+        next_layout = getattr(group, "monad_layout", 2)
     elif current_layout_is_monad(group):
         next_layout = FULL_LAYOUT
     else:
@@ -251,8 +254,10 @@ def windows_matching_shuffle(qtile, **kwargs):
         [
             w
             for w in qtile.windowMap.values()
-            if w.group and window_match_re(w, **kwargs)],
-        key=lambda ww: ww.window.wid)
+            if w.group and window_match_re(w, **kwargs)
+        ],
+        key=lambda ww: ww.window.wid,
+    )
     idx = 0
     if qtile.current_window is not None:
         try:
@@ -272,9 +277,7 @@ def window_match_re(window, wmname=None, wmclass=None, role=None):
     """
 
     if not (wmname or wmclass or role):
-        raise TypeError(
-            "at least one of name, wmclass or role must be specified"
-        )
+        raise TypeError("at least one of name, wmclass or role must be specified")
     ret = False
     if wmname:
         ret = ret or re.match(wmname, window.name)
@@ -291,4 +294,3 @@ def window_match_re(window, wmname=None, wmclass=None, role=None):
     except (xcffib.xproto.WindowError, xcffib.xproto.AccessError):
         return False
     return ret
-

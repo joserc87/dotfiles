@@ -7,6 +7,7 @@ from libqtile import hook
 
 from lib.keys import ALT, TAB, CTRL, SHIFT, RETURN, UNDERSCORE
 from lib.settings import MODKEY, DEFAULT_TERMINAL, APP_LAUNCHER
+
 # from lib.default import layout_deafults
 
 # Parts of the config
@@ -16,6 +17,7 @@ from lib.layouts import layouts, floating_layout
 from lib.hooks import *
 from lib.mouse import *
 from lib.screens import screens
+
 
 def main(qtile):
     pass

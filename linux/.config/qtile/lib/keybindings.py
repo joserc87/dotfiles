@@ -92,19 +92,15 @@ keys = [
     Key([MODKEY, CTRL], "l", lazy.function(kick_to_next_screen)),
     Key([], "F12", lazy.group["scratchpad"].dropdown_toggle("diary")),
     Key([CTRL], "F12", lazy.group["scratchpad"].dropdown_toggle("task")),
-
     # Multimedia
-
     # Volume
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -D pulse sset Master 2%+")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -D pulse sset Master 2%-")),
     Key([], "XF86AudioMute", lazy.spawn("amixer -D pulse sset Master toggle")),
-
     # Brightness
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +5%")),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
     Key([], "XF86TouchpadToggle", lazy.spawn("i3lock-fancy")),
-
     Key([MODKEY], "Print", lazy.spawn("flameshot gui")),
     Key([MODKEY, SHIFT], "Print", lazy.spawn("flameshot launcher")),
 ]

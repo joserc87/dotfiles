@@ -10,6 +10,7 @@ from libqtile.widget import base
 from .settings import COLS, FONT_PARAMS, WITH_SYS_TRAY, SCRIPT_DIR
 from .utils import window_switch_to_screen_or_pull_group
 
+
 def _separator():
     # return widget.Sep(linewidth=2, foreground=COLS["dark_3"])
     return widget.Sep(linewidth=2, foreground=COLS["deus_1"], background=COLS["deus_1"])
@@ -20,6 +21,7 @@ BAR_STYLE = dict(
     **FONT_PARAMS,
 )
 
+
 def widget_with_label(widget_class, label, color=None, *args, **kwargs):
     font_params = {**BAR_STYLE}
     widget_params = {**BAR_STYLE}
@@ -27,11 +29,11 @@ def widget_with_label(widget_class, label, color=None, *args, **kwargs):
     font_params.update(font_kwargs)
     widget_params.update(kwargs)
     if color:
-        font_params['foreground'] = color
-        widget_params['foreground'] = color
+        font_params["foreground"] = color
+        widget_params["foreground"] = color
 
     return [
-        widget.TextBox(label,**font_params, width=20) if label else None,
+        widget.TextBox(label, **font_params, width=20) if label else None,
         widget_class(
             *args,
             **widget_params,
@@ -39,21 +41,22 @@ def widget_with_label(widget_class, label, color=None, *args, **kwargs):
         _separator() if label else None,
     ]
 
+
 # Purple: 1DB954. Use it somewhere!
 # Screens
 # ----------------------------------------------------------------------------
 def make_screen(systray=False):
-    position = 'top'
+    position = "top"
     """Defined as a function so that I can duplicate this on other monitors"""
-    bat0_path = '/sys/class/power_supply/BAT0'
+    bat0_path = "/sys/class/power_supply/BAT0"
     running_on_batteries = os.path.exists(bat0_path)
     blocks = [
         # Marker for the start of the groups to give a nice bg: ◢■■■■■■■◤
         widget.TextBox(
-            #font="Arial",
+            # font="Arial",
             # font="Arial", foreground=COLS["deus_3"],
-            text=" "*3 if position == 'top' else " "*3,
-            #text="◥" if position == 'top' else "◢", fontsize=50, padding=-1,
+            text=" " * 3 if position == "top" else " " * 3,
+            # text="◥" if position == 'top' else "◢", fontsize=50, padding=-1,
             **BAR_STYLE,
         ),
         widget.GroupBox(
@@ -76,10 +79,10 @@ def make_screen(systray=False):
         ),
         # Marker for the end of the groups to give a nice bg: ◢■■■■■■■◤
         widget.TextBox(
-            #font="Arial",
+            # font="Arial",
             # font="Arial", foreground=COLS["deus_3"],
-            text=" "*3 if position == 'top' else " "*3,
-            #text="◤" if position == 'top' else "◣", fontsize=50, padding=-5,
+            text=" " * 3 if position == "top" else " " * 3,
+            # text="◤" if position == 'top' else "◣", fontsize=50, padding=-5,
             **BAR_STYLE,
         ),
         # Show the title for the focused window
@@ -92,18 +95,21 @@ def make_screen(systray=False):
             # ignore_dups_history=True,
             bell_style="visual",
             prompt="λ : ",
-            **BAR_STYLE
+            **BAR_STYLE,
         ),
         _separator(),
-        *widget_with_label(widget.Mpris2, "", "#1DB954",
-            name='spotify',
+        *widget_with_label(
+            widget.Mpris2,
+            "",
+            "#1DB954",
+            name="spotify",
             objname="org.mpris.MediaPlayer2.spotify",
-            display_metadata=['xesam:title', 'xesam:artist'],
+            display_metadata=["xesam:title", "xesam:artist"],
             scroll_chars=None,
             width=150,
-            playing_text=' {track}',
-            stopped_text=' {track}',
-            paused_text=' {track}',
+            playing_text=" {track}",
+            stopped_text=" {track}",
+            paused_text=" {track}",
             **BAR_STYLE,
         ),
         # Resource usage graphs
@@ -123,7 +129,7 @@ def make_screen(systray=False):
             line_width=1,
             type="line",
             width=50,
-            **BAR_STYLE
+            **BAR_STYLE,
         ),
         widget.NetGraph(
             border_color=COLS["green_1"],
@@ -132,7 +138,7 @@ def make_screen(systray=False):
             line_width=1,
             type="line",
             width=50,
-            **BAR_STYLE
+            **BAR_STYLE,
         ),
         _separator(),
         # IP information
@@ -151,14 +157,15 @@ def make_screen(systray=False):
             update_interval=600,
             markup=True,
             padding=1,
-            **BAR_STYLE
+            **BAR_STYLE,
         ),
         _separator(),
-
         # Current battery level
-        *(widget_with_label(
-            widget.Battery, "B",  "#70fdff"
-        ) if running_on_batteries else []),
+        *(
+            widget_with_label(widget.Battery, "B", "#70fdff")
+            if running_on_batteries
+            else []
+        ),
         # ShellScript(
         #     fname="battery.sh",
         #     update_interval=60,
@@ -166,32 +173,26 @@ def make_screen(systray=False):
         #     padding=1,
         #     **BAR_STYLE
         # ) if running_on_batteries else None,
-
         # Wifi strength
-#         ShellScript(
-#             fname="wifi-signal.sh",
-#             update_interval=60,
-#             markup=True,
-#             padding=1,
-#             **BAR_STYLE
-#         ) if running_on_batteries else None,
-
+        #         ShellScript(
+        #             fname="wifi-signal.sh",
+        #             update_interval=60,
+        #             markup=True,
+        #             padding=1,
+        #             **BAR_STYLE
+        #         ) if running_on_batteries else None,
         # Volume % : scroll mouse wheel to change volume
-        *widget_with_label(widget.Volume, "",  "#70fdff", volume_app="select_audio"),
-
+        *widget_with_label(widget.Volume, "", "#70fdff", volume_app="select_audio"),
         # Keyboard layout
         # Disabled until this is released
         # https://github.com/qtile/qtile/issues/1446
         # *widget_with_label(widget.KeyboardLayout, "", "#AAAAFF",
         #         configured_keyboards=['us', 'es']),
-
         # Current time
-        *widget_with_label(widget.Clock, "",
-                format="%d/%m %a %I:%M"),
+        *widget_with_label(widget.Clock, "", format="%d/%m %a %I:%M"),
         # Visual indicator of the current layout for this workspace.
         widget.CurrentLayoutIcon(
-            custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
-            **BAR_STYLE
+            custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")], **BAR_STYLE
         ),
     ]
     # Remove disabled widgets
@@ -207,6 +208,7 @@ def make_screen(systray=False):
     my_bar = bar.Bar(blocks, 24, background=COLS["dark_1_trans"])
 
     return Screen(**{position: my_bar})
+
 
 #### class ShellScript(base.ThreadedPollText):
 ####     '''
@@ -228,16 +230,16 @@ def make_screen(systray=False):
 ####         ('fname', None, 'Filename in script directory'),
 ####         ('script_dir', SCRIPT_DIR, 'Directory containing the script'),
 ####     ]
-#### 
+####
 ####     def __init__(self, **config):
 ####         base.ThreadedPollText.__init__(self, **config)
 ####         self.add_defaults(ShellScript.defaults)
 ####         self.fname = self.script_dir + config['fname']
-#### 
+####
 ####     def poll(self):
 ####         '''When polled just run the script without click info'''
 ####         return self._run_script()
-#### 
+####
 ####     def _run_script(self, btn=None, x=None, y=None):
 ####         '''Run the script, optionally passing click info in the environment'''
 ####         if btn is not None:
@@ -249,15 +251,15 @@ def make_screen(systray=False):
 ####                 self.fname, stdout=subprocess.PIPE, env=btn_env)
 ####         else:
 ####             result = subprocess.run(self.fname, stdout=subprocess.PIPE)
-#### 
+####
 ####         return result.stdout.decode()
-#### 
+####
 ####     def button_press(self, x, y, button):
 ####         '''
 ####         Pass the information off to the script but ignore the script output
 ####         '''
 ####         return self._run_script(btn=button, x=x, y=y)
-#### 
+####
 # XXX : When I run qtile inside of mate, I don"t actually want a qtile systray
 #       as mate handles that. (Plus, if it _is_ enabled then the mate and
 #       qtile trays both crap out...)
@@ -266,4 +268,3 @@ screens = [
     make_screen(systray=False),
     make_screen(systray=False),
 ]
-

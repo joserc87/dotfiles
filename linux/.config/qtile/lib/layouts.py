@@ -35,7 +35,7 @@ floating_layout = layout.Floating(
         Match(wm_class="floating"),
         Match(wm_class="zoom"),
         Match(wm_class="dragon-drop"),
-    ]
+    ],
 )
 layouts = [
     layout.MonadTall(name="MainSatelite", **_main_satelite, margin=GAP),

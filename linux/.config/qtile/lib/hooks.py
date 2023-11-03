@@ -11,7 +11,7 @@ def startup():
 
 @hook.subscribe.client_new
 def floating_dialogs(window):
-    dialog = window.window.get_wm_type() == 'dialog'
+    dialog = window.window.get_wm_type() == "dialog"
     transient = window.window.get_wm_transient_for()
     window_name = window.name.lower()
 

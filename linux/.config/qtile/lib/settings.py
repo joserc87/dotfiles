@@ -6,12 +6,12 @@ import os
 from lib.keys import WIN
 
 MODKEY = WIN
-DEFAULT_TERMINAL = 'alacritty'
-APP_LAUNCHER = 'dmenu_recency'
-FLOATING_WINDOWS = ['feh ']
+DEFAULT_TERMINAL = "alacritty"
+APP_LAUNCHER = "dmenu_recency"
+FLOATING_WINDOWS = ["feh "]
 
 
-SCRIPT_DIR = os.path.expanduser('~/scripts/')
+SCRIPT_DIR = os.path.expanduser("~/scripts/")
 
 # Colour codes from gruvbox for use in the UI.
 # TODO :: Parse this out of a common shell script so that colours are
@@ -103,11 +103,11 @@ COLS = {
     "orange_1": "#d65d0e",
     "orange_2": "#af3a03",
     # Additional related colors from the deus colorscheme
-    'deus_1': '#2C323B70',
-    'deus_2': '#646D7A',
-    'deus_3': '#48505D',
-    'deus_4': '#1A222F',
-    'deus_5': '#101A28',
+    "deus_1": "#2C323B70",
+    "deus_2": "#646D7A",
+    "deus_3": "#48505D",
+    "deus_4": "#1A222F",
+    "deus_5": "#101A28",
 }
 
 
@@ -115,18 +115,18 @@ COLS = {
 # FONT = 'Hack Regular'
 # FONT = 'ProFont for Powerline Regular'
 # FONT = 'TerminessTTF Nerd Font Medium'
-FONT = 'Noto Sans Mono:style=Regular'
+FONT = "Noto Sans Mono:style=Regular"
 
-FOREGROUND = COLS['light_3']
-ALERT = COLS['red_1']
+FOREGROUND = COLS["light_3"]
+ALERT = COLS["red_1"]
 FONTSIZE = 13
 PADDING = 3
 
 # Keep all of the UI consistent
 FONT_PARAMS = {
-    'font': FONT,
-    'fontsize': FONTSIZE,
-    'foreground': FOREGROUND,
+    "font": FONT,
+    "fontsize": FONTSIZE,
+    "foreground": FOREGROUND,
 }
 
 
