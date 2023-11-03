@@ -131,6 +131,7 @@ require('packer').startup(function(use)
   use { 'stevearc/oil.nvim', config = function() require('oil').setup() end }
 
   use 'navarasu/onedark.nvim' -- Theme inspired by Atom
+  use 'xiyaowong/transparent.nvim' -- Transparent background
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
