@@ -508,6 +508,14 @@ ddb_preview() {
 	ddb_ensure_has_table_selected
 	aws dynamodb scan --table-name "$LAST_DDB_TABLE" | jq -r '.Items[].id.S'
 }
+check_job_status() {
+    curl -X 'GET' \
+      "https://dumpy-api.prod.nvirginia.delivery.ravenpack.com/datafiles/$1" \
+      -H 'accept: application/json' \
+      -H "api_key: $RP_API_KEY" \
+      -s \
+     | jq -r '.datafile.status'
+}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
