@@ -246,6 +246,11 @@ vim.keymap.set('n', '<leader>wp', ':ObsidianQuickSwitch<cr>', { desc = '[W]iki s
 vim.keymap.set('', '<leader>h', ':HopChar2<CR>')
 vim.keymap.set('', 's', ':HopChar2<CR>')
 
+
+-- Silly things
+vim.keymap.set('n', '<leader>wt', ':TransparentToggle<cr>')
+
+
 local mappings = {}
 mappings.on_attach = on_attach
 return mappings

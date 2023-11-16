@@ -191,7 +191,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
   PS1="\$(__pyenv_version_ps1)${PS1}"
 fi
 
-export PYTHONPATH=.:..:./ravenpack:./python:$PYTHONPATH
+export PYTHONPATH=.:..:./ravenpack:./python #:$PYTHONPATH
 
 # Android tools:
 export PATH=\
