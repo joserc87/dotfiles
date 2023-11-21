@@ -35,6 +35,7 @@ floating_layout = layout.Floating(
         Match(wm_class="floating"),
         Match(wm_class="zoom"),
         Match(wm_class="dragon-drop"),
+        Match(role="pop-up"),
     ],
 )
 layouts = [
