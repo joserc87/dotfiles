@@ -3,6 +3,6 @@ Type=Application
 Version=1.0
 Name=ferdium
 Comment=ferdiumstartup script
-Exec=/opt/ferdium-bin/ferdium
+Exec=/usr/bin/ferdium
 StartupNotify=false
 Terminal=false

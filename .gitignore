@@ -32,7 +32,5 @@ linux/.config/github-copilot/hosts.json
 linux/.config/nextjs-nodejs/config.json
 linux/.config/sst-nodejs/config.json
 linux/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-notifyd.xml
-linux/.config/nitrogen/nitrogen.cfg
-linux/.config/nitrogen/bg-saved.cfg
 linux/.config/glib-2.0/settings/keyfile
 linux/.config/kwalletrc
