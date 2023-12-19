@@ -96,3 +96,7 @@ vim.cmd [[colorscheme onedark]]
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
+
+
+-- Just to show nice icons in obsidian
+vim.o.conceallevel = 1
