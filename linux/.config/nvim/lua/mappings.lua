@@ -100,6 +100,10 @@ vim.keymap.set('n', '<leader>sg', require('telescope').extensions.live_grep_args
 --vim.keymap.set('n', '<leader>sg', function()
 --  require('telescope.builtin').grep_string({ shorten_path = true, word_match = "-w", only_sort_text = true, search = '' })
 --end, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>st', function()
+  dirs = {"~/code/braindump/brain/diary", "~/code/braindump/brain/ravenpack"}
+  require("telescope").extensions.live_grep_args.live_grep_args({default_text="\\- \\[ \\]", search_dirs=dirs})
+end, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sb', require('telescope.builtin').buffers, { desc = '[S]earch [B]uffers' })
 vim.keymap.set('n', '<leader>sv', function()
@@ -214,7 +218,8 @@ local group = vim.api.nvim_create_augroup("ObsidianMapping", { clear = true })
 vim.api.nvim_create_autocmd("BufEnter", { callback = function(arg)
   local bufnr = arg['buf']
   vim.keymap.set('n', '<CR>', ':ObsidianFollowLink<CR>', { buffer = bufnr, desc = "Follow links in obsidian" })
-  vim.keymap.set('n', '<leader>tt', ':MarkdownPreviewToggle<CR>', { buffer = bufnr, desc = "Toglles the perview of the markdown" })
+  vim.keymap.set('n', '<leader>tt', ':MarkdownPreviewToggle<CR>', { buffer = bufnr, desc = "Toggles the perview of the markdown" })
+  vim.keymap.set('n', '<leader>x', require('obsidian').util.toggle_checkbox, { buffer = bufnr, desc = "Toggle check-boxes" })
   -- I should get used to <leader>wp instead
   -- vim.keymap.set('n', '<C-p>', ':ObsidianQuickSwitch<CR>', { buffer = bufnr, desc = "Finds a file  in the docs" })
 end, group = group, pattern = "*.md" })
