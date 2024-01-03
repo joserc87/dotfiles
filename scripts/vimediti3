@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-TMPFILE=/tmp/vimedit
-xclip -out -selection clipboard > $TMPFILE && editi3 $TMPFILE && xclip -in -selection clipboard $TMPFILE
