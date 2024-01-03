@@ -3,8 +3,8 @@ services:
 gui:
   showFileTree: false
 os:
-  editCommand: 'nvim'
-  editCommandTemplate: 'nvim  -- {{filename}}'
+  edit: 'nvim {{filename}}'
+  editAtLine: 'nvim  +{{line}} -- {{filename}}'
 customCommands:
   - key: '<f1>'
     command: 'glab mr view -w'
