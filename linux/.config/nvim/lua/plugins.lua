@@ -111,6 +111,7 @@ require('packer').startup(function(use)
       "nvim-lua/plenary.nvim",
     },
   })
+  use 'metakirby5/codi.vim'
   use 'kshenoy/vim-signature'
   use 'itchyny/vim-cursorword'
   -- use 'nvim-lua/popup.nvim'
