@@ -125,6 +125,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 -- FLOATERM:
 vim.keymap.set('n', '<leader>fz', ':FloatermNew fzf --preview \'~/.vim/plugged/fzf.vim/bin/preview.sh {}\'<CR>')
 vim.keymap.set('n', '<leader>fs', ':FloatermNew zsh<CR>')
+vim.keymap.set('n', '<leader>fS', ':FloatermNew --wintype=normal --position=right --width=0.4 zsh<CR>')
 vim.keymap.set('n', '<leader>fr', ':FloatermNew ranger<CR>')
 vim.keymap.set('n', '<leader>fp', ':FloatermNew  --wintype=normal --position=right --width=0.4 ipython<CR>')
 vim.keymap.set('n', '<leader>fP', ':FloatermNew  --wintype=normal --position=right --width=0.4 python<CR>')
