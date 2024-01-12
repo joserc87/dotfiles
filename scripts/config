@@ -72,7 +72,7 @@ case $1 in
         $EDITOR ~/.config/dunst/dunstrc
     ;;
     alacritty)
-        $EDITOR ~/.config/alacritty/alacritty.yml
+        $EDITOR ~/.config/alacritty/alacritty.toml
     ;;
     ssh)
         $EDITOR ~/.ssh/config
