@@ -39,3 +39,5 @@ linux/.config/BambuStudio/log
 linux/.config/BambuStudio/hms/hms_en.json
 linux/.config/BambuStudio/plugins
 linux/.config/tuxedo-control-center
+linux/.config/nitrogen/bg-saved.cfg
+linux/.config/nitrogen/nitrogen.cfg
