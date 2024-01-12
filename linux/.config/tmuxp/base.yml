@@ -8,12 +8,13 @@ windows:
 - window_name: base
   focus: True
   layout: tiled
+  start_directory: ~/code/braindump/brain
   panes:
-  - startvpn
+  - vim
   - read && yay -Syuu
 - window_name: code
   layout: main-horizontal
-  start_directory: ~/code/
+  start_directory: ~/code/dotfiles
   panes:
   - vim
 #  - make serve
