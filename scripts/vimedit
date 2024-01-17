@@ -1,3 +1,12 @@
 #!/usr/bin/env bash
+set -e
 
-TMPFILE=/tmp/vimedit xclip -out -selection clipboard > $TMPFILE && vim $TMPFILE && xclip -in -selection clipboard $TMPFILE
+TMPFILE=${TMPFILE:-/tmp/vimedit}
+
+xclip -out -selection clipboard > "$TMPFILE"
+if test -t 0; then
+    nvim $TMPFILE
+else
+    alacritty -e zsh -c "nvim $TMPFILE"
+fi
+xclip -in -selection clipboard $TMPFILE
