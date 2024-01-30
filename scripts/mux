@@ -8,6 +8,7 @@ function all {
     tmuxp load -d dumpy
     tmuxp load -d dumpy-api
     tmuxp load -d python-api
+    tmuxp load -d bigdata-client
     #tmuxp load -d monitoring-proxy
     tmuxp load -d cdk
     tmux attach -t base

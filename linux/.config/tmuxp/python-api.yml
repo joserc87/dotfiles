@@ -1,14 +1,8 @@
 session_name: python-api
-# start_directory: ./ # load session relative to config location (project root).
-# before_script: cd ~/git/python/dumpy #./.tmuxp-before-script.sh
-start_directory: "~/git/github/python-api"  # load session relative to config location (project root).
-  #shell_command_before:
-  #- 'sleep 2 && pyenv activate'
+start_directory: "~/git/github/python-api"
 windows:
 - window_name: vim
   focus: True
   layout: main-vertical
   panes:
   - sleep 2 && pyenv activate && vim
-#  - make serve
-#  - make SPHINXBUILD='poetry run sphinx-build' watch
