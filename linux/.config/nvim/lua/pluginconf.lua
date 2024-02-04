@@ -125,7 +125,7 @@ require('gitsigns').setup {
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'markdown', 'markdown_inline', 'groovy' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'vimdoc', 'markdown', 'markdown_inline', 'groovy' },
 
   highlight = { enable = true },
   -- Why was it disabled for python??
