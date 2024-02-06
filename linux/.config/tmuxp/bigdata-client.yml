@@ -6,3 +6,6 @@ windows:
   layout: main-vertical
   panes:
   - sleep 2 && vim
+- window_name: docs
+  panes:
+  - poetry run task watch-docs
