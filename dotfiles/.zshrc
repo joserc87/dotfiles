@@ -516,6 +516,14 @@ check_job_status() {
       -s \
      | jq -r '.datafile.status'
 }
+pyrepl() {
+    tempfile="$(mktemp -t pyrepl.XXXXXX)"
+    nvim "$tempfile" +'Codi python'
+}
+jsrepl() {
+    tempfile="$(mktemp -t pyrepl.XXXXXX)"
+    nvim "$tempfile" +'Codi javascript'
+}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

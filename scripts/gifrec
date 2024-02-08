@@ -43,6 +43,6 @@ screenkey -g "$G" &
 byzanz-record ${BYZANZ_ARGUMENTS} $D
 killall screenkey
 sxiv -a $FILE
-dragon $FILE
+dragon-drop $FILE
 
 #beep
