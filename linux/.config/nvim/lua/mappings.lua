@@ -199,7 +199,7 @@ vim.keymap.set('n', '<leader>tL', ':TestLast -strategy=quickfix<CR>')
 vim.keymap.set('n', '<leader>tg', ':TestVisit<CR>')
 vim.keymap.set('n', '<leader>tt', ':TestLast<CR>')
 vim.keymap.set('n', '<leader>tT', ':TestLast -strategy=shtuff -vv<CR>')
-vim.keymap.set('n', '<leader>tB', 'oimport pdb; pdb.set_trace()<ESC>')
+vim.keymap.set('n', '<leader>tB', 'Oimport pdb; pdb.set_trace()<ESC>')
 
 -- LSP:
 vim.keymap.set('n', '<leader>cf', ':Format<CR>')
