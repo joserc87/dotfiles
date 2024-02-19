@@ -1,0 +1,13 @@
+session_name: teamstats
+start_directory: "~/git/python/teamstats"
+windows:
+- window_name: vim
+  focus: True
+  layout: main-vertical
+  panes:
+  - sleep 2 && pyenv activate && vim
+- window_name: server
+  focus: True
+  layout: main-vertical
+  panes:
+  - echo ssh pyscheduler

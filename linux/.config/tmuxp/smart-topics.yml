@@ -1,0 +1,8 @@
+session_name: smart-topics
+start_directory: "~/git/python/smart-topics"
+windows:
+- window_name: vim
+  focus: True
+  layout: main-vertical
+  panes:
+  - sleep 2 && pyenv activate && vim
