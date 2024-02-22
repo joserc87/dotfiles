@@ -317,6 +317,8 @@ g.firenvim_config = {
 g["test#python#runner"] = 'pytest'
 g["test#python#options"] = {
   suite='-vv -m "not slow and not skip and not knownfail and not require_cache"',
+  nearest='-vv',
+  file='-vv',
 }
 -- g["test#strategy"] = "neovim"
 g["test#strategy"] = "dispatch"
