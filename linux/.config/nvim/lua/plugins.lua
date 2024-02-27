@@ -153,7 +153,7 @@ require('packer').startup(function(use)
       "iamcco/markdown-preview.nvim",
       run = function() vim.fn["mkdp#util#install"]() end,
   })
-
+  use { 'mistricky/codesnap.nvim', run = "make" }
   -- Focus mode:
   use({
 	"Pocco81/true-zen.nvim",

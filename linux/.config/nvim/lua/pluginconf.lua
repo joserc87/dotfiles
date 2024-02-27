@@ -69,6 +69,12 @@ require("obsidian").setup({
 --   auto_session_enabled = false,
 --   auto_session_allowed_dirs = {"/home/jcano/git/entitytool/", "/home/jcano/git/pysync/"}
 -- })
+-- CodeSnap
+require("codesnap").setup({
+  mac_window_bar = true,
+  opacity = true,
+  watermark = "Jose Ramon Cano"
+})
 
 -- Lualine
 require('lualine').setup {
