@@ -524,6 +524,11 @@ jsrepl() {
     tempfile="$(mktemp -t pyrepl.XXXXXX)"
     nvim "$tempfile" +'Codi javascript'
 }
+back2desk() {
+    nocaps
+    xset r rate 180 80
+    autorandr ofi
+}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
