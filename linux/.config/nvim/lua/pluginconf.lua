@@ -13,10 +13,19 @@ require("obsidian").setup({
     date_format = "%Y-%m-%d-%a",
     time_format = "%H:%M",
   },
-  completion = {
-    nvim_cmp = false, -- if using nvim-cmp, otherwise set to false
-    prepend_note_id = true,
-  },
+  -- completion = {
+  --   nvim_cmp = false, -- if using nvim-cmp, otherwise set to false
+  --   prepend_note_id = true,
+  -- },
+  wiki_link_func = function(opts)
+    if opts.id == nil then
+      return string.format("[[%s]]", opts.label)
+    elseif opts.label ~= opts.id then
+      return string.format("[[%s|%s]]", opts.id, opts.label)
+    else
+      return string.format("[[%s]]", opts.id)
+    end
+  end,
   ui = {
     enable = true,  -- set to false to disable all additional syntax features
     update_debounce = 200,  -- update delay after a text change (in milliseconds)

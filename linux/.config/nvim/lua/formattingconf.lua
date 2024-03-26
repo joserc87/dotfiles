@@ -19,6 +19,7 @@ formatter.setup {
     lua = { require("formatter.filetypes.lua").stylua },
     typescript = eslint_fmt,
     typescriptreact = eslint_fmt,
+    json = { require("formatter.filetypes.json").jq },
     python = {
       function ()
         return {
