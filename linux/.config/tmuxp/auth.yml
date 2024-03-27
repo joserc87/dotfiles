@@ -1,0 +1,8 @@
+session_name: auth
+start_directory: ~/git/python/auth
+windows:
+- window_name: vim
+  focus: True
+  layout: main-vertical
+  panes:
+  - vim
