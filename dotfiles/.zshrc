@@ -250,7 +250,7 @@ function ranger-cd {
 alias rcd=ranger-cd
 # Ranger + Tmux
 alias rmux="ranger-cd && tmux new -s `echo '${PWD##*/}'`"
-alias t='task'
+alias t='task -backlog'
 # alias th="task priority:H"
 # alias tl="task priority:H or priority:"
 alias alamux='TERM=screen-256color tmux'
@@ -524,10 +524,14 @@ jsrepl() {
     tempfile="$(mktemp -t pyrepl.XXXXXX)"
     nvim "$tempfile" +'Codi javascript'
 }
+athome() {
+    lsusb | grep DisplayLink > /dev/null
+}
 back2desk() {
+    profile=$(athome && echo "usb-only" || echo "ofi")
     nocaps
     xset r rate 180 80
-    autorandr ofi
+    autorandr $profile
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
