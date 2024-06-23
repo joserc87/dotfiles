@@ -1,5 +1,5 @@
 from libqtile.config import Drag, Click
-from libqtile.command import lazy
+from libqtile.lazy import lazy
 from lib.settings import MODKEY
 
 # This allows you to drag windows around with the mouse if you want.

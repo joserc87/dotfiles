@@ -4,7 +4,7 @@ Helper functions to run programs
 import os
 import re
 import subprocess
-from libqtile.command import lazy
+from libqtile.lazy import lazy
 
 from lib.settings import DEFAULT_TERMINAL
 

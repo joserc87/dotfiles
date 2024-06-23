@@ -15,7 +15,7 @@ from lib.keys import (
     COMMA,
     ESCAPE,
 )
-from libqtile.command import lazy
+from libqtile.lazy import lazy
 from lib.settings import MODKEY, DEFAULT_TERMINAL, APP_LAUNCHER, DEFAULT_TERMINAL
 from lib.utils import (
     exe,
