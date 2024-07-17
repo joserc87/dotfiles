@@ -1,0 +1,14 @@
+session_name: bdsm
+# start_directory: ./ # load session relative to config location (project root).
+# before_script: cd ~/git/ops/rp-cdk #./.tmuxp-before-script.sh
+start_directory: ~/git/python/subscription-management-poc
+windows:
+- window_name: vim
+  focus: True
+  layout: main-vertical
+  panes:
+  - vim
+- window_name: server
+  layout: tiled
+  panes:
+    - ssh bsm-poc

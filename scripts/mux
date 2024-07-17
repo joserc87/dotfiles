@@ -11,6 +11,7 @@ function all {
     # tmuxp load -d bigdata-client
     #tmuxp load -d monitoring-proxy
     # tmuxp load -d cdk
+    tmuxp load -d bdsm
     tmux attach -t base
 }
 

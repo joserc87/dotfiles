@@ -18,13 +18,16 @@ list() {
 }
 
 if [ "$#" -ne 1 ]; then
-    echo "Wrong number of arguments. Usage:"
-    echo ""
-    echo "  config SOMETHING"
-    echo ""
-    echo "Where SOMETHING can be:"
-    list " -> "
-    exit
+    pushd ~/.config
+    fzf | xargs -I {} $EDITOR {}
+    popd 
+    # echo "Wrong number of arguments. Usage:"
+    # echo ""
+    # echo "  config SOMETHING"
+    # echo ""
+    # echo "Where SOMETHING can be:"
+    # list " -> "
+    # exit
 fi
 
 
