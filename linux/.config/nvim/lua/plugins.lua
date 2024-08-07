@@ -153,6 +153,16 @@ require('packer').startup(function(use)
       "iamcco/markdown-preview.nvim",
       run = function() vim.fn["mkdp#util#install"]() end,
   })
+  use ({
+    "OXY2DEV/markview.nvim",
+    -- ft = "markdown" -- If you decide to lazy-load anyway
+
+    -- dependencies = {
+    --     "nvim-treesitter/nvim-treesitter",
+    --     "nvim-tree/nvim-web-devicons"
+    -- }
+  })
+
   use { 'mistricky/codesnap.nvim', run = "make" }
   -- Focus mode:
   use({
