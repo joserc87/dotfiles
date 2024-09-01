@@ -1,7 +1,86 @@
-#############################
-# CUSTOM OPTIONS ADDED BY ME:
-#############################
+# Part of the config added from https://github.com/dreamsofautonomy/zensh/blob/main/.zshrc
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
+if [[ -f "/opt/homebrew/bin/brew" ]] then
+  # If you're using macOS, you'll want this enabled
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# Set the directory we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Add in Powerlevel10k
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+# Add in zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+
+# Add in snippets
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
+zinit snippet OMZP::archlinux
+zinit snippet OMZP::aws
+zinit snippet OMZP::kubectl
+zinit snippet OMZP::kubectx
+zinit snippet OMZP::command-not-found
+
+# Load completions
+autoload -Uz compinit && compinit
+
+zinit cdreplay -q
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Keybindings
+bindkey -e
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+bindkey '^[w' kill-region
+
+# History
+HISTSIZE=999999999
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
+
+# Shell integrations
+eval "$(fzf --zsh)"
+eval "$(zoxide init --cmd cd zsh)"
+
+# CUSTOM OPTIONS ADDED BY ME:
 export TERMINFO="$HOME/.terminfo"
 export TERM=xterm-256color
 # This one makes ranger crash
@@ -9,21 +88,7 @@ export TERM=xterm-256color
 
 # for neovim
 export XDG_CONFIG_HOME="$HOME/.config/"
-# vi style incremental search
-# look at www.drbunsen.org/the-text-triumvirate/
 
-# nano? hell no!
-[ "$EDITOR" = "$(which nano)" ] && unset EDITOR
-
-# If neovim exists, use nvim, otherwise use vim
-# if ! type nvim >/dev/null; then
-#     export EDITOR=${EDITOR:-vim}
-#     alias nvim=vim
-# else
-#     export EDITOR=${EDITOR:-nvim}
-#     # This is just because I am used to type $ vim instead of $ nvim
-#     alias vim=nvim
-# fi
 if [ -n "$NVIM" ]; then
     export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
     export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
@@ -34,138 +99,31 @@ elif type nvim >/dev/null; then
     # This is just because I am used to type $ vim instead of $ nvim
     alias vim=nvim
     alias v=nvim
+elif type vim >/dev/null; then
+    export EDITOR="vim"
 else
     export EDITOR=${EDITOR:-vim}
 fi
 export SHELL="/bin/zsh"
 bindkey -v
 
-# TMUXINATOR
-if hash tmuxinator 2>/dev/null; then
-    alias mux=tmuxinator
-fi
-
 # Add this so we don't have to type cd
 setopt AUTO_CD
-
-# Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
-export DEFAULT_USER=jose
 
 # To solve the weird characters on ssh
 export LC_ALL=en_US.UTF-8
 export LANG="$LC_ALL"
 
-# Tokens for fb bots and wit.ai
-export MESSENGER_PAGE_ACCESS_TOKEN=__FACEBOOK_PAGE_ACCESS_TOKEN_HERE__
-export MESSENGER_VALIDATION_TOKEN=__FACEBOOK_VERIFY_TOKEN_HERE__
-export WIT_TOKEN=__WIT_TOKEN_HERE__
-export PORT=3000
-
-############
-# PROJECTS #
-############
-
-# TRIVIHASH
-export TRIVIHASH_DATABASE_PASSWORD=trivihash
-
-# CORTADO
-# Tokens for fb bots and wit.ai
-export MESSENGER_PAGE_ACCESS_TOKEN=__FACEBOOK_PAGE_ACCESS_TOKEN_HERE__
-export MESSENGER_VALIDATION_TOKEN=__FACEBOOK_VERIFY_TOKEN_HERE__
-export TELEGRAM_BOT_TOKEN=__TELEGRAM_TOKEN_HERE__
-export WIT_TOKEN=__WIT_TOKEN_HERE__
-export PORT=3000
-
 source ~/.tokens
-
-
-##############################
-# DEFAULT OH-MY-ZSH CONFIG   #
-##############################
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-# The following would be the default theme
-ZSH_THEME="robbyrussell"
-# ZSH_THEME="joserc"
-# ZSH_THEME="agnoster"
-# ZSH_THEME="lambda-gister"
-# ZSH_THEME="node"
-# ZSH_THEME="spaceship"
-
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-export DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-export HISTSIZE=1000000000
-export SAVEHIST=$HISTSIZE
-setopt EXTENDED_HISTORY
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git virtualenv)
-
-# User configuration
 
 function add_path {
     [[ -e "$1" ]] && export PATH="$1:$PATH"
 }
+
 # -- JOSE --
 # Deprecated:
-# export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-# export PATH="$HOME/Dev/spell/build/install/spell/bin:$PATH"
-
-# User defined scripts:
-# Scripts folder is present for Linux and Mac OS
-
 # In reverse order of priority
-add_path "$HOME/.gem/ruby/2.4.0/bin"
-add_path "/usr/local/Cellar/python/2.7.10_2/bin/"
-add_path "$HOME/Library/Android/sdk/platform-tools/"
-add_path "/Applications/MacPorts/MacVim.app/Contents/MacOS/"
-add_path "/opt/flutter/.pub-cache/bin"
-add_path "$HOME/macscripts/"
 add_path "$HOME/scripts/"
-add_path "$HOME/Scripts/"
 add_path "$HOME/.local/bin"
 add_path "$HOME/bin/"
 add_path "$HOME/apps/"
@@ -193,36 +151,42 @@ fi
 
 export PYTHONPATH=.:..:./ravenpack:./python #:$PYTHONPATH
 
-# Android tools:
-export PATH=\
-~/Library/Android/sdk/platform-tools/\
-:/Applications/MacPorts/MacVim.app/Contents/MacOS/\
+
+if command -v thefuck 1>/dev/null 2>&1; then
+    eval $(thefuck --alias)
+fi
+if command -v zoxide 1>/dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
+fi
+
+##########
+# ORACLE #
+##########
+
+# export ORACLE_HOME=/usr/lib/oracle/12.2/client64/lib/
+export ORACLE_HOME=/usr/lib/
+export LD_LIBRARY_PATH=\
+/usr/lib/oracle/12.2/client64/lib/\
 :/opt/oracle/instantclient_21_1/\
-:$PATH
-# Antlr
+:$LD_LIBRARY_PATH
 
-# -- JOSE --
-# Disable warning when .oh-my-zsh is shared between users
-# https://github.com/robbyrussell/oh-my-zsh/issues/6835#issuecomment-390216875
-ZSH_DISABLE_COMPFIX=true
-source $ZSH/oh-my-zsh.sh
-# Show the virtualenv
-PROMPT+='%{$fg_bold[magenta]%}$(virtualenv_prompt_info)%{$reset_color%} '
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Virtualenv/VirtualenvWrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/git
+export JIRA_USER=jcano
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+HISTSIZE=999999999
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+# -U to Ignore VCS ignore files (.gitignore)
+export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -U -f -g ""'
+export TESTSHTUFF=testrunner
 
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
+# Aliases
+alias ls='ls --color'
 function checktws() {
     if [ "$1" != "" ]
     then
@@ -257,48 +221,8 @@ alias alamux='TERM=screen-256color tmux'
 alias gs='git status'
 alias ta="tmux attach"
 alias tn="tmux new -s "
-
-if command -v thefuck 1>/dev/null 2>&1; then
-    eval $(thefuck --alias)
-fi
-if command -v zoxide 1>/dev/null 2>&1; then
-    eval "$(zoxide init zsh)"
-fi
-
-##########
-# ORACLE #
-##########
-
-# export ORACLE_HOME=/usr/lib/oracle/12.2/client64/lib/
-export ORACLE_HOME=/usr/lib/
-export LD_LIBRARY_PATH=\
-/usr/lib/oracle/12.2/client64/lib/\
-:/opt/oracle/instantclient_21_1/\
-:$LD_LIBRARY_PATH
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export JIRA_USER=jcano
+alias c='clear'
 alias my-jiras="jira-get 'code,summary' assignee=$JIRA_USER status='Open' separator=' '"
-
-HISTSIZE=999999999
-
-# -U to Ignore VCS ignore files (.gitignore)
-export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -U -f -g ""'
-export TESTSHTUFF=testrunner
-
-
-# Fix for Python in VIM:
-# https://vi.stackexchange.com/questions/7644/use-vim-with-virtualenv/7654#7654
-if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
-# source "${VIRTUAL_ENV}/bin/activate"  # commented out by conda initialize
-  touch ~/hack_worked
-fi
-
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
 
 #alias pytest py.test
 #
@@ -533,21 +457,3 @@ back2desk() {
     xset r rate 180 80
     autorandr $profile
 }
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/jcano/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/jcano/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/jcano/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/jcano/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
