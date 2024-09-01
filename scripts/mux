@@ -10,8 +10,10 @@ function all {
     tmuxp load -d python-api
     # tmuxp load -d bigdata-client
     #tmuxp load -d monitoring-proxy
-    # tmuxp load -d cdk
-    tmuxp load -d bdsm
+    tmuxp load -d cdk
+    tmuxp load -d dataset-api
+    #tmuxp load -d bdsm
+    tmuxp load -d smart-topics
     tmux attach -t base
 }
 
