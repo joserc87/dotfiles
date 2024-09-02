@@ -372,6 +372,10 @@ listprojects() {
         find ~/git/python/tools/apps/ -maxdepth 1 -mindepth 1 -type d
     [ -d ~/git/ ] && \
         find ~/git/python/tools/libs/ -maxdepth 1 -mindepth 1 -type d
+    [ -d ~/git/ ] && \
+        find ~/git/python/smart-topics/lambda/ -maxdepth 1 -mindepth 1 -type d
+    [ -d ~/git/ ] && \
+        find ~/git/python/smart-topics/lambda/shared/ -maxdepth 1 -mindepth 1 -type d
     [ -d ~/code/ ] && \
         find ~/code/ -maxdepth 1
 }
