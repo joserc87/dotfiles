@@ -28,3 +28,7 @@ git:
   paging:
     colorArg: always
     pager: delta --dark --paging=never
+  commitPrefixes:
+    jira-id:
+      pattern: "^(\\w+\\-\\d+).+$"
+      replace: "$1: "
