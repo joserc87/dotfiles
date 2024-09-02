@@ -77,8 +77,16 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 
 # Shell integrations
-eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
+if command -v fzf 1>/dev/null 2>&1; then
+    eval "$(fzf --zsh)"
+fi
+if command -v zoxide 1>/dev/null 2>&1; then
+    #eval "$(zoxide init --cmd cd zsh)"
+    eval "$(zoxide init zsh)"
+fi
+if command -v thefuck 1>/dev/null 2>&1; then
+    eval $(thefuck --alias)
+fi
 
 # CUSTOM OPTIONS ADDED BY ME:
 export TERMINFO="$HOME/.terminfo"
@@ -150,14 +158,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 export PYTHONPATH=.:..:./ravenpack:./python #:$PYTHONPATH
-
-
-if command -v thefuck 1>/dev/null 2>&1; then
-    eval $(thefuck --alias)
-fi
-if command -v zoxide 1>/dev/null 2>&1; then
-    eval "$(zoxide init zsh)"
-fi
 
 ##########
 # ORACLE #
