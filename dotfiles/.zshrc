@@ -1,3 +1,4 @@
+export DISABLE_AUTO_TITLE="true"
 # Part of the config added from https://github.com/dreamsofautonomy/zensh/blob/main/.zshrc
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
