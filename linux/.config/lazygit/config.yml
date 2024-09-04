@@ -29,6 +29,11 @@ git:
     colorArg: always
     pager: delta --dark --paging=never
   commitPrefixes:
-    jira-id:
+    # This is the project name
+    smart-topics:
+      pattern: "^(\\w+\\-\\d+).+$"
+      replace: "$1: "
+    # This is the project name
+    rp-cdk:
       pattern: "^(\\w+\\-\\d+).+$"
       replace: "$1: "
