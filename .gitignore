@@ -34,6 +34,7 @@ linux/.config/sst-nodejs/config.json
 linux/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-notifyd.xml
 linux/.config/glib-2.0/settings/keyfile
 linux/.config/kwalletrc
+linux/.config/BambuStudio/
 linux/.config/BambuStudioInternal/log
 linux/.config/BambuStudio/log
 linux/.config/BambuStudio/hms/hms_en.json
