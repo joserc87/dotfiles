@@ -1,3 +1,4 @@
+export DISABLE_AUTO_TITLE="true"
 # Part of the config added from https://github.com/dreamsofautonomy/zensh/blob/main/.zshrc
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -77,8 +78,16 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 
 # Shell integrations
-eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
+if command -v fzf 1>/dev/null 2>&1; then
+    eval "$(fzf --zsh)"
+fi
+if command -v zoxide 1>/dev/null 2>&1; then
+    #eval "$(zoxide init --cmd cd zsh)"
+    eval "$(zoxide init zsh)"
+fi
+if command -v thefuck 1>/dev/null 2>&1; then
+    eval $(thefuck --alias)
+fi
 
 # CUSTOM OPTIONS ADDED BY ME:
 export TERMINFO="$HOME/.terminfo"
@@ -151,14 +160,6 @@ fi
 
 export PYTHONPATH=.:..:./ravenpack:./python #:$PYTHONPATH
 
-
-if command -v thefuck 1>/dev/null 2>&1; then
-    eval $(thefuck --alias)
-fi
-if command -v zoxide 1>/dev/null 2>&1; then
-    eval "$(zoxide init zsh)"
-fi
-
 ##########
 # ORACLE #
 ##########
@@ -171,8 +172,14 @@ export LD_LIBRARY_PATH=\
 :$LD_LIBRARY_PATH
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+function nvm_lazyload {
+    unalias nvm
+    \. "$NVM_DIR/nvm.sh" # This loads nvm
+    nvm $@
+}
+[ -s "$NVM_DIR/nvm.sh" ] && alias nvm='nvm_lazyload'
 
 export JIRA_USER=jcano
 
@@ -372,6 +379,10 @@ listprojects() {
         find ~/git/python/tools/apps/ -maxdepth 1 -mindepth 1 -type d
     [ -d ~/git/ ] && \
         find ~/git/python/tools/libs/ -maxdepth 1 -mindepth 1 -type d
+    [ -d ~/git/ ] && \
+        find ~/git/python/smart-topics/lambda/ -maxdepth 1 -mindepth 1 -type d
+    [ -d ~/git/ ] && \
+        find ~/git/python/smart-topics/lambda/shared/ -maxdepth 1 -mindepth 1 -type d
     [ -d ~/code/ ] && \
         find ~/code/ -maxdepth 1
 }

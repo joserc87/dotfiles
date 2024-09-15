@@ -34,6 +34,7 @@ linux/.config/sst-nodejs/config.json
 linux/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-notifyd.xml
 linux/.config/glib-2.0/settings/keyfile
 linux/.config/kwalletrc
+linux/.config/BambuStudio/
 linux/.config/BambuStudioInternal/log
 linux/.config/BambuStudio/log
 linux/.config/BambuStudio/hms/hms_en.json
@@ -42,7 +43,10 @@ linux/.config/tuxedo-control-center
 linux/.config/nitrogen/bg-saved.cfg
 linux/.config/nitrogen/nitrogen.cfg
 linux/.config/Postman
-linux/.config/kicad/7.0
 linux/.config/BambuStudio
 linux/.config/gtk-3.0
 linux/.config/xarchiver
+linux/.config/bruno
+linux/.config/go/telemetry/local
+linux/.config/kicad
+linux/.config/user-dirs.dirs

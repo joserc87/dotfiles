@@ -20,6 +20,7 @@ BAR_STYLE = dict(
     background=COLS["dark_4"],
     **FONT_PARAMS,
 )
+BAR_HEIGHT = FONT_PARAMS["fontsize"] + 10 # 24
 
 
 def widget_with_label(widget_class, label, color=None, *args, **kwargs):
@@ -205,7 +206,7 @@ def make_screen(systray=False):
 
     # return Screen(top=bar.Bar(blocks, 25, background=COLS["deus_1"]))
     # my_bar = bar.Bar(blocks, 24, background=COLS["dark_2"])
-    my_bar = bar.Bar(blocks, 24, background=COLS["dark_1_trans"])
+    my_bar = bar.Bar(blocks, BAR_HEIGHT, background=COLS["dark_1_trans"])
 
     return Screen(**{position: my_bar})
 
