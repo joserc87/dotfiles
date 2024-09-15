@@ -42,3 +42,7 @@ linux/.config/tuxedo-control-center
 linux/.config/nitrogen/bg-saved.cfg
 linux/.config/nitrogen/nitrogen.cfg
 linux/.config/Postman
+linux/.config/kicad/7.0
+linux/.config/BambuStudio
+linux/.config/gtk-3.0
+linux/.config/xarchiver
