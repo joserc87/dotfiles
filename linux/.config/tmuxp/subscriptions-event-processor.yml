@@ -1,0 +1,8 @@
+session_name: subscriptions-event-processor
+start_directory: "~/git/python/smart-topics/lambda/st_subscriptions_event_processor"
+windows:
+- window_name: vim
+  focus: True
+  layout: main-vertical
+  panes:
+  - vim
