@@ -51,10 +51,22 @@ zinit cdreplay -q
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Keybindings
-bindkey -e
+
+# > Emacs
+# > no VIM!
+# bindkey -e
+
+# > Let me fix that:
+# > Emacs?
+# > no, VIM!
+bindkey -v
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^Xe' edit-command-line
+bindkey '^X^e' edit-command-line
 
 # History
 HISTSIZE=999999999
@@ -409,7 +421,7 @@ tdd() {
     [[ -z "$project" ]] && return
     echo Testing in $project
     cd "$project"
-    (sleep 1 && shtuff into $TESTSHTUFF "pyenv activate")&
+    [ -e .python-version ] && (sleep 1 && shtuff into $TESTSHTUFF "pyenv activate")&
     testhere
 }
 
