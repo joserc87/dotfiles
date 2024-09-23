@@ -50,3 +50,4 @@ linux/.config/bruno
 linux/.config/go/telemetry/local
 linux/.config/kicad
 linux/.config/user-dirs.dirs
+linux/.config/gtk-3.0/settings.ini
