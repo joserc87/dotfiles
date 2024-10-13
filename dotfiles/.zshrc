@@ -334,7 +334,8 @@ function fzf-yay {
 }
 
 function testhere {
-    shtuff as $TESTSHTUFF
+    # shtuff as $TESTSHTUFF
+    shtuff as "$(pwd)"
 }
 
 function saw {
@@ -393,6 +394,8 @@ listprojects() {
         find ~/git/python/tools/libs/ -maxdepth 1 -mindepth 1 -type d
     [ -d ~/git/ ] && \
         find ~/git/python/smart-topics/lambda/ -maxdepth 1 -mindepth 1 -type d
+    [ -d ~/git/ ] && \
+        find ~/git/python/smart-topics/lambda/ -maxdepth 3 -mindepth 3 -type d | grep /libs/
     [ -d ~/git/ ] && \
         find ~/git/python/smart-topics/lambda/shared/ -maxdepth 1 -mindepth 1 -type d
     [ -d ~/code/ ] && \

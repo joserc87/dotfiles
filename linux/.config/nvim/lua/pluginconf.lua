@@ -347,7 +347,7 @@ g.dispatch_compilers = {
   ['./vendor/bin/'] = 'pytest',
   pyunit = 'pytest'
 }
-g.shtuff_receiver = 'testrunner'
+g.shtuff_receiver = vim.fn.getcwd() -- 'testrunner'
 
 g.dispatch_compilers = {python = 'pytest%'}
 -- autocmd FileType python let b:dispatch = 'pytest%'
