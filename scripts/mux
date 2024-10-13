@@ -6,9 +6,9 @@ function all {
         dumpy \
         cdk \
         smart-topics \
-        subscriptions \
-        subscriptions-dispatcher \
-        subscriptions-event-processor
+        st-subscriptions \
+        st-subscriptions-dispatcher \
+        st-subscriptions-event-processor
     # Disabled
     #   dumpy-api \
     #   python-api \

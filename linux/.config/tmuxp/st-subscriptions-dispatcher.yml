@@ -1,4 +1,4 @@
-session_name: subscriptions-dispatcher
+session_name: st_subscriptions_dispatcher
 start_directory: "~/git/python/smart-topics/lambda/st_subscriptions_dispatcher"
 windows:
 - window_name: vim

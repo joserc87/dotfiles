@@ -1,4 +1,4 @@
-session_name: subscriptions-event-processor
+session_name: st_subscriptions_event_processor
 start_directory: "~/git/python/smart-topics/lambda/st_subscriptions_event_processor"
 windows:
 - window_name: vim
