@@ -10,7 +10,7 @@ _matches = {
     10: ["Spotify", "pavucontrol"],
 }
 _spawn = {
-    0: ["obsidian"],
+    0: ["alacritty -e mux all"],
     3: ["brave"],
     4: ["chromium"],
     6: ["slack"],
