@@ -334,8 +334,7 @@ function fzf-yay {
 }
 
 function testhere {
-    # shtuff as $TESTSHTUFF
-    shtuff as "$(pwd)"
+    shtuff as $TESTSHTUFF
 }
 
 function saw {
@@ -424,6 +423,7 @@ tdd() {
     [[ -z "$project" ]] && return
     echo Testing in $project
     cd "$project"
+    export TESTSHTUFF="$(pwd)"
     [ -e .python-version ] && (sleep 1 && shtuff into $TESTSHTUFF "pyenv activate")&
     testhere
 }
