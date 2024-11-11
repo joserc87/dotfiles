@@ -1,4 +1,4 @@
-session_name: subscriptions
+session_name: st_subscriptions
 start_directory: "~/git/python/smart-topics/lambda/st_subscriptions"
 windows:
 - window_name: vim

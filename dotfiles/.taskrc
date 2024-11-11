@@ -51,11 +51,11 @@ report.small.sort=start-,urgency-
 
 report.next.filter=status:pending limit:page project.not:personal
 
-taskd.certificate=/home/jcano/.secret/intheam.private.certificate.pem
-taskd.key=/home/jcano/.secret/intheam.private.key.pem
-taskd.ca=/home/jcano/.secret/intheam.ca.crt
-taskd.server=inthe.am:53589
-taskd.credentials=inthe_am/joserc87/c7735aa3-07b1-4846-acb5-a51d50a62d89
+taskd.certificate=/home/joserc87/.secret/server.cert.pem
+taskd.key=/home/joserc87/.secret/server.key.pem
+taskd.ca=/home/joserc87/.secret/ca.cert.pem
+taskd.server=josecano.net:53589
+taskd.credentials=Public/Jose Cano/e5d4f072-3ae1-421d-a25d-01d200daf663
 taskd.trust=strict
 
 report.week.description=A report for the week

@@ -4,14 +4,15 @@ function all {
     tmuxp load -d base \
         webapps \
         dumpy \
-        dumpy-api \
-        python-api \
         cdk \
-        dataset-api \
         smart-topics \
-        subscriptions \
-        subscriptions-dispatcher
+        st-subscriptions \
+        st-subscriptions-dispatcher \
+        st-subscriptions-event-processor
     # Disabled
+    #   dumpy-api \
+    #   python-api \
+    #   dataset-api \
     #   entitytool \
     #   pysync \
     #   bigdata-client \

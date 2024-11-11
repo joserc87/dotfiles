@@ -12,9 +12,9 @@ if [ ! -z "$img" ]; then
     text=$(echo | $DMENU)
     if [ ! -z "$text" ]; then
         python -m dankcli $DIR/$img "$text" -f $TMPFILE 
-        dragon $TMPFILE*
+        dragon-drop $TMPFILE*
     else
-        dragon $DIR/$img
+        dragon-drop $DIR/$img
     fi
 fi
 

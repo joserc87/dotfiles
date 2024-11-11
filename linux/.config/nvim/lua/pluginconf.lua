@@ -79,11 +79,11 @@ require("obsidian").setup({
 --   auto_session_allowed_dirs = {"/home/jcano/git/entitytool/", "/home/jcano/git/pysync/"}
 -- })
 -- CodeSnap
-require("codesnap").setup({
-  mac_window_bar = true,
-  opacity = true,
-  watermark = "Jose Ramon Cano"
-})
+-- require("codesnap").setup({
+--   mac_window_bar = true,
+--   opacity = true,
+--   watermark = "Jose Ramon Cano"
+-- })
 
 -- Lualine
 require('lualine').setup {
@@ -140,7 +140,7 @@ require('gitsigns').setup {
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'vimdoc', 'markdown', 'markdown_inline', 'groovy' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'vimdoc', 'markdown', 'markdown_inline', 'groovy', 'html'},
 
   highlight = { enable = true },
   -- Why was it disabled for python??
@@ -347,7 +347,7 @@ g.dispatch_compilers = {
   ['./vendor/bin/'] = 'pytest',
   pyunit = 'pytest'
 }
-g.shtuff_receiver = 'testrunner'
+g.shtuff_receiver = vim.fn.getcwd() -- 'testrunner'
 
 g.dispatch_compilers = {python = 'pytest%'}
 -- autocmd FileType python let b:dispatch = 'pytest%'

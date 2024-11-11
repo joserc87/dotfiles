@@ -17,8 +17,8 @@ _matches = {
     9: ["Ferdium"],
     10: ["Spotify", "pavucontrol"],
 }
-_spawn_work = {
-    0: [],
+_spawn = {
+    0: ["alacritty -e mux all"],
     3: ["brave"],
     4: ["chromium"],
     6: ["slack"],
