@@ -1,4 +1,12 @@
+import os
+
 from libqtile.config import Group, Match, ScratchPad, DropDown
+
+
+def is_work_laptop():
+    hostname = os.uname()[1]
+    return hostname == "rp-laptop"
+
 
 _matches = {
     0: ["obsidian"],
@@ -9,8 +17,8 @@ _matches = {
     9: ["Ferdium"],
     10: ["Spotify", "pavucontrol"],
 }
-_spawn = {
-    0: ["obsidian"],
+_spawn_work = {
+    0: [],
     3: ["brave"],
     4: ["chromium"],
     6: ["slack"],
@@ -19,6 +27,17 @@ _spawn = {
     # Disabled: "blueman-manager", "pavucontrol"
     10: ["spotify"],
 }
+_spawn_personal = {
+    0: [],
+    3: ["zen-browser"],
+    4: [],
+    6: [],
+    7: [],
+    9: ["ferdium"],
+    # Disabled: "blueman-manager", "pavucontrol"
+    10: ["spotify"],
+}
+_spawn = _spawn_work if is_work_laptop() else _spawn_personal
 _layout_opts = {10: dict(ratio=0.7)}
 _names = {
     0: "jack",
