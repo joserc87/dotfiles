@@ -6,11 +6,12 @@ local bo = vim.bo
 require("obsidian").setup({
   dir = "~/code/braindump/brain",
   daily_notes = {
-      folder = "diary"
+      folder = "diary",
+      template = "daily",
   },
   templates = {
     subdir = "templates",
-    date_format = "%Y-%m-%d-%a",
+    date_format = "%B %d, %Y - %A",
     time_format = "%H:%M",
   },
   -- completion = {

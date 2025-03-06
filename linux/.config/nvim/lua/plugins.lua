@@ -130,6 +130,7 @@ require('packer').startup(function(use)
   use 'kyazdani42/nvim-tree.lua'
   use 'tpope/vim-projectionist'
   use { 'stevearc/oil.nvim', config = function() require('oil').setup() end }
+  use { 'rmagatti/gx-extended.nvim', config = function() require('gx-extended').setup {} end }
 
   use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'xiyaowong/transparent.nvim' -- Transparent background
@@ -147,7 +148,8 @@ require('packer').startup(function(use)
   -- Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
   -- Plug 'tools-life/taskwiki'
   use 'itchyny/calendar.vim'
-  use 'preservim/vim-markdown'
+  -- Disabled because it messes with gx :(
+  -- use 'preservim/vim-markdown'
   use 'epwalsh/obsidian.nvim'
   use({
       "iamcco/markdown-preview.nvim",
