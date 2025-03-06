@@ -51,3 +51,5 @@ linux/.config/go/telemetry/local
 linux/.config/kicad
 linux/.config/user-dirs.dirs
 linux/.config/gtk-3.0/settings.ini
+linux/.config/pypoetry/pyproject.toml
+linux/.config/pypoetry/poetry.lock
