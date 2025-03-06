@@ -6,6 +6,8 @@ function all {
         dumpy \
         cdk \
         smart-topics \
+        st-profiles \
+        st-auth-webhook-notifications-ddb-stream \
         st-subscriptions \
         st-subscriptions-dispatcher \
         st-subscriptions-event-processor

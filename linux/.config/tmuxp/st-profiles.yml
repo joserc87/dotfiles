@@ -1,0 +1,8 @@
+session_name: st_profiles
+start_directory: "~/git/python/smart-topics/lambda/st_profiles"
+windows:
+- window_name: vim
+  focus: True
+  layout: main-vertical
+  panes:
+  - vim
