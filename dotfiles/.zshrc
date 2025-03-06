@@ -334,7 +334,8 @@ function fzf-yay {
 }
 
 function testhere {
-    shtuff as $TESTSHTUFF
+    shtuff as "$(pwd)"
+    # shtuff as "$TESTSHTUFF"
 }
 
 function saw {
@@ -345,7 +346,10 @@ function tw {
     taskwarrior-tui
 }
 
+# OpenVPN
 VPN_SERVICE=openvpn-client@ravenpack.service
+# Wireguard
+VPN_SERVICE=wg-quick@wg0
 
 function isvpnrunning {
     systemctl is-active --quiet $VPN_SERVICE

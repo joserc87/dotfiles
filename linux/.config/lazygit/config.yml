@@ -31,9 +31,9 @@ git:
   commitPrefixes:
     # This is the project name
     smart-topics:
-      pattern: "^(\\w+\\-\\d+).+$"
-      replace: "$1: "
+      - pattern: "^(\\w+\\-\\d+).+$"
+        replace: "$1: "
     # This is the project name
     rp-cdk:
-      pattern: "^(\\w+\\-\\d+).+$"
-      replace: "$1: "
+      - pattern: "^(\\w+\\-\\d+).+$"
+        replace: "$1: "
