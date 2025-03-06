@@ -10,8 +10,9 @@ def is_work_laptop():
 
 _matches = {
     0: ["obsidian"],
-    3: ["Brave-browser"],
+    3: ["zen-alpha"],
     4: ["Chromium"],
+    5: ["Brave-browser"],
     6: ["Slack"],
     7: ["Firefox"],
     9: ["Ferdium"],
@@ -19,11 +20,11 @@ _matches = {
 }
 _spawn = {
     0: ["alacritty -e mux all"],
-    3: ["brave"],
-    4: ["chromium"],
+    # 3: ["brave"],
+    # 4: ["chromium"],
     6: ["slack"],
     7: ["firefox"],
-    9: ["ferdium"],
+    # 9: ["ferdium"],
     # Disabled: "blueman-manager", "pavucontrol"
     10: ["spotify"],
 }
