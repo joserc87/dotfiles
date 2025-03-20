@@ -1,5 +1,5 @@
-session_name: smart-topics
-start_directory: "~/git/python/smart-topics-wip"
+session_name: smart-topics-master
+start_directory: "~/git/python/smart-topics"
 windows:
 - window_name: vim
   focus: True

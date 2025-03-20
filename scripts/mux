@@ -10,7 +10,8 @@ function all {
         st-auth-webhook-notifications-ddb-stream \
         st-subscriptions \
         st-subscriptions-dispatcher \
-        st-subscriptions-event-processor
+        st-subscriptions-event-processor \
+        subscriptionslib \
     # Disabled
     #   dumpy-api \
     #   python-api \

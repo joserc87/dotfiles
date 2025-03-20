@@ -1,0 +1,23 @@
+#!/usr/bin/bash
+
+if [ -d ~/git/ ]; then
+    # All projedcts except worktrees and hr
+    find ~/git/ -maxdepth 2 -mindepth 2 -type d \
+    | grep forest -v \
+    | grep '/hr/' -v
+
+    # All projects on worktrees
+    find ~/git/python/ -maxdepth 2 -mindepth 2 -type d \
+    | grep forest
+
+    find ~/git/python/tools/apps/ -maxdepth 1 -mindepth 1 -type d
+    find ~/git/python/tools/libs/ -maxdepth 1 -mindepth 1 -type d
+
+    find ~/git/python/smart-topics/lambda/ -maxdepth 1 -mindepth 1 -type d
+    find ~/git/python/smart-topics/lambda/ -maxdepth 3 -mindepth 3 -type d | grep /libs/
+
+    find ~/git/python/smart-topics-forest/*/lambda/ -maxdepth 1 -mindepth 1 -type d
+    find ~/git/python/smart-topics-forest/*/lambda/ -maxdepth 3 -mindepth 3 -type d | grep /libs/
+    # find ~/git/python/smart-topics/lambda/shared/ -maxdepth 1 -mindepth 1 -type d
+fi
+[ -d ~/code/ ] && find ~/code/ -maxdepth 1

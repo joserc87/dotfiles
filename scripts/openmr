@@ -1,28 +1,64 @@
 #!/usr/bin/bash
-mr=$(glab mr list | fzf)
+
+RED='\033[0;31m'
+NC='\033[0m'
+
+# Check if we are in a git projetct with git status
+if [ -z "$(git status 2> /dev/null)" ]; then
+    project=$(listprojects | fzf)
+    [[ -z "$project" ]] && echo "Cancelling..." && exit
+    [[ -d "$project" ]] || (echo -e "${RED}Project $project not found$NC" && exit)
+    echo "Entering $project"
+    pushd "$project"
+fi
+function listmrs {
+    glab mr list --assignee=@me --reviewer=@me | tail +3
+    echo "--------------------------------"
+    glab mr list | tail +3
+}
+mr=$(listmrs| fzf)
 mr_id=$(echo $mr | sed 's/!\(.[0-9]*\).*/\1/')
 branch=$(echo $mr | sed 's/.* ← (\(.*\))/\1/')
 
 rootdir=$(git rev-parse --show-toplevel)
 project_name=$(basename "$rootdir")
 
-echo MR $mr_id
-echo branch $branch
+echo ""
+echo "Project |  $project_name"
+echo "     MR | !$mr_id"
+echo " Branch |  $branch"
+echo ""
 
-worktreedir="$rootdir/../$project_name-forest/$mr_id-$branch"
+if echo $rootdir | grep -q -- "$project_name-forest"; then
+    worktreedir="$rootdir/../$mr_id-$branch"
+else
+    worktreedir="$rootdir/../$project_name-forest/$mr_id-$branch"
+fi
 
 git fetch
-git worktree add "$worktreedir" "$branch"
+[ -d $worktreedir ] || git worktree add "$worktreedir" "$branch" > /dev/null
+if [ $? -ne 0 ]; then
+    # Red color
+    echo -e "${RED}Failed to create worktree$NC"
+    exit
+fi
 
 TMUX_SESSION="$project_name-$mr_id"
 
 function create_session {
-    tmux has-session -t "$1"
-    if [ $? != 0 ]
-    then
-        TMUX= tmux new -s "$1" -d -c "$worktreedir"
-    fi
-    tmux attach -t "$1"
+    tmux has-session -t "$1" 2> /dev/null && return 1
+    TMUX= tmux new -s "$1" -d -c "$worktreedir"
+
+    # Wait for session to be created
+    for i in $(seq 0 10) ; do
+        tmux has-session -t "$1" 2> /dev/null
+        if [ $? == 0 ]
+        then
+            break
+        fi
+        sleep 1
+    done
+    # tmux attach -t "$1"
 
     tmux new-window -t "$1:1" -n Description -S -c "$worktreedir"
     tmux new-window -t "$1:2" -n Description -S -c "$worktreedir"
@@ -32,9 +68,17 @@ function run {
     tmux send -t "$TMUX_SESSION:$1" "$2" ENTER
 }
 
-create_session "$TMUX_SESSION"
+if create_session "$TMUX_SESSION"; then
+    run 1 "git pull"
+    run 1 "mrvim"
+    run 2 "glab mr show"
+fi
 
-run 1 "git pull"
-run 1 "mrvim"
-run 2 "glab mr show"
-tmux switch-client -t $"$TMUX_SESSION"
+popd 2> /dev/null
+
+if [ -z "$TMUX" ]
+then
+    tmux attach -t "$TMUX_SESSION"
+else
+    tmux switch-client -t "$TMUX_SESSION"
+fi

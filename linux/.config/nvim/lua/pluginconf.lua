@@ -364,7 +364,27 @@ g.floaterm_wintitle = 0
 g.floaterm_autoclose = 1
 g.floaterm_opener  =  'edit'
 
-g.lazygit_use_neovim_remote = 1 -- fallback to 0 if neovim-remote is not installed
+-- Lazygit
+-- g.lazygit_use_neovim_remote = 1 -- fallback to 0 if neovim-remote is not installed
+-- Functions to open in current instance of nvim when using embedded lazygit
+function EditLineFromLazygit(file_path, line)
+    local path = vim.fn.expand("%:p")
+    if path == file_path then
+        vim.cmd(tostring(line))
+    else
+        vim.cmd("e " .. file_path)
+        vim.cmd(tostring(line))
+    end
+end
+
+function EditFromLazygit(file_path)
+    local path = vim.fn.expand("%:p")
+    if path == file_path then
+        return
+    else
+        vim.cmd("e " .. file_path)
+    end
+end
 
 -- Gitsigns.nvim
 --
