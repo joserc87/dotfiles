@@ -1,0 +1,44 @@
+;; Kanata configuration for caps to esc+ctrl
+;; https://www.youtube.com/watch?v=XuQVbZ0wENE
+
+(defvar
+  tap-timeout   100
+  hold-timeout  50
+  tt $tap-timeout
+  ht $hold-timeout
+)
+
+(defsrc
+  caps
+)
+
+;; The tap-hold action and all variants can behave unexpectedly on Linux with
+;; respect to repeat of antecedent key presses. The full context is in discussion
+;; #422. In brief, the workaround is to use tap-hold inside of multi, combined
+;; with another key action that behaves as a no-op like f24.
+;; Example: (multi f24 (tap-hold ...))
+(defalias
+  escctrl (multi f24 (tap-hold-press 100 1000 esc lctrl))
+)
+
+(deflayer base
+    @escctrl
+)
+
+(defcfg
+  ;; Enable processing of keys that are not in defsrc.
+  ;; This is useful if you are only mapping a few keys in defsrc instead of
+  ;; most of the keys on your keyboard. Without this, the tap-hold-release and
+  ;; tap-hold-press actions will not activate for keys that are not in defsrc.
+  ;;
+  ;; The reason this is not enabled by default is because some keys may not
+  ;; work correctly if they are intercepted. E.g. rctl/altgr on Windows; see the
+  ;; windows-altgr configuration item above for context.
+  process-unmapped-keys yes
+
+  ;; On Linux, you can ask kanata to run `xset r rate <delay> <rate>` on startup
+  ;; and on live reload via the config below. The first number is the delay in ms
+  ;; and the second number is the repeat rate in repeats/second.
+  ;;
+  linux-x11-repeat-delay-rate 180,70
+)
