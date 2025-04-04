@@ -164,8 +164,18 @@ local on_attach = function(_, bufnr)
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  -- nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+  -- nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  -- Telescope lsp symbols, fixing some issue with width
+  nmap('<leader>ds', function()
+    require('telescope.builtin').lsp_document_symbols({symbol_width=0.9, symbol_type_width = 0.1})
+  end, '[D]ocument [S]ymbols')
+  nmap('<leader>df', function()
+    require('telescope.builtin').lsp_document_symbols({symbol_width=0.9, symbol_type_width = 0.1, symbols={'method', 'function'}})
+  end, '[D]ocument [F]unctions')
+  nmap('<leader>ws', function()
+    require('telescope.builtin').lsp_dynamic_workspace_symbols({fname_width = 0.5,symbol_width=0.4, symbol_type_width = 0.1})
+  end, '[D]ocument [S]ymbols')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -259,6 +269,8 @@ vim.keymap.set('', 's', ':HopChar2<CR>')
 
 -- Silly things
 vim.keymap.set('n', '<leader>wt', ':TransparentToggle<cr>')
+-- Auto switch back to english layout
+vim.keymap.set('n', 'ñ', ':silent !switchkblayout<cr>', { silent = true })
 
 
 local mappings = {}
