@@ -10,9 +10,15 @@ if [ -d ~/git/ ]; then
     find ~/git/python/ -maxdepth 2 -mindepth 2 -type d \
     | grep forest
 
+    # Tools
     find ~/git/python/tools/apps/ -maxdepth 1 -mindepth 1 -type d
     find ~/git/python/tools/libs/ -maxdepth 1 -mindepth 1 -type d
 
+    # Text Analitics
+    find ~/git/content/python/auth -maxdepth 1 -type d
+    find ~/git/content/python/upload-api -maxdepth 1 -type d
+
+    # Smart Topics
     find ~/git/python/smart-topics/lambda/ -maxdepth 1 -mindepth 1 -type d
     find ~/git/python/smart-topics/lambda/ -maxdepth 3 -mindepth 3 -type d | grep /libs/
 
