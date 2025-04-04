@@ -183,7 +183,7 @@ def make_screen(systray=False):
         #             **BAR_STYLE
         #         ) if running_on_batteries else None,
         # Volume % : scroll mouse wheel to change volume
-        *widget_with_label(widget.Volume, "", "#70fdff", volume_app="select_audio"),
+        *widget_with_label(widget.Volume, "", "#70fdff", volume_app="select_audio --toggle"),
         # Keyboard layout
         # Disabled until this is released
         # https://github.com/qtile/qtile/issues/1446

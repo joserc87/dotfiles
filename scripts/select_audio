@@ -83,6 +83,7 @@ else
     icon=/usr/share/icons/Papirus-Dark/16x16/devices/audio-speakers.svg
 fi
 notify-send \
+    -r 1234 \
     -i $icon \
     -t 10000 \
     "Audio Sink" \
