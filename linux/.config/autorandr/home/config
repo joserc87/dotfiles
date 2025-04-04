@@ -1,4 +1,4 @@
-output HDMI-1
+output eDP-1
 off
 output DP-1
 off
@@ -8,17 +8,22 @@ output DP-3
 off
 output DP-4
 off
-output eDP-1
-off
 output DVI-I-2-2
-crtc 4
+off
+output DVI-I-1-1
+crtc 5
 mode 3840x2160
 pos 0x0
 rate 60.00
 x-prop-non_desktop 0
-output DVI-I-1-1
-crtc 5
+output HDMI-1
+crtc 1
 mode 3840x2160
 pos 3840x0
 rate 60.00
+x-prop-aspect_ratio Automatic
+x-prop-audio auto
+x-prop-broadcast_rgb Automatic
+x-prop-colorspace Default
+x-prop-max_bpc 12
 x-prop-non_desktop 0
