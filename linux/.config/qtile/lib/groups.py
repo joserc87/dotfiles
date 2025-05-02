@@ -1,6 +1,7 @@
 import os
+import re
 
-from libqtile.config import Group, Match, ScratchPad, DropDown
+from libqtile.config import DropDown, Group, Match, ScratchPad
 
 
 def is_work_laptop():
@@ -9,14 +10,14 @@ def is_work_laptop():
 
 
 _matches = {
-    0: ["obsidian"],
-    3: ["zen-alpha"],
-    4: ["Chromium"],
-    5: ["Brave-browser"],
-    6: ["Slack"],
-    7: ["Firefox"],
-    9: ["Ferdium"],
-    10: ["Spotify", "pavucontrol"],
+    0: [Match(wm_class="obsidian")],
+    3: [Match(wm_class="zen-alpha")],
+    4: [Match(wm_class="Chromium")],
+    5: [Match(wm_class="brave-browser")],
+    6: [Match(wm_class="Slack")],
+    7: [Match(wm_class="Firefox")],
+    9: [Match(wm_class="zen-alpha") & Match(title=re.compile(".*RavenPack International SLU"))],
+    10: [Match(wm_class=["Spotify", "pavucontrol"])],
 }
 _spawn = {
     0: ["alacritty -e mux all"],
@@ -61,7 +62,7 @@ _terminal_windows = [0, 1, 2, 5, 8]
 def _create_group(i):
     name = _names[i]
     label = _labels[i]
-    matches = [Match(wm_class=_matches[i])] if i in _matches else None
+    matches = _matches.get(i)
     spawn = _spawn[i] if i in _spawn else None
     init = True
     layout = "GapsBig" if i in _terminal_windows else "GapsSmall"
