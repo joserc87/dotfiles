@@ -335,7 +335,7 @@ function fzf-yay {
 }
 
 function testhere {
-    shtuff as "$(pwd)"
+    shtuff as "$(pwd -P)"
     # shtuff as "$TESTSHTUFF"
 }
 
