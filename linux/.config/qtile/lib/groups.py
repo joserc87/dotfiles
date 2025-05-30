@@ -54,7 +54,8 @@ _names = {
     9: "email",
     10: "spotify",
 }
-_labels = "#"
+_labels = "#󰒱󰌃󰊫"
+
 
 _terminal_windows = [0, 1, 2, 5, 8]
 
