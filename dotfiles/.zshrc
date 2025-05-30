@@ -231,9 +231,18 @@ function ranger-cd {
     fi
     rm -f -- "$tempfile"
 }
-alias rcd=ranger-cd
+function yazi-cd {
+    tempfile="$(mktemp -t tmp.XXXXXX)"
+    yazi --chooser-file "$tempfile" "${@:-$(pwd)}"
+    test -f "$tempfile" &&
+    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+        cd -- "$(cat "$tempfile")"
+    fi
+    rm -f -- "$tempfile"
+}
+alias rcd=yazi-cd
 # Ranger + Tmux
-alias rmux="ranger-cd && tmux new -s `echo '${PWD##*/}'`"
+alias rmux="rcd && tmux new -s `echo '${PWD##*/}'`"
 alias t='task -backlog'
 # alias th="task priority:H"
 # alias tl="task priority:H or priority:"
@@ -413,13 +422,15 @@ code() {
     project_name=$(basename "$project")
     cd "$project"
     dirty_files=$(git status --porcelain . | sed s/^...// | tr '\n' ' ')
+    # Disable opening dirty files for now
+    dirty_files=""
     if [[ -n "$TMUX" ]]; then
         pyenv activate
         $EDITOR
     else
         tmux new -d -s "$project_name"
         sleep 1
-        tmux send-keys -t "$project_name.1" "$EDITOR $dirty_files\n" Enter
+        tmux send-keys -t "$project_name.1" "$EDITOR $dirty_files" Enter
         tmux attach -t "$project_name"
     fi
 }
