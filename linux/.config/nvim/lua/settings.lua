@@ -32,7 +32,7 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = false
 
 -- Enable per-project .vimrc
--- vim.opt.exrc = true
+vim.opt.exrc = true
 --
 
 vim.g.localvimrc_sandbox = 0

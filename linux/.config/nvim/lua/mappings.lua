@@ -9,7 +9,7 @@ vim.keymap.set({ 'i' }, 'jj', '<Esc>', { desc = '[jj] Go to normal mode' })
 
 -- Sensible Y. For old Y, just do yy!
 vim.keymap.set({ 'n' }, 'Y', 'y$')
-vim.keymap.set({ 'n' }, 'y%', ':let @" = expand("%") . ":" . line(".")<CR>')
+vim.keymap.set({ 'n' }, 'y%', ':let @" = expand("%") . ":" . line(".")<CR>', { silent = true, desc = 'Yank path with line number' })
 vim.keymap.set({ 'v' }, '+', '"+y')
 vim.keymap.set({ 'n' }, '+', '"+p')
 
@@ -103,6 +103,10 @@ vim.keymap.set('n', '<leader>sg', require('telescope').extensions.live_grep_args
 vim.keymap.set('n', '<leader>st', function()
   dirs = {"~/code/braindump/brain/diary", "~/code/braindump/brain/ravenpack"}
   require("telescope").extensions.live_grep_args.live_grep_args({default_text="\\- \\[ \\]", search_dirs=dirs})
+end, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>wg', function()
+  dirs = {"~/code/braindump/brain"}
+  require("telescope").extensions.live_grep_args.live_grep_args({search_dirs=dirs})
 end, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sb', require('telescope.builtin').buffers, { desc = '[S]earch [B]uffers' })
