@@ -2,17 +2,17 @@
 
 function all {
     tmuxp load -d base \
-        webapps \
-        dumpy \
         cdk \
         smart-topics \
         st-profiles \
-        st-auth-webhook-notifications-ddb-stream \
-        st-subscriptions \
-        st-subscriptions-dispatcher \
-        st-subscriptions-event-processor \
-        subscriptionslib \
     # Disabled
+    #   webapps \
+    #   dumpy \
+    #   st-auth-webhook-notifications-ddb-stream \
+    #   st-subscriptions \
+    #   st-subscriptions-dispatcher \
+    #   st-subscriptions-event-processor \
+    #   subscriptionslib \
     #   dumpy-api \
     #   python-api \
     #   dataset-api \

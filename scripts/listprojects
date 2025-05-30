@@ -22,6 +22,8 @@ if [ -d ~/git/ ]; then
     find ~/git/python/smart-topics/lambda/ -maxdepth 1 -mindepth 1 -type d
     find ~/git/python/smart-topics/lambda/ -maxdepth 3 -mindepth 3 -type d | grep /libs/
 
+    find ~/git/python/smart-topics/lambda/shared/ -maxdepth 1 -mindepth 1 -type d
+
     find ~/git/python/smart-topics-forest/*/lambda/ -maxdepth 1 -mindepth 1 -type d
     find ~/git/python/smart-topics-forest/*/lambda/ -maxdepth 3 -mindepth 3 -type d | grep /libs/
     # find ~/git/python/smart-topics/lambda/shared/ -maxdepth 1 -mindepth 1 -type d

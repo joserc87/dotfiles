@@ -14,7 +14,7 @@ files.regex = "^[\\.\\/~]+.*\\.(.*)"
 files.command = "xdg-open $FILE"
 files.filtercommand = "test -e $FILE"
 
-url.regex = "((?:www|http).*)"
+url.regex = "((?:www|http|slack).*)"
 url.command = "xdg-open $LAST_MATCH 2>/dev/null"
 
 edit.regex = ".*"
