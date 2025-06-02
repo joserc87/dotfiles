@@ -156,15 +156,15 @@ require('packer').startup(function(use)
       run = function() vim.fn["mkdp#util#install"]() end,
   })
   -- markview is a bit too much, unless in readonly mode
-  -- use ({
-  --   "OXY2DEV/markview.nvim",
-  --   -- ft = "markdown" -- If you decide to lazy-load anyway
+  use ({
+    "OXY2DEV/markview.nvim",
+    -- ft = "markdown" -- If you decide to lazy-load anyway
 
-  --   -- dependencies = {
-  --   --     "nvim-treesitter/nvim-treesitter",
-  --   --     "nvim-tree/nvim-web-devicons"
-  --   -- }
-  -- })
+    -- dependencies = {
+    --     "nvim-treesitter/nvim-treesitter",
+    --     "nvim-tree/nvim-web-devicons"
+    -- }
+  })
 
   -- Disabled because the MF takes 2GB of disk just for this plugin (.so libs)
   -- use { 'mistricky/codesnap.nvim', run = "make" }

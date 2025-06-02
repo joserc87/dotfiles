@@ -237,7 +237,8 @@ local group = vim.api.nvim_create_augroup("ObsidianMapping", { clear = true })
 vim.api.nvim_create_autocmd("BufEnter", { callback = function(arg)
   local bufnr = arg['buf']
   vim.keymap.set('n', '<CR>', ':ObsidianFollowLink<CR>', { buffer = bufnr, desc = "Follow links in obsidian" })
-  vim.keymap.set('n', '<leader>tt', ':MarkdownPreviewToggle<CR>', { buffer = bufnr, desc = "Toggles the perview of the markdown" })
+  --vim.keymap.set('n', '<leader>tt', ':MarkdownPreviewToggle<CR>', { buffer = bufnr, desc = "Toggles the perview of the markdown" })
+  vim.keymap.set('n', '<leader>tt', ':Markview toggle<CR>', { buffer = bufnr, desc = "Toggles the perview of the markdown" })
   vim.keymap.set('n', '<leader>x', require('obsidian').util.toggle_checkbox, { buffer = bufnr, desc = "Toggle check-boxes" })
   -- I should get used to <leader>wp instead
   -- vim.keymap.set('n', '<C-p>', ':ObsidianQuickSwitch<CR>', { buffer = bufnr, desc = "Finds a file  in the docs" })
