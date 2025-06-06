@@ -1,33 +1,34 @@
 from libqtile.config import Key
+from libqtile.lazy import lazy
+
+from lib.groups import groups
 from lib.keys import (
     ALT,
-    TAB,
-    CTRL,
-    SHIFT,
-    RETURN,
-    SPACE,
-    UNDERSCORE,
-    GRAVE,
-    DELETE,
-    PRINT,
     BACKSPACE,
-    SEMICOLON,
     COMMA,
+    CTRL,
+    DELETE,
     ESCAPE,
+    GRAVE,
+    PRINT,
+    RETURN,
+    SEMICOLON,
+    SHIFT,
+    SPACE,
+    TAB,
+    UNDERSCORE,
 )
-from libqtile.lazy import lazy
-from lib.settings import MODKEY, DEFAULT_TERMINAL, APP_LAUNCHER, DEFAULT_TERMINAL
+from lib.settings import APP_LAUNCHER, DEFAULT_TERMINAL, MODKEY
 from lib.utils import (
-    exe,
-    term_exe,
-    kick_to_next_screen,
-    go_to_next_screen,
-    go_to_group_or_switch_screen,
-    next_layout,
-    increase_gaps,
     decrease_gaps,
+    exe,
+    go_to_group_or_switch_screen,
+    go_to_next_screen,
+    increase_gaps,
+    kick_to_next_screen,
+    next_layout,
+    term_exe,
 )
-from lib.groups import groups
 
 # Keybindings
 keys = [
@@ -111,6 +112,10 @@ for g, k in zip(groups, [GRAVE] + list("asdfgyuiop")):
     # keys.append(Key([MODKEY], k, lazy.function(go_to_group_or_switch_screen, g.name)))
     keys.append(Key([MODKEY, SHIFT], k, lazy.window.togroup(g.name)))
     keys.append(Key([MODKEY, CTRL], k, lazy.window.togroup(g.name)))
+    keys.append(Key([MODKEY, SHIFT], k, lazy.window.togroup(g.name)))
+    spawns_for_group = g.spawn or []
+    for spawn in spawns_for_group:
+        keys.append(Key([MODKEY, ALT], k, lazy.spawn(spawn)))
 
 
 def modifier_window_commands(match, spawn, *keys):

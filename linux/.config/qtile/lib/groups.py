@@ -20,9 +20,9 @@ _matches = {
     9: [Match(wm_class="zen-alpha") & Match(title=re.compile(".*RavenPack International SLU"))],
     10: [Match(wm_class=["Spotify", "pavucontrol"])],
 }
-_spawn = {
+_spawn_work = {
     0: ["alacritty -e mux all"],
-    # 3: ["brave"],
+    3: ["zen-browser-optimized"],
     # 4: ["chromium"],
     6: ["slack"],
     7: ["firefox"],
