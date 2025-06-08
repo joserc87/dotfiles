@@ -10,6 +10,7 @@ def is_work_laptop():
 
 _matches = {
     0: ["obsidian"],
+    2: ["Xephyr"],
     3: ["Brave-browser"],
     4: ["Chromium"],
     6: ["Slack"],
