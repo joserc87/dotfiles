@@ -9,7 +9,7 @@ vim.keymap.set({ 'i' }, 'jj', '<Esc>', { desc = '[jj] Go to normal mode' })
 
 -- Sensible Y. For old Y, just do yy!
 vim.keymap.set({ 'n' }, 'Y', 'y$')
-vim.keymap.set({ 'n' }, 'y%', ':let @" = expand("%") . ":" . line(".")<CR>')
+vim.keymap.set({ 'n' }, 'y%', ':let @" = expand("%") . ":" . line(".")<CR>', { silent = true, desc = 'Yank path with line number' })
 vim.keymap.set({ 'v' }, '+', '"+y')
 vim.keymap.set({ 'n' }, '+', '"+p')
 
@@ -104,6 +104,10 @@ vim.keymap.set('n', '<leader>st', function()
   dirs = {"~/code/braindump/brain/diary", "~/code/braindump/brain/ravenpack"}
   require("telescope").extensions.live_grep_args.live_grep_args({default_text="\\- \\[ \\]", search_dirs=dirs})
 end, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>wg', function()
+  dirs = {"~/code/braindump/brain"}
+  require("telescope").extensions.live_grep_args.live_grep_args({search_dirs=dirs})
+end, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sb', require('telescope.builtin').buffers, { desc = '[S]earch [B]uffers' })
 vim.keymap.set('n', '<leader>sv', function()
@@ -164,8 +168,18 @@ local on_attach = function(_, bufnr)
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  -- nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+  -- nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  -- Telescope lsp symbols, fixing some issue with width
+  nmap('<leader>ds', function()
+    require('telescope.builtin').lsp_document_symbols({symbol_width=0.9, symbol_type_width = 0.1})
+  end, '[D]ocument [S]ymbols')
+  nmap('<leader>df', function()
+    require('telescope.builtin').lsp_document_symbols({symbol_width=0.9, symbol_type_width = 0.1, symbols={'method', 'function'}})
+  end, '[D]ocument [F]unctions')
+  nmap('<leader>ws', function()
+    require('telescope.builtin').lsp_dynamic_workspace_symbols({fname_width = 0.5,symbol_width=0.4, symbol_type_width = 0.1})
+  end, '[D]ocument [S]ymbols')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -223,7 +237,8 @@ local group = vim.api.nvim_create_augroup("ObsidianMapping", { clear = true })
 vim.api.nvim_create_autocmd("BufEnter", { callback = function(arg)
   local bufnr = arg['buf']
   vim.keymap.set('n', '<CR>', ':ObsidianFollowLink<CR>', { buffer = bufnr, desc = "Follow links in obsidian" })
-  vim.keymap.set('n', '<leader>tt', ':MarkdownPreviewToggle<CR>', { buffer = bufnr, desc = "Toggles the perview of the markdown" })
+  --vim.keymap.set('n', '<leader>tt', ':MarkdownPreviewToggle<CR>', { buffer = bufnr, desc = "Toggles the perview of the markdown" })
+  vim.keymap.set('n', '<leader>tt', ':Markview toggle<CR>', { buffer = bufnr, desc = "Toggles the perview of the markdown" })
   vim.keymap.set('n', '<leader>x', require('obsidian').util.toggle_checkbox, { buffer = bufnr, desc = "Toggle check-boxes" })
   -- I should get used to <leader>wp instead
   -- vim.keymap.set('n', '<C-p>', ':ObsidianQuickSwitch<CR>', { buffer = bufnr, desc = "Finds a file  in the docs" })
@@ -259,6 +274,8 @@ vim.keymap.set('', 's', ':HopChar2<CR>')
 
 -- Silly things
 vim.keymap.set('n', '<leader>wt', ':TransparentToggle<cr>')
+-- Auto switch back to english layout
+vim.keymap.set('n', 'ñ', ':silent !switchkblayout<cr>', { silent = true })
 
 
 local mappings = {}

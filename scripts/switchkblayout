@@ -8,3 +8,14 @@ else
 fi
 
 setxkbmap -layout "$other_layout"
+icon="$HOME/Pictures/icons/32x32/flags/$other_layout.png"
+if [ ! -f "$icon" ]; then
+    icon=/usr/share/icons/Papirus-Dark/16x16/devices/keyboard.svg
+fi
+
+notify-send \
+    -r  1000 \
+    -i $icon \
+    -t 10000 \
+    "Keyboard Layout" \
+    "Switching to <b>${other_layout^^}</b>" \

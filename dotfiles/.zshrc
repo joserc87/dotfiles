@@ -110,7 +110,8 @@ export TERM=xterm-256color
 # for neovim
 export XDG_CONFIG_HOME="$HOME/.config/"
 
-if [ -n "$NVIM" ]; then
+# if [ -n "$NVIM" ]; then
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
     export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
     export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
     alias nvim=nvr -cc split --remote-wait +'set bufhidden=wipe'
@@ -230,9 +231,18 @@ function ranger-cd {
     fi
     rm -f -- "$tempfile"
 }
-alias rcd=ranger-cd
+function yazi-cd {
+    tempfile="$(mktemp -t tmp.XXXXXX)"
+    yazi --chooser-file "$tempfile" "${@:-$(pwd)}"
+    test -f "$tempfile" &&
+    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+        cd -- "$(cat "$tempfile")"
+    fi
+    rm -f -- "$tempfile"
+}
+alias rcd=yazi-cd
 # Ranger + Tmux
-alias rmux="ranger-cd && tmux new -s `echo '${PWD##*/}'`"
+alias rmux="rcd && tmux new -s `echo '${PWD##*/}'`"
 alias t='task -backlog'
 # alias th="task priority:H"
 # alias tl="task priority:H or priority:"
@@ -334,8 +344,8 @@ function fzf-yay {
 }
 
 function testhere {
-    # shtuff as $TESTSHTUFF
-    shtuff as "$(pwd)"
+    shtuff as "$(pwd -P)"
+    # shtuff as "$TESTSHTUFF"
 }
 
 function saw {
@@ -346,7 +356,10 @@ function tw {
     taskwarrior-tui
 }
 
+# OpenVPN
 VPN_SERVICE=openvpn-client@ravenpack.service
+# Wireguard
+VPN_SERVICE=wg-quick@wg0
 
 function isvpnrunning {
     systemctl is-active --quiet $VPN_SERVICE
@@ -380,41 +393,44 @@ function screenoff {
     sleep 1 ; xset dpms force off
 }
 
-listprojects() {
-    [ -d ~/git/ ] && \
-        find ~/git/ -maxdepth 2 -mindepth 2 -type d \
-        | grep forest -v \
-        | grep '/hr/' -v
-    [ -d ~/git/ ] && \
-        find ~/git/python/ -maxdepth 2 -mindepth 2 -type d \
-        | grep forest
-    [ -d ~/git/ ] && \
-        find ~/git/python/tools/apps/ -maxdepth 1 -mindepth 1 -type d
-    [ -d ~/git/ ] && \
-        find ~/git/python/tools/libs/ -maxdepth 1 -mindepth 1 -type d
-    [ -d ~/git/ ] && \
-        find ~/git/python/smart-topics/lambda/ -maxdepth 1 -mindepth 1 -type d
-    [ -d ~/git/ ] && \
-        find ~/git/python/smart-topics/lambda/ -maxdepth 3 -mindepth 3 -type d | grep /libs/
-    [ -d ~/git/ ] && \
-        find ~/git/python/smart-topics/lambda/shared/ -maxdepth 1 -mindepth 1 -type d
-    [ -d ~/code/ ] && \
-        find ~/code/ -maxdepth 1
-}
-
+# Moved to its own script
+# listprojects() {
+#     [ -d ~/git/ ] && \
+#         find ~/git/ -maxdepth 2 -mindepth 2 -type d \
+#         | grep forest -v \
+#         | grep '/hr/' -v
+#     [ -d ~/git/ ] && \
+#         find ~/git/python/ -maxdepth 2 -mindepth 2 -type d \
+#         | grep forest
+#     [ -d ~/git/ ] && \
+#         find ~/git/python/tools/apps/ -maxdepth 1 -mindepth 1 -type d
+#     [ -d ~/git/ ] && \
+#         find ~/git/python/tools/libs/ -maxdepth 1 -mindepth 1 -type d
+#     [ -d ~/git/ ] && \
+#         find ~/git/python/smart-topics/lambda/ -maxdepth 1 -mindepth 1 -type d
+#     [ -d ~/git/ ] && \
+#         find ~/git/python/smart-topics/lambda/ -maxdepth 3 -mindepth 3 -type d | grep /libs/
+#     [ -d ~/git/ ] && \
+#         find ~/git/python/smart-topics/lambda/shared/ -maxdepth 1 -mindepth 1 -type d
+#     [ -d ~/code/ ] && \
+#         find ~/code/ -maxdepth 1
+# }
+# 
 code() {
     project=$(listprojects | fzf || exit)
     [[ -z "$project" ]] && return
     project_name=$(basename "$project")
     cd "$project"
-    dirty_files=$(git status --porcelain | sed s/^...// | tr '\n' ' ')
+    dirty_files=$(git status --porcelain . | sed s/^...// | tr '\n' ' ')
+    # Disable opening dirty files for now
+    dirty_files=""
     if [[ -n "$TMUX" ]]; then
         pyenv activate
         $EDITOR
     else
         tmux new -d -s "$project_name"
         sleep 1
-        tmux send-keys -t "$project_name.1" "$EDITOR $dirty_files\n" Enter
+        tmux send-keys -t "$project_name.1" "$EDITOR $dirty_files" Enter
         tmux attach -t "$project_name"
     fi
 }
@@ -424,6 +440,7 @@ tdd() {
     [[ -z "$project" ]] && return
     echo Testing in $project
     cd "$project"
+    export TESTSHTUFF="$(pwd)"
     [ -e .python-version ] && (sleep 1 && shtuff into $TESTSHTUFF "pyenv activate")&
     testhere
 }
@@ -482,4 +499,18 @@ back2desk() {
     nocaps
     xset r rate 180 80
     autorandr $profile
+}
+curlbench() {
+    # Fill in the curl-format.txt file with mulitple lines
+    cat <<EOF > /tmp/curl-format.txt
+   time_namelookup:  %{time_namelookup}s\n
+      time_connect:  %{time_connect}s\n
+   time_appconnect:  %{time_appconnect}s\n
+  time_pretransfer:  %{time_pretransfer}s\n
+     time_redirect:  %{time_redirect}s\n
+time_starttransfer:  %{time_starttransfer}s\n
+        ----------   ---------\n
+        time_total:  %{time_total}s\n
+EOF
+    curl -w "@/tmp/curl-format.txt" -o /dev/null -s "$1"
 }

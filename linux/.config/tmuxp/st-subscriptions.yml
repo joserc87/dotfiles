@@ -1,5 +1,5 @@
 session_name: st_subscriptions
-start_directory: "~/git/python/smart-topics/lambda/st_subscriptions"
+start_directory: "~/git/python/smart-topics-wip/lambda/st_subscriptions"
 windows:
 - window_name: vim
   focus: True

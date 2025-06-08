@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+set -e
+
 list_sinks() {
     pacmd list-sinks \
         | grep 'alsa.card_name =\|index:' \
@@ -9,20 +11,80 @@ list_sinks() {
 get_mouse_coords() {
     eval $(xdotool getmouselocation --shell)
 }
-select_sink() {
+select_sink_gui() {
     get_mouse_coords
     list_sinks | cut -d'	' -f2 | dmenu -i  -l 10 -x $X -y $Y -w 300 # -m 0
 }
+get_sink_name_by_id() {
+    sink_id=$1
+    list_sinks | grep "^${sink_id}	" | cut -d'	' -f2
+}
+get_current_sink() {
+    pacmd list-sinks | grep '* index:' | cut -d' ' -f5
+}
+toggle_audio() {
+    # Toggle only if we have the expected audio outputs
+    ids=$(list_sinks | grep 'RODE NT-USB\|Audioengine 2+' | cut -f1)
+    if [[ $(echo $ids | wc -w) -ne 2 ]]; then
+        echo "Not the expected audio outputs" >&2
+        exit -1
+    fi
+    # Get the current sink ID
+    current_sink=$(get_current_sink)
+    # Get the sink ID that is not the current sink
+    new_sink=$(echo "$ids" | grep -v "$current_sink")
+    get_sink_name_by_id "$new_sink"
+}
 
-sink_name=$(select_sink)
-[[ -z "$sink_name" ]] && exit -1
+find_sink_id_by_name() {
+    sink_name=$1
+    sink_num=$(list_sinks | grep "$sink_name" | cut -d'	' -f1)
+    echo "$sink_num"
+}
 
-sink_num=$(list_sinks | grep "$sink_name" | cut -d'	' -f1)
-[[ -z "$sink_num" ]] && exit -1
+if [[ -z "$1" ]]; then
+    sink_name=$(select_sink_gui)
+    [[ -z "$sink_name" ]] && exit -1
+else
+    case "$1" in
+        -h|--help)
+            echo "Usage: select_audio [--toggle|--list]"
+            exit 0
+            ;;
+        --list)
+            echo "Available audio sinks:"
+            list_sinks
+            exit 0
+            ;;
+        --toggle)
+            sink_name=$(toggle_audio)
+            ;;
 
-pacmd set-default-sink $sink_num
+        --get)
+            echo "Current sink:"
+            get_current_sink
+            exit 0
+            ;;
+        *)
+            sink_name=$1
+            ;;
+    esac
+fi
+
+
+sink_num=$(find_sink_id_by_name "$sink_name")
+[[ -z "$sink_num" ]] && echo "Error selecting the sink id" && exit -1
+
+echo "Setting the audio output to $sink_num: $sink_name"
+pacmd set-default-sink "$sink_num"
+if [[ "$sink_name" = "RODE NT-USB" ]]; then
+    icon=/usr/share/icons/Papirus-Dark/16x16/devices/audio-headphones.svg
+else
+    icon=/usr/share/icons/Papirus-Dark/16x16/devices/audio-speakers.svg
+fi
 notify-send \
-    -i /usr/share/icons/Papirus-Dark/16x16/actions/speaker.svg \
+    -r 1002 \
+    -i $icon \
     -t 10000 \
     "Audio Sink" \
     "Changed the audio output to \n\n$sink_num: <b>$sink_name</b>"

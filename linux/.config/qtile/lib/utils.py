@@ -104,7 +104,7 @@ def go_to_next_screen(qtile, direction=1):
     other_scr_index = (qtile.screens.index(qtile.current_screen) + direction) % len(
         qtile.screens
     )
-    qtile.cmd_to_screen(other_scr_index)
+    qtile.to_screen(other_scr_index)
 
 
 def go_to_group_or_switch_screen(qtile, group_name):
@@ -115,7 +115,7 @@ def go_to_group_or_switch_screen(qtile, group_name):
         # group_screen_index = qtile.screens.index(screen) if screen is not None else None
         if group_screen_index is not None:
             if group_screen_index != current_screen_index:
-                qtile.cmd_to_screen(group_screen_index)
+                qtile.to_screen(group_screen_index)
             else:
                 # Toggle back:
                 # qtile.current_screen.cmd_prev_group()
@@ -141,7 +141,7 @@ def window_switch_to_screen_or_pull_group(**kwargs):
             window = windows[0]
             if window.group != qtile.current_group:
                 if window.group.screen:
-                    qtile.cmd_to_screen(window.group.screen.index)
+                    qtile.to_screen(window.group.screen.index)
                 qtile.current_screen.setGroup(window.group)
             window.group.focus(window, False)
 

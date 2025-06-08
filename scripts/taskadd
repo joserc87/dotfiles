@@ -13,3 +13,10 @@ ID=$(task +LATEST ids)
 if [[ "$url" =~ https?://* ]]; then
     task $ID annotate "$url"
 fi
+icon=/usr/share/icons/Papirus-Dark/16x16/apps/notes.svg
+notify-send \
+    -r 1001 \
+    -i $icon \
+    -t 10000 \
+    "New task added" \
+    "$task_name"

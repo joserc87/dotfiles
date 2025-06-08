@@ -119,7 +119,8 @@ FONT = "Noto Sans Mono:style=Regular"
 
 FOREGROUND = COLS["light_3"]
 ALERT = COLS["red_1"]
-FONTSIZE = 18
+# TODO: Make it autoadjust based on screen resolution
+FONTSIZE = 14
 PADDING = 3
 
 # Keep all of the UI consistent
