@@ -6,7 +6,7 @@ from libqtile.config import DropDown, Group, Match, ScratchPad
 
 def is_work_laptop():
     hostname = os.uname()[1]
-    return hostname == "rp-laptop"
+    return hostname == "jcano-rplaptop"
 
 
 _matches = {
