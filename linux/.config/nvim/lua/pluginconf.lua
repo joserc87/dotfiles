@@ -247,17 +247,17 @@ mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
-local mappings = require("mappings")
+-- local mappings = require("mappings")
 
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = mappings.on_attach,
-      settings = servers[server_name],
-    }
-  end,
-}
+-- mason_lspconfig.setup_handlers {
+--   function(server_name)
+--     require('lspconfig')[server_name].setup {
+--       capabilities = capabilities,
+--       on_attach = mappings.on_attach,
+--       settings = servers[server_name],
+--     }
+--   end,
+-- }
 
 -- Turn on lsp status information
 require('fidget').setup()

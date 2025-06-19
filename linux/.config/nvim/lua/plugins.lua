@@ -125,6 +125,7 @@ require('packer').startup(function(use)
   use 'shumphrey/fugitive-gitlab.vim'
   use 'junegunn/gv.vim'
   use 'lewis6991/gitsigns.nvim'
+  use 'sindrets/diffview.nvim'
 
   -- FILE_NAVIGATION:
   use 'kyazdani42/nvim-tree.lua'
