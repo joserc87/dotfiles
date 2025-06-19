@@ -1,6 +1,8 @@
 #!/usr/bin/bash
 
 SOURCE_BRANCH=origin/master
-git diff --name-status $SOURCE_BRANCH \
-    | awk '{print $2}' \
-    | xargs nvim
+# git diff --name-status $SOURCE_BRANCH \
+#     | awk '{print $2}' \
+#     | xargs nvim
+# Run :DiffviewOpen in nvim
+nvim -c "DiffviewOpen $SOURCE_BRANCH"
