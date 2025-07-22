@@ -54,3 +54,5 @@ linux/.config/gtk-3.0/settings.ini
 linux/.config/pypoetry/pyproject.toml
 linux/.config/pypoetry/poetry.lock
 linux/.config/Code - OSS/
+linux/.config/Cursor/*
+linux/.config/slack-term/config
