@@ -1,0 +1,14 @@
+session_name: explore
+start_directory: "~/git/python/explore"
+windows:
+- window_name: vim
+  focus: True
+  layout: main-vertical
+  panes:
+  - vim
+- window_name: shell
+  focus: False
+  layout: main-horizontal
+  panes:
+  - yarn install && exit
+  - read && xdg-open "http://localhost:3000" & nx serve
