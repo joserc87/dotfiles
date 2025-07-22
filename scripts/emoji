@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+
+# If running in a terminal, use fzf, otherwise use rofi or dmenu
+if [ -t 0 ]; then
+    FUZZYSELECT=fzf
+elif command -v rofi >/dev/null 2>&1; then
+    FUZZYSELECT="rofi -dmenu -i -p 'Emoji:'"
+else
+    FUZZYSELECT="dmenu -l 20 -i -p 'Emoji:'"
+fi
+cat ~/Documents/emojis_by_category.txt \
+    | grep -v -x '[[:blank:]]*' \
+    | $FUZZYSELECT \
+    |  xclip -selection clipboard

@@ -3,8 +3,7 @@
 function all {
     tmuxp load -d base \
         cdk \
-        smart-topics \
-        st-profiles \
+        smart-topics-master \
     # Disabled
     #   webapps \
     #   dumpy \
@@ -20,6 +19,7 @@ function all {
     #   pysync \
     #   bigdata-client \
     #   monitoring-proxy \
+    #   st-profiles \
     #   bdsm \
     tmux attach -t base
 }

@@ -15,6 +15,7 @@ list() {
     echo "${1}notif"
     echo "${1}alacritty"
     echo "${1}ssh"
+    echo "${1}rmpc"
 }
 
 if [ "$#" -ne 1 ]; then
@@ -79,6 +80,9 @@ case $1 in
     ;;
     ssh)
         $EDITOR ~/.ssh/config
+    ;;
+    rmpc)
+        $EDITOR ~/.config/rmpc/config.ron
     ;;
     shortlist)
         echo i3 nvim vim-plugins zsh xresources tmux stuff config

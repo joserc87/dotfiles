@@ -8,17 +8,21 @@ if [ -z "$(git status 2> /dev/null)" ]; then
     project=$(listprojects | fzf)
     [[ -z "$project" ]] && echo "Cancelling..." && exit
     [[ -d "$project" ]] || (echo -e "${RED}Project $project not found$NC" && exit)
-    echo "Entering $project"
+    echo "Entering '$project'"
     pushd "$project"
 fi
+
 function listmrs {
     glab mr list --assignee=@me --reviewer=@me | tail +3
     echo "--------------------------------"
     glab mr list | tail +3
 }
+
 mr=$(listmrs| fzf)
 mr_id=$(echo $mr | sed 's/!\(.[0-9]*\).*/\1/')
-branch=$(echo $mr | sed 's/.* ← (\(.*\))/\1/')
+branch="$(echo $mr | sed 's/.* ← (\(.*\))/\1/')"
+remote="origin"
+
 
 rootdir=$(git rev-parse --show-toplevel)
 project_name=$(basename "$rootdir")
@@ -36,11 +40,17 @@ else
 fi
 
 git fetch
-[ -d $worktreedir ] || git worktree add "$worktreedir" "$branch" > /dev/null
-if [ $? -ne 0 ]; then
-    # Red color
-    echo -e "${RED}Failed to create worktree$NC"
-    exit
+if [ -d "$worktreedir" ]; then
+    echo "Worktree already exists at $worktreedir"
+else
+    echo "Creating worktree at $worktreedir"
+    echo "$ git worktree add \"$worktreedir\" \"$remote/$branch\""
+    git worktree add "$worktreedir" "$remote/$branch" > /dev/null
+    if [ $? -ne 0 ]; then
+        # Red color
+        echo -e "${RED}Failed to create worktree$NC"
+        exit
+    fi
 fi
 
 TMUX_SESSION="$project_name-$mr_id"
