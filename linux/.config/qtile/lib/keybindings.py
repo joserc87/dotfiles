@@ -112,7 +112,6 @@ for g, k in zip(groups, [GRAVE] + list("asdfgyuiop")):
     # keys.append(Key([MODKEY], k, lazy.function(go_to_group_or_switch_screen, g.name)))
     keys.append(Key([MODKEY, SHIFT], k, lazy.window.togroup(g.name)))
     keys.append(Key([MODKEY, CTRL], k, lazy.window.togroup(g.name)))
-    keys.append(Key([MODKEY, SHIFT], k, lazy.window.togroup(g.name)))
     spawns_for_group = g.spawn or []
     for spawn in spawns_for_group:
         keys.append(Key([MODKEY, ALT], k, lazy.spawn(spawn)))

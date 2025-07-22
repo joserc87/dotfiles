@@ -92,7 +92,7 @@ def kick_to_next_screen(qtile, direction=1):
         qtile.screens
     )
     othergroup = None
-    for group in qtile.cmd_groups().values():
+    for group in qtile.get_groups().values():
         if group["screen"] == other_scr_index:
             othergroup = group["name"]
             break
@@ -108,7 +108,7 @@ def go_to_next_screen(qtile, direction=1):
 
 
 def go_to_group_or_switch_screen(qtile, group_name):
-    group = qtile.cmd_groups().get(group_name)
+    group = qtile.get_groups().get(group_name)
     if group:
         group_screen_index = group["screen"]
         current_screen_index = qtile.screens.index(qtile.current_screen)

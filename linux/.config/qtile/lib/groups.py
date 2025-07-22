@@ -18,7 +18,7 @@ _matches = {
     6: [Match(wm_class="Slack")],
     7: [Match(wm_class="Firefox")],
     9: [Match(wm_class="zen-alpha") & Match(title=re.compile(".*RavenPack International SLU"))],
-    10: [Match(wm_class=["Spotify", "pavucontrol"])],
+    10: [Match(wm_class=re.compile(r"^(Spotify|pavucontrol)$"))],
 }
 _spawn_work = {
     0: ["alacritty -e mux all"],
