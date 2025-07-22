@@ -24,8 +24,17 @@ fi
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Add in Powerlevel10k
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+# Set Oh My Zsh theme conditionally
+# so that cursor doesn't hang
+if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+    ZSH_THEME=""  # Disable Powerlevel10k for Cursor
+    PROMPT='%n@%m:%~%# '
+    RPROMPT=''
+else
+    # Add in Powerlevel10k
+    zinit ice depth=1; zinit light romkatv/powerlevel10k
+fi
 
 # Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
@@ -514,3 +523,6 @@ time_starttransfer:  %{time_starttransfer}s\n
 EOF
     curl -w "@/tmp/curl-format.txt" -o /dev/null -s "$1"
 }
+alias calw="gcalcli --default-calendar jcano@ravenpack.com calw"
+alias calm="gcalcli --default-calendar jcano@ravenpack.com calm"
+
