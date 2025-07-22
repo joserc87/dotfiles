@@ -141,7 +141,7 @@ require('gitsigns').setup {
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'vimdoc', 'markdown', 'markdown_inline', 'groovy', 'html', 'yaml'},
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'vimdoc', 'markdown', 'markdown_inline', 'groovy', 'html', 'yaml', 'sql', 'json'},
 
   highlight = { enable = true },
   -- Why was it disabled for python??
@@ -247,7 +247,13 @@ mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
--- local mappings = require("mappings")
+local mappings = require("mappings")
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    mappings.on_attach("", ev.buf)
+  end,
+})
 
 -- mason_lspconfig.setup_handlers {
 --   function(server_name)
