@@ -1,5 +1,5 @@
 session_name: st_auth_webhook_notifications_ddb_stream
-start_directory: "~/git/python/smart-topics-wip/lambda/st_auth_webhook_notifications_ddb_stream"
+start_directory: "~/git/python/smart-topics/lambda/st_auth_webhook_notifications_ddb_stream"
 windows:
 - window_name: vim
   focus: True
