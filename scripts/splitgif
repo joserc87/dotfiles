@@ -1,0 +1,55 @@
+#!/bin/bash
+
+set -e
+
+# Check if input is provided
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 input.gif"
+    exit 1
+fi
+
+INPUT_GIF="$1"
+
+# Check if file exists
+if [ ! -f "$INPUT_GIF" ]; then
+    echo "File not found: $INPUT_GIF"
+    exit 1
+fi
+
+# Create a working directory
+WORKDIR=$(mktemp -d)
+cd "$WORKDIR" || exit 1
+
+# Step 1: Coalesce frames
+magick "$OLDPWD/$INPUT_GIF" -coalesce frame.png
+
+# Get dimensions
+read WIDTH HEIGHT <<< $(identify -format "%w %h" frame-0.png)
+
+# Calculate half-width and half-height
+HALF_W=$((WIDTH / 2))
+HALF_H=$((HEIGHT / 2))
+
+# Step 2: Crop into 4 quadrants
+for img in frame-*.png; do
+    magick "$img" -crop ${HALF_W}x${HALF_H}+0+0 +repage tl_"$img"
+    magick "$img" -crop ${HALF_W}x${HALF_H}+$HALF_W+0 +repage tr_"$img"
+    magick "$img" -crop ${HALF_W}x${HALF_H}+0+$HALF_H +repage bl_"$img"
+    magick "$img" -crop ${HALF_W}x${HALF_H}+$HALF_W+$HALF_H +repage br_"$img"
+done
+
+# Step 3: Rebuild GIFs
+magick -delay 10 -loop 0 tl_frame-*.png "$OLDPWD/output_top_left.gif"
+magick -delay 10 -loop 0 tr_frame-*.png "$OLDPWD/output_top_right.gif"
+magick -delay 10 -loop 0 bl_frame-*.png "$OLDPWD/output_bottom_left.gif"
+magick -delay 10 -loop 0 br_frame-*.png "$OLDPWD/output_bottom_right.gif"
+
+# Step 4: Clean up
+cd "$OLDPWD"
+rm -rf "$WORKDIR"
+
+echo "Done. Output GIFs:"
+echo " - output_top_left.gif"
+echo " - output_top_right.gif"
+echo " - output_bottom_left.gif"
+echo " - output_bottom_right.gif"
