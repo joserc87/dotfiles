@@ -44,8 +44,8 @@ if [ -d "$worktreedir" ]; then
     echo "Worktree already exists at $worktreedir"
 else
     echo "Creating worktree at $worktreedir"
-    echo "$ git worktree add \"$worktreedir\" \"$remote/$branch\""
-    git worktree add "$worktreedir" "$remote/$branch" > /dev/null
+    echo "$ git worktree add \"$worktreedir\" \"$branch\""
+    git worktree add "$worktreedir" "$branch" > /dev/null
     if [ $? -ne 0 ]; then
         # Red color
         echo -e "${RED}Failed to create worktree$NC"

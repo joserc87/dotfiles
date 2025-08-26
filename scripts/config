@@ -10,6 +10,7 @@ list() {
     echo "${1}xresources"
     echo "${1}config"
     echo "${1}tmux"
+    echo "${1}tmuxp"
     echo "${1}task"
     echo "${1}aws"
     echo "${1}notif"
@@ -62,6 +63,9 @@ case $1 in
     ;;
     tmux)
         $EDITOR ~/.tmux.conf
+    ;;
+    tmuxp)
+        $EDITOR ~/.config/tmuxp/
     ;;
     task)
         $EDITOR ~/.taskrc
