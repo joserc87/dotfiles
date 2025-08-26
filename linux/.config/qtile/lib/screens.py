@@ -4,11 +4,9 @@ Basically copied from https://github.com/sminez/qtile-config/blob/master/config.
 import os
 
 from libqtile import bar, widget
-from libqtile.config import Screen, hook
-from libqtile.widget import base
+from libqtile.config import Screen
 
-from .settings import COLS, FONT_PARAMS, WITH_SYS_TRAY, SCRIPT_DIR
-from .utils import window_switch_to_screen_or_pull_group
+from .settings import COLS, FONT_PARAMS, WITH_SYS_TRAY
 
 
 def _separator():
@@ -192,8 +190,10 @@ def make_screen(systray=False):
         # Current time
         *widget_with_label(widget.Clock, "", format="%d/%m %a %I:%M"),
         # Visual indicator of the current layout for this workspace.
-        widget.CurrentLayoutIcon(
-            custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")], **BAR_STYLE
+        widget.CurrentLayout(
+            custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
+            icon_first=False,
+            **BAR_STYLE,
         ),
     ]
     # Remove disabled widgets
