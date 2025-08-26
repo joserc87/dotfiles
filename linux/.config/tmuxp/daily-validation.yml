@@ -1,0 +1,14 @@
+session_name: daily-validation
+start_directory: ~/code/daily-validation
+windows:
+- window_name: vim
+  focus: True
+  layout: main-vertical
+  panes:
+  - vim
+- window_name: run
+  layout: tiled
+  panes:
+  - read && AWS_PROFILE=smart-topics-dev-nvirginia poetry run python src/daily_validation/main.py all
+  - read && AWS_PROFILE=smart-topics-stg-nvirginia poetry run python src/daily_validation/main.py all
+  - read && AWS_PROFILE=smart-topics-prod-nvirginia poetry run python src/daily_validation/main.py all
