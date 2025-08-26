@@ -28,7 +28,7 @@ _spawn_work = {
     7: ["firefox"],
     # 9: ["ferdium"],
     # Disabled: "blueman-manager", "pavucontrol"
-    10: ["spotify"],
+    #10: ["spotify"],
 }
 _spawn_personal = {
     0: [],
