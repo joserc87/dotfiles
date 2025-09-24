@@ -116,6 +116,45 @@ export TERM=xterm-256color
 # This one makes ranger crash
 # export TERM=screen-256color
 
+# Trying to make man pages colored
+# export LESS_TERMCAP_mb=$'\e[1;32m'
+# export LESS_TERMCAP_md=$'\e[1;32m'
+# export LESS_TERMCAP_me=$'\e[0m'
+# export LESS_TERMCAP_se=$'\e[0m'
+# export LESS_TERMCAP_so=$'\e[01;33m'
+# export LESS_TERMCAP_ue=$'\e[0m'
+# export LESS_TERMCAP_us=$'\e[1;4;31m'
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
+export LESS_TERMCAP_md=$(tput bold; tput setaf 6) # cyan
+export LESS_TERMCAP_me=$(tput sgr0)
+export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4) # yellow on blue
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 7) # white
+export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
+export LESS_TERMCAP_mr=$(tput rev)
+export LESS_TERMCAP_mh=$(tput dim)
+export LESS_TERMCAP_ZN=$(tput ssubm)
+export LESS_TERMCAP_ZV=$(tput rsubm)
+export LESS_TERMCAP_ZO=$(tput ssupm)
+export LESS_TERMCAP_ZW=$(tput rsupm)
+
+# # Bold text
+# export LESS_TERMCAP_md=$(tput bold; tput setaf 2) # Green
+# # End all mode like so, us, mb, md, and mr
+# export LESS_TERMCAP_me=$(tput sgr0)
+# # Start underlining
+# export LESS_TERMCAP_us=$(tput smul; tput setaf 4) # Blue
+# # End underlining
+# export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
+
+export GROFF_NO_SGR=1         # For Konsole and Gnome-terminal
+
+# But since still doesn't colour them, use most
+# export PAGER="most"
+# export MANPAGER="less -R --use-color -Dd+r -Du+b"
+# export MANROFFOPT="-c"
+# export LESS='-RXF --use-color -Dd+r$Du+b'
+
 # for neovim
 export XDG_CONFIG_HOME="$HOME/.config/"
 
