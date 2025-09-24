@@ -2,6 +2,7 @@
 
 function all {
     tmuxp load -d base \
+        daily-validation \
         cdk \
         smart-topics-master \
     # Disabled
