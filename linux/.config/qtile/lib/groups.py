@@ -9,16 +9,26 @@ def is_work_laptop():
     return hostname == "jcano-rplaptop"
 
 
+WM_CLASS_DEPLOYMENT_TOOL = "deployment-tool.devtools.ravenpack.com__deployments"
+WM_CLASS_MEET = "meet.google.com__landing"
+WM_CLASS_GMAIL = "mail.google.com__mail_u_0"
+WM_CLASS_CALENDAR = "calendar.google.com__calendar_u_0_r"
+WM_CLASS_YOUTUBE = "www.youtube.com"
+
 _matches = {
     0: [Match(wm_class="obsidian")],
-    2: [Match(wm_class="Xephyr")],
+    2: [Match(wm_class="Xephyr"), Match(wm_class=WM_CLASS_DEPLOYMENT_TOOL)],
     3: [Match(wm_class="zen-alpha")],
     4: [Match(wm_class="Chromium")],
     5: [Match(wm_class="brave-browser")],
     6: [Match(wm_class="Slack")],
     7: [Match(wm_class="Firefox")],
-    9: [Match(wm_class="zen-alpha") & Match(title=re.compile(".*RavenPack International SLU"))],
-    10: [Match(wm_class=re.compile(r"^(Spotify|pavucontrol)$"))],
+    8: [Match(wm_class=WM_CLASS_MEET)],
+    9: [Match(wm_class=WM_CLASS_GMAIL), Match(wm_class=WM_CLASS_CALENDAR)],
+    10: [
+        Match(wm_class=re.compile(r"^(Spotify|pavucontrol)$")),
+        Match(wm_class=WM_CLASS_YOUTUBE),
+    ],
 }
 _spawn_work = {
     0: ["alacritty -e mux all"],
@@ -28,7 +38,7 @@ _spawn_work = {
     7: ["firefox"],
     # 9: ["ferdium"],
     # Disabled: "blueman-manager", "pavucontrol"
-    #10: ["spotify"],
+    # 10: ["spotify"],
 }
 _spawn_personal = {
     0: [],

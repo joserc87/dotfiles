@@ -1,0 +1,19 @@
+[Desktop Entry]
+Version=1.0
+Name=Deployment Tool
+Comment=Deployment Tool
+Exec=brave --app="https://deployment-tool.devtools.ravenpack.com/deployments/?project=st" --class="WebApp-DeploymentTool" --profile-directory="Profile 27" --name=WebApp-DeploymentTool
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=webapp-manager
+Categories=GTK;Development;
+MimeType=text/html;text/xml;application/xhtml_xml;
+StartupWMClass=WebApp-DeploymentTool
+StartupNotify=true
+X-WebApp-Browser=Brave
+X-WebApp-URL=https://deployment-tool.devtools.ravenpack.com/deployments/?project=st
+X-WebApp-CustomParameters=
+X-WebApp-Navbar=false
+X-WebApp-PrivateWindow=false
+X-WebApp-Isolated=false

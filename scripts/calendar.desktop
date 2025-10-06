@@ -1,0 +1,19 @@
+[Desktop Entry]
+Version=1.0
+Name=GCalendar
+Comment=GCalendar
+Exec=brave --app="https://calendar.google.com/calendar/u/0/r" --profile-directory="Profile 27" --class="WebApp-GCalendar" --name="WebApp-GCalendar"
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=webapp-manager
+Categories=GTK;Office;
+MimeType=text/html;text/xml;application/xhtml_xml;
+StartupWMClass=WebApp-GCalendar
+StartupNotify=true
+X-WebApp-Browser=Brave
+X-WebApp-URL=https://calendar.google.com/calendar/u/0/r
+X-WebApp-CustomParameters=
+X-WebApp-Navbar=false
+X-WebApp-PrivateWindow=false
+X-WebApp-Isolated=false

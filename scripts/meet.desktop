@@ -1,0 +1,20 @@
+[Desktop Entry]
+Version=1.0
+Name=Google Meet
+Comment=Google Meet
+Exec=brave --app="https://meet.google.com/landing" --profile-directory="Profile 27" --class="WebApp-GoogleMeet" --name="WebApp-GoogleMeet"
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=webapp-manager
+Categories=GTK;Office;
+MimeType=text/html;text/xml;application/xhtml_xml;
+StartupWMClass=WebApp-GoogleMeet
+StartupNotify=true
+X-WebApp-Browser=Brave
+X-WebApp-URL=https://meet.google.com/landing
+X-WebApp-CustomParameters=
+X-WebApp-Navbar=false
+X-WebApp-PrivateWindow=false
+X-WebApp-Isolated=false
+

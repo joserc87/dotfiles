@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+DIR=$(dirname "$(realpath "$0")")
+APP=meet
+gio launch "$DIR/$APP.desktop"

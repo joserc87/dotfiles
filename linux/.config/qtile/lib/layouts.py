@@ -1,9 +1,11 @@
 """
 Layout definitions
 """
+
 from libqtile import layout
-from .settings import COLS
 from libqtile.config import Match
+
+from .settings import COLS
 
 _layout_common_settings = dict(
     border_focus=COLS["purple_1"],
@@ -28,6 +30,17 @@ _main_satelite = {
 GAP = 16
 
 # Layouts
+floating_exceptions = (
+    Match(wm_class="WebApp-GoogleMeet")
+    | Match(wm_class="WebApp-GCalendar")
+    | Match(wm_class="WebApp-GMail")
+    | Match(wm_class="WebApp-DeploymentTool")
+    | Match(wm_class="deployment-tool.devtools.ravenpack.com__deployments")
+    | Match(wm_class="meet.google.com__landing")
+    | Match(wm_class="mail.google.com__mail_u_0")
+    | Match(wm_class="calendar.google.com__calendar_u_0_r")
+    | Match(wm_class="www.youtube.com")
+)
 floating_layout = layout.Floating(
     border_width=0,
     float_rules=[
@@ -35,7 +48,7 @@ floating_layout = layout.Floating(
         Match(wm_class="floating"),
         Match(wm_class="zoom"),
         Match(wm_class="dragon-drop"),
-        Match(role="pop-up"),
+        Match(role="pop-up") & (~floating_exceptions),
     ],
 )
 layouts = [

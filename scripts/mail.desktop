@@ -1,0 +1,19 @@
+[Desktop Entry]
+Version=1.0
+Name=GMail
+Comment=GMail
+Exec=brave --app="https://mail.google.com/mail/u/0/#inbox" --profile-directory="Profile 27" --class=WebApp-GMail --name=WebApp-GMail
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=webapp-manager
+Categories=GTK;Office;
+MimeType=text/html;text/xml;application/xhtml_xml;
+StartupWMClass=WebApp-GMail
+StartupNotify=true
+X-WebApp-Browser=Brave
+X-WebApp-URL=https://mail.google.com/mail/u/0/#inbox
+X-WebApp-CustomParameters=
+X-WebApp-Navbar=false
+X-WebApp-PrivateWindow=false
+X-WebApp-Isolated=false

@@ -1,0 +1,6 @@
+#!/usr/bin/sh
+
+DIR=$(dirname "$(realpath "$0")")
+APP=youtube
+gio launch "$DIR/$APP.desktop"
+
