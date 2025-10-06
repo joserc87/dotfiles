@@ -6,7 +6,7 @@ windows:
   layout: main-vertical
   panes:
   - vim
-  - read && aws sso login --profile smart-topics-dev-nvirginia && aws sso login --profile smart-topics-stg-nvirginia && aws sso login --profile smart-topics-prod-nvirginia && exit
+  - read && aws sso login --profile smart-topics-dev-nvirginia
 - window_name: run
   layout: tiled
   panes:
