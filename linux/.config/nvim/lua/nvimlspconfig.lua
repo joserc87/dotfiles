@@ -1,5 +1,7 @@
-require'lspconfig'.pyright.setup{}
+-- Deprecated
+-- require'lspconfig'.pyright.setup{}
 -- require'lspconfig'.pylsp.setup{}
+vim.lsp.config("pyright", {})
 
 vim.diagnostic.config({
   -- To disable:
