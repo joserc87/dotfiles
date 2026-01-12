@@ -28,9 +28,9 @@ customCommands:
     command: 'dragon-drop {{.SelectedFile.Name}}'
     context: 'files'
 git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never
   commitPrefixes:
     # This is the project name
     smart-topics:
