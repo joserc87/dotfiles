@@ -252,6 +252,10 @@ vim.keymap.set('n', '<leader>wp', ':ObsidianQuickSwitch<cr>', { desc = '[W]iki s
 --vim.keymap.set('n', '<leader>sW', function ()
 --  --require('telescope.builtin').find_files({ search_dirs = { '~/code/braindump/work/' } } )
 --end, { desc = '[S]earch [S]scripts' })
+vim.keymap.set('n', '<leader>wl', 'viw:ObsidianLink<cr>', { desc = '[W]iki [L]ink' })
+vim.keymap.set('v', '<leader>wl', ':ObsidianLink<cr>', { desc = '[W]iki [L]ink' })
+vim.keymap.set('n', '<leader>wn', ':ObsidianNew<cr>', { desc = '[W]iki [N]ew' })
+vim.keymap.set('v', '<leader>wn', ':ObsidianExtractNote<cr>', { desc = '[W]iki [N]ew from selection' })
 
 -- local hop = require('hop')
 -- local directions = require('hop.hint').HintDirection

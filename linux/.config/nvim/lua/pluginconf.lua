@@ -4,7 +4,12 @@ local bo = vim.bo
 
 -- Obsidian
 require("obsidian").setup({
-  dir = "~/code/braindump/brain",
+  workspaces = {
+    {
+      name = "brain",
+      path = "~/code/braindump/brain",
+    },
+  },
   daily_notes = {
       folder = "diary",
       template = "daily",
@@ -27,6 +32,51 @@ require("obsidian").setup({
       return string.format("[[%s]]", opts.id)
     end
   end,
+
+  ---@param title string|?
+  ---@return string
+  note_id_func = function(title)
+    -- Create note IDs with the date as prefix 
+    -- In this case a note with the title 'My new note' created in new years eve
+    -- will be given an ID that looks like '20261231-my-new-note', and therefore the file name '20261231-my-new-note.md'. A note without title created at 10:20pm will be '20261231-2220'
+    local suffix = ""
+    local date_prefix = tostring(os.date("%Y%m%d"))
+    if title ~= nil then
+      -- If title is given, transform it into valid file name.
+      suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+    else
+      suffix = tostring(os.date("%H%M"))
+    end
+    return date_prefix .. "-" .. suffix
+  end,
+
+  -- @param img string
+  follow_img_func = function(img)
+    -- vim.fn.jobstart { "qlmanage", "-p", img }  -- Mac OS quick look preview
+    -- vim.fn.jobstart({"xdg-open", url})  -- linux
+    vim.fn.jobstart({"sxiv", img})  -- linux
+    -- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
+  end,
+
+  picker = {
+    -- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
+    name = "telescope.nvim",
+    -- Optional, configure key mappings for the picker. These are the defaults.
+    -- Not all pickers support all mappings.
+    note_mappings = {
+      -- Create a new note from your query.
+      new = "<C-x>",
+      -- Insert a link to the selected note.
+      insert_link = "<C-l>",
+    },
+    tag_mappings = {
+      -- Add tag(s) to current note.
+      tag_note = "<C-x>",
+      -- Insert a tag at the current location.
+      insert_tag = "<C-l>",
+    },
+  },
+
   ui = {
     enable = true,  -- set to false to disable all additional syntax features
     update_debounce = 200,  -- update delay after a text change (in milliseconds)
@@ -44,6 +94,8 @@ require("obsidian").setup({
 
       -- You can also add more custom ones...
     },
+    -- Use bullet marks for non-checkbox lists.
+    bullets = { char = "•", hl_group = "ObsidianBullet" },
     external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
     -- Replace the above with this if you don't have a patched font:
     -- external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
@@ -53,15 +105,42 @@ require("obsidian").setup({
     hl_groups = {
       -- The options are passed directly to `vim.api.nvim_set_hl()`. See `:help nvim_set_hl`.
       ObsidianTodo = { bold = true, fg = "#f78c6c" },
-      ObsidianInProgress = { bold = true, fg = "#f78c6c" },
       ObsidianDone = { bold = true, fg = "#89ddff" },
       ObsidianRightArrow = { bold = true, fg = "#f78c6c" },
       ObsidianTilde = { bold = true, fg = "#ff5370" },
+      ObsidianImportant = { bold = true, fg = "#d73128" },
+      ObsidianBullet = { bold = true, fg = "#89ddff" },
       ObsidianRefText = { underline = true, fg = "#c792ea" },
       ObsidianExtLinkIcon = { fg = "#c792ea" },
       ObsidianTag = { italic = true, fg = "#89ddff" },
+      ObsidianBlockID = { italic = true, fg = "#89ddff" },
       ObsidianHighlightText = { bg = "#75662e" },
     },
+  },
+  -- Specify how to handle attachments.
+  attachments = {
+    -- The default folder to place images in via `:ObsidianPasteImg`.
+    -- If this is a relative path it will be interpreted as relative to the vault root.
+    -- You can always override this per image by passing a full path to the command instead of just a filename.
+    img_folder = "assets/imgs",  -- This is the default
+
+    -- Optional, customize the default name or prefix when pasting images via `:ObsidianPasteImg`.
+    ---@return string
+    img_name_func = function()
+      -- Prefix image names with timestamp.
+      return string.format("%s-", os.time())
+    end,
+
+    -- A function that determines the text to insert in the note when pasting an image.
+    -- It takes two arguments, the `obsidian.Client` and an `obsidian.Path` to the image file.
+    -- This is the default implementation.
+    ---@param client obsidian.Client
+    ---@param path obsidian.Path the absolute path to the image file
+    ---@return string
+    img_text_func = function(client, path)
+      path = client:vault_relative_path(path) or path
+      return string.format("![%s](%s)", path.name, path)
+    end,
   },
 })
 
