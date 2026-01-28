@@ -256,6 +256,7 @@ vim.keymap.set('n', '<leader>wl', 'viw:ObsidianLink<cr>', { desc = '[W]iki [L]in
 vim.keymap.set('v', '<leader>wl', ':ObsidianLink<cr>', { desc = '[W]iki [L]ink' })
 vim.keymap.set('n', '<leader>wn', ':ObsidianNew<cr>', { desc = '[W]iki [N]ew' })
 vim.keymap.set('v', '<leader>wn', ':ObsidianExtractNote<cr>', { desc = '[W]iki [N]ew from selection' })
+vim.keymap.set('n', '<leader>o', 'o<Esc>S- `<C-R>=strftime("%H:%M")<CR>` - ', { desc = 'Insert timestamped bullet' })
 
 -- local hop = require('hop')
 -- local directions = require('hop.hint').HintDirection

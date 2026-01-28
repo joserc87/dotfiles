@@ -18,6 +18,14 @@ require("obsidian").setup({
     subdir = "templates",
     date_format = "%B %d, %Y - %A",
     time_format = "%H:%M",
+    substitutions = {
+      dateiso = function()
+        return os.date("%Y-%m-%d")
+      end,
+      dateid = function()
+        return os.date("%Y%m%d")
+      end
+    }
   },
   -- completion = {
   --   nvim_cmp = false, -- if using nvim-cmp, otherwise set to false
