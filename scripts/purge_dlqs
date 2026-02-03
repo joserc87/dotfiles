@@ -1,0 +1,61 @@
+#!/usr/bin/bash
+
+# If an argument is not provided for the environment, select it interactively
+if [ -z "$AWS_PROFILE" ]; then
+    export AWS_PROFILE=$1
+fi
+if [ -z "$AWS_PROFILE" ]; then
+    echo "Select the environment:"
+    select env in "smart-topics-dev-nvirginia" "smart-topics-stg-nvirginia" "smart-topics-prod-nvirginia"; do
+        export AWS_PROFILE=$env
+        break
+    done
+fi
+echo "Selected environment: $AWS_PROFILE"
+aws sts get-caller-identity &> /dev/null
+if [ $? -ne 0 ]; then
+    echo "Not logged in. Logging in to AWS SSO for profile: $AWS_PROFILE"
+    aws sso login --profile "$AWS_PROFILE"
+fi
+
+function get_all_dlqs() {
+    aws sqs list-queues | jq -r '.QueueUrls[]' | grep "dlq"
+}
+
+function get_interesting_dlqs() {
+    INTERESTING_QUEUES=(
+        "auth-notifications-dlq"
+        "quota-events-processor-dlq"
+        "admin-quotas-dlq"
+        "subscriptions-event-processor-dlq"
+        "subscriptions-org-updater-event-bus-dlq"
+    )
+
+    for queue_url in $(get_all_dlqs); do
+        if [[ " ${INTERESTING_QUEUES[@]} " =~ " $(basename "$queue_url") " ]]; then
+            echo "$queue_url"
+        fi
+    done
+}
+
+function get_queue_message_count() {
+    local queue_url=$1
+    aws sqs get-queue-attributes --queue-url "$queue_url" --attribute-names ApproximateNumberOfMessages | jq -r '.Attributes.ApproximateNumberOfMessages'
+}
+
+for queue_url in $(get_interesting_dlqs); do
+    queue_name=$(basename "$queue_url")
+    echo -ne "Queue $queue_name: "
+    message_count=$(get_queue_message_count "$queue_url")
+    if [ "$message_count" -gt 0 ]; then
+        echo -ne "\e[31m$message_count\e[0m messages. Purge? \e[34m(y/n)\e[0m"
+        read -r answer
+        if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
+            echo -n "..."
+            aws sqs purge-queue --queue-url "$queue_url"
+            echo "Purged"
+        fi
+    else
+        echo -e "\e[32mempty\e[0m"
+    fi
+done
