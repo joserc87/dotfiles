@@ -1,6 +1,6 @@
 -- Install packer
-require("plugins")
 require("settings")
+require("lazy_bootstrap")
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
