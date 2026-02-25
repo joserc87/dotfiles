@@ -57,7 +57,12 @@ TMUX_SESSION="$project_name-$mr_id"
 
 function create_session {
     tmux has-session -t "$1" 2> /dev/null && return 1
-    TMUX= tmux new -s "$1" -d -c "$worktreedir"
+    # Select with FZF one of the directories in the worktree as the starting directory for the tmux session
+
+    PROJECT_DIR=$(find "$worktreedir" -type d | fzf --prompt="Select starting directory for tmux session: ")
+    [[ -z "$PROJECT_DIR" ]] && echo "Cancelling..." && exit
+
+    TMUX= tmux new -s "$1" -d -c "$PROJECT_DIR"
 
     # Wait for session to be created
     for i in $(seq 0 10) ; do
@@ -70,8 +75,8 @@ function create_session {
     done
     # tmux attach -t "$1"
 
-    tmux new-window -t "$1:1" -n Description -S -c "$worktreedir"
-    tmux new-window -t "$1:2" -n Description -S -c "$worktreedir"
+    tmux new-window -t "$1:1" -n Description -S -c "$PROJECT_DIR"
+    tmux new-window -t "$1:2" -n Description -S -c "$PROJECT_DIR"
 }
 
 function run {

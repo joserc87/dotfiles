@@ -1,11 +1,12 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 function all {
-    tmuxp load -d base \
-        daily-validation \
-        cdk \
+    tmuxp load -d \
+        base \
         smart-topics-master \
     # Disabled
+    #   cdk \
+    #   daily-validation \
     #   webapps \
     #   dumpy \
     #   st-auth-webhook-notifications-ddb-stream \
@@ -32,11 +33,11 @@ parse_args() {
              all
              ;;
          '')
-             opt=$(tmuxp ls | fzf)
+             opt=$(tmuxp ls | grep '^  ' | sed 's/ //g' | fzf)
              [[ -z "$opt" ]] || tmuxp load "$opt"
              ;;
          *)
-             opt=$(tmuxp ls | grep "$1" | fzf)
+             opt=$(tmuxp ls | grep '^  ' | grep "$1" | sed 's/ //g' | fzf)
              [[ -z "$opt" ]] || tmuxp load "$opt"
              ;;
     esac

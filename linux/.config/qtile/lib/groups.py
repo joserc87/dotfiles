@@ -6,7 +6,7 @@ from libqtile.config import DropDown, Group, Match, ScratchPad
 
 def is_work_laptop():
     hostname = os.uname()[1]
-    return hostname == "jcano-rplaptop"
+    return hostname == "RP-L0006"
 
 
 WM_CLASS_DEPLOYMENT_TOOL = "deployment-tool.devtools.ravenpack.com__deployments"
@@ -78,7 +78,7 @@ def _create_group(i):
     spawn = _spawn[i] if i in _spawn else None
     init = True
     layout = "GapsBig" if i in _terminal_windows else "GapsSmall"
-    if i == 10:
+    if i in [8, 10]:
         layout = "MainSatelite"
     layout_opts = _layout_opts[i] if i in _layout_opts else None
     return Group(
