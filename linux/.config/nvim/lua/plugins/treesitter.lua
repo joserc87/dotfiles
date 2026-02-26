@@ -8,7 +8,7 @@ return {
       -- Parsers will be installed via the build command ':TSUpdate'
       -- You can manually install more with :TSInstall <language>
       
-      -- Provide a fallback for ft_to_lang if it's missing (for Telescope compatibility)
+      -- Provide fallbacks for missing Telescope compatibility functions
       local ts_ok, _ = pcall(require, 'nvim-treesitter')
       if ts_ok then
         local parsers = require('nvim-treesitter.parsers')
@@ -34,6 +34,15 @@ return {
               vim = 'vim',
             }
             return ft_to_parser[ft] or ft
+          end
+        end
+        
+        -- Add is_enabled compatibility shim for Telescope
+        local ts_highlighter_ok, ts_highlighter = pcall(require, 'vim.treesitter.highlighter')
+        if ts_highlighter_ok and not ts_highlighter.is_enabled then
+          ts_highlighter.is_enabled = function(bufnr)
+            -- Check if treesitter highlighting is active for the buffer
+            return vim.treesitter.highlighter.active[bufnr] ~= nil
           end
         end
       end

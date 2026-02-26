@@ -19,6 +19,10 @@ local actions = require('telescope.actions')
 require('telescope').setup {
   defaults = {
     file_ignore_patterns = { "node_modules/.*", "^.git/", "/archive/.*" },
+    -- Disable treesitter highlighting in preview to avoid API compatibility issues
+    preview = {
+      treesitter = false,
+    },
     mappings = {
       i = {
         ['<C-u>'] = false,
