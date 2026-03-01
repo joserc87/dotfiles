@@ -564,4 +564,13 @@ EOF
 }
 alias calw="gcalcli --default-calendar jcano@ravenpack.com calw"
 alias calm="gcalcli --default-calendar jcano@ravenpack.com calm"
-
+function repr2str {
+    CONTENT="$(xclip -o -selection clipboard)"
+    echo "$CONTENT"
+    echo "$CONTENT" | xclip -selection clipboard || echo "ERROR" && return 1
+}
+function geterror {
+    CONTENT="$(xclip -o -selection clipboard | jq -r '.exception' )"
+    echo "$CONTENT"
+    echo "$CONTENT" | xclip -selection clipboard || echo "ERROR" && return 1
+}

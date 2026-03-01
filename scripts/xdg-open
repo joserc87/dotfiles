@@ -7,6 +7,8 @@ AWS_BROWSER='brave'
 BROWSER='zen-browser-optimized.desktop' # For instance /usr/bin/brave
 BROWSER_OPTIONS='' # Optional, for command line options passed to browser
 XDG_OPEN='/usr/bin/xdg-open'
+DEFAULT_REPO='https://gitlab.com/ravenpack/development/bigdata.com/backend'
+CDK_REPO='https://gitlab.com/ravenpack/development/operations/cloud/rp-cdk'
 
 #JIRA_PATTERN='^https\?:\/\/jira\.ravenpack\.com'
 JIRA_SERVER_PATTERN='jira\.ravenpack\.com'
@@ -16,6 +18,10 @@ LATTICE_PATTERN='https\?://ravenpack.latticehq.com/'
 DEV_PATTERN='^.*\.bigdata.com\|^.*localhost:\|.*staging.ravenpack.com\|\.*app.ravenpack.com\|^\.*entitytool'
 AWS_PATTERN='^https\?://.*\.console\.aws\.amazon\.com\|^https://ravenpacksso.awsapps.com/'
 SLACK_PATTERN='^https://ravenpack.slack.com/archives/'
+GITLAB_MR_PATTERN='^\![0-9]\+'
+CDK_GITLAB_MR_PATTERN='^\(CDK\|cdk\)\![0-9]\+'
+JIRA_ID_PATTERN='^\(CPS\|TASE\|PX\|PLAT\|BIGDATA\)-[0-9]\+$'
+
 
 if echo "$1" | grep -q "$JIRA_PATTERN"; then
     open_qtile_group.py 7
@@ -50,6 +56,26 @@ elif echo "$1" | grep -q "$SLACK_PATTERN"; then
     fi
     echo "Opening slack directly: $SLACK_URL"
     "$XDG_OPEN" "$SLACK_URL"
+elif echo "$1" | grep -q "$GITLAB_MR_PATTERN"; then
+    open_qtile_group.py 3
+    MR_NUMBER=$(echo "$1" | grep -oP '(?<=\!)[0-9]+')
+    GITLAB_URL="$DEFAULT_REPO/-/merge_requests/$MR_NUMBER"
+    "$XDG_OPEN" $BROWSER_OPTIONS "$GITLAB_URL"
+    exit 0
+elif echo "$1" | grep -q "$CDK_GITLAB_MR_PATTERN"; then
+    open_qtile_group.py 3
+    # Find the MR number after "CDK!" or "cdk!"
+    MR_NUMBER=$(echo "CDK!493" | grep -oP '(CDK|cdk)!\K[0-9]+')
+    echo "$MR_NUMBER" > /tmp/last_cdk_mr_number.txt
+    GITLAB_URL="$CDK_REPO/-/merge_requests/$MR_NUMBER"
+    "$XDG_OPEN" $BROWSER_OPTIONS "$GITLAB_URL"
+    exit 0
+elif echo "$1" | grep -q "$JIRA_ID_PATTERN"; then
+    open_qtile_group.py 7
+    JIRA_ID=$1
+    JIRA_URL="https://ravenpack.atlassian.net/browse/$JIRA_ID"
+    "$JIRA_BROWSER" $BROWSER_OPTIONS "$JIRA_URL"
+    exit 0
 else
     # Calling always the browser cause errors when trying to open an application
     # "$NORMAL_BROWSER" $BROWSER_OPTIONS ${*}

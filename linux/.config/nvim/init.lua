@@ -1,6 +1,6 @@
 -- Install packer
-require("plugins")
 require("settings")
+require("lazy_bootstrap")
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
@@ -23,7 +23,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 
-require("pluginconf")
+-- Plugin configurations now handled by lazy.nvim in plugins/ folder
+-- require("pluginconf")  -- Migrated to separate plugin files
 require("telescopeconf")
 require("nvimlspconfig")
 require("formattingconf")
