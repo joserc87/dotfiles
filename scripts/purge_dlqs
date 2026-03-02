@@ -43,19 +43,26 @@ function get_queue_message_count() {
     aws sqs get-queue-attributes --queue-url "$queue_url" --attribute-names ApproximateNumberOfMessages | jq -r '.Attributes.ApproximateNumberOfMessages'
 }
 
+final_message="*DLQs:*\n"
 for queue_url in $(get_interesting_dlqs); do
     queue_name=$(basename "$queue_url")
     echo -ne "Queue $queue_name: "
     message_count=$(get_queue_message_count "$queue_url")
     if [ "$message_count" -gt 0 ]; then
+        final_message+="* *$queue_name - $message_count*: "
         echo -ne "\e[31m$message_count\e[0m messages. Purge? \e[34m(y/n)\e[0m"
         read -r answer
         if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
             echo -n "..."
             aws sqs purge-queue --queue-url "$queue_url"
             echo "Purged"
+            final_message+="Purged :mrclean:\n"
+        else
+            final_message+="Not purged for now\n"
         fi
     else
         echo -e "\e[32mempty\e[0m"
     fi
 done
+echo -e "\n\n$final_message\n"
+echo -e "$final_message" | xclip -selection clipboard
