@@ -101,6 +101,17 @@ return {
 					insert_tag = "<C-l>",
 				},
 			},
+
+			mappings = {
+				-- Smart action depending on context, either follow link or toggle checkbox.
+				["<cr>"] = {
+					action = function()
+						return require("obsidian").util.smart_action()
+					end,
+					opts = { buffer = true, expr = true },
+				},
+			},
+
 			ui = {
 				enable = false, -- set to false to disable all additional syntax features
 				update_debounce = 200, -- update delay after a text change (in milliseconds)
