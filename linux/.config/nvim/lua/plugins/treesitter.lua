@@ -5,7 +5,15 @@ return {
 		priority = 100,
 		build = ":TSUpdate",
 		opts = {
-			ensure_installed = {
+			highlight = {
+				enable = true,
+			},
+			indent = {
+				enable = true,
+			},
+		},
+		config = function()
+			require("nvim-treesitter").install {
 				"c",
 				"cpp",
 				"python",
@@ -14,7 +22,6 @@ return {
 				"javascript",
 				"typescript",
 				"go",
-				"c",
 				"yaml",
 				"json",
 				"markdown",
@@ -26,102 +33,92 @@ return {
 				"vimdoc",
 				"groovy",
 				"sql",
-			},
-			highlight = {
-				enable = true,
-			},
-			indent = {
-				enable = true,
-			},
-		},
-		config = function()
-			-- Parsers will be installed via the build command ':TSUpdate'
-			-- You can manually install more with :TSInstall <language>
-
+			}
+ 		
 			-- Provide fallbacks for missing Telescope compatibility functions
-			local ts_ok, _ = pcall(require, "nvim-treesitter")
-			if ts_ok then
-				local parsers = require("nvim-treesitter.parsers")
-				if parsers and not parsers.ft_to_lang then
-					parsers.ft_to_lang = function(ft)
-						-- Simple fallback mapping
-						local ft_to_parser = {
-							cpp = "cpp",
-							python = "python",
-							rust = "rust",
-							lua = "lua",
-							javascript = "javascript",
-							typescript = "typescript",
-							go = "go",
-							c = "c",
-							yaml = "yaml",
-							json = "json",
-							markdown = "markdown",
-							html = "html",
-							css = "css",
-							bash = "bash",
-							sh = "bash",
-							vim = "vim",
-						}
-						return ft_to_parser[ft] or ft
-					end
-				end
+			 local ts_ok, _ = pcall(require, "nvim-treesitter")
+			 if ts_ok then
+			 	local parsers = require("nvim-treesitter.parsers")
+			 	if parsers and not parsers.ft_to_lang then
+			 		parsers.ft_to_lang = function(ft)
+			 			-- Simple fallback mapping
+			 			local ft_to_parser = {
+			 				cpp = "cpp",
+			 				python = "python",
+			 				rust = "rust",
+			 				lua = "lua",
+			 				javascript = "javascript",
+			 				typescript = "typescript",
+			 				go = "go",
+			 				c = "c",
+			 				yaml = "yaml",
+			 				json = "json",
+			 				markdown = "markdown",
+			 				html = "html",
+			 				css = "css",
+			 				bash = "bash",
+			 				sh = "bash",
+			 				vim = "vim",
+			 			}
+			 			return ft_to_parser[ft] or ft
+			 		end
+			 	end
 
-				-- Add is_enabled compatibility shim for Telescope
-				local ts_highlighter_ok, ts_highlighter = pcall(require, "vim.treesitter.highlighter")
-				if ts_highlighter_ok and not ts_highlighter.is_enabled then
-					ts_highlighter.is_enabled = function(bufnr)
-						-- Check if treesitter highlighting is active for the buffer
-						return vim.treesitter.highlighter.active[bufnr] ~= nil
-					end
-				end
-			end
+			 	-- Add is_enabled compatibility shim for Telescope
+			 	local ts_highlighter_ok, ts_highlighter = pcall(require, "vim.treesitter.highlighter")
+			 	if ts_highlighter_ok and not ts_highlighter.is_enabled then
+			 		ts_highlighter.is_enabled = function(bufnr)
+			 			-- Check if treesitter highlighting is active for the buffer
+			 			return vim.treesitter.highlighter.active[bufnr] ~= nil
+			 		end
+			 	end
+			 end
 
-			-- Enable treesitter highlighting for all filetypes
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "*",
-				callback = function()
-					pcall(vim.treesitter.start)
-				end,
-			})
+			 -- Enable treesitter highlighting for all filetypes
+			 -- vim.api.nvim_create_autocmd("FileType", {
+			 -- 	pattern = "*",
+			 -- 	callback = function()
+			 -- 		pcall(vim.treesitter.start)
+			 -- 	end,
+			 -- })
 
-			-- Enable treesitter-based folding
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "*",
-				callback = function()
-					vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
-					vim.wo[0][0].foldmethod = "expr"
-				end,
-			})
+			 -- Enable treesitter-based folding
+			 vim.api.nvim_create_autocmd("FileType", {
+			 	pattern = "*",
+			 	callback = function()
+			 		vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+			 		vim.wo[0][0].foldmethod = "expr"
+			 	end,
+			 })
 
-			-- Enable treesitter-based indentation (experimental)
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "*",
-				callback = function()
-					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-				end,
-			})
+			 -- Enable treesitter-based indentation (experimental)
+			 vim.api.nvim_create_autocmd("FileType", {
+			 	pattern = "*",
+			 	callback = function()
+			 		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+			 	end,
+			 })
 
-			-- Hack to make treesitter folding work after opening file with telescope
-			vim.api.nvim_create_autocmd({ "BufEnter" }, {
-				pattern = { "*" },
-				command = "normal zR",
-			})
+			 -- Hack to make treesitter folding work after opening file with telescope
+			 vim.api.nvim_create_autocmd({ "BufEnter" }, {
+			 	pattern = { "*" },
+			 	command = "normal zR",
+			 })
 
-			-- Incremental selection keymaps
-			vim.keymap.set("n", "<c-space>", function()
-				vim.cmd("normal! v")
-				require("nvim-treesitter.incremental_selection").init_selection()
-			end, { desc = "Init treesitter selection" })
-			vim.keymap.set("v", "<c-space>", function()
-				require("nvim-treesitter.incremental_selection").node_incremental()
-			end, { desc = "Increment treesitter selection" })
-			vim.keymap.set("v", "<c-s>", function()
-				require("nvim-treesitter.incremental_selection").scope_incremental()
-			end, { desc = "Increment treesitter scope" })
-			vim.keymap.set("v", "<c-backspace>", function()
-				require("nvim-treesitter.incremental_selection").node_decremental()
-			end, { desc = "Decrement treesitter selection" })
+			 -- Incremental selection keymaps
+			 --vim.keymap.set("n", "<c-space>", function()
+			 --	vim.cmd("normal! v")
+			 --	require("nvim-treesitter.incremental_selection").init_selection()
+			 --end, { desc = "Init treesitter selection" })
+			 --vim.keymap.set("v", "<c-space>", function()
+			 --	require("nvim-treesitter.incremental_selection").node_incremental()
+			 --end, { desc = "Increment treesitter selection" })
+			 --vim.keymap.set("v", "<c-s>", function()
+			 --	require("nvim-treesitter.incremental_selection").scope_incremental()
+			 --end, { desc = "Increment treesitter scope" })
+			 --vim.keymap.set("v", "<c-backspace>", function()
+			 --	require("nvim-treesitter.incremental_selection").node_decremental()
+			 --end, { desc = "Decrement treesitter selection" })
 		end,
 	},
 	{
