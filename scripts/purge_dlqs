@@ -4,9 +4,17 @@
 if [ -z "$AWS_PROFILE" ]; then
     export AWS_PROFILE=$1
 fi
+ENVIRONMENTS=(\
+    "smart-topics-dev-nvirginia" \
+    "smart-topics-stg-nvirginia" \
+    "smart-topics-prod-nvirginia" \
+    "auth-dev-nvirginia" \
+    "auth-stg-nvirginia" \
+    "auth-prod-nvirginia" \
+)
 if [ -z "$AWS_PROFILE" ]; then
     echo "Select the environment:"
-    select env in "smart-topics-dev-nvirginia" "smart-topics-stg-nvirginia" "smart-topics-prod-nvirginia"; do
+    select env in "${ENVIRONMENTS[@]}"; do
         export AWS_PROFILE=$env
         break
     done
@@ -29,8 +37,8 @@ function get_interesting_dlqs() {
         "admin-quotas-dlq"
         "subscriptions-event-processor-dlq"
         "subscriptions-org-updater-event-bus-dlq"
+        "auth-webhook-notifications-ddb-stream-dlq"
     )
-
     for queue_url in $(get_all_dlqs); do
         if [[ " ${INTERESTING_QUEUES[@]} " =~ " $(basename "$queue_url") " ]]; then
             echo "$queue_url"
