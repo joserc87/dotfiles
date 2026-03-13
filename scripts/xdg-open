@@ -20,7 +20,7 @@ AWS_PATTERN='^https\?://.*\.console\.aws\.amazon\.com\|^https://ravenpacksso.aws
 SLACK_PATTERN='^https://ravenpack.slack.com/archives/'
 GITLAB_MR_PATTERN='^\![0-9]\+'
 CDK_GITLAB_MR_PATTERN='^\(CDK\|cdk\)\![0-9]\+'
-JIRA_ID_PATTERN='^\(CPS\|TASE\|PX\|PLAT\|BIGDATA\)-[0-9]\+$'
+JIRA_ID_PATTERN='^\(HDS\|CLOUDSV\|CPS\|TASE\|PX\|PLAT\|BIGDATA\)-[0-9]\+$'
 
 
 if echo "$1" | grep -q "$JIRA_PATTERN"; then
