@@ -48,7 +48,8 @@ def make_screen(systray=False):
     position = "top"
     """Defined as a function so that I can duplicate this on other monitors"""
     bat0_path = "/sys/class/power_supply/BAT0"
-    running_on_batteries = os.path.exists(bat0_path)
+    bat1_path = "/sys/class/power_supply/BAT1"
+    running_on_batteries = os.path.exists(bat0_path) or os.path.exists(bat1_path)
     blocks = [
         # Marker for the start of the groups to give a nice bg: ◢■■■■■■■◤
         widget.TextBox(
