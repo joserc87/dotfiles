@@ -17,8 +17,14 @@
 ;; #422. In brief, the workaround is to use tap-hold inside of multi, combined
 ;; with another key action that behaves as a no-op like f24.
 ;; Example: (multi f24 (tap-hold ...))
+;;
+;; This is not needed anymore?
+;; (defalias
+;;   escctrl (multi f24 (tap-hold-press 100 1000 esc lctrl))
+;; )
+
 (defalias
-  escctrl (multi f24 (tap-hold-press 100 1000 esc lctrl))
+  escctrl (tap-hold-press 100 1000 esc lctrl)
 )
 
 (deflayer base
