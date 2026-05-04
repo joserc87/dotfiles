@@ -1,0 +1,12 @@
+# taskdown configuration
+
+# Directory where task markdown files are stored.
+data_dir = "~/code/braindump/brain/TaskNotes/Tasks"
+
+# Tags added to the frontmatter of every newly created task.
+#default_tags = ["task"]
+
+# Status values written into the task frontmatter.
+#status_todo    = "todo"
+#status_started = "started"
+#status_done    = "done"
