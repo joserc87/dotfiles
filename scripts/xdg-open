@@ -19,8 +19,9 @@ DEV_PATTERN='^.*\.bigdata.com\|^.*localhost:\|.*staging.ravenpack.com\|\.*app.ra
 AWS_PATTERN='^https\?://.*\.console\.aws\.amazon\.com\|^https://ravenpacksso.awsapps.com/'
 SLACK_PATTERN='^https://ravenpack.slack.com/archives/'
 GITLAB_MR_PATTERN='^\![0-9]\+'
+GITLAB_PIPELINE_PATTERN='^|[0-9]\+'
 CDK_GITLAB_MR_PATTERN='^\(CDK\|cdk\)\![0-9]\+'
-JIRA_ID_PATTERN='^\(HDS\|CLOUDSV\|CPS\|TASE\|PX\|PLAT\|BIGDATA\)-[0-9]\+$'
+JIRA_ID_PATTERN='^\(HDS\|CLOUDSV\|CPS\|TASE\|PX\|CCS\|PLAT\|BIGDATA\)-[0-9]\+$'
 
 
 if echo "$1" | grep -q "$JIRA_PATTERN"; then
@@ -62,10 +63,16 @@ elif echo "$1" | grep -q "$GITLAB_MR_PATTERN"; then
     GITLAB_URL="$DEFAULT_REPO/-/merge_requests/$MR_NUMBER"
     "$XDG_OPEN" $BROWSER_OPTIONS "$GITLAB_URL"
     exit 0
+elif echo "$1" | grep -q "$GITLAB_PIPELINE_PATTERN"; then
+    open_qtile_group.py 3
+    MR_NUMBER=$(echo "$1" | grep -oP '(?<=\|)[0-9]+')
+    GITLAB_URL="$DEFAULT_REPO/-/pipelines/$MR_NUMBER"
+    "$XDG_OPEN" $BROWSER_OPTIONS "$GITLAB_URL"
+    exit 0
 elif echo "$1" | grep -q "$CDK_GITLAB_MR_PATTERN"; then
     open_qtile_group.py 3
     # Find the MR number after "CDK!" or "cdk!"
-    MR_NUMBER=$(echo "CDK!493" | grep -oP '(CDK|cdk)!\K[0-9]+')
+    MR_NUMBER=$(echo "$1" | grep -oP '(CDK|cdk)!\K[0-9]+')
     echo "$MR_NUMBER" > /tmp/last_cdk_mr_number.txt
     GITLAB_URL="$CDK_REPO/-/merge_requests/$MR_NUMBER"
     "$XDG_OPEN" $BROWSER_OPTIONS "$GITLAB_URL"

@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+# Pause music
+if command -v rmpc &> /dev/null; then
+  rmpc pause
+fi
+i3lock-fancy-rapid 1 20

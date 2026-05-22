@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+pass otp -c aws-totp
+icon=/usr/share/icons/Papirus-Dark/16x16/emblems/emblem-encrypted-locked.svg
+notify-send \
+    -r  1000 \
+    -i $icon \
+    -t 10000 \
+    "AWS SSO TOTP" \
+    "Your OTP has been copied to the clipboard." \

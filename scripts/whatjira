@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+acli jira workitem view "$1" --fields summary --json | jq -r .fields.summary

@@ -11,6 +11,9 @@ ENVIRONMENTS=(\
     "auth-dev-nvirginia" \
     "auth-stg-nvirginia" \
     "auth-prod-nvirginia" \
+    "text-analytics-dev" \
+    "text-analytics-stg" \
+    "text-analytics-prod" \
 )
 if [ -z "$AWS_PROFILE" ]; then
     echo "Select the environment:"
@@ -38,6 +41,7 @@ function get_interesting_dlqs() {
         "subscriptions-event-processor-dlq"
         "subscriptions-org-updater-event-bus-dlq"
         "auth-webhook-notifications-ddb-stream-dlq"
+        "auth-notification-consumer-dlq"
     )
     for queue_url in $(get_all_dlqs); do
         if [[ " ${INTERESTING_QUEUES[@]} " =~ " $(basename "$queue_url") " ]]; then
