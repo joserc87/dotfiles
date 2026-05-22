@@ -62,3 +62,12 @@ linux/.config/superProductivity/*
 linux/.config/deluge
 linux/.config/audacity
 linux/.config/mozilla/firefox/*
+linux/.config/zen/*
+linux/.config/cursor/*
+linux/.config/github-copilot/*
+linux/.config/mcp-gdrive/*
+linux/.config/confluence-markdown-exporter/*
+linux/.config/acli/*
+linux/.config/zoom/*
+linux/.config/weylus/weylus.toml
+linux/.config/nvim/lazy-lock.json

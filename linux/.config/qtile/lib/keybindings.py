@@ -99,8 +99,8 @@ keys = [
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -D pulse sset Master 2%-")),
     Key([], "XF86AudioMute", lazy.spawn("amixer -D pulse sset Master toggle")),
     # Brightness
-    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +5%")),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl -d '*amd*' set +5%")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl -d '*amd*' set 5%-")),
     Key([], "XF86TouchpadToggle", lazy.spawn("i3lock-fancy")),
     Key([MODKEY], "Print", lazy.spawn("flameshot gui")),
     Key([MODKEY, SHIFT], "Print", lazy.spawn("flameshot launcher")),

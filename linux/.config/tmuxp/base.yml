@@ -1,21 +1,24 @@
 session_name: base
 # start_directory: ./ # load session relative to config location (project root).
 # before_script: ./.tmuxp-before-script.sh
-start_directory: ~/ # load session relative to config location (project root).
+start_directory: ~/code/braindump/brain # load session relative to config location (project root).
 # shell_command_before:
 # - '[ -f .venv/bin/activate ] && source .venv/bin/activate && reset'
 windows:
 - window_name: base
   focus: True
   layout: tiled
-  start_directory: ~/code/braindump/brain
   panes:
   - vim
   - read && yay -Syuu
-- window_name: code
+- window_name: AI
   layout: main-horizontal
-  start_directory: ~/code/dotfiles
   panes:
-  - vim
-#  - make serve
-#  - make SPHINXBUILD='poetry run sphinx-build' watch
+  - cursor-agent
+# - window_name: code
+#   layout: main-horizontal
+#   start_directory: ~/code/dotfiles
+#   panes:
+#   - vim
+# #  - make serve
+# #  - make SPHINXBUILD='poetry run sphinx-build' watch

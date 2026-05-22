@@ -1,7 +1,7 @@
 # taskdown configuration
 
 # Directory where task markdown files are stored.
-data_dir = "~/code/braindump/brain/TaskNotes/Tasks"
+data_dir = "~/code/braindump/brain/tasks"
 
 # Tags added to the frontmatter of every newly created task.
 #default_tags = ["task"]
