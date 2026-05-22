@@ -22,10 +22,6 @@ return {
     dependencies = { 'kana/vim-textobj-user' },
   },
   'michaeljsmith/vim-indent-object',
-  {
-    'lucapette/vim-textobj-underscore',
-    dependencies = { 'kana/vim-textobj-user' },
-  },
   'wellle/targets.vim',
   {
     'idbrii/textobj-word-column.vim',

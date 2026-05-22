@@ -158,10 +158,16 @@ export GROFF_NO_SGR=1         # For Konsole and Gnome-terminal
 # for neovim
 export XDG_CONFIG_HOME="$HOME/.config/"
 
-# if [ -n "$NVIM" ]; then
-if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
-    export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
-    export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+# If NVIM or NVIM_LISTEN_ADDRESS is set:
+if [[ -n "$FLOATERM" ]]; then
+    export VISUAL="nvr -cc FloatermHide"
+    export EDITOR="nvr -cc FloatermHide"
+    # export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+    # export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+    alias nvim=nvr -cc split --remote-wait +'set bufhidden=wipe'
+elif [[ -n "$NVIM" || -n "$NVIM_LISTEN_ADDRESS" ]]; then
+    export VISUAL="nvr"
+    export EDITOR="nvr"
     alias nvim=nvr -cc split --remote-wait +'set bufhidden=wipe'
 elif type nvim >/dev/null; then
     export VISUAL="nvim"
@@ -291,9 +297,10 @@ function yazi-cd {
 alias rcd=yazi-cd
 # Ranger + Tmux
 alias rmux="rcd && tmux new -s `echo '${PWD##*/}'`"
-alias t='task -backlog'
+#alias t='task -backlog'
 # alias th="task priority:H"
 # alias tl="task priority:H or priority:"
+alias t='taskdown'
 alias alamux='TERM=screen-256color tmux'
 alias gs='git status'
 alias ta="tmux attach"

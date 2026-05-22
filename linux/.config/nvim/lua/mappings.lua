@@ -231,6 +231,7 @@ vim.keymap.set('n', '<leader>cf', ':Format<CR>')
 vim.keymap.set('n', '<leader>nn', '<cmd>Oil .<cr>')
 vim.keymap.set('n', '<leader>ne', '<cmd>Oil .<cr>')
 vim.keymap.set('n', '<leader>nf', '<cmd>Oil<cr>')
+vim.keymap.set('n', '<leader>nt', '<cmd>NvimTreeToggle<cr>')
 
 -- Obsidian:
 local group = vim.api.nvim_create_augroup("ObsidianMapping", { clear = true })
@@ -259,6 +260,7 @@ vim.keymap.set('v', '<leader>wl', ':ObsidianLink<cr>', { desc = '[W]iki [L]ink' 
 vim.keymap.set('n', '<leader>wn', ':ObsidianNew<cr>', { desc = '[W]iki [N]ew' })
 vim.keymap.set('v', '<leader>wn', ':ObsidianExtractNote<cr>', { desc = '[W]iki [N]ew from selection' })
 vim.keymap.set('n', '<leader>o', 'Go<Esc>S- `<C-R>=strftime("%H:%M")<CR>` - ', { desc = 'Insert timestamped bullet' })
+vim.keymap.set('n', '<leader>w<CR>', ':ObsidianToggleCheckbox<CR>', { desc = 'Toggle Checkbox' })
 
 -- local hop = require('hop')
 -- local directions = require('hop.hint').HintDirection
