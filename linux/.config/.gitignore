@@ -130,3 +130,5 @@ confluence-markdown-exporter/*
 acli/*
 zoom/*
 weylus/weylus.toml
+github-copilot/*
+opencode/*
