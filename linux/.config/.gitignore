@@ -1,5 +1,5 @@
 # Ignore everything
-#*/
+*/
 
 # ...even if they are in subdirectories
 #!*/
@@ -73,3 +73,60 @@ unity3d
 vlc
 yarn
 zoomus.conf
+nvim/lazy-lock.json
+lazygit/state.yml
+dconf/user
+QtProject.conf
+configstore/update-notifier-npm.json
+flameshot/flameshot.ini
+gtk-2.0/gtkfilechooser.ini
+htop/htoprc
+manjaro/manjaro-settings-manager.conf
+QtProject.conf
+mimeapps.list
+pavucontrol.ini
+zoom.conf
+ngrok/ngrok.yml
+syncthing
+spotify-tui/client.yml
+spotify-tui/.spotify_token_cache.json
+epdfview/main.conf
+libfm/libfm.conf
+pcmanfm/default/pcmanfm.conf
+nextjs-nodejs/config.json
+sst-nodejs/config.json
+xfce4/xfconf/xfce-perchannel-xml/xfce4-notifyd.xml
+glib-2.0/settings/keyfile
+kwalletrc
+BambuStudio/
+BambuStudioInternal/log
+tuxedo-control-center
+nitrogen/bg-saved.cfg
+nitrogen/nitrogen.cfg
+Postman
+BambuStudio
+gtk-3.0
+xarchiver
+bruno
+go/telemetry/local
+kicad
+user-dirs.dirs
+gtk-3.0/settings.ini
+pypoetry/pyproject.toml
+pypoetry/poetry.lock
+Code - OSS/
+Cursor/*
+slack-term/config
+RedisInsight/*
+superProductivity/*
+deluge
+audacity
+mozilla/firefox/*
+zen/*
+cursor/*
+github-copilot/*
+mcp-gdrive/*
+confluence-markdown-exporter/*
+acli/*
+zoom/*
+weylus/weylus.toml
