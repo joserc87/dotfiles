@@ -21,7 +21,7 @@ SLACK_PATTERN='^https://ravenpack.slack.com/archives/'
 GITLAB_MR_PATTERN='^\![0-9]\+'
 GITLAB_PIPELINE_PATTERN='^|[0-9]\+'
 CDK_GITLAB_MR_PATTERN='^\(CDK\|cdk\)\![0-9]\+'
-JIRA_ID_PATTERN='^\(HDS\|CLOUDSV\|CPS\|TASE\|PX\|CCS\|PLAT\|BIGDATA\)-[0-9]\+$'
+JIRA_ID_PATTERN='^\(HDS\|CLOUDSV\|CCE\|CPS\|TASE\|PX\|CCS\|PLAT\|BIGDATA\)-[0-9]\+$'
 
 
 if echo "$1" | grep -q "$JIRA_PATTERN"; then
