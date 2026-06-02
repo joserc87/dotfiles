@@ -297,6 +297,7 @@ function chatsend() {
   local msg=$(\
     curl -s -X POST https://slack.com/api/chat.postMessage \
       --data-urlencode "as_user=true" \
+      --data-urlencode "text=${text}" \
       --data-urlencode "attachments=$(attachify)" \
       --data-urlencode "channel=$(lchannel)" \
       --data-urlencode "token=${token}")
