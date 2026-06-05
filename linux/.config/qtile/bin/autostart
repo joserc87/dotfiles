@@ -14,11 +14,12 @@ function execute_once {
 autorandr --change
 nitrogen --restore
 sleep 1
-execute_once ferdium
 xset r rate 180 70
-indicator-sound-switcher
-nm-applet
-gxkb # keyboard layout indicator
+
+# Applets
+execute_once indicator-sound-switcher
+execute_once nm-applet
+execute_once gxkb # keyboard layout indicator
 
 sleep 10
 compton-blur

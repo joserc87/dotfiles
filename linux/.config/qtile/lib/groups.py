@@ -31,7 +31,8 @@ _matches = {
     ],
 }
 _spawn_work = {
-    0: ["alacritty -e mux all"],
+    #0: ["alacritty -e mux all"],
+    0: ["obsidian"],
     3: ["zen-browser-optimized"],
     # 4: ["chromium"],
     6: ["slack"],
