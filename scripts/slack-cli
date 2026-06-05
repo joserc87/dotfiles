@@ -237,7 +237,7 @@ function attachify() {
   [ -n "${title}" ] && local _title=", \"title\": \"${title}\""
   [ -n "${titlelink}" ] && local _titlelink=", \"title_link\": \"${titlelink}\""
   local _json="${_author}${_authoricon}${_authorlink}${_color}${_footer}${_footericon}${_image}${_pretext}${_thumbnail}${__time}${_title}${_titlelink}${_fields}${_actions}"
-  [ -z "${_json}" ] && local _attachments="[{\"mrkdwn_in\": [\"pretext\"], \"fallback\": \"${text}\", \"pretext\": \"${text}\"}]"
+  [ -z "${_json}" ] && local _attachments="[]"
   [ -n "${_json}" ] && local _attachments="[{\"mrkdwn_in\": [\"fields\", \"pretext\", \"text\"], \"fallback\": \"${text}\", \"text\": \"${text}\"${_json}}]"
 
   echo "${_attachments}"
