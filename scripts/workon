@@ -119,9 +119,9 @@ function run {
 if create_session "$TMUX_SESSION"; then
     run 1 "nvim"
     if [[ "$project" == "$SMART_TOPICS" ]] && echo "$PROJECT_DIR" | grep -q "/lambda/"; then
-        run 2 "poetry install && cursor-agent"
+        run 2 "poetry install && claude"
     else
-        run 2 "cursor-agent"
+        run 2 "claude"
     fi
 fi
 

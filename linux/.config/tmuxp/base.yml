@@ -14,7 +14,7 @@ windows:
 - window_name: AI
   layout: main-horizontal
   panes:
-  - cursor-agent
+  - claude
 # - window_name: code
 #   layout: main-horizontal
 #   start_directory: ~/code/dotfiles
