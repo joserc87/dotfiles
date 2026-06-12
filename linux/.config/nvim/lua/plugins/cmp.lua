@@ -52,6 +52,9 @@ return {
         sources = {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
+          { name = 'avante_commands' },
+          { name = 'avante_mentions' },
+          { name = 'avante_files' },
         },
       }
     end,

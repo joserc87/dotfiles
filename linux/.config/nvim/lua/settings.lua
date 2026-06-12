@@ -43,6 +43,7 @@ vim.opt.secure = true
 
 vim.g.python_host_prog = '~/.pyenv/versions/neovim2/bin/python'
 vim.g.python3_host_prog = '~/.pyenv/versions/neovim3/bin/python'
+vim.g.node_host_prog = vim.fn.expand('~/.nvm/versions/node/v22.22.3/bin/node')
 -- vim.env.EDITOR = 'floaterm'
 vim.cmd(
   [[

@@ -75,21 +75,22 @@ return {
       build = function() vim.fn["mkdp#util#install"]() end,
   },
   -- markview is a bit too much, unless in readonly mode
-  {
-    "OXY2DEV/markview.nvim",
-    lazy = false,
-    -- ft = "markdown" -- If you decide to lazy-load anyway
+  -- In favor of "render-markdown.nvim" which is needed for avante
+  -- {
+  --   "OXY2DEV/markview.nvim",
+  --   lazy = false,
+  --   -- ft = "markdown" -- If you decide to lazy-load anyway
 
-    -- dependencies = {
-    --     "nvim-treesitter/nvim-treesitter",
-    --     "nvim-tree/nvim-web-devicons"
-    -- }
-    config = function()
-      require("markview").setup({
-        preview = { enable = false }
-      })
-    end,
-  },
+  --   -- dependencies = {
+  --   --     "nvim-treesitter/nvim-treesitter",
+  --   --     "nvim-tree/nvim-web-devicons"
+  --   -- }
+  --   config = function()
+  --     require("markview").setup({
+  --       preview = { enable = false }
+  --     })
+  --   end,
+  -- },
 
   -- Disabled because the MF takes 2GB of disk just for this plugin (.so libs)
   -- { 'mistricky/codesnap.nvim', build = "make" }
