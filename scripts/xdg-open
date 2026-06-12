@@ -2,7 +2,8 @@
 
 #OTHER_BROWSER='jumanji' # For instance /usr/bin/firefox
 JIRA_BROWSER='firefox'
-DEV_BROWSER='chromium'
+# DEV_BROWSER='chromium'
+DEV_BROWSER='zen-browser-optimized.desktop'
 AWS_BROWSER='brave'
 BROWSER='zen-browser-optimized.desktop' # For instance /usr/bin/brave
 BROWSER_OPTIONS='' # Optional, for command line options passed to browser

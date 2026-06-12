@@ -1,0 +1,134 @@
+#!/usr/bin/bash
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+SMART_TOPICS="/home/jcano/git/python/smart-topics"
+CDK="/home/jcano/git/ops/rp-cdk"
+
+project=$(printf "$SMART_TOPICS\n$CDK" | fzf --prompt="Project: " --header="Enter to select (default: smart-topics)")
+[[ -z "$project" ]] && echo "Cancelling..." && exit
+echo "Entering '$project'"
+pushd "$project"
+
+# Accept Jira code as argument or prompt for it
+if [[ -n "$1" ]]; then
+    jira_input="$1"
+else
+    read -p "Jira code: " jira_input
+fi
+[[ -z "$jira_input" ]] && echo "Cancelling..." && exit
+
+# Normalize: extract key and uppercase it
+jira_code=$(echo "$jira_input" | grep -oP '[A-Za-z]+-[0-9]+' | tr '[:lower:]' '[:upper:]')
+[[ -z "$jira_code" ]] && echo -e "${RED}Invalid Jira code$NC" && exit 1
+
+# Fetch Jira title and status
+echo "Fetching $jira_code..."
+jira_json=$(acli jira workitem view "$jira_code" --json --fields "key,summary,status")
+if [ $? -ne 0 ]; then
+    echo -e "${RED}Failed to fetch $jira_code$NC"
+    exit 1
+fi
+
+jira_title=$(echo "$jira_json" | jq -r '.fields.summary')
+jira_status=$(echo "$jira_json" | jq -r '.fields.status.name')
+
+# Generate branch name suggestion from title
+slug=$(echo "$jira_title" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/-\+/-/g' | sed 's/^-\|-$//g')
+suggested_branch="${jira_code}-${slug}"
+
+echo ""
+echo "  Jira | $jira_code: $jira_title"
+echo "Status | $jira_status"
+echo ""
+echo -e "Branch suggestion: ${GREEN}$suggested_branch${NC}"
+read -p "Branch name [Enter to accept]: " custom_branch
+branch="${custom_branch:-$suggested_branch}"
+
+rootdir=$(git rev-parse --show-toplevel)
+project_name=$(basename "$rootdir")
+
+echo ""
+echo "Project |  $project_name"
+echo " Branch |  $branch"
+echo ""
+
+if echo $rootdir | grep -q -- "$project_name-forest"; then
+    worktreedir="$rootdir/../$branch"
+else
+    worktreedir="$rootdir/../$project_name-forest/$branch"
+fi
+
+git fetch origin master
+if [ -d "$worktreedir" ]; then
+    echo "Worktree already exists at $worktreedir"
+else
+    echo "Creating worktree at $worktreedir"
+    if git show-ref --verify --quiet "refs/heads/$branch"; then
+        echo "$ git worktree add \"$worktreedir\" \"$branch\""
+        git worktree add "$worktreedir" "$branch"
+    else
+        echo "$ git worktree add -b \"$branch\" \"$worktreedir\" origin/master"
+        git worktree add -b "$branch" "$worktreedir" origin/master
+    fi
+    if [ $? -ne 0 ]; then
+        echo -e "${RED}Failed to create worktree$NC"
+        exit 1
+    fi
+fi
+
+# Link .cursor from the main repo into the worktree
+if [ -d "$rootdir/.cursor" ] && [ ! -e "$worktreedir/.cursor" ]; then
+    ln -s "$rootdir/.cursor" "$worktreedir/.cursor"
+fi
+
+# Transition to In Progress if not already
+if [ "$jira_status" != "In Progress" ]; then
+    read -p "Transition $jira_code to 'In Progress'? [y/N] " transition_answer
+    if [[ "$transition_answer" =~ ^[Yy]$ ]]; then
+        acli jira workitem transition --key "$jira_code" --status "In Progress" --yes
+        echo -e "${GREEN}$jira_code → In Progress${NC}"
+    fi
+fi
+
+TMUX_SESSION="$project_name-$jira_code"
+
+function create_session {
+    tmux has-session -t "$1" 2> /dev/null && return 1
+
+    PROJECT_DIR=$(find "$worktreedir" -type d | fzf --prompt="Select starting directory for tmux session: ")
+    [[ -z "$PROJECT_DIR" ]] && echo "Cancelling..." && exit
+
+    TMUX= tmux new -s "$1" -d -c "$PROJECT_DIR"
+
+    for i in $(seq 0 10); do
+        tmux has-session -t "$1" 2> /dev/null && break
+        sleep 1
+    done
+
+    tmux new-window -t "$1:1" -n editor -S -c "$PROJECT_DIR"
+    tmux new-window -t "$1:2" -n ai -S -c "$PROJECT_DIR"
+}
+
+function run {
+    tmux send -t "$TMUX_SESSION:$1" "$2" ENTER
+}
+
+if create_session "$TMUX_SESSION"; then
+    run 1 "nvim"
+    if [[ "$project" == "$SMART_TOPICS" ]] && echo "$PROJECT_DIR" | grep -q "/lambda/"; then
+        run 2 "poetry install && cursor-agent"
+    else
+        run 2 "cursor-agent"
+    fi
+fi
+
+popd 2> /dev/null
+
+if [ -z "$TMUX" ]; then
+    tmux attach -t "$TMUX_SESSION"
+else
+    tmux switch-client -t "$TMUX_SESSION"
+fi

@@ -1,28 +1,41 @@
 #!/usr/bin/bash
 
-# If an argument is not provided for the environment, select it interactively
-if [ -z "$AWS_PROFILE" ]; then
-    export AWS_PROFILE=$1
-fi
-ENVIRONMENTS=(\
-    "smart-topics-dev-nvirginia" \
-    "smart-topics-stg-nvirginia" \
-    "smart-topics-prod-nvirginia" \
-    "auth-dev-nvirginia" \
-    "auth-stg-nvirginia" \
-    "auth-prod-nvirginia" \
-    "text-analytics-dev" \
-    "text-analytics-stg" \
-    "text-analytics-prod" \
+declare -A PROFILE_MAP=(
+    ["smart-topics-dev-nvirginia"]="smart-topics-dev-nvirginia"
+    ["smart-topics-stg-nvirginia"]="smart-topics-stg-nvirginia"
+    ["smart-topics-prod-nvirginia"]="smart-topics-prod-nvirginia-RW-DO-NOT-USE-THIS-PROFILE"
+    ["auth-dev-nvirginia"]="auth-dev-nvirginia"
+    ["auth-stg-nvirginia"]="auth-stg-nvirginia"
+    ["auth-prod-nvirginia"]="auth-prod-nvirginia-RW-DO-NOT-USE-THIS-PROFILE"
+    ["text-analytics-dev"]="text-analytics-dev"
+    ["text-analytics-stg"]="text-analytics-stg"
+    ["text-analytics-prod"]="text-analytics-prod-RW-DO-NOT-USE-THIS-PROFILE"
 )
-if [ -z "$AWS_PROFILE" ]; then
+ENVIRONMENTS=(
+    "smart-topics-prod-nvirginia"
+    "smart-topics-stg-nvirginia"
+    "smart-topics-dev-nvirginia"
+    "auth-prod-nvirginia"
+    "auth-stg-nvirginia"
+    "auth-dev-nvirginia"
+    "text-analytics-prod"
+    "text-analytics-stg"
+    "text-analytics-dev"
+)
+
+SELECTED_ENV=$1
+if [ -z "$SELECTED_ENV" ] && [ -n "$AWS_PROFILE" ]; then
+    SELECTED_ENV="$AWS_PROFILE"
+fi
+if [ -z "$SELECTED_ENV" ]; then
     echo "Select the environment:"
     select env in "${ENVIRONMENTS[@]}"; do
-        export AWS_PROFILE=$env
+        SELECTED_ENV=$env
         break
     done
 fi
-echo "Selected environment: $AWS_PROFILE"
+export AWS_PROFILE="${PROFILE_MAP[$SELECTED_ENV]}"
+echo "Selected environment: $SELECTED_ENV"
 aws sts get-caller-identity &> /dev/null
 if [ $? -ne 0 ]; then
     echo "Not logged in. Logging in to AWS SSO for profile: $AWS_PROFILE"
