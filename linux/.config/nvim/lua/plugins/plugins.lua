@@ -44,7 +44,6 @@ return {
   -- FILE_NAVIGATION:
   'kyazdani42/nvim-tree.lua',
   'tpope/vim-projectionist',
-  { 'rmagatti/gx-extended.nvim', config = function() require('gx-extended').setup {} end },
   {
     "navarasu/onedark.nvim",
     priority = 1000, -- make sure to load this before all the other start plugins
