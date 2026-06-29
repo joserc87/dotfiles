@@ -1,0 +1,241 @@
+#!/usr/bin/bash
+# Manage git worktrees in *-forest directories under ~/git
+
+RED=$'\033[0;31m'
+GREEN=$'\033[0;32m'
+YELLOW=$'\033[1;33m'
+NC=$'\033[0m'
+
+GIT_ROOT="$HOME/git"
+
+make_session_name() {
+    echo "${1}-${2}" | tr '.:' '--' | cut -c1-50
+}
+
+find_worktrees() {
+    local tmux_sessions
+    tmux_sessions=$(tmux list-sessions -F '#{session_name}' 2>/dev/null)
+
+    find "$GIT_ROOT" -maxdepth 2 -type d -name "*-forest" | sort | while read -r forest; do
+        local project="${forest##*/}"
+        project="${project%-forest}"
+        for worktree_path in "$forest"/*/; do
+            [[ -d "$worktree_path" ]] || continue
+            git -C "$worktree_path" rev-parse --git-dir &>/dev/null || continue
+            local branch="${worktree_path%/}"
+            branch="${branch##*/}"
+            local path="${worktree_path%/}"
+
+            local status_ind
+            if [[ -z "$(git -C "$path" status --porcelain 2>/dev/null)" ]]; then
+                status_ind="${GREEN}○${NC}"
+            else
+                status_ind="${RED}●${NC}"
+            fi
+
+            local tmux_ind=""
+            local session_name
+            session_name=$(make_session_name "$project" "$branch")
+            if echo "$tmux_sessions" | grep -qxF "$session_name"; then
+                tmux_ind=" ${YELLOW}[tmux]${NC}"
+            fi
+
+            printf '%s %s/%s%s\t%s\n' "$status_ind" "$project" "$branch" "$tmux_ind" "$path"
+        done
+    done
+}
+
+get_status() {
+    local output
+    output=$(git -C "$1" status --porcelain 2>/dev/null)
+    [[ -z "$output" ]] && echo "clean" || echo "dirty"
+}
+
+open_tmux_session() {
+    local worktree_path="$1" project_name="$2" branch="$3"
+    local session
+    session=$(make_session_name "$project_name" "$branch")
+
+    if ! tmux has-session -t "$session" 2>/dev/null; then
+        printf "${YELLOW}Fetching...${NC}\n"
+        git -C "$worktree_path" fetch 2>&1 || true
+
+        local behind
+        behind=$(git -C "$worktree_path" rev-list "HEAD..@{u}" --count 2>/dev/null)
+        if [[ "$behind" =~ ^[0-9]+$ ]] && [[ "$behind" -gt 0 ]]; then
+            printf "${YELLOW}Branch is %d commit(s) behind remote.${NC}\n" "$behind"
+        fi
+
+        TMUX= tmux new -s "$session" -d -c "$worktree_path"
+
+        for i in $(seq 0 10); do
+            tmux has-session -t "$session" 2>/dev/null && break
+            sleep 1
+        done
+
+        tmux new-window -t "$session:1" -n editor -S -c "$worktree_path"
+        tmux new-window -t "$session:2" -n ai -S -c "$worktree_path"
+        tmux send -t "$session:1" "nvim" ENTER
+        tmux send -t "$session:2" "claude" ENTER
+    fi
+
+    if [[ -z "$TMUX" ]]; then
+        tmux attach -t "$session"
+    else
+        tmux switch-client -t "$session"
+    fi
+}
+
+delete_worktree() {
+    local worktree_path="$1"
+    printf "${YELLOW}About to remove: %s${NC}\n" "$worktree_path"
+    read -r -p "Confirm? [y/N] " confirm
+    [[ "$confirm" =~ ^[Yy]$ ]] || return 1
+
+    if git -C "$worktree_path" worktree remove "$worktree_path"; then
+        printf "${GREEN}Worktree removed.${NC}\n"
+        sleep 1
+        return 0
+    else
+        printf "${RED}Failed to remove worktree.${NC}\n"
+        sleep 1
+        return 1
+    fi
+}
+
+bulk_delete() {
+    local selections="$1"
+    local clean=() dirty=()
+
+    while IFS= read -r line; do
+        [[ -z "$line" ]] && continue
+        local path
+        path=$(printf '%s' "$line" | cut -f2)
+        if [[ "$(get_status "$path")" == "clean" ]]; then
+            clean+=("$path")
+        else
+            dirty+=("$path")
+        fi
+    done <<< "$selections"
+
+    if [[ "${#dirty[@]}" -gt 0 ]]; then
+        printf "${RED}Skipping %d dirty worktree(s):${NC}\n" "${#dirty[@]}"
+        printf '  %s\n' "${dirty[@]}"
+    fi
+
+    if [[ "${#clean[@]}" -eq 0 ]]; then
+        printf "${RED}No clean worktrees selected — nothing to delete.${NC}\n"
+        read -r -p "Press Enter to continue..."
+        return
+    fi
+
+    printf "${YELLOW}Will delete %d clean worktree(s):${NC}\n" "${#clean[@]}"
+    printf '  %s\n' "${clean[@]}"
+    printf '\n'
+    read -r -p "Confirm deletion of all? [y/N] " confirm
+    [[ "$confirm" =~ ^[Yy]$ ]] || return
+
+    local failed=0
+    for path in "${clean[@]}"; do
+        if git -C "$path" worktree remove "$path"; then
+            printf "${GREEN}Removed: %s${NC}\n" "$path"
+        else
+            printf "${RED}Failed: %s${NC}\n" "$path"
+            (( failed++ ))
+        fi
+    done
+
+    [[ "$failed" -gt 0 ]] && printf "${RED}%d deletion(s) failed.${NC}\n" "$failed"
+    sleep 1
+}
+
+action_menu() {
+    local worktree_path="$1" project_name="$2" branch="$3"
+
+    while true; do
+        local status
+        status=$(get_status "$worktree_path")
+        [[ "$status" == "clean" ]] && status_label="CLEAN" || status_label="DIRTY"
+
+        local choice
+        choice=$({
+            printf 'open-tmux\tOpen in new tmux session\n'
+            printf 'lazygit\tOpen lazygit\n'
+            [[ "$status" == "clean" ]] && printf 'delete\tDelete this worktree\n'
+            printf 'back\tSelect another worktree\n'
+        } | fzf \
+            --prompt="Action > " \
+            --header="${project_name} / ${branch}  [${status_label}]" \
+            --delimiter=$'\t' \
+            --with-nth=2 \
+            --no-sort \
+            --height=~12)
+
+        [[ -z "$choice" ]] && return 0
+
+        local action
+        action=$(printf '%s' "$choice" | cut -f1)
+
+        case "$action" in
+            open-tmux)
+                open_tmux_session "$worktree_path" "$project_name" "$branch"
+                exit 0
+                ;;
+            lazygit)
+                (cd "$worktree_path" && lazygit)
+                ;;
+            delete)
+                delete_worktree "$worktree_path" && return 0
+                ;;
+            back)
+                return 0
+                ;;
+        esac
+    done
+}
+
+main() {
+    while true; do
+        local worktrees
+        worktrees=$(find_worktrees)
+
+        if [[ -z "$worktrees" ]]; then
+            printf "${RED}No worktrees found in %s${NC}\n" "$GIT_ROOT"
+            exit 1
+        fi
+
+        local selected
+        selected=$(printf '%s' "$worktrees" | fzf \
+            --multi \
+            --prompt="Worktree > " \
+            --header="Select worktree(s)  [Tab: multi-select for bulk delete]" \
+            --delimiter=$'\t' \
+            --with-nth=1 \
+            --preview='git -C {2} log --oneline -8 2>/dev/null; echo; git -C {2} status --short 2>/dev/null' \
+            --preview-window='right:50%' \
+            --ansi \
+            --height=50%)
+
+        [[ -z "$selected" ]] && echo "Cancelled." && exit 0
+
+        local count
+        count=$(printf '%s\n' "$selected" | wc -l)
+
+        if [[ "$count" -gt 1 ]]; then
+            bulk_delete "$selected"
+        else
+            local worktree_path
+            worktree_path=$(printf '%s' "$selected" | cut -f2)
+
+            local forest_dir project_name branch
+            forest_dir=$(dirname "$worktree_path")
+            project_name=$(basename "$forest_dir")
+            project_name="${project_name%-forest}"
+            branch=$(basename "$worktree_path")
+
+            action_menu "$worktree_path" "$project_name" "$branch"
+        fi
+    done
+}
+
+main

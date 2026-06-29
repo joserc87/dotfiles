@@ -79,9 +79,9 @@ else
     fi
 fi
 
-# Link .cursor from the main repo into the worktree
-if [ -d "$rootdir/.cursor" ] && [ ! -e "$worktreedir/.cursor" ]; then
-    ln -s "$rootdir/.cursor" "$worktreedir/.cursor"
+# Link .claude from the main repo into the worktree
+if [ -d "$rootdir/.claude" ] && [ ! -e "$worktreedir/.claude" ]; then
+    ln -s "$rootdir/.claude" "$worktreedir/.claude"
 fi
 
 # Transition to In Progress if not already
