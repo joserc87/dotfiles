@@ -1,0 +1,12 @@
+session_name: refinements
+start_directory: ~/code/refinements
+windows:
+- window_name: vim
+  focus: True
+  layout: main-vertical
+  panes:
+  - vim
+- window_name: run
+  layout: tiled
+  panes:
+  - claude
