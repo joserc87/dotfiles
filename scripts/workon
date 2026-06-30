@@ -101,6 +101,7 @@ function create_session {
     PROJECT_DIR=$(find "$worktreedir" -type d | fzf --prompt="Select starting directory for tmux session: ")
     [[ -z "$PROJECT_DIR" ]] && echo "Cancelling..." && exit
 
+    echo "$PROJECT_DIR" > "$worktreedir/.workon-path"
     TMUX= tmux new -s "$1" -d -c "$PROJECT_DIR"
 
     for i in $(seq 0 10); do

@@ -66,15 +66,20 @@ open_tmux_session() {
             printf "${YELLOW}Branch is %d commit(s) behind remote.${NC}\n" "$behind"
         fi
 
-        TMUX= tmux new -s "$session" -d -c "$worktree_path"
+        local start_dir="$worktree_path"
+        if [[ -f "$worktree_path/.workon-path" ]]; then
+            start_dir=$(cat "$worktree_path/.workon-path")
+        fi
+
+        TMUX= tmux new -s "$session" -d -c "$start_dir"
 
         for i in $(seq 0 10); do
             tmux has-session -t "$session" 2>/dev/null && break
             sleep 1
         done
 
-        tmux new-window -t "$session:1" -n editor -S -c "$worktree_path"
-        tmux new-window -t "$session:2" -n ai -S -c "$worktree_path"
+        tmux new-window -t "$session:1" -n editor -S -c "$start_dir"
+        tmux new-window -t "$session:2" -n ai -S -c "$start_dir"
         tmux send -t "$session:1" "nvim" ENTER
         tmux send -t "$session:2" "claude" ENTER
     fi
