@@ -22,8 +22,6 @@ output DP-1-2
 off
 output eDP
 off
-output DVI-I-3-2
-off
 output DVI-I-2-1
 crtc 5
 mode 3840x2160
