@@ -12,11 +12,17 @@ project=$(printf "$SMART_TOPICS\n$CDK" | fzf --prompt="Project: " --header="Ente
 echo "Entering '$project'"
 pushd "$project"
 
-# Accept Jira code as argument or prompt for it
+# Accept Jira code as argument or fzf from unresolved assigned Jiras
 if [[ -n "$1" ]]; then
     jira_input="$1"
 else
-    read -p "Jira code: " jira_input
+    echo "Fetching your unresolved Jiras..."
+    jira_list=$(acli jira workitem search \
+        --jql "assignee = currentUser() AND resolution = Unresolved ORDER BY updated DESC" \
+        --fields "key,summary,status" --json --limit 50 2>/dev/null)
+    fzf_input=$(echo "$jira_list" | jq -r '.[] | "\(.key)  [\(.fields.status.name)]  \(.fields.summary)"')
+    selected=$(echo "$fzf_input" | fzf --prompt="Jira: " --header="Select a Jira to work on")
+    jira_input=$(echo "$selected" | grep -oP '^[A-Z]+-[0-9]+')
 fi
 [[ -z "$jira_input" ]] && echo "Cancelling..." && exit
 
