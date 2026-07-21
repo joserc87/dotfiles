@@ -9,3 +9,5 @@ __pycache__
 plugged
 
 dotfiles/git/.gitconfig
+/linux/.config/discord/*
+**/client_secret.json
