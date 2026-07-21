@@ -79,7 +79,7 @@ def execute_once(command):
 
 
 class command:
-    terminal = get_alternatives(["alacritty", "terminator", "gnome-terminal", "xterm"])
+    terminal = get_alternatives(["kitty", "alacritty", "terminator", "gnome-terminal", "xterm"])
     autostart = get_bin("autostart")
     lock = get_bin("lock")
     suspend = get_bin("suspend")
