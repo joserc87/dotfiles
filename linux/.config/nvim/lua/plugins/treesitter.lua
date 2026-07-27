@@ -87,6 +87,14 @@ return {
 			 vim.api.nvim_create_autocmd("FileType", {
 			 	pattern = "*",
 			 	callback = function()
+			 		-- Don't clobber true-zen's TZNarrow, which needs foldmethod=manual
+			 		-- while active (it errors on exit otherwise) and re-sets 'filetype'
+			 		-- on its scratch windows, retriggering this autocmd. tz_narrow_closing
+			 		-- is set by our true-zen narrow callbacks (see plugins/true-zen.lua) for
+			 		-- the close sequence, since true-zen clears tz_narrowed_buffer too early.
+			 		if vim.b.tz_narrowed_buffer or vim.g.tz_narrow_closing then
+			 			return
+			 		end
 			 		vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
 			 		vim.wo[0][0].foldmethod = "expr"
 			 	end,

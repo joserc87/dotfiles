@@ -93,16 +93,7 @@ return {
 
   -- Disabled because the MF takes 2GB of disk just for this plugin (.so libs)
   -- { 'mistricky/codesnap.nvim', build = "make" }
-  -- Focus mode:
-  {
-	"Pocco81/true-zen.nvim",
-	config = function()
-		 require("true-zen").setup {
-			-- your config goes here
-			-- or just leave it empty :)
-		 }
-	end,
-  },
+  -- Focus mode: see lua/plugins/true-zen.lua
 
   -- INTEGRATIONS:
   'tpope/vim-dotenv',
