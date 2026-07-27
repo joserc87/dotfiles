@@ -1,9 +1,8 @@
 return {
   {
-    'yuki-yano/hop.nvim',
-    -- branch = 'v2',
-    -- config = function()
-    --   require('hop').setup { keys = 'etovxqpdygfblzhckisuran' }
-    -- end,
+    'smoka7/hop.nvim',
+    config = function()
+      require('hop').setup { keys = 'etovxqpdygfblzhckisuran' }
+    end,
   },
 }
