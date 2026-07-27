@@ -1,0 +1,14 @@
+session_name: config
+start_directory: ~/code/dotfiles
+# shell_command_before:
+# - '[ -f .venv/bin/activate ] && source .venv/bin/activate && reset'
+windows:
+- window_name: config
+  focus: True
+  layout: tiled
+  panes:
+  - vim
+- window_name: AI
+  layout: main-horizontal
+  panes:
+  - claude
