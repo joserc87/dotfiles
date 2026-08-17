@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# Pick a Jira from the refinements workspace via fzf, then act on it.
+set -euo pipefail
+
+REFINEMENTS_DIR="$HOME/code/refinements"
+JIRA_BROWSE_URL="https://ravenpack.atlassian.net/browse"
+
+selected_line=$("$REFINEMENTS_DIR/bin/list_jiras.py" | fzf)
+[ -z "$selected_line" ] && exit 0
+
+jira_code=$(echo "$selected_line" | grep -oP '(?<=^\[)[^]]+')
+
+echo "Selected: $jira_code"
+select action in "Open in browser" "Open markdown file" "Echo Jira code"; do
+    case "$action" in
+        "Open in browser")
+            nohup xdg-open "$JIRA_BROWSE_URL/$jira_code" &> /dev/null &
+            break
+            ;;
+        "Open markdown file")
+            md_file="$REFINEMENTS_DIR/jiras/all-md/$jira_code.md"
+            if [ -f "$md_file" ]; then
+                "${EDITOR:-vim}" "$md_file"
+            else
+                echo "No markdown file found for $jira_code" >&2
+                exit 1
+            fi
+            break
+            ;;
+        "Echo Jira code")
+            echo "$jira_code"
+            break
+            ;;
+        *)
+            echo "Invalid option"
+            ;;
+    esac
+done
