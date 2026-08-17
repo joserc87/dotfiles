@@ -1,8 +1,0 @@
-session_name: smart-topics-wip
-start_directory: "~/git/python/smart-topics-wip"
-windows:
-- window_name: vim
-  focus: True
-  layout: main-vertical
-  panes:
-  - vim

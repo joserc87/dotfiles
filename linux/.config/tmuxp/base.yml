@@ -5,7 +5,7 @@ start_directory: ~/code/braindump/brain # load session relative to config locati
 # shell_command_before:
 # - '[ -f .venv/bin/activate ] && source .venv/bin/activate && reset'
 windows:
-- window_name: base
+- window_name: Notes
   focus: True
   layout: tiled
   panes:

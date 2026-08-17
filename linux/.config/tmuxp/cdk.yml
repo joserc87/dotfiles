@@ -5,22 +5,27 @@ start_directory: ~/git/ops/rp-cdk # load session relative to config location (pr
 shell_command_before:
 - 'pyenv activate cdk'
 windows:
-- window_name: vim
-  focus: True
+- window_name: Vim
+  focus: False
   layout: main-vertical
   panes:
   - vim
-- window_name: cdk
-  layout: tiled
+- window_name: AI
+  focus: True
+  layout: main-vertical
   panes:
-    - shell_command:
-      - cd aux-tools/cdk-container/
-      - ./rp-cdk
-      - activate st
-      - clear
-      - cmd: cdk --profile common-dev-ireland -c environment=common-dev-ireland diff monitoring -e
-        enter: false
-    # - cd rpa && cdk --profile vdp-dev-ireland -c environment=vdp-dev-ireland diff vdp-dev-ireland-vdp -e
+  - claude
+# - window_name: cdk
+#   layout: tiled
+#   panes:
+#     - shell_command:
+#       - cd aux-tools/cdk-container/
+#       - ./rp-cdk
+#       - activate st
+#       - clear
+#       - cmd: cdk --profile common-dev-ireland -c environment=common-dev-ireland diff monitoring -e
+#         enter: false
+#     # - cd rpa && cdk --profile vdp-dev-ireland -c environment=vdp-dev-ireland diff vdp-dev-ireland-vdp -e
 
 #  - make serve
 #  - make SPHINXBUILD='poetry run sphinx-build' watch

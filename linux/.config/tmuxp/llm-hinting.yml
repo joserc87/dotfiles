@@ -1,8 +1,0 @@
-session_name: llm-hinting
-start_directory: "~/git/python/llm-hinting"
-windows:
-- window_name: vim
-  focus: True
-  layout: main-vertical
-  panes:
-  - sleep 2 && pyenv activate && vim

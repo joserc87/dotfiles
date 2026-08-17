@@ -1,8 +1,0 @@
-session_name: auth_clerk_webhook
-start_directory: "~/git/content/python/auth/auth_clerk_webhook"
-windows:
-- window_name: vim
-  focus: True
-  layout: main-vertical
-  panes:
-  - vim

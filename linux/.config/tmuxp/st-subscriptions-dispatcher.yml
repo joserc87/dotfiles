@@ -1,8 +1,0 @@
-session_name: st_subscriptions_dispatcher
-start_directory: "~/git/python/smart-topics-wip/lambda/st_subscriptions_dispatcher"
-windows:
-- window_name: vim
-  focus: True
-  layout: main-vertical
-  panes:
-  - vim

@@ -4,11 +4,11 @@ start_directory: ~/code/dotfiles
 # - '[ -f .venv/bin/activate ] && source .venv/bin/activate && reset'
 windows:
 - window_name: config
-  focus: True
   layout: tiled
   panes:
   - vim
 - window_name: AI
   layout: main-horizontal
+  focus: True
   panes:
   - claude
