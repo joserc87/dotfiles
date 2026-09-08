@@ -254,6 +254,7 @@ vim.keymap.set('n', '<leader>w?', ':ObsidianBacklinks<cr>', { desc = 'Obsidian B
 vim.keymap.set('n', '<leader>w/', ':ObsidianSearch<cr>', { desc = '[S]earch [W]iki' })
 vim.keymap.set('n', '<leader>wp', ':ObsidianQuickSwitch<cr>', { desc = '[W]iki switch' })
 vim.keymap.set('n', '<leader>wb', ':ObsidianQuickSwitch<cr>', { desc = '[W]iki switch' })
+vim.keymap.set('n', '<leader>we', ':Telescope emoji<cr>', { desc = '[W]iki [E]moji' })
 --vim.keymap.set('n', '<leader>sW', function ()
 --  --require('telescope.builtin').find_files({ search_dirs = { '~/code/braindump/work/' } } )
 --end, { desc = '[S]earch [S]scripts' })
