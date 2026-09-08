@@ -6,8 +6,9 @@ NC='\033[0m'
 
 SMART_TOPICS="/home/jcano/git/python/smart-topics"
 CDK="/home/jcano/git/ops/rp-cdk"
+CONTENT_PYTHON="/home/jcano/git/content/python"
 
-project=$(printf "$SMART_TOPICS\n$CDK" | fzf --prompt="Project: " --header="Enter to select (default: smart-topics)")
+project=$(printf "$SMART_TOPICS\n$CDK\n$CONTENT_PYTHON" | fzf --prompt="Project: " --header="Enter to select (default: smart-topics)")
 [[ -z "$project" ]] && echo "Cancelling..." && exit
 echo "Entering '$project'"
 pushd "$project"
@@ -125,7 +126,7 @@ function run {
 
 if create_session "$TMUX_SESSION"; then
     run 1 "nvim"
-    if [[ "$project" == "$SMART_TOPICS" ]] && echo "$PROJECT_DIR" | grep -q "/lambda/"; then
+    if [ -f "$PROJECT_DIR/pyproject.toml" ]; then
         run 2 "poetry install && claude"
     else
         run 2 "claude"
