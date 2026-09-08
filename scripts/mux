@@ -4,6 +4,7 @@ function all {
     tmuxp load -d \
         base \
         smart-topics-master \
+        refinements \
     # Disabled
     #   cdk \
     #   daily-validation \
