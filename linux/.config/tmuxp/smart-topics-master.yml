@@ -1,4 +1,6 @@
 session_name: smart-topics-master
+options:
+  "@session-color": "colour31"
 start_directory: "~/git/python/smart-topics"
 windows:
 - window_name: vim
@@ -6,3 +8,8 @@ windows:
   layout: main-vertical
   panes:
   - vim
+- window_name: Daily Validation
+  focus: True
+  layout: main-vertical
+  panes:
+  - claude

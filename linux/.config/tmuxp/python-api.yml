@@ -1,4 +1,6 @@
 session_name: python-api
+options:
+  "@session-color": "colour2"
 start_directory: "~/git/github/python-api"
 windows:
 - window_name: vim

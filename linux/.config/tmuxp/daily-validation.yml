@@ -1,4 +1,6 @@
 session_name: daily-validation
+options:
+  "@session-color": "colour2"
 start_directory: ~/code/daily-validation
 windows:
 - window_name: vim

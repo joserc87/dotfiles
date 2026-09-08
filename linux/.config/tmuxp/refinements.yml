@@ -1,4 +1,6 @@
 session_name: refinements
+options:
+  "@session-color": "colour1"
 start_directory: ~/code/refinements
 windows:
 - window_name: vim
@@ -6,7 +8,9 @@ windows:
   layout: main-vertical
   panes:
   - vim
-- window_name: run
+- window_name: ia
   layout: tiled
   panes:
   - claude
+  - ./bin/fetch_project.sh TASE && git add jiras && git commit -m "Sync Jiras"
+

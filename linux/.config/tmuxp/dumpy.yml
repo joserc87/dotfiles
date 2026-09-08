@@ -1,4 +1,6 @@
 session_name: dumpy
+options:
+  "@session-color": "colour2"
 # start_directory: ./ # load session relative to config location (project root).
 # before_script: cd ~/git/python/dumpy #./.tmuxp-before-script.sh
 start_directory: ~/git/python/dumpy # load session relative to config location (project root).

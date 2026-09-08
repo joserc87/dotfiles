@@ -1,4 +1,6 @@
 session_name: cdk
+options:
+  "@session-color": "colour30"
 # start_directory: ./ # load session relative to config location (project root).
 # before_script: cd ~/git/ops/rp-cdk #./.tmuxp-before-script.sh
 start_directory: ~/git/ops/rp-cdk # load session relative to config location (project root).
