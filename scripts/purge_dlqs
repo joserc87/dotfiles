@@ -49,6 +49,7 @@ function get_all_dlqs() {
 function get_interesting_dlqs() {
     INTERESTING_QUEUES=(
         "auth-notifications-dlq"
+        "event-bridge-subscriptions-fanout-dlq"
         "quota-events-processor-dlq"
         "admin-quotas-dlq"
         "subscriptions-event-processor-dlq"

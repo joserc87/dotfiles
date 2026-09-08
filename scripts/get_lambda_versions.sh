@@ -8,11 +8,39 @@ SERVICES=(
   "lambda/st-subscriptions-org-updater-event-bus"
   "lambda/st-auth-webhook-notifications-ddb-stream"
   "lambda/st-quota-events-processor"
+  "lambda/st-quota-consumption-calculator"
   "lambda/st-admin-quotas"
   "lambda/st-profiles"
   "lambda/st-api-gateway-authorizer"
-  "ecs/st-internal-quota-service"
+  "ecs/internal-quota-service"
+  "ecs/internal-subscriptions-service"
+  "ecs/internal-users-service"
+  "ecs/st-authorizer"
 )
+
+ENVS=(dev stg prod)
+
+# One get-parameters-by-path call per env instead of one get-parameter call
+# per service/env, so we make 3 AWS calls total instead of 3 x #SERVICES.
+# Run the 3 calls in parallel since they're independent per-account requests.
+TMP_DIR=$(mktemp -d)
+trap 'rm -rf "$TMP_DIR"' EXIT
+for env in "${ENVS[@]}"; do
+    account="smart-topics-$env-nvirginia"
+    aws ssm get-parameters-by-path \
+        --profile "$account" \
+        --path "/$account" \
+        --recursive \
+        --region us-east-1 \
+        --query "Parameters[].{Name:Name,Value:Value}" \
+        --output json > "$TMP_DIR/$env.json" &
+done
+wait
+
+declare -A PARAMS_JSON
+for env in "${ENVS[@]}"; do
+    PARAMS_JSON[$env]=$(cat "$TMP_DIR/$env.json")
+done
 
 function get_lambda_version() {
     local service_name="$1"
@@ -22,6 +50,8 @@ function get_lambda_version() {
     param_name=""
     if [[ "$service_name" == lambda* ]]; then
 	param_name="$service_name/zip-name"
+    elif [[ "$service_name" == "ecs/st-authorizer" ]]; then
+	param_name="$service_name/image-version"
     elif [[ "$service_name" == ecs* ]]; then
 	param_name="$service_name/image"
     else
@@ -29,12 +59,8 @@ function get_lambda_version() {
 	return 1
     fi
     service_name=$(basename "$service_name")
-    aws ssm get-parameter \
-	--profile "$account" \
-        --name "/$account/$param_name" \
-        --region us-east-1 \
-        --query "Parameter.Value" \
-        --output text | \
+    jq -r --arg name "/$account/$param_name" \
+        '.[] | select(.Name == $name) | .Value' <<<"${PARAMS_JSON[$env]}" | \
 	sed "s/$service_name-//;s/.zip//;s/:/-/g"
 }
 BLUE=$(tput setaf 4)
