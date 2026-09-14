@@ -1,5 +1,19 @@
 #!/usr/bin/bash
 # Manage git worktrees in *-forest directories under ~/git
+#
+# Usage:
+#   forest                        Interactive fzf picker (open in tmux, lazygit,
+#                                  delete one, or Tab-select several to bulk delete)
+#   forest --list                 Print all worktree paths, one per line (for scripting)
+#   forest --delete <path> [...]  Delete one or more worktrees non-interactively.
+#                                  Repeatable: --delete <p1> --delete <p2> ...
+#                                  Prompts for confirmation per path unless --yes is given.
+#   forest --delete <path> --yes  Delete without any confirmation prompt (for scripts/agents)
+#   forest -h | --help            Show this help
+#
+# Examples:
+#   forest --list | grep merged-branch-name
+#   forest --delete ~/git/python/smart-topics-forest/TASE-1299-foo --yes
 
 RED=$'\033[0;31m'
 GREEN=$'\033[0;32m'
@@ -154,6 +168,46 @@ bulk_delete() {
     sleep 1
 }
 
+print_usage() {
+    sed -n '2,17p' "$0" | sed 's/^# \{0,1\}//'
+}
+
+cli_delete() {
+    local auto_yes="$1"
+    shift
+    local paths=("$@")
+    local failed=0
+
+    for path in "${paths[@]}"; do
+        path="${path%/}"
+
+        if ! git -C "$path" rev-parse --git-dir &>/dev/null; then
+            printf "${RED}Not a git worktree: %s${NC}\n" "$path"
+            (( failed++ ))
+            continue
+        fi
+
+        if [[ "$auto_yes" -ne 1 ]]; then
+            printf "${YELLOW}About to remove: %s${NC}\n" "$path"
+            read -r -p "Confirm? [y/N] " confirm
+            if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+                printf "Skipped: %s\n" "$path"
+                continue
+            fi
+        fi
+
+        if git -C "$path" worktree remove "$path"; then
+            printf "${GREEN}Removed: %s${NC}\n" "$path"
+        else
+            printf "${RED}Failed: %s${NC}\n" "$path"
+            (( failed++ ))
+        fi
+    done
+
+    [[ "$failed" -gt 0 ]] && return 1
+    return 0
+}
+
 action_menu() {
     local worktree_path="$1" project_name="$2" branch="$3"
 
@@ -200,6 +254,44 @@ action_menu() {
 }
 
 main() {
+    local delete_paths=() auto_yes=0
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --list)
+                find_worktrees | cut -f2
+                exit 0
+                ;;
+            --delete)
+                shift
+                if [[ $# -eq 0 ]]; then
+                    printf "${RED}--delete requires a path argument${NC}\n"
+                    exit 1
+                fi
+                delete_paths+=("$1")
+                shift
+                ;;
+            --yes)
+                auto_yes=1
+                shift
+                ;;
+            -h|--help)
+                print_usage
+                exit 0
+                ;;
+            *)
+                printf "${RED}Unknown argument: %s${NC}\n" "$1"
+                print_usage
+                exit 1
+                ;;
+        esac
+    done
+
+    if [[ "${#delete_paths[@]}" -gt 0 ]]; then
+        cli_delete "$auto_yes" "${delete_paths[@]}"
+        exit $?
+    fi
+
     while true; do
         local worktrees
         worktrees=$(find_worktrees)
@@ -243,4 +335,4 @@ main() {
     done
 }
 
-main
+main "$@"
