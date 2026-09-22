@@ -25,7 +25,18 @@ ENVIRONMENTS=(
 
 SELECTED_ENV=$1
 if [ -z "$SELECTED_ENV" ] && [ -n "$AWS_PROFILE" ]; then
-    SELECTED_ENV="$AWS_PROFILE"
+    # $AWS_PROFILE may already hold the resolved profile name (e.g. set by
+    # other tooling) rather than one of our short environment keys, so look
+    # it up by value before falling back to using it as a key directly.
+    for key in "${!PROFILE_MAP[@]}"; do
+        if [ "${PROFILE_MAP[$key]}" == "$AWS_PROFILE" ]; then
+            SELECTED_ENV="$key"
+            break
+        fi
+    done
+    if [ -z "$SELECTED_ENV" ]; then
+        SELECTED_ENV="$AWS_PROFILE"
+    fi
 fi
 if [ -z "$SELECTED_ENV" ]; then
     echo "Select the environment:"
@@ -34,8 +45,11 @@ if [ -z "$SELECTED_ENV" ]; then
         break
     done
 fi
-export AWS_PROFILE="${PROFILE_MAP[$SELECTED_ENV]}"
+if [ -n "${PROFILE_MAP[$SELECTED_ENV]}" ]; then
+    export AWS_PROFILE="${PROFILE_MAP[$SELECTED_ENV]}"
+fi
 echo "Selected environment: $SELECTED_ENV"
+echo "Using AWS profile: $AWS_PROFILE"
 aws sts get-caller-identity &> /dev/null
 if [ $? -ne 0 ]; then
     echo "Not logged in. Logging in to AWS SSO for profile: $AWS_PROFILE"
@@ -54,8 +68,11 @@ function get_interesting_dlqs() {
         "admin-quotas-dlq"
         "subscriptions-event-processor-dlq"
         "subscriptions-org-updater-event-bus-dlq"
+        "org-updater-dlq"
+        "org-updater-priority-dlq"
         "auth-webhook-notifications-ddb-stream-dlq"
         "auth-notification-consumer-dlq"
+        "users-ddb-stream-dlq"
     )
     for queue_url in $(get_all_dlqs); do
         if [[ " ${INTERESTING_QUEUES[@]} " =~ " $(basename "$queue_url") " ]]; then
@@ -69,11 +86,23 @@ function get_queue_message_count() {
     aws sqs get-queue-attributes --queue-url "$queue_url" --attribute-names ApproximateNumberOfMessages | jq -r '.Attributes.ApproximateNumberOfMessages'
 }
 
+mapfile -t QUEUE_URLS < <(get_interesting_dlqs)
+
+declare -A MESSAGE_COUNTS
+while read -r queue_url message_count; do
+    MESSAGE_COUNTS["$queue_url"]="$message_count"
+done < <(
+    for queue_url in "${QUEUE_URLS[@]}"; do
+        (echo "$queue_url $(get_queue_message_count "$queue_url")") &
+    done
+    wait
+)
+
 final_message="*DLQs:*\n"
-for queue_url in $(get_interesting_dlqs); do
+for queue_url in "${QUEUE_URLS[@]}"; do
     queue_name=$(basename "$queue_url")
     echo -ne "Queue $queue_name: "
-    message_count=$(get_queue_message_count "$queue_url")
+    message_count="${MESSAGE_COUNTS[$queue_url]}"
     if [ "$message_count" -gt 0 ]; then
         final_message+="* *$queue_name - $message_count*: "
         echo -ne "\e[31m$message_count\e[0m messages. Purge? \e[34m(y/n)\e[0m"
@@ -91,4 +120,4 @@ for queue_url in $(get_interesting_dlqs); do
     fi
 done
 echo -e "\n\n$final_message\n"
-echo -e "$final_message" | xclip -selection clipboard
+echo -e "$final_message" | setsid -f xclip -selection clipboard >/dev/null 2>&1 <&-
