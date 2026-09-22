@@ -21,6 +21,11 @@ YELLOW=$'\033[1;33m'
 NC=$'\033[0m'
 
 GIT_ROOT="$HOME/git"
+JIRA_SITE="ravenpack.atlassian.net"
+
+jira_key_from_branch() {
+    grep -oE '^[A-Z]+-[0-9]+' <<< "$1"
+}
 
 make_session_name() {
     echo "${1}-${2}" | tr '.:' '--' | cut -c1-50
@@ -211,6 +216,9 @@ cli_delete() {
 action_menu() {
     local worktree_path="$1" project_name="$2" branch="$3"
 
+    local jira_key
+    jira_key=$(jira_key_from_branch "$branch")
+
     while true; do
         local status
         status=$(get_status "$worktree_path")
@@ -220,6 +228,7 @@ action_menu() {
         choice=$({
             printf 'open-tmux\tOpen in new tmux session\n'
             printf 'lazygit\tOpen lazygit\n'
+            [[ -n "$jira_key" ]] && printf 'open-jira\tOpen Jira ticket (%s)\n' "$jira_key"
             [[ "$status" == "clean" ]] && printf 'delete\tDelete this worktree\n'
             printf 'back\tSelect another worktree\n'
         } | fzf \
@@ -242,6 +251,9 @@ action_menu() {
                 ;;
             lazygit)
                 (cd "$worktree_path" && lazygit)
+                ;;
+            open-jira)
+                xdg-open "https://${JIRA_SITE}/browse/${jira_key}" &>/dev/null &
                 ;;
             delete)
                 delete_worktree "$worktree_path" && return 0
