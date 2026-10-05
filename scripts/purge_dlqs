@@ -3,13 +3,13 @@
 declare -A PROFILE_MAP=(
     ["smart-topics-dev-nvirginia"]="smart-topics-dev-nvirginia"
     ["smart-topics-stg-nvirginia"]="smart-topics-stg-nvirginia"
-    ["smart-topics-prod-nvirginia"]="smart-topics-prod-nvirginia-RW-DO-NOT-USE-THIS-PROFILE"
+    ["smart-topics-prod-nvirginia"]="smart-topics-prod-nvirginia-RW"
     ["auth-dev-nvirginia"]="auth-dev-nvirginia"
     ["auth-stg-nvirginia"]="auth-stg-nvirginia"
-    ["auth-prod-nvirginia"]="auth-prod-nvirginia-RW-DO-NOT-USE-THIS-PROFILE"
+    ["auth-prod-nvirginia"]="auth-prod-nvirginia-RW"
     ["text-analytics-dev"]="text-analytics-dev"
     ["text-analytics-stg"]="text-analytics-stg"
-    ["text-analytics-prod"]="text-analytics-prod-RW-DO-NOT-USE-THIS-PROFILE"
+    ["text-analytics-prod"]="text-analytics-prod-RW"
 )
 ENVIRONMENTS=(
     "smart-topics-prod-nvirginia"
@@ -121,3 +121,6 @@ for queue_url in "${QUEUE_URLS[@]}"; do
 done
 echo -e "\n\n$final_message\n"
 echo -e "$final_message" | setsid -f xclip -selection clipboard >/dev/null 2>&1 <&-
+# Wait 30 seconds and kill xclip
+sleep 30
+pkill -f "xclip -selection clipboard" 2>/dev/null
