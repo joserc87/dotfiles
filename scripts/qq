@@ -6,7 +6,7 @@ cd ~/Documents/qq
 
 # Create a new tmux session running claude if it doesn't exist
 if ! tmux has-session -t qq 2>/dev/null; then
-    tmux new-session -d -s qq "claude"
+    tmux new-session -d -s qq "claude --model sonnet"
 fi
 
 alacritty -e zsh -c "tmux attach-session -t qq"
