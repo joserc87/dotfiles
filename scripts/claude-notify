@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Claude Code Notification hook: show which session needs me.
+# Summary: the conversation title (/rename, else the auto title).
+# Body: where it runs (tmux session:window, else the folder) and Claude's message.
+
+input=$(cat)
+field() { jq -r "$1 // empty" <<< "$input"; }
+esc() { sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g'; }
+
+session_id=$(field .session_id)
+transcript=$(field .transcript_path)
+message=$(field .message)
+cwd=$(field .cwd)
+
+title=""
+if [ -r "$transcript" ]; then
+    title=$(jq -r 'select(.type == "custom-title") | .customTitle // empty' "$transcript" | tail -1)
+    [ -z "$title" ] && title=$(jq -r 'select(.type == "ai-title") | .aiTitle // empty' "$transcript" | tail -1)
+fi
+
+if [ -n "$TMUX_PANE" ]; then
+    where=$(tmux display -p -t "$TMUX_PANE" '#S:#I #W' 2>/dev/null)
+fi
+[ -z "$where" ] && where=$(basename "$cwd")
+
+urgency=normal
+[ "$(field .notification_type)" = permission_prompt ] && urgency=critical
+
+notify-send -a Claude -u "$urgency" \
+    -h "string:x-dunst-stack-tag:claude-$session_id" \
+    "$(esc <<< "${title:-$(basename "$cwd")}")" \
+    "<b>$(esc <<< "$where")</b>
+$(esc <<< "${message:-Needs your attention}")"
