@@ -84,6 +84,153 @@
 
 # Rules — run `dunstctl debug` or `dbus-monitor` to find appname/category values.
 
+# App icons, tracked in ./icons (Papirus + recoloured Simple Icons, CC0).
+# When several rules match, the last one wins: broad matches first, specific last.
+
+# --- Generic senders ---
+
+[app_script]
+    appname = "Script"
+    new_icon = ~/.config/dunst/icons/script.svg
+
+[app_claude_name]
+    appname = "*[Cc]laude*"
+    new_icon = ~/.config/dunst/icons/claude.svg
+
+[app_claude]
+    summary = "*Claude*"
+    new_icon = ~/.config/dunst/icons/claude.svg
+
+# --- Web notifications (Brave): match the site in the body ---
+
+[app_gitlab]
+    body = "*gitlab.com*"
+    new_icon = ~/.config/dunst/icons/gitlab.svg
+
+[app_github]
+    body = "*github.com*"
+    new_icon = ~/.config/dunst/icons/github.svg
+
+[app_gmail]
+    body = "*mail.google.com*"
+    new_icon = ~/.config/dunst/icons/gmail.svg
+
+[app_google_meet]
+    body = "*meet.google.com*"
+    new_icon = ~/.config/dunst/icons/google-meet.svg
+
+[app_google_calendar]
+    body = "*calendar.google.com*"
+    new_icon = ~/.config/dunst/icons/google-calendar.svg
+
+[app_jira]
+    body = "*atlassian.net*"
+    new_icon = ~/.config/dunst/icons/jira.svg
+
+[app_datadog]
+    body = "*datadoghq*"
+    new_icon = ~/.config/dunst/icons/datadog.svg
+
+# --- My scripts: match the summary ---
+
+[app_pomodoro]
+    summary = "*POMODORO*"
+    new_icon = ~/.config/dunst/icons/pomodoro.svg
+
+[app_git_sync]
+    summary = "Changes to push"
+    new_icon = ~/.config/dunst/icons/git.svg
+
+[app_okta]
+    summary = "Okta*"
+    new_icon = ~/.config/dunst/icons/okta.svg
+
+[app_aws]
+    summary = "*AWS*"
+    new_icon = ~/.config/dunst/icons/aws.svg
+
+# --- App name: always wins. `notify-send -a <App>` picks the icon (see desktop-notify skill) ---
+
+[app_slack]
+    appname = "Slack"
+    new_icon = ~/.config/dunst/icons/slack.svg
+
+[app_python]
+    appname = "*[Pp]ython*"
+    new_icon = ~/.config/dunst/icons/python.svg
+
+[app_jira_name]
+    appname = "*[Jj]ira*"
+    new_icon = ~/.config/dunst/icons/jira.svg
+
+[app_datadog_name]
+    appname = "*[Dd]atadog*"
+    new_icon = ~/.config/dunst/icons/datadog.svg
+
+[app_zoom]
+    appname = "[Zz]oom*"
+    new_icon = ~/.config/dunst/icons/zoom.svg
+
+[app_devtime]
+    appname = "DevTime"
+    new_icon = ~/.config/dunst/icons/clock.svg
+
+[app_name_gitlab]
+    appname = "GitLab"
+    new_icon = ~/.config/dunst/icons/gitlab.svg
+
+[app_name_github]
+    appname = "GitHub"
+    new_icon = ~/.config/dunst/icons/github.svg
+
+[app_name_git]
+    appname = "Git"
+    new_icon = ~/.config/dunst/icons/git.svg
+
+[app_name_gmail]
+    appname = "Gmail"
+    new_icon = ~/.config/dunst/icons/gmail.svg
+
+[app_name_google_calendar]
+    appname = "Google Calendar"
+    new_icon = ~/.config/dunst/icons/google-calendar.svg
+
+[app_name_google_meet]
+    appname = "Google Meet"
+    new_icon = ~/.config/dunst/icons/google-meet.svg
+
+[app_name_aws]
+    appname = "AWS"
+    new_icon = ~/.config/dunst/icons/aws.svg
+
+[app_name_okta]
+    appname = "Okta"
+    new_icon = ~/.config/dunst/icons/okta.svg
+
+[app_name_pomodoro]
+    appname = "Pomodoro"
+    new_icon = ~/.config/dunst/icons/pomodoro.svg
+
+[app_name_clock]
+    appname = "Clock"
+    new_icon = ~/.config/dunst/icons/clock.svg
+
+[app_name_jenkins]
+    appname = "Jenkins"
+    new_icon = ~/.config/dunst/icons/jenkins.svg
+
+[app_name_bluetooth]
+    appname = "Bluetooth"
+    new_icon = ~/.config/dunst/icons/bluetooth.svg
+
+[app_name_clipboard]
+    appname = "Clipboard"
+    new_icon = ~/.config/dunst/icons/clipboard.svg
+
+[app_name_emoji]
+    appname = "Emoji"
+    new_icon = ~/.config/dunst/icons/emoji.svg
+
 [irc]
     appname = weechat
     timeout = 0
