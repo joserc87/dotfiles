@@ -120,7 +120,4 @@ for queue_url in "${QUEUE_URLS[@]}"; do
     fi
 done
 echo -e "\n\n$final_message\n"
-echo -e "$final_message" | setsid -f xclip -selection clipboard >/dev/null 2>&1 <&-
-# Wait 30 seconds and kill xclip
-sleep 30
-pkill -f "xclip -selection clipboard" 2>/dev/null
+echo -e "$final_message" | xclip -selection clipboard
