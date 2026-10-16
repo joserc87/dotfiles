@@ -263,6 +263,7 @@ vim.keymap.set('v', '<leader>wl', ':ObsidianLink<cr>', { desc = '[W]iki [L]ink' 
 vim.keymap.set('n', '<leader>wn', ':ObsidianNew<cr>', { desc = '[W]iki [N]ew' })
 vim.keymap.set('v', '<leader>wn', ':ObsidianExtractNote<cr>', { desc = '[W]iki [N]ew from selection' })
 vim.keymap.set('n', '<leader>o', 'Go<Esc>S- `<C-R>=strftime("%H:%M")<CR>` - ', { desc = 'Insert timestamped bullet' })
+vim.keymap.set('n', '<leader>to', 'Go<Esc>S- [ ] `<C-R>=strftime("%H:%M")<CR>` - ', { desc = 'Insert timestamped bullet' })
 vim.keymap.set('n', '<leader>w<CR>', ':ObsidianToggleCheckbox<CR>', { desc = 'Toggle Checkbox' })
 
 -- local hop = require('hop')
