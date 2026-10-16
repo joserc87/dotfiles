@@ -1,16 +1,23 @@
 #!/usr/bin/env bash
+
+# One stack tag, so the "break" popup replaces the "focus" one
+notify() {
+    notify-send -a Pomodoro -h string:x-dunst-stack-tag:pomodoro "$@"
+}
+
 if [[ $1 == on ]]; then 
-    slack-cli status edit "Focused" ":tomato:"
+    slack-cli status edit "Focused" ":tomato:" \
+        || notify -u critical "Couldn't set Slack status" "slack-cli status edit failed"
     slack-cli snooze start 15
-    notify-send "🍅 POMODORO" "\n\nStarting 15 minutes of focus"
+    notify -u low "Focus: 15 minutes" "Slack snoozed until the break"
     sleep 900
     slack-cli status edit " " ":python:"
-    notify-send "🍅 POMODORO" "\n\nBreak time!"
+    notify -u critical "Break time!" "Slack status cleared, notifications back on"
 elif [[ $1 == off ]]; then 
     echo enable pomodoro
     slack-cli snooze end
     slack-cli status edit " " ":python:"
-    notify-send "🍅 POMODORO" "\n\nPomodoro canceled"
+    notify -u low "Pomodoro canceled" "Slack status cleared, notifications back on"
 else
     echo Error. Wrong arguments
 fi

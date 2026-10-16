@@ -12,9 +12,10 @@ OPTION=$(echo '1. None
 8. Pomodoro
 ' \
     | $DMENU -i -l 10)
+[ -z "$OPTION" ] && exit 0
 
 notify() {
-    notify-send -a Script $1 -u normal
+    notify-send -a Slack -h string:x-dunst-stack-tag:slack-status "$@"
 }
 
 emoji=:python: 
@@ -58,7 +59,11 @@ case $OPTION in
 esac
 
 echo "I'm $stat... $emoji"
-echo slack-cli status edit "$stat" "$emoji"
-if [[ ! -z message ]]; then
+if slack-cli status edit "$stat" "$emoji"; then
+    notify -u low "Slack status: ${OPTION#*. }" "$stat $emoji"
+else
+    notify -u critical "Couldn't set Slack status" "slack-cli status edit failed"
+fi
+if [[ -n "$message" ]]; then
     slack-cli chat send "$message" "@jcano"
 fi

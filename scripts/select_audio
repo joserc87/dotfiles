@@ -2,11 +2,12 @@
 
 set -e
 
+notify_error() {
+    notify-send -a Audio -i audio-card -u critical "Audio output not changed" "$1"
+}
 list_sinks() {
-    pacmd list-sinks \
-        | grep 'alsa.card_name =\|index:' \
-        | sed 'N;s/\n//' \
-        | sed 's/\s\+\**\sindex:\s\([0-9]\+\)\s\+alsa.card_name = "\(.*\)"/\1\t\2/'
+    pactl -f json list sinks \
+        | jq -r '.[] | "\(.index)\t\(.properties["alsa.card_name"] // .description)"'
 }
 get_mouse_coords() {
     eval $(xdotool getmouselocation --shell)
@@ -20,13 +21,15 @@ get_sink_name_by_id() {
     list_sinks | grep "^${sink_id}	" | cut -d'	' -f2
 }
 get_current_sink() {
-    pacmd list-sinks | grep '* index:' | cut -d' ' -f5
+    pactl -f json list sinks \
+        | jq -r --arg d "$(pactl get-default-sink)" '.[] | select(.name == $d) | .index'
 }
 toggle_audio() {
     # Toggle only if we have the expected audio outputs
     ids=$(list_sinks | grep 'RODE NT-USB\|Audioengine 2+' | cut -f1)
     if [[ $(echo $ids | wc -w) -ne 2 ]]; then
         echo "Not the expected audio outputs" >&2
+        notify_error "Expected the RODE NT-USB and the Audioengine 2+ to be connected"
         exit -1
     fi
     # Get the current sink ID
@@ -73,18 +76,20 @@ fi
 
 
 sink_num=$(find_sink_id_by_name "$sink_name")
-[[ -z "$sink_num" ]] && echo "Error selecting the sink id" && exit -1
+[[ -z "$sink_num" ]] && echo "Error selecting the sink id" && notify_error "No sink called '$sink_name'" && exit -1
 
 echo "Setting the audio output to $sink_num: $sink_name"
-pacmd set-default-sink "$sink_num"
+pactl set-default-sink "$sink_num"
 if [[ "$sink_name" = "RODE NT-USB" ]]; then
     icon=/usr/share/icons/Papirus-Dark/16x16/devices/audio-headphones.svg
 else
     icon=/usr/share/icons/Papirus-Dark/16x16/devices/audio-speakers.svg
 fi
 notify-send \
-    -r 1002 \
-    -i $icon \
-    -t 10000 \
-    "Audio Sink" \
-    "Changed the audio output to \n\n$sink_num: <b>$sink_name</b>"
+    -a Audio \
+    -h string:x-dunst-stack-tag:audio-sink \
+    -i "$icon" \
+    -u low \
+    -t 5000 \
+    "Audio output" \
+    "<b>$sink_name</b>"

@@ -1,7 +1,19 @@
 #!/usr/bin/bash
 
-bluetoothctl power on
-bluetoothctl devices \
-    | dmenu -l 10 \
-    | cut -f2 -d' ' \
-    | xargs bluetoothctl connect
+notify() {
+    notify-send -a Bluetooth -h string:x-dunst-stack-tag:bluetooth "$@"
+}
+
+bluetoothctl power on >/dev/null
+device=$(bluetoothctl devices | dmenu -l 10)
+[ -z "$device" ] && exit 0
+
+mac=$(echo "$device" | cut -f2 -d' ')
+name=$(echo "$device" | cut -f3- -d' ')
+notify -u low "Connecting…" "$name"
+if bluetoothctl connect "$mac"; then
+    notify "Connected" "$name"
+else
+    notify -u critical "Couldn't connect" "$name ($mac)"
+    exit 1
+fi

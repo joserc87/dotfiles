@@ -13,3 +13,6 @@ $PATCH
 END_OF_PATCH
 git apply" | xclip -in -selection clipboard
 
+files=$(git diff --name-only $@ | wc -l)
+notify-send -a Git -u low "Patch copied" "git apply command for $files file(s) is on the clipboard"
+

@@ -1,10 +1,11 @@
 #!/usr/bin/bash
 
-pass otp -c okta-totp
-icon=/usr/share/icons/Papirus-Dark/16x16/emblems/emblem-encrypted-locked.svg
-notify-send \
-    -r  1000 \
-    -i $icon \
-    -t 10000 \
-    "Okta TOTP" \
-    "Your OTP has been copied to the clipboard." \
+if pass otp -c okta-totp; then
+    notify-send -a Okta -h string:x-dunst-stack-tag:okta-totp -t 10000 \
+        "Okta TOTP copied" \
+        "Your OTP has been copied to the clipboard."
+else
+    notify-send -a Okta -h string:x-dunst-stack-tag:okta-totp -u critical \
+        "Okta TOTP failed" \
+        "pass otp -c okta-totp failed: nothing was copied."
+fi

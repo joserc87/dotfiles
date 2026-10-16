@@ -9,4 +9,5 @@ if test -t 0; then
 else
     alacritty -e zsh -c "nvim $TMPFILE"
 fi
-xclip -in -selection clipboard $TMPFILE
+xclip -in -selection clipboard "$TMPFILE"
+notify-send -a Clipboard -u low "Clipboard updated" "$(wc -l < "$TMPFILE") line(s) from the editor"

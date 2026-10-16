@@ -9,6 +9,7 @@ export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"
 
 function check_git_status {
   dir="$1"
+  [ -d "$dir" ] || return
   pushd "$dir" > /dev/null
 
   if [ ! -z "$(git status --porcelain)" ]; then 
@@ -17,11 +18,12 @@ function check_git_status {
     msg="The folder has some files to push to git
 
     $dir"
-    ACTION=$(dunstify -t 600000 --action="default,OpenLazyGit" "Changes to push" "$msg")
+    ACTION=$(dunstify -a Git -h "string:x-dunst-stack-tag:check-syncs-$dir" -t 600000 \
+      --action="default,OpenLazyGit" "Changes to push" "$msg")
 
     case "$ACTION" in
     "default")
-	alacritty -e zsh -c lazygit code/braindump
+	alacritty --working-directory "$dir" -e lazygit
 	;;
     "2")
 	;;

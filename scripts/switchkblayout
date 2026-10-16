@@ -14,8 +14,10 @@ if [ ! -f "$icon" ]; then
 fi
 
 notify-send \
-    -r  1000 \
-    -i $icon \
-    -t 10000 \
+    -a Keyboard \
+    -h string:x-dunst-stack-tag:kblayout \
+    -i "$icon" \
+    -u low \
+    -t 3000 \
     "Keyboard Layout" \
-    "Switching to <b>${other_layout^^}</b>" \
+    "Switching to <b>${other_layout^^}</b>"

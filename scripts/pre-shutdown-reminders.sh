@@ -8,7 +8,7 @@ export DISPLAY=:0
 export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"
 
 function notify_reminders {
-    ACTION=$(dunstify -t 600000 --action="default,OpenClockwork" "Reminder" "$1")
+    ACTION=$(dunstify -a Clock -t 600000 --action="default,OpenClockwork" "Reminder" "$1")
     case "$ACTION" in
     "default")
 	xdg-open "$2"

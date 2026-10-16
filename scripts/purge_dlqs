@@ -50,10 +50,18 @@ if [ -n "${PROFILE_MAP[$SELECTED_ENV]}" ]; then
 fi
 echo "Selected environment: $SELECTED_ENV"
 echo "Using AWS profile: $AWS_PROFILE"
+notify() {
+    notify-send -a AWS -h string:x-dunst-stack-tag:purge-dlqs "$@"
+}
+
 aws sts get-caller-identity &> /dev/null
 if [ $? -ne 0 ]; then
     echo "Not logged in. Logging in to AWS SSO for profile: $AWS_PROFILE"
-    aws sso login --profile "$AWS_PROFILE"
+    notify-send -a Okta -u critical "AWS SSO login needed" "$AWS_PROFILE — finish the login in the browser"
+    if ! aws sso login --profile "$AWS_PROFILE"; then
+        notify -u critical "DLQ purge aborted" "AWS SSO login failed for $AWS_PROFILE"
+        exit 1
+    fi
 fi
 
 function get_all_dlqs() {
@@ -87,6 +95,10 @@ function get_queue_message_count() {
 }
 
 mapfile -t QUEUE_URLS < <(get_interesting_dlqs)
+if [ ${#QUEUE_URLS[@]} -eq 0 ]; then
+    notify -u critical "No DLQs found" "Listing queues in $SELECTED_ENV failed or returned nothing"
+    exit 1
+fi
 
 declare -A MESSAGE_COUNTS
 while read -r queue_url message_count; do
@@ -99,19 +111,27 @@ done < <(
 )
 
 final_message="*DLQs:*\n"
+non_empty=0
+purged=0
 for queue_url in "${QUEUE_URLS[@]}"; do
     queue_name=$(basename "$queue_url")
     echo -ne "Queue $queue_name: "
     message_count="${MESSAGE_COUNTS[$queue_url]}"
     if [ "$message_count" -gt 0 ]; then
+        non_empty=$((non_empty + 1))
         final_message+="* *$queue_name - $message_count*: "
         echo -ne "\e[31m$message_count\e[0m messages. Purge? \e[34m(y/n)\e[0m"
         read -r answer
         if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
             echo -n "..."
-            aws sqs purge-queue --queue-url "$queue_url"
-            echo "Purged"
-            final_message+="Purged :mrclean:\n"
+            if aws sqs purge-queue --queue-url "$queue_url"; then
+                echo "Purged"
+                purged=$((purged + 1))
+                final_message+="Purged :mrclean:\n"
+            else
+                notify -u critical "Couldn't purge $queue_name" "$SELECTED_ENV"
+                final_message+="Purge failed\n"
+            fi
         else
             final_message+="Not purged for now\n"
         fi
@@ -121,3 +141,8 @@ for queue_url in "${QUEUE_URLS[@]}"; do
 done
 echo -e "\n\n$final_message\n"
 echo -e "$final_message" | xclip -selection clipboard
+if [ "$non_empty" -eq 0 ]; then
+    notify -u low "DLQs empty in $SELECTED_ENV" "${#QUEUE_URLS[@]} queues checked"
+else
+    notify "DLQ summary copied" "$SELECTED_ENV: $non_empty with messages, $purged purged"
+fi
