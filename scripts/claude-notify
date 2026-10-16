@@ -2,6 +2,20 @@
 # Claude Code Notification hook: show which session needs me.
 # Summary: the conversation title (/rename, else the auto title).
 # Body: where it runs (tmux session:window, else the folder) and Claude's message.
+# Clicking the notification switches tmux to that session's pane.
+
+# Detached half: wait for the click, then switch the most recently used tmux client.
+if [ "$1" = --wait-click ]; then
+    action=$(notify-send -a Claude -u "$CN_URGENCY" \
+        -h "string:x-dunst-stack-tag:claude-$CN_SESSION_ID" \
+        -A "default=Go to session" "$CN_SUMMARY" "$CN_BODY")
+    if [ "$action" = default ]; then
+        tmux switch-client -t "$CN_TMUX_SESSION" \; \
+            select-window -t "$CN_TMUX_WINDOW" \; \
+            select-pane -t "$CN_TMUX_PANE"
+    fi
+    exit
+fi
 
 input=$(cat)
 field() { jq -r "$1 // empty" <<< "$input"; }
@@ -18,16 +32,25 @@ if [ -r "$transcript" ]; then
     [ -z "$title" ] && title=$(jq -r 'select(.type == "ai-title") | .aiTitle // empty' "$transcript" | tail -1)
 fi
 
+where=""
 if [ -n "$TMUX_PANE" ]; then
-    where=$(tmux display -p -t "$TMUX_PANE" '#S:#I #W' 2>/dev/null)
+    read -r tmux_session tmux_window where < <(
+        tmux display -p -t "$TMUX_PANE" '#{session_id} #{window_id} #S:#I #W' 2>/dev/null)
 fi
 [ -z "$where" ] && where=$(basename "$cwd")
 
 urgency=normal
 [ "$(field .notification_type)" = permission_prompt ] && urgency=critical
 
-notify-send -a Claude -u "$urgency" \
-    -h "string:x-dunst-stack-tag:claude-$session_id" \
-    "$(esc <<< "${title:-$(basename "$cwd")}")" \
-    "<b>$(esc <<< "$where")</b>
+summary=$(esc <<< "${title:-$(basename "$cwd")}")
+body="<b>$(esc <<< "$where")</b>
 $(esc <<< "${message:-Needs your attention}")"
+
+if [ -n "$tmux_session" ]; then
+    CN_URGENCY=$urgency CN_SESSION_ID=$session_id CN_SUMMARY=$summary CN_BODY=$body \
+    CN_TMUX_SESSION=$tmux_session CN_TMUX_WINDOW=$tmux_window CN_TMUX_PANE=$TMUX_PANE \
+        setsid -f "$0" --wait-click </dev/null >/dev/null 2>&1
+else
+    notify-send -a Claude -u "$urgency" \
+        -h "string:x-dunst-stack-tag:claude-$session_id" "$summary" "$body"
+fi
