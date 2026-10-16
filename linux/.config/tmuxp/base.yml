@@ -16,7 +16,7 @@ windows:
 - window_name: AI
   layout: main-horizontal
   panes:
-  - claude
+  - claude "/daily-checks"
 # - window_name: code
 #   layout: main-horizontal
 #   start_directory: ~/code/dotfiles
