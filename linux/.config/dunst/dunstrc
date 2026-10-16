@@ -58,9 +58,9 @@
     history_length = 30
     dmenu = /usr/bin/dmenu -p dunst:
     browser = /usr/bin/xdg-open
-    mouse_left_click = do_action, close_current
-    mouse_middle_click = close_all
-    mouse_right_click = close_current
+    mouse_left_click = close_current
+    mouse_middle_click = do_action, close_current
+    mouse_right_click = close_all
 
 [urgency_low]
     background = "#1d2021"

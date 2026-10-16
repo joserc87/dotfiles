@@ -2,7 +2,7 @@
 # Claude Code Notification hook: show which session needs me.
 # Summary: the conversation title (/rename, else the auto title).
 # Body: where it runs (tmux session:window, else the folder) and Claude's message.
-# Clicking the notification switches tmux to that session's pane.
+# Middle-clicking the notification switches tmux to that session's pane.
 
 # Detached half: wait for the click, then switch the most recently used tmux client.
 if [ "$1" = --wait-click ]; then
