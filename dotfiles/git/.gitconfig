@@ -52,5 +52,7 @@
 [init]
 	defaultBranch = main
 [user]
-	email = joserc87@gmail.com
+	email = jcano@ravenpack.com
 	name = Jose Ramon Cano
+[credential "https://gitlab.com"]
+	helper = !/usr/bin/glab auth git-credential
