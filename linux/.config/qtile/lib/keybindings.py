@@ -95,9 +95,9 @@ keys = [
     Key([CTRL], "F12", lazy.group["scratchpad"].dropdown_toggle("task")),
     # Multimedia
     # Volume
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -D pulse sset Master 2%+")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -D pulse sset Master 2%-")),
-    Key([], "XF86AudioMute", lazy.spawn("amixer -D pulse sset Master toggle")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer sset Master 2%+")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer sset Master 2%-")),
+    Key([], "XF86AudioMute", lazy.spawn("amixer sset Master toggle")),
     # Brightness
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl -d '*amd*' set +5%")),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl -d '*amd*' set 5%-")),
