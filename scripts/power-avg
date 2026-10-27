@@ -1,0 +1,38 @@
+#!/usr/bin/bash
+# Average whole-system power draw from the battery while discharging.
+# Usage: power-avg [seconds] [label]
+set -euo pipefail
+
+BAT=/sys/class/power_supply/BAT1
+DURATION=${1:-120}
+LABEL=${2:-measurement}
+LOG=${XDG_STATE_HOME:-$HOME/.local/state}/power-avg.log
+mkdir -p "$(dirname "$LOG")"
+
+if [[ $(cat "$BAT/status") != Discharging ]]; then
+    echo "Battery is $(cat "$BAT/status"); unplug all power (dock included) first." >&2
+    exit 1
+fi
+
+echo "Measuring for ${DURATION}s; leave the laptop idle..."
+sum=0 n=0 min=999 max=0
+for ((i = 0; i < DURATION; i++)); do
+    if [[ $(cat "$BAT/status") != Discharging ]]; then
+        echo "Power was plugged in; aborting." >&2
+        exit 1
+    fi
+    # current_now is in uA and voltage_now in uV, so uA * uV / 1e12 = W
+    w=$(awk -v c="$(cat $BAT/current_now)" -v v="$(cat $BAT/voltage_now)" 'BEGIN { printf "%.2f", c * v / 1e12 }')
+    sum=$(awk -v s="$sum" -v w="$w" 'BEGIN { print s + w }')
+    min=$(awk -v a="$min" -v b="$w" 'BEGIN { print (b < a) ? b : a }')
+    max=$(awk -v a="$max" -v b="$w" 'BEGIN { print (b > a) ? b : a }')
+    n=$((n + 1))
+    printf '\r  %3ds  now %6.2f W  avg %6.2f W' "$n" "$w" "$(awk -v s="$sum" -v n="$n" 'BEGIN { print s / n }')"
+    sleep 1
+done
+echo
+
+avg=$(awk -v s="$sum" -v n="$n" 'BEGIN { printf "%.2f", s / n }')
+gpu=$(cat /sys/bus/pci/devices/0000:01:00.0/power_state 2>/dev/null || echo absent)
+line="$(date '+%F %T')  ${LABEL}  avg=${avg}W  min=${min}W  max=${max}W  brightness=$(cat /sys/class/backlight/*/brightness 2>/dev/null | head -1)  nvidia=${gpu}"
+echo "$line" | tee -a "$LOG"
