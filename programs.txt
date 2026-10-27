@@ -5,3 +5,4 @@ ranger
 python3
 alacritty
 figlet
+pipewire-alsa
