@@ -40,7 +40,19 @@ fi
 [ -z "$where" ] && where=$(basename "$cwd")
 
 urgency=normal
-[ "$(field .notification_type)" = permission_prompt ] && urgency=critical
+if [ "$(field .notification_type)" = permission_prompt ]; then
+    urgency=critical
+    # Claude Code also reports AskUserQuestion dialogs as permission_prompt with the
+    # generic "Claude needs your permission"; if the pending tool call is a question, show it.
+    if [ -r "$transcript" ]; then
+        question=$(jq -r 'select(.type == "assistant") | .message.content[]?
+            | select(.type == "tool_use")
+            | if .name == "AskUserQuestion"
+              then "Question: " + ((.input.questions[0].question // "") | gsub("\n"; " "))
+              else "" end' "$transcript" | tail -1)
+        [ -n "$question" ] && message=$question
+    fi
+fi
 
 summary=$(esc <<< "${title:-$(basename "$cwd")}")
 body="<b>$(esc <<< "$where")</b>
