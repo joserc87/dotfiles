@@ -1,0 +1,144 @@
+#!/usr/bin/env bash
+# rmr — open a Claude Code review of a GitLab MR in the project's tmux session.
+#
+# Usage: rmr [--dry-run] [MR]
+#   MR: !6546 or 6546 (bigdata backend), cdk!2118 (rp-cdk), or an MR URL.
+#   Without MR it is read from the clipboard, so it works from a global hotkey.
+#
+# In the project's tmux session (smart-topics-master or cdk, started from its
+# tmuxp config when missing) it opens a background window named like the Claude
+# session, "MR-!<id>-<author>". A new session starts the review with /review-mr;
+# an existing one is resumed. A notification says where it went: click it to
+# switch tmux there. --dry-run only prints what it would do.
+
+# Detached half: wait for a click on the notification, then switch tmux there.
+if [[ ${1:-} == --wait-click ]]; then
+    action=$(notify-send -a GitLab -h "string:x-dunst-stack-tag:rmr-$RMR_NAME" \
+        -A "default=Go to window" "$RMR_SUMMARY" "$RMR_BODY")
+    if [[ $action == default ]]; then
+        tmux switch-client -t "$RMR_SESSION" \; select-window -t "$RMR_WINDOW"
+    fi
+    exit
+fi
+
+set -euo pipefail
+
+BACKEND_PROJECT="ravenpack/development/bigdata.com/backend"
+CDK_PROJECT="ravenpack/development/operations/cloud/rp-cdk"
+
+# Run from a hotkey there is no terminal, so errors go to a notification too.
+fail() {
+    echo "rmr: $1" >&2
+    notify-send -a GitLab -u critical "rmr failed" "$1" 2>/dev/null || true
+    exit 1
+}
+
+dry_run=false
+if [[ ${1:-} == --dry-run ]]; then
+    dry_run=true
+    shift
+fi
+[[ $# -le 1 ]] || fail "Usage: rmr [--dry-run] [!123 | cdk!123 | MR URL]"
+
+if [[ $# -eq 1 ]]; then
+    ref=$1
+else
+    ref=$(xclip -selection clipboard -o 2>/dev/null || true)
+fi
+# A copied URL often carries a trailing newline or spaces.
+ref=$(sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//' <<<"$ref")
+[[ -n $ref ]] || fail "No MR given and the clipboard is empty"
+
+shopt -s nocasematch
+if [[ $ref =~ ^https?://[^/]+/(.+)/-/merge_requests/([0-9]+)([/?#].*)?$ ]]; then
+    project_path=${BASH_REMATCH[1]}
+    iid=${BASH_REMATCH[2]}
+elif [[ $ref =~ ^(rp-)?cdk[[:space:]]*!?[[:space:]]*([0-9]+)$ ]]; then
+    project_path=$CDK_PROJECT
+    iid=${BASH_REMATCH[2]}
+elif [[ $ref =~ ^!?([0-9]+)$ ]]; then
+    project_path=$BACKEND_PROJECT
+    iid=${BASH_REMATCH[1]}
+else
+    fail "Not an MR id or URL: ${ref:0:100}"
+fi
+shopt -u nocasematch
+
+case $project_path in
+    "$BACKEND_PROJECT")
+        session=smart-topics-master
+        repo_dir=$HOME/git/python/smart-topics
+        review_ref="!$iid"
+        before=""
+        ;;
+    "$CDK_PROJECT")
+        session=cdk
+        repo_dir=$HOME/git/ops/rp-cdk
+        review_ref="CDK!$iid"
+        before="pyenv activate cdk; " # what cdk.yml runs before every pane
+        ;;
+    *)
+        fail "Only bigdata backend and rp-cdk MRs are supported, not $project_path"
+        ;;
+esac
+
+project_id=$(jq -rn --arg s "$project_path" '$s | @uri')
+author=$(glab api "projects/$project_id/merge_requests/$iid" 2>/dev/null | jq -r '.author.username // empty' || true)
+[[ -n $author ]] || fail "Could not read MR $review_ref from GitLab"
+name="MR-!$iid-$author"
+
+# Claude keeps a folder's conversations in ~/.claude/projects/<folder path, / and . as ->.
+# A conversation's name is its latest "custom-title" entry (set by --name or /rename).
+claude_dir="$HOME/.claude/projects/$(sed 's#[/.]#-#g' <<<"$repo_dir")"
+claude_session_exists() {
+    local file
+    while IFS= read -r file; do
+        [[ $(grep -oE '"customTitle":"[^"]*"' "$file" | tail -1) == "\"customTitle\":\"$name\"" ]] && return 0
+    done < <(grep -lF "\"customTitle\":\"$name\"" "$claude_dir"/*.jsonl 2>/dev/null)
+    return 1
+}
+
+# Typed into the window's shell. Single quotes keep zsh from expanding the "!".
+if claude_session_exists; then
+    claude_cmd="claude --resume '$name'"
+    summary="Resumed the review of $review_ref"
+else
+    claude_cmd="claude --name '$name' '/review-mr $review_ref'"
+    summary="Reviewing $review_ref by $author"
+fi
+
+find_window() {
+    tmux list-windows -t "=$session" -F "#{window_id}"$'\t'"#{window_name}" 2>/dev/null |
+        awk -F '\t' -v name="$name" '$2 == name { print $1; exit }'
+}
+
+if $dry_run; then
+    tmux has-session -t "=$session" 2>/dev/null && session_state=running || session_state="missing, would load ~/.config/tmuxp/$session.yml"
+    window=$(find_window || true)
+    printf 'MR:       %s (%s)\n' "$review_ref" "$project_path"
+    printf 'Session:  %s (%s)\n' "$session" "$session_state"
+    printf 'Window:   %s (%s)\n' "$name" "${window:+already open as $window}${window:-new, in $repo_dir}"
+    printf 'Command:  %s%s\n' "$before" "$claude_cmd"
+    exit 0
+fi
+
+if ! tmux has-session -t "=$session" 2>/dev/null; then
+    tmuxp load -d -y "$HOME/.config/tmuxp/$session.yml" >/dev/null 2>&1 ||
+        fail "Could not start the tmux session $session"
+fi
+
+window=$(find_window || true)
+if [[ -z $window ]]; then
+    window=$(tmux new-window -d -t "=$session:" -n "$name" -c "$repo_dir" -P -F '#{window_id}')
+    tmux set-option -w -t "$window" automatic-rename off
+    tmux send-keys -t "$window" "$before$claude_cmd" Enter
+elif [[ $(tmux display -p -t "$window" '#{pane_current_command}') != claude ]]; then
+    # The window is there but Claude was closed in it: start it again in place.
+    tmux send-keys -t "$window" "$before$claude_cmd" Enter
+else
+    summary="The review of $review_ref is already open"
+fi
+
+RMR_NAME=$name RMR_SUMMARY=$summary RMR_BODY="<b>$session</b>: $name. Click to go there." \
+RMR_SESSION=$(tmux display -p -t "$window" '#{session_id}') RMR_WINDOW=$window \
+    setsid -f "$0" --wait-click </dev/null >/dev/null 2>&1
