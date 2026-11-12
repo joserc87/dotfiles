@@ -81,6 +81,10 @@ function get_interesting_dlqs() {
         "auth-webhook-notifications-ddb-stream-dlq"
         "auth-notification-consumer-dlq"
         "users-ddb-stream-dlq"
+        "users-event-bridge-dlq"
+        "org-updater-lifecycle-dlq"
+        "admin-panel-history-recorder-dlq"
+        "quota-revshare-event-bridge-dlq"
     )
     for queue_url in $(get_all_dlqs); do
         if [[ " ${INTERESTING_QUEUES[@]} " =~ " $(basename "$queue_url") " ]]; then
