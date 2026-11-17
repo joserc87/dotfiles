@@ -22,3 +22,5 @@ warn "Linking linux home files\n";
 symlink "" .xsession ~ .xsession
 # gmailctl only looks in ~/.gmailctl; keep the real dir in .config
 symlink .config/ gmailctl ~ .gmailctl
+# Claude Code only reads ~/.claude (unless CLAUDE_CONFIG_DIR is set); keep the real file in .config
+symlink .config/claude/ keybindings.json ~/.claude keybindings.json
